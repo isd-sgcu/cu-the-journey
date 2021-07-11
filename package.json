@@ -2,8 +2,8 @@
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build",
-    "format": "prettier --write \"src/**/*.{ts,js}\"",
-    "lint": "prettier --check \"src/**/*.{ts,js}\""
+    "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
+    "lint": "prettier --check \"src/**/*.{tsx,ts,js}\""
   },
   "dependencies": {
     "solid-js": "^1.0.0"
