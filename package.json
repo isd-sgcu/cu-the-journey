@@ -6,6 +6,7 @@
     "lint": "prettier --check \"src/**/*.{tsx,ts,js}\""
   },
   "dependencies": {
+    "firebase": "^8.7.1",
     "solid-js": "^1.0.0"
   },
   "devDependencies": {
