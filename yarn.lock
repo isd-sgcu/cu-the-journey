@@ -3852,6 +3852,11 @@ socks@^2.3.3:
     ip "^1.1.5"
     smart-buffer "^4.1.0"
 
+solid-app-router@^0.0.51:
+  version "0.0.51"
+  resolved "https://registry.yarnpkg.com/solid-app-router/-/solid-app-router-0.0.51.tgz#796519ce04db58dff9964bcbf9a91face1095d28"
+  integrity sha512-9V7eassyze/v8lNp33YZ3cGadwjXN+OmCXcpmMU46BowgnzmYdJsl81crrM8WZ06CP9+mA4dvObUz7AuL8gwfg==
+
 solid-js@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.0.1.tgz#2c966f9b7873f25fd00c560753685f5b0cc84dae"

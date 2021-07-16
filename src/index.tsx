@@ -1,9 +1,18 @@
-import './styles/tailwind.css';
+import "./styles/tailwind.css";
 
-import { render } from 'solid-js/web';
-import { App } from './app';
+import { Router } from "solid-app-router";
+import { render } from "solid-js/web";
+import { App } from "./app";
+import RoutingPath from "./router/RoutingPath";
 
-const dispose = render(() => <App />, document.getElementById('app'));
+const dispose = render(
+  () => (
+    <Router routes={RoutingPath}>
+      <App />
+    </Router>
+  ),
+  document.getElementById("app")
+);
 
 /**
  * Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
@@ -11,7 +20,7 @@ const dispose = render(() => <App />, document.getElementById('app'));
  *
  * Note: Solid doesn't support state preservation on hot reload as of yet
  */
-if (import.meta.env.MODE === 'development') {
+if (import.meta.env.MODE === "development") {
   import.meta.hot.accept();
   import.meta.hot.dispose(dispose);
 }
