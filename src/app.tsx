@@ -1,4 +1,4 @@
-import { Route } from "solid-app-router";
+import { Route, Link } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
 
 export const App: Component = () => {
@@ -25,6 +25,9 @@ export const App: Component = () => {
       >
         +
       </button>
+      <Link class="nav" href="/choices">
+        Choice
+      </Link>
       <Route />
     </>
   );
