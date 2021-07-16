@@ -1,4 +1,5 @@
-import { Component, createSignal } from 'solid-js';
+import { Route } from "solid-app-router";
+import { Component, createSignal } from "solid-js";
 
 export const App: Component = () => {
   const [count, setCount] = createSignal(0);
@@ -24,6 +25,7 @@ export const App: Component = () => {
       >
         +
       </button>
+      <Route />
     </>
   );
 };
