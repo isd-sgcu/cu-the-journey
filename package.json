@@ -1,4 +1,5 @@
 {
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build",
