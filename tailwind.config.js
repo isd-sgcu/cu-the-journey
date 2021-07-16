@@ -20,6 +20,9 @@ module.exports = {
           DEFAULT: '#5F229F',
         },
       },
+      fontFamily: {
+        Mitr: ['Mitr', 'Arial', 'sans']
+      },
     },
   },
   variants: {},
