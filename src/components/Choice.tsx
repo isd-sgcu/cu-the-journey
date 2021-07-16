@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import { Link } from "solid-app-router";
 
 const [count, setCount] = createSignal(0);
@@ -20,12 +20,12 @@ const ChoiceButton = props => (
   </div>
 );
 
-const ChoiceComponent: Component = () => (
+const ChoiceComponent = props => (
   <>
-    <div class="flex justify-center bg-green">
-      <div class="flex flex-col items-center w-[20rem]">
-        <div class="font-Mitr text-center text-xl font-medium selection:bg-purple selection:text-yellow">
-          <h1>Lorem ipsum</h1>
+    <div class="flex h-screen justify-center items-center">
+      <div class="flex flex-col items-center min-w-[20rem]">
+        <div class="font-Mitr text-center text-xl font-medium text-purple selection:bg-purple selection:text-yellow">
+          <h1>วันนี้ของเธอเป็นวันแบบไหน</h1>
         </div>
         <ChoiceButton by={1} text="สวัสดี" ref="/1" />
         <ChoiceButton by={2} text="ชาวไทย" ref="/2" />
