@@ -1,10 +1,10 @@
+import ChoiceComponent from "../components/Choice";
+
 const FirstScene = () => <p>First Scene</p>;
 
 const SecondScene = () => <p>Second Scene</p>;
 
 const FallbackScene = () => <p>Not found</p>;
-
-import { Choice } from "../components/Choice";
 
 export default [
   {
@@ -21,6 +21,6 @@ export default [
   },
   {
     path: "/choices",
-    component: Choice
+    component: ChoiceComponent
   }
 ];
