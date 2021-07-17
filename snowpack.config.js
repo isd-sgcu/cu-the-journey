@@ -26,7 +26,12 @@ const config = {
     clean: true,
     out: "dist"
   },
-  plugins: ["@snowpack/plugin-typescript", "@snowpack/plugin-babel", "@snowpack/plugin-postcss"],
+  plugins: [
+    "@snowpack/plugin-typescript",
+    "@snowpack/plugin-babel",
+    "@snowpack/plugin-postcss",
+    "@snowpack/plugin-dotenv"
+  ],
   optimize: {
     bundle: true,
     minify: true,
