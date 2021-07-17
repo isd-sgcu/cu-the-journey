@@ -8,6 +8,7 @@
     "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -w"
   },
   "dependencies": {
+    "@amoutonbrady/solid-i18n": "^0.4.0",
     "firebase": "^8.7.1",
     "solid-app-router": "^0.0.51",
     "solid-js": "^1.0.0"
