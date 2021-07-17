@@ -1,0 +1,22 @@
+import type { Component } from "solid-js";
+import ChoiceComponent from "../components/Choice";
+
+const Scene3S1: Component = () => (
+  <>
+    <ChoiceComponent
+      question="วันนี้ของเธอเป็นวันแบบไหน"
+      choices={[
+        ["วันที่ฝนฟ้าคะนอง", "/1"],
+        ["วันที่ฟ้าสดใส", "/2"],
+        ["วันที่แดดจ้า"],
+        ["วันที่ฝนเพิ่งหยุดตก"]
+      ]}
+    />
+  </>
+);
+
+const Scene3 = {
+  Scene3S1
+};
+
+export default Scene3;

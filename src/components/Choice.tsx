@@ -1,10 +1,10 @@
-import { createSignal } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { Link } from "solid-app-router";
 
 const [count, setCount] = createSignal(0);
 const increment = (by = 1) => setCount(count() + by);
 
-const ChoiceButton = props => (
+const ChoiceButton: Component<{ href: string; by: number; text: string }> = props => (
   <div>
     <Link href={props.href}>
       <button
@@ -14,16 +14,16 @@ const ChoiceButton = props => (
                   hover:text-white hover:bg-purple
                   focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1"
       >
-        {props.text} {props.href} {count()}
+        {props.text} {count()}
       </button>
     </Link>
   </div>
 );
 
-const ChoiceComponent = props => {
+const ChoiceComponent: Component<{ question: string; choices: Array<string[]> }> = props => {
   const buttons = props.choices.map(choice => {
-    let text: string = choice[0];
-    let ref: string = choice[1] ? choice[1] : "/";
+    const text: string = choice[0];
+    const ref: string = choice[1] ? choice[1] : "/";
     return <ChoiceButton by={1} text={text} href={ref} />;
   });
   return (
