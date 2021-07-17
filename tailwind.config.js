@@ -26,6 +26,7 @@ module.exports = {
       }
     },
     screens: {
+      xs: { max: "374px" }, //Separate small mobile (iPhone 5 and Galaxy Fold) and normal mobile.
       sm: "500px"
     }
   },
