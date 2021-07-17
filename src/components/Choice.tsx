@@ -10,7 +10,7 @@ const ChoiceButton = props => (
       <button
         onClick={() => increment(props.by)}
         class="w-[10rem] h-[2rem] mt-[8px] rounded-full cursor-pointer
-                  text-md text-purple font-medium font-Mitr border-[2px] border-purple
+                  text-md text-purple font-medium font-ChulaC border-[2px] border-purple
                   hover:text-white hover:bg-purple
                   focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1"
       >
@@ -27,9 +27,9 @@ const ChoiceComponent: Component = () => (
         <div class="font-Mitr text-center text-xl font-medium selection:bg-purple selection:text-yellow">
           <h1>Lorem ipsum</h1>
         </div>
-        <ChoiceButton by={1} text="consectetur" ref="/1" />
-        <ChoiceButton by={2} text="adipiscing" ref="/2" />
-        <ChoiceButton by={3} text="elit" />
+        <ChoiceButton by={1} text="สวัสดี" ref="/1" />
+        <ChoiceButton by={2} text="ชาวไทย" ref="/2" />
+        <ChoiceButton by={3} text="เป็นอย่างไรบ้าง Test" />
       </div>
     </div>
   </>
