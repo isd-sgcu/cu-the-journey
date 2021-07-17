@@ -1,3 +1,4 @@
+import { useI18n } from "@amoutonbrady/solid-i18n";
 import ChoiceComponent from "../components/Choice";
 
 const FirstScene = () => <p>First Scene</p>;
@@ -5,6 +6,17 @@ const FirstScene = () => <p>First Scene</p>;
 const SecondScene = () => <p>Second Scene</p>;
 
 const FallbackScene = () => <p>Not found</p>;
+
+const I18Testing = () => {
+  const [t, { locale }] = useI18n();
+  return (
+    <>
+      <button onClick={() => locale("th")}>Change to TH</button>
+      <button onClick={() => locale("en")}>Change to EN</button>
+      <h1>{t("hello")}</h1>
+    </>
+  );
+};
 
 export default [
   {
@@ -22,5 +34,9 @@ export default [
   {
     path: "/choices",
     component: ChoiceComponent
+  },
+  {
+    path: "/i18n",
+    component: I18Testing
   }
 ];

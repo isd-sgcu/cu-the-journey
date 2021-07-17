@@ -2,14 +2,18 @@ import "./styles/tailwind.css";
 
 import { Router } from "solid-app-router";
 import { render } from "solid-js/web";
+import { I18nProvider } from "@amoutonbrady/solid-i18n";
 import { App } from "./app";
 import RoutingPath from "./router/RoutingPath";
+import { dict } from "./config/i18n";
 
 const dispose = render(
   () => (
-    <Router routes={RoutingPath}>
-      <App />
-    </Router>
+    <I18nProvider dict={dict} locale="th">
+      <Router routes={RoutingPath}>
+        <App />
+      </Router>
+    </I18nProvider>
   ),
   document.getElementById("app")
 );
