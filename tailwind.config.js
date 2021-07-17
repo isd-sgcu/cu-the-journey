@@ -22,8 +22,7 @@ module.exports = {
       },
       fontFamily: {
         Mitr: ["Mitr", "Arial", "sans"],
-        ChulaC: ["ChulaCharasNew", "Arial", "sans"],
-        ChulaL: ["CHULALONGKORN", "Arial", "sans"]
+        BaiJam: ["Bai Jamjuree", "Arial", "sans"]
       }
     }
   },
