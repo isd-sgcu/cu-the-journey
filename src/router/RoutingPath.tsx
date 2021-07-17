@@ -1,5 +1,6 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
 import ChoiceComponent from "../components/Choice";
+import ThirdScene from "../pages/Scene3";
 
 const FirstScene = () => <p>First Scene</p>;
 
@@ -40,5 +41,17 @@ export default [
   {
     path: "/i18n",
     component: I18Testing
+  },
+  {
+    path: "/3",
+    component: Scene3S1
+  },
+  {
+    path: "/3-0",
+    component: Scene3S0
+  },
+  {
+    path: "/3-2",
+    component: Scene3S2
   }
 ];
