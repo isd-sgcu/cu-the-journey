@@ -1,5 +1,6 @@
 import { Route, Link } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
+import "./firebase";
 
 export const App: Component = () => {
   const [count, setCount] = createSignal(0);
