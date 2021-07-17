@@ -5,6 +5,8 @@ const FirstScene = () => <p>First Scene</p>;
 
 const SecondScene = () => <p>Second Scene</p>;
 
+const { Scene3S1 } = ThirdScene;
+
 const FallbackScene = () => <p>Not found</p>;
 
 const I18Testing = () => {
