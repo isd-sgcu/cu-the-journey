@@ -11,8 +11,8 @@ module.exports = {
   },
   plugins: ["@typescript-eslint"],
   rules: {
-    "import/no-unresolved": "warn",
-    "import/extensions": "warn",
-    "import/prefer-default-export": "warn"
+    "import/no-unresolved": "none",
+    "import/extensions": "none",
+    "import/prefer-default-export": "none"
   }
 };
