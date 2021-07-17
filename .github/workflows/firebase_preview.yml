@@ -33,6 +33,16 @@ jobs:
         with:
           name: dist
           path: dist
+      - name: Create .env
+        run: |
+          touch .env
+          echo FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}>>.env
+          echo FIREBASE_AUTH_DOMAIN=freshy-the-journey.firebaseapp.com>>.env
+          echo FIREBASE_PROJECT_ID=freshy-the-journey>>.env
+          echo FIREBASE_STORAGE_BUCKET=freshy-the-journey.appspot.com>>.env
+          echo FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}>>.env
+          echo FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}>>.env
+          echo FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}>>.env
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
