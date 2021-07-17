@@ -24,6 +24,9 @@ module.exports = {
         Mitr: ["Mitr", "Arial", "sans"],
         BaiJam: ["Bai Jamjuree", "Arial", "sans"]
       }
+    },
+    screens: {
+      sm: "500px"
     }
   },
   variants: {},

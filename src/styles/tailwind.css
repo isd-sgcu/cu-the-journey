@@ -110,4 +110,32 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
       U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
+
+  h1 {
+    @apply text-4xl text-purple font-semibold font-Mitr;
+  }
+
+  h2 {
+    @apply text-2xl text-purple font-semibold font-Mitr;
+  }
+
+  h3 {
+    @apply text-xl text-purple font-medium font-Mitr;
+  }
+
+  h4 {
+    @apply text-lg text-purple font-bold font-Mitr;
+  }
+
+  h5 {
+    @apply text-lg text-purple font-medium font-Mitr;
+  }
+
+  h6 {
+    @apply text-base text-purple font-bold font-Mitr;
+  }
+
+  body {
+    @apply text-base text-purple font-normal font-BaiJam;
+  }
 }
