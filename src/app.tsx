@@ -1,5 +1,6 @@
 import { Route } from "solid-app-router";
 import type { Component } from "solid-js";
+import "./firebase";
 
 export const App: Component = () => (
   <div class="w-screen h-screen flex justify-center items-center">
