@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 // eslint-disable-next-line import/no-mutable-exports
-let app: firebase.app.App | undefined;
+let app: firebase.app.App
 
 if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
