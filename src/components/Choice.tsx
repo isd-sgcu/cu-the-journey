@@ -4,17 +4,17 @@ import { Link } from "solid-app-router";
 const [count, setCount] = createSignal(0);
 const increment = (by = 1) => setCount(count() + by);
 
-const ChoiceButton: Component<{ href: string; by: number; text: string }> = props => (
+const ChoiceButton: Component<{ href: string; text: string; by?: number }> = props => (
   <div>
     <Link href={props.href}>
       <button
         onClick={() => increment(props.by)}
         class="w-[12rem] h-[2rem] mt-[8px] rounded-full cursor-pointer
-                  text-md text-purple font-normal font-Mitr border-[1px] border-purple
-                  hover:text-white hover:bg-purple
+                  text-md text-purple font-normal font-ChulaC border-[1px] border-purple
+                  hover:bg-purple-light
                   focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1"
       >
-        {props.text} {count()}
+        {props.text}
       </button>
     </Link>
   </div>
@@ -24,7 +24,7 @@ const ChoiceComponent: Component<{ question: string; choices: Array<string[]> }>
   const buttons = props.choices.map(choice => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
-    return <ChoiceButton by={1} text={text} href={ref} />;
+    return <ChoiceButton text={text} href={ref} />;
   });
   return (
     <>
