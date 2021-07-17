@@ -9,7 +9,7 @@ const TextBold: Component<{ text: string[] }> = props => {
   ));
   return (
     <div class="flex h-screen justify-center items-center">
-      <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-Mitr font-bold">
+      <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
         <h2>{text}</h2>
       </div>
     </div>
@@ -25,8 +25,8 @@ const TextUpper: Component<{ text: string[] }> = props => {
   ));
   return (
     <div class="flex h-screen justify-center items-center">
-      <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-ChulaC font-normal">
-        <h6>{text}</h6>
+      <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
+        <p>{text}</p>
       </div>
     </div>
   );
@@ -41,8 +41,8 @@ const TextMiddle: Component<{ text: string[] }> = props => {
   ));
   return (
     <div class="flex h-screen justify-center items-center">
-      <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-ChulaC font-normal">
-        <h6>{text}</h6>
+      <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
+        <p>{text}</p>
       </div>
     </div>
   );
