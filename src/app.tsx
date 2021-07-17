@@ -1,34 +1,11 @@
-import { Route, Link } from "solid-app-router";
-import { Component, createSignal } from "solid-js";
+import { Route } from "solid-app-router";
+import type { Component } from "solid-js";
 
-export const App: Component = () => {
-  const [count, setCount] = createSignal(0);
-  const increment = (by = 1) => setCount(count() + by);
-  const decrement = (by = 1) => setCount(count() - by);
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => decrement(2)}
-        class="bg-gray-900 text-gray-100 p-4 text-3xl"
-      >
-        -
-      </button>
-
-      <span class="p-4 text-3xl">{count()}</span>
-
-      <button
-        type="button"
-        onClick={() => increment(1)}
-        class="bg-gray-900 text-gray-100 p-4 text-3xl"
-      >
-        +
-      </button>
-      <Link class="nav" href="/choices">
-        Choice
-      </Link>
+// eslint-disable-next-line import/prefer-default-export
+export const App: Component = () => (
+  <div class="w-screen h-screen bg-[#262626] flex justify-center items-center">
+    <div class="w-screen sm:max-w-[375px] h-screen sm:max-h-[667px] bg-white flex justify-center items-center flex-col">
       <Route />
-    </>
-  );
-};
+    </div>
+  </div>
+);
