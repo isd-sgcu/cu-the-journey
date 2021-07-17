@@ -1,6 +1,7 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
 import ChoiceComponent from "../components/Choice";
 import ThirdScene from "../pages/Scene3";
+import PickANumber from "../pages/ending/PickANumber";
 
 const FirstScene = () => <p>First Scene</p>;
 
@@ -43,5 +44,9 @@ export default [
   {
     path: "/3",
     component: ThirdScene
+  },
+  {
+    path: "/pick-a-number",
+    component: PickANumber
   }
 ];
