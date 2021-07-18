@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { Link } from "solid-app-router";
+import { goToPage } from "./JumpTo";
 
 interface ChoiceButtonProps {
   href: string;
@@ -14,20 +14,19 @@ interface ChoiceComponentProps {
 }
 
 const ChoiceButton: Component<ChoiceButtonProps> = props => (
-  <div>
-    <Link href={props.href}>
-      <button
-        class={`${
-          props.isLongBtn ? "w-[220px]" : "w-[150px]"
-        } h-[40px] mt-[16px] rounded-full cursor-pointer
+  <>
+    <button
+      onClick={() => goToPage(props.href)}
+      class={`${
+        props.isLongBtn ? "w-[220px]" : "w-[150px]"
+      } h-[40px] mt-[16px] rounded-full cursor-pointer
                   text-[14px] leading-[28px] text-purple font-normal font-Mitr border-[1px] border-purple
                   hover:bg-purple-light
                   focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1`}
-      >
-        {props.text}
-      </button>
-    </Link>
-  </div>
+    >
+      {props.text}
+    </button>
+  </>
 );
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {

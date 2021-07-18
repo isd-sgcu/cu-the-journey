@@ -1,24 +1,10 @@
-import { Component, createSignal, Switch, Match } from "solid-js";
+import type { Component } from "solid-js";
+import { Dynamic } from "solid-js/web";
+import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
 
 const { TextMiddle } = TextComponent;
-
-const [count, setCount] = createSignal(0);
-const increment = () => setCount(count() + 1);
-const decrement = () => setCount(count() - 1);
-
-const NextScene = () => (
-  <div class="w-4 inline-flex">
-    <button onClick={() => increment()}>next{count()}</button>
-  </div>
-);
-
-const PrevScene = () => (
-  <div class="w-4 inline-flex">
-    <button onClick={() => decrement()}>prev</button>
-  </div>
-);
 
 const Scene3S0: Component = () => (
   <>
@@ -29,8 +15,8 @@ const Scene3S0: Component = () => (
         "อันแสนเหน็ดเหนื่อยที่ผ่านมา"
       ]}
     />
-    <PrevScene />
-    <NextScene />
+    <PrevScene pg="3-0" />
+    <NextScene pg="3-1" />
   </>
 );
 
@@ -40,24 +26,22 @@ const Scene3S1: Component = () => (
       isLong={false}
       question="วันนี้ของเธอเป็นวันแบบไหน"
       choices={[
-        ["วันที่ฝนฟ้าคะนอง", "/1"],
-        ["วันที่ฟ้าสดใส", "/2"],
-        ["วันที่แดดจ้า"],
-        ["วันที่ฝนเพิ่งหยุดตก"],
-        ["Scene3 intro", "/3-0"],
-        ["Scene3.2", "/3-2"]
+        ["วันที่ฝนฟ้าคะนอง", "3-2"],
+        ["วันที่ฟ้าสดใส", "3-2"],
+        ["วันที่แดดจ้า", "3-2"],
+        ["วันที่ฝนเพิ่งหยุดตก", "3-2"]
       ]}
     />
-    <PrevScene />
-    <NextScene />
+    <PrevScene pg="3-0" />
+    <NextScene pg="3-2" />
   </>
 );
 
 const Scene3S2: Component = () => (
   <>
     <TextMiddle text={["เธอนึกขึ้นได้ว่ายังไม่ได้เปิดซองจดหมาย", "ที่รับมาเมื่อเช้า"]} />
-    <PrevScene />
-    <NextScene />
+    <PrevScene pg="3-1" />
+    <NextScene pg="3-3" />
   </>
 );
 
@@ -67,55 +51,43 @@ const Scene3S3: Component = () => (
       isLong={false}
       question="เธอเก็บซองจดหมายไว้ที่ไหนกันนะ"
       choices={[
-        ["บนโต๊ะทำงาน"],
-        ["บนโต๊ะกินช้าว"],
-        ["บนเตียงนอน"],
-        ["ในลิ้นชัก"],
-        ["อยู่ไหนก็ไม่รู้"]
+        ["บนโต๊ะทำงาน", "3-4"],
+        ["บนโต๊ะกินช้าว", "3-4"],
+        ["บนเตียงนอน", "3-4"],
+        ["ในลิ้นชัก", "3-4"],
+        ["อยู่ไหนก็ไม่รู้", "3-3-1"]
       ]}
     />
-    <PrevScene />
-    <NextScene />
+    <PrevScene pg="3-2" />
+    <NextScene pg="3-4" />
+  </>
+);
+
+const Scene3S3S1: Component = () => (
+  <>
+    <TextMiddle text={["ลองหาดูใหม่สิ...", "นั่นไง! เธอเจอมันแล้ว!"]} />
+    <PrevScene pg="3-3" />
+    <NextScene pg="3-4" />
   </>
 );
 
 const Scene3S4: Component = () => (
   <>
-    <TextMiddle text={["ลองหาดูใหม่สิ...", "นั่นไง! เธอเจอมันแล้ว!"]} />
-    <PrevScene />
-    <NextScene />
-  </>
-);
-
-const Scene3S5: Component = () => (
-  <>
     <TextMiddle text={["เธอเดินไปหยิบจดหมายมาเปิดอ่าน"]} />
-    <PrevScene />
-    <NextScene />
+    <PrevScene pg="3-3" />
+    <NextScene pg="3-0" />
   </>
 );
 
-const Scene3: Component = () => (
-  <Switch fallback={<Scene3S0 />}>
-    <Match when={count() === 0}>
-      <Scene3S0 />
-    </Match>
-    <Match when={count() === 1}>
-      <Scene3S1 />
-    </Match>
-    <Match when={count() === 2}>
-      <Scene3S2 />
-    </Match>
-    <Match when={count() === 3}>
-      <Scene3S3 />
-    </Match>
-    <Match when={count() === 4}>
-      <Scene3S4 />
-    </Match>
-    <Match when={count() === 5}>
-      <Scene3S5 />
-    </Match>
-  </Switch>
-);
+const referPage = {
+  "3-0": Scene3S0,
+  "3-1": Scene3S1,
+  "3-2": Scene3S2,
+  "3-3": Scene3S3,
+  "3-3-1": Scene3S3S1,
+  "3-4": Scene3S4
+};
+
+const Scene3: Component = () => <Dynamic component={referPage[currentPage()]} />;
 
 export default Scene3;
