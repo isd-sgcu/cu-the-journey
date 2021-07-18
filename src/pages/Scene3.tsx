@@ -4,7 +4,6 @@ import { Link, Route } from "solid-app-router";
 import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
-import Scene4 from "../pages/Scene4";
 
 const { TextMiddle } = TextComponent;
 
@@ -90,8 +89,7 @@ const referPage = {
   "3-2": Scene3S2,
   "3-3": Scene3S3,
   "3-3-1": Scene3S3S1,
-  "3-4": Scene3S4,
-  "4-1": Scene4
+  "3-4": Scene3S4
 };
 
 const Scene3: Component = () => <Dynamic component={referPage[currentPage()]} />;
