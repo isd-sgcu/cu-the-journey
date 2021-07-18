@@ -39,7 +39,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     <>
       <div class="flex h-screen justify-center items-center">
         <div class="flex flex-col items-center min-w-[20rem]">
-          <div class="text-center selection:bg-purple selection:text-yellow">
+          <div class="text-center w-[240px] selection:bg-purple selection:text-yellow">
             <h5>{props.question}</h5>
           </div>
           {buttons}

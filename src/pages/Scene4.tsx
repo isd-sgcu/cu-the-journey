@@ -49,8 +49,8 @@ const Scene4S2: Component = () => (
       text={["แต่ไม่ว่าเธอจะรู้สึกอย่างไร", "การเดินทางครั้งใหม่นี้ก็ได้เริ่มขึ้นแล้ว"]}
     />
     <PrevScene pg="4-1" />
-    <Link href="/4">
-      <NextScene pg="4-2" />
+    <Link href="/5">
+      <NextScene pg="5-0" />
     </Link>
     <Route />
   </>

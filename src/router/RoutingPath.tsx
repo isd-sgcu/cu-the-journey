@@ -4,6 +4,7 @@ import ChoiceComponent from "../components/Choice";
 import SixthScene from "../pages/Scene6";
 import Scene3 from "../pages/Scene3";
 import Scene4 from "../pages/Scene4";
+import Scene5 from "../pages/Scene5";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/SelectLanguage";
 
@@ -61,6 +62,10 @@ export default [
   {
     path: "/6",
     component: SixthScene
+  },
+  {
+    path: "/5",
+    component: Scene5
   },
   {
     path: "/pick-a-number",
