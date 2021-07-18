@@ -19,6 +19,7 @@ const Scene3S0: Component = () => (
 const Scene3S1: Component = () => (
   <>
     <ChoiceComponent
+      isLong={false}
       question="วันนี้ของเธอเป็นวันแบบไหน"
       choices={[
         ["วันที่ฝนฟ้าคะนอง", "/1"],
