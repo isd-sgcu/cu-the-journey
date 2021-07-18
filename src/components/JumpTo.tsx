@@ -1,7 +1,7 @@
 import { Component, createSignal } from "solid-js";
 
-const [currentPage, setPage] = createSignal("3-0");
-const goToPage = (pg = "3-0") => setPage(pg);
+const [currentPage, setPage] = createSignal("0");
+const goToPage = (pg = "0") => setPage(pg);
 
 interface JumpTo {
   pg: string;

@@ -4,6 +4,7 @@ import { Link, Route } from "solid-app-router";
 import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
+import Fallback from "./Fallback";
 
 const { TextMiddle } = TextComponent;
 
@@ -107,6 +108,7 @@ const Scene5S5S3: Component = () => (
 );
 
 const referPage = {
+  "0": Fallback,
   "5-0": Scene5S0,
   "5-1": Scene5S1,
   "5-2": Scene5S2,
