@@ -6,8 +6,6 @@ const FirstScene = () => <p>First Scene</p>;
 
 const SecondScene = () => <p>Second Scene</p>;
 
-const { Scene3S0, Scene3S1, Scene3S2 } = ThirdScene;
-
 const FallbackScene = () => <p>Not found</p>;
 
 const I18Testing = () => {
@@ -44,14 +42,6 @@ export default [
   },
   {
     path: "/3",
-    component: Scene3S1
-  },
-  {
-    path: "/3-0",
-    component: Scene3S0
-  },
-  {
-    path: "/3-2",
-    component: Scene3S2
+    component: ThirdScene
   }
 ];
