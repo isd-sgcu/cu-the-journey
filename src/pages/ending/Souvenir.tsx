@@ -24,7 +24,7 @@ function Souvenir() {
       <h6 class="mt-4">ใช้ช่วงเวลาต่อจากนี้ให้คุ้มค่า เหมือนที่ผ่านมานะ</h6>
       <h6>- Free your mind, Find your way -</h6>
       <p class="mt-4">อย่าลืม แอดไลน์ เพื่อติดตามข่าวสารต่าง ๆ จากอบจ.</p>
-      <p class="text-right">QR Line Official</p>
+      <p class="self-end mr-4">QR Line Official</p>
     </>
   );
 }
