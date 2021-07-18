@@ -1,7 +1,7 @@
 import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
-import SixthScene from "../pages/Scene6";
+import Fallback from "../pages/Fallback";
 import Scene3 from "../pages/Scene3";
 import Scene4 from "../pages/Scene4";
 import Scene5 from "../pages/Scene5";
@@ -11,8 +11,6 @@ import SelectLanguage from "../pages/SelectLanguage";
 const FirstScene = () => <p>First Scene</p>;
 
 const SecondScene = () => <p>Second Scene</p>;
-
-const FallbackScene = () => <p>Not found</p>;
 
 const I18Testing = () => {
   const [t, { locale }] = useTranslation("i18n");
@@ -26,7 +24,7 @@ const I18Testing = () => {
   );
 };
 
-export default [
+const allPath = [
   {
     path: "/",
     component: SelectLanguage
@@ -41,7 +39,7 @@ export default [
   },
   {
     path: "*all",
-    component: FallbackScene
+    component: Fallback
   },
   {
     path: "/choices",
@@ -52,22 +50,6 @@ export default [
     component: I18Testing
   },
   {
-    path: "/3",
-    component: Scene3
-  },
-  {
-    path: "/4",
-    component: Scene4
-  },
-  {
-    path: "/6",
-    component: SixthScene
-  },
-  {
-    path: "/5",
-    component: Scene5
-  },
-  {
     path: "/pick-a-number",
     component: PickANumber
   },
@@ -76,3 +58,18 @@ export default [
     component: Souvenir
   }
 ];
+
+/* will iterate through all import scene and create corresponding paths */
+const iterateScene = (scene: object) => {
+  Object.keys(scene).forEach(page => {
+    const convertPath = `/${page.toString().slice(5).replace(/S/g, "-")}`;
+    const link = { path: convertPath, component: scene[page] };
+    allPath.push(link);
+  });
+};
+
+iterateScene(Scene3);
+iterateScene(Scene4);
+iterateScene(Scene5);
+
+export default allPath;
