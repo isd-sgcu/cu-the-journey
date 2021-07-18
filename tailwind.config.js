@@ -24,6 +24,28 @@ module.exports = {
       fontFamily: {
         Mitr: ["Mitr", "Arial", "sans"],
         BaiJam: ["Bai Jamjuree", "Arial", "sans"]
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": {
+            opacity: 0
+          },
+          "100%": {
+            opacity: 1
+          }
+        },
+        fadeOut: {
+          "0%": {
+            opacity: 1
+          },
+          "100%": {
+            opacity: 0
+          }
+        }
+      },
+      animation: {
+        fadeIn: "fadeIn 1s linear",
+        fadeOut: "fadeOut 1s linear"
       }
     },
     screens: {

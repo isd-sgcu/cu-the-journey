@@ -1,5 +1,6 @@
 import type { Component } from "solid-js";
 import { useTranslation } from "../config/i18n";
+import { AnimationRoute } from "../components/AnimationRoute";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import Fallback from "../pages/Fallback";
@@ -64,6 +65,10 @@ const allPath = [
   {
     path: "/souvenir",
     component: Souvenir,
+  },
+  {
+    path: "/poc-transition",
+    component: AnimationRoute,
   },
 ];
 
