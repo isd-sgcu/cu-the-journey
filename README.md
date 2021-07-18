@@ -1,7 +1,8 @@
-# Solid snowpack starter (+ tailwind 2)
+# Freshy the Journey 2021
 
-Solid + snowpack + tailwindcss template
-You get HMR out of the box and full PWA compatible.
+## Deployment 
+
+Our site uses [Firebase Hosting](https://firebase.google.com) for deploying the app. You can visit our site here, [Freshy the Journey 2021](https://freshy-the-journey.firebaseapp.com)
 
 ## Install
 
