@@ -1,4 +1,5 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
+import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import ThirdScene from "../pages/Scene3";
 import PickANumber from "../pages/ending/PickANumber";
@@ -48,5 +49,9 @@ export default [
   {
     path: "/pick-a-number",
     component: PickANumber
+  },
+  {
+    path: "/souvenir",
+    component: Souvenir
   }
 ];

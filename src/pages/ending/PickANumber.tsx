@@ -3,7 +3,7 @@ import { Index } from "solid-js";
 
 function Choice({ number }: { number: number }) {
   return (
-    <Link href="/souvenir" class="m-2">
+    <Link href={`/souvenir?number=${number}`} class="m-2">
       <button
         class="w-[91px] h-[91px] flex items-center justify-center"
         style="box-shadow: 0px 4px 8px -2px #A984D4;"
