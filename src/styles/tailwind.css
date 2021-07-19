@@ -140,6 +140,6 @@
   }
 
   button {
-    @apply text-sm font-medium;
+    @apply text-sm font-medium font-Mitr;
   }
 }
