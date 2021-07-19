@@ -12,7 +12,7 @@ function Souvenir() {
 
   return (
     <>
-      <div class="flex-grow flex justify-center flex-col">
+      <div class="flex-grow mt-[23%] mb-4">
         <Typography variant="h2">Your New Journey Begins</Typography>
         <Typography variant="h4" class="mt-2 mb-[18px]">
           {number ? `${t("number", { number: String(number) })}` : t("notChoose")}
