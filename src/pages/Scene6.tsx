@@ -2,6 +2,7 @@ import type { Component } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import TextComponent from "../components/Text";
+import InputBox from "../components/common/InputBox";
 
 const { TextMiddle, TextBold } = TextComponent;
 
@@ -34,6 +35,7 @@ const Scene6S3: Component = () => {
   return (
     <>
       <TextBold text={["การเดินทางในช่วงเวลานั้น", "เป็นอย่างไรบ้าง"]} />
+      <InputBox />
       <PrevScene pg="6-2" />
       <NextScene pg="6-4" />
     </>
