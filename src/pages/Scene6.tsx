@@ -56,6 +56,6 @@ const referPage = {
   "6-4": Scene6S4
 };
 
-const Scene6: Component = () => <Dynamic component={referPage["6-0"]} />;
+const Scene6: Component = () => <Dynamic component={referPage["6-3"]} />;
 
 export default Scene6;
