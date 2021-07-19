@@ -22,16 +22,3 @@ export function useTranslation(prefix?: string): ITranslation {
 
   return [newT, action];
 }
-
-export const dict = {
-  th: {
-    i18n: {
-      hello: "สวัสดีโลก {{ name }}"
-    }
-  },
-  en: {
-    i18n: {
-      hello: "Hello World {{ name }}"
-    }
-  }
-};
