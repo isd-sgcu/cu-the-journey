@@ -1,22 +1,24 @@
 import type { Component } from "solid-js";
-import { Link, Route } from "solid-app-router";
+import { useRouter } from "solid-app-router";
 
 interface ChoiceButtonProps {
   href: string;
   text: string;
-  isLongBtn?: boolean;
+  isLongBtn: boolean;
 }
 
 interface ChoiceComponentProps {
-  question: Array<string>;
+  question: string | string[];
   choices: Array<string[]>;
   isLong?: boolean;
 }
 
-const ChoiceButton: Component<ChoiceButtonProps> = props => (
-  <>
-    <Link href={props.href}>
+const ChoiceButton: Component<ChoiceButtonProps> = props => {
+  const [, { push }] = useRouter();
+  return (
+    <>
       <button
+        onClick={() => push(props.href)}
         class={`${
           props.isLongBtn ? "w-[220px]" : "w-[150px]"
         } h-[40px] mt-[16px] rounded-full cursor-pointer
@@ -26,10 +28,9 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => (
       >
         {props.text}
       </button>
-    </Link>
-    <Route />
-  </>
-);
+    </>
+  );
+};
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {
   const buttons = props.choices.map(choice => {
@@ -37,12 +38,17 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     const ref: string = choice[1] ? choice[1] : "/";
     return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong} />;
   });
-  const question = props.question.map(line => (
-    <>
-      {line}
-      <br />
-    </>
-  ));
+  const question = () => {
+    if (Array.isArray(props.question)) {
+      return props.question.map(line => (
+        <>
+          {line}
+          <br />
+        </>
+      ));
+    }
+    return props.question;
+  };
   return (
     <>
       <div class="flex h-screen justify-center items-center">

@@ -8,7 +8,6 @@ const { TextMiddle } = TextComponent;
 const Scene4S1: Component = () => (
   <>
     <ChoiceComponent
-      isLong={false}
       question={["เธอรู้สึกอย่างไรกับการเดินทาง", "ครั้งใหม่ที่กำลังจะเริ่มขึ้น"]}
       choices={[
         ["ตื่นเต้น", "/4-1-1"],

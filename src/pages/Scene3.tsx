@@ -22,8 +22,7 @@ const Scene3S0: Component = () => (
 const Scene3S1: Component = () => (
   <>
     <ChoiceComponent
-      isLong={false}
-      question={["วันนี้ของเธอเป็นวันแบบไหน"]}
+      question="วันนี้ของเธอเป็นวันแบบไหน"
       choices={[
         ["วันที่ฝนฟ้าคะนอง", "3-2"],
         ["วันที่ฟ้าสดใส", "3-2"],
@@ -47,8 +46,7 @@ const Scene3S2: Component = () => (
 const Scene3S3: Component = () => (
   <>
     <ChoiceComponent
-      isLong={false}
-      question={["เธอเก็บซองจดหมายไว้ที่ไหนกันนะ"]}
+      question="เธอเก็บซองจดหมายไว้ที่ไหนกันนะ"
       choices={[
         ["บนโต๊ะทำงาน", "/3-4"],
         ["บนโต๊ะกินช้าว", "/3-4"],
@@ -72,7 +70,7 @@ const Scene3S3S1: Component = () => (
 
 const Scene3S4: Component = () => (
   <>
-    <TextMiddle text={["เธอเดินไปหยิบจดหมายมาเปิดอ่าน"]} />
+    <TextMiddle text="เธอเดินไปหยิบจดหมายมาเปิดอ่าน" />
     <PrevScene page="/3-3" />
     <NextScene page="/4-1" />
   </>

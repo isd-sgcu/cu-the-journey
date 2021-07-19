@@ -15,7 +15,7 @@ const Scene5S0: Component = () => (
 
 const Scene5S1: Component = () => (
   <>
-    <TextMiddle text={["เธอเตรียมของที่จำเป็นใส่กระเป๋า"]} />
+    <TextMiddle text="เธอเตรียมของที่จำเป็นใส่กระเป๋า" />
     <PrevScene page="/5-0" />
     <NextScene page="/5-2" />
   </>
@@ -50,8 +50,7 @@ const Scene5S3: Component = () => (
 const Scene5S4: Component = () => (
   <>
     <ChoiceComponent
-      isLong={false}
-      question={["เธอพร้อมที่จะย้อนกลับไปแล้วใช่ไหม"]}
+      question="เธอพร้อมที่จะย้อนกลับไปแล้วใช่ไหม"
       choices={[
         ["พร้อม", "/6-0"],
         ["ไม่พร้อม", "/5-5-1"]
@@ -89,7 +88,6 @@ const Scene5S5S2: Component = () => (
 const Scene5S5S3: Component = () => (
   <>
     <ChoiceComponent
-      isLong={false}
       question={["เธอพร้อมที่จะให้โอกาส", "การเดินทางที่ผ่านมาแล้วหรือยัง"]}
       choices={[
         ["พร้อม", "/6-0"],

@@ -1,30 +1,28 @@
 import type { Component } from "solid-js";
-import { Link, Route } from "solid-app-router";
+import { useRouter } from "solid-app-router";
 
-interface JumpTo {
+interface JumpToProps {
   page: string;
 }
 
-const NextScene: Component<JumpTo> = props => (
-  <>
-    <Link href={props.page}>
-      <button>
-        next
-        <br />
-        {props.page}
+const NextScene: Component<JumpToProps> = props => {
+  const [router, { push }] = useRouter();
+  return (
+    <>
+      <button onClick={() => push(props.page)}>
+        next <br /> {router.current[0].path}
       </button>
-    </Link>
-    <Route />
-  </>
-);
+    </>
+  );
+};
 
-const PrevScene: Component<JumpTo> = props => (
-  <>
-    <Link href={props.page}>
-      <button>prev</button>
-    </Link>
-    <Route />
-  </>
-);
+const PrevScene: Component<JumpToProps> = props => {
+  const [, { push }] = useRouter();
+  return (
+    <>
+      <button onClick={() => push(props.page)}>prev</button>
+    </>
+  );
+};
 
 export { NextScene, PrevScene };
