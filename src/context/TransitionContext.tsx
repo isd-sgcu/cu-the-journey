@@ -78,7 +78,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
       style={{ opacity: nowOpacity() }}
       class={`${
         local.transitionNumber() >= order ? "animate-fadeIn" : ""
-      } w-full h-full flex justify-center items-center flex-col`}
+      } flex justify-center items-center flex-col`}
     >
       {props.children}
     </div>

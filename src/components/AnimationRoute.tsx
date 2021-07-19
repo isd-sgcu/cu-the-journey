@@ -4,7 +4,7 @@ export function AnimationRoute() {
   const { nextAnimationTrigger, scheduleFrame } = useTransitionContext();
   scheduleFrame(5, 2000);
   return (
-    <>
+    <div class="flex items-center justify-center flex-col">
       <button onClick={() => nextAnimationTrigger()}>Next frame</button>
       <TransitionFade order={0}>
         <h4>Hello</h4>
@@ -21,6 +21,6 @@ export function AnimationRoute() {
       <TransitionFade order={4}>
         <h4>Hello</h4>
       </TransitionFade>
-    </>
+    </div>
   );
 }
