@@ -3,6 +3,7 @@ import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import ThirdScene from "../pages/Scene3";
 import PickANumber from "../pages/ending/PickANumber";
+import SelectLanguage from "../pages/SelectLanguage";
 
 const FirstScene = () => <p>First Scene</p>;
 
@@ -22,6 +23,10 @@ const I18Testing = () => {
 };
 
 export default [
+  {
+    path: "/",
+    component: SelectLanguage
+  },
   {
     path: "/1",
     component: FirstScene
