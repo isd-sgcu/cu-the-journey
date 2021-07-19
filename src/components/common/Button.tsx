@@ -2,7 +2,6 @@ import { useRouter } from "solid-app-router";
 import type { JSX } from "solid-js/jsx-runtime";
 
 interface IProps {
-  children?: JSX.Element;
   onClick?: (() => Promise<void>) | (() => void);
   href?: string;
 }
