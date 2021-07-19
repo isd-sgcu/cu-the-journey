@@ -59,7 +59,12 @@ const allPath = [
   }
 ];
 
-/* will iterate through all import scene and create corresponding paths */
+/* will iterate through all scene in an import
+ * and create corresponding paths
+ * USE THIS FORMAT FOR ALL SCENES:
+ * Scene_S_S_ where _ is a number
+ * e.g. Scene12S5 -> /12-5
+ */
 const iterateScene = (scene: object) => {
   Object.keys(scene).forEach(page => {
     const convertPath = `/${page.toString().slice(5).replace(/S/g, "-")}`;
@@ -68,6 +73,7 @@ const iterateScene = (scene: object) => {
   });
 };
 
+// this will be changed later
 iterateScene(Scene3);
 iterateScene(Scene4);
 iterateScene(Scene5);
