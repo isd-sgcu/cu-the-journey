@@ -7,7 +7,7 @@ export const App: Component = () => {
   // Set language
   const [, { locale }] = useI18n();
   const language = localStorage.getItem("language");
-  if (language) {
+  if (language === "th" || language === "en") {
     locale(language);
   }
 
