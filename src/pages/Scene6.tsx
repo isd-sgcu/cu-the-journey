@@ -1,10 +1,10 @@
-import type { Component } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import InputBox from "../components/common/InputBox";
 
-const { TextMiddle, TextBold } = TextComponent;
+const { TextMiddle } = TextComponent;
 
 const Scene6S0: Component = () => (
   <>
@@ -32,10 +32,21 @@ const Scene6S2: Component = () => (
 
 const Scene6S3: Component = () => {
   console.log(currentPage());
+  const placeHolder = "ลองเล่าให้ฟังได้ไหม...";
+  const [text, setText] = createSignal(placeHolder);
+
   return (
     <>
-      <TextBold text={["การเดินทางในช่วงเวลานั้น", "เป็นอย่างไรบ้าง"]} />
-      <InputBox />
+      <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
+        <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
+          <h5>
+            การเดินทางในช่วงเวลานั้น
+            <br />
+            เป็นอย่างไรบ้าง
+          </h5>
+        </div>
+        <InputBox placeHolder={placeHolder} signal={[text, setText]} />
+      </div>
       <PrevScene pg="6-2" />
       <NextScene pg="6-4" />
     </>
