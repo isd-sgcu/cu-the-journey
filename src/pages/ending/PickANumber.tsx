@@ -36,7 +36,7 @@ function PickANumber() {
           </Typography>
         </Link>
       </div>
-      <Typography variant="p" class="mb-3 text-orange">
+      <Typography variant="p" class="mb-[28px] text-[#F46C2A]">
         {t("footer")}
       </Typography>
     </>
