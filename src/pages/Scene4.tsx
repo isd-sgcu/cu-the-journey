@@ -2,19 +2,20 @@ import type { Component } from "solid-js";
 import { NextScene, PrevScene } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
+import { useTranslation } from "../config/i18n";
 
 const { TextMiddle } = TextComponent;
+
+function t(JSONkey: string) {
+  const [translate] = useTranslation("scene4");
+  return translate(JSONkey);
+}
 
 const Scene4S1: Component = () => (
   <>
     <ChoiceComponent
-      question={["เธอรู้สึกอย่างไรกับการเดินทาง", "ครั้งใหม่ที่กำลังจะเริ่มขึ้น"]}
-      choices={[
-        ["ตื่นเต้น", "/4-1-1"],
-        ["กังวลใจ", "/4-1-2"],
-        ["เฉย ๆ", "/4-2"],
-        ["สับสนวุ่นวายใจ", "/4-1-2"]
-      ]}
+      question={t("4-1.q")}
+      choices={[t("4-1.c1"), t("4-1.c2"), t("4-1.c3"), t("4-1.c4")]}
     />
     <PrevScene page="/3-4" />
     <NextScene page="/4-2" />
@@ -23,7 +24,7 @@ const Scene4S1: Component = () => (
 
 const Scene4S1S1: Component = () => (
   <>
-    <TextMiddle text={["เป็นเรื่องปกติที่เราจะต้องรู้สึกตื่นเต้น", "กับการเดินทางครั้งใหม่"]} />
+    <TextMiddle text={t("4-1-1")} />
     <PrevScene page="/4-1" />
     <NextScene page="/4-2" />
   </>
@@ -31,7 +32,7 @@ const Scene4S1S1: Component = () => (
 
 const Scene4S1S2: Component = () => (
   <>
-    <TextMiddle text={["อย่าพึ่งคิดมากไปเลยนะ", "เธอผ่านมันไปได้อยู่แล้วแหละ"]} />
+    <TextMiddle text={t("4-1-2")} />
     <PrevScene page="/4-1" />
     <NextScene page="/4-2" />
   </>
@@ -39,9 +40,7 @@ const Scene4S1S2: Component = () => (
 
 const Scene4S2: Component = () => (
   <>
-    <TextMiddle
-      text={["แต่ไม่ว่าเธอจะรู้สึกอย่างไร", "การเดินทางครั้งใหม่นี้ก็ได้เริ่มขึ้นแล้ว"]}
-    />
+    <TextMiddle text={t("4-2")} />
     <PrevScene page="/4-1" />
     <NextScene page="/5-0" />
   </>
