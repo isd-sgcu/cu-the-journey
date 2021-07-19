@@ -1,11 +1,13 @@
 import type { Component } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
+// import { useTranslation } from "../config/i18n";
 
 interface TextProps {
   text: string | string[];
 }
 
 function addtText(text: string | string[]): string | JSX.Element {
+  // const [t] = useTranslation("scene3");
   if (Array.isArray(text))
     return text.map(line => (
       <>

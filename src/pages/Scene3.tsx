@@ -2,18 +2,18 @@ import type { Component } from "solid-js";
 import { NextScene, PrevScene } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
+import { useTranslation } from "../config/i18n";
 
 const { TextMiddle } = TextComponent;
 
+function t(JSONkey: string) {
+  const [translate] = useTranslation("scene3");
+  return translate(JSONkey);
+}
+
 const Scene3S0: Component = () => (
   <>
-    <TextMiddle
-      text={[
-        "วันนี้เป็นวันพักผ่อนวันหนึ่งของ(name)",
-        "ที่กำลังพักผ่อนจากการเดินทาง",
-        "อันแสนเหน็ดเหนื่อยที่ผ่านมา"
-      ]}
-    />
+    <TextMiddle text={t("3-0")} />
     <PrevScene page="/3-0" />
     <NextScene page="/3-1" />
   </>
