@@ -44,7 +44,7 @@ module.exports = {
         }
       },
       animation: {
-        fadeIn: "fadeIn 1s linear",
+        fadeIn: "fadeIn 1s linear 500ms",
         fadeOut: "fadeOut 1s linear"
       }
     },

@@ -10,6 +10,8 @@ import {
 } from "solid-js";
 
 interface ITransitionProvider {
+  // eslint-disable-next-line no-unused-vars
+  scheduleFrame: (num: number, timems: number) => void;
   nextAnimationTrigger: () => void;
   resetAnimationFrame: () => void;
   transitionNumber: Accessor<number>;
@@ -18,6 +20,11 @@ interface ITransitionProvider {
 interface ITransitionFadeProp {
   order: number;
 }
+
+// interface ITransitionLinkProp {
+//   order: number;
+//   href: string;
+// }
 
 const TransitionContext = createContext<ITransitionProvider>();
 
@@ -39,9 +46,18 @@ export const TransitionProvider: Component = props => {
     setTransitionNumber(0);
   };
 
+  const scheduleFrame = (num: number, timems: number) => {
+    if (num !== 0) {
+      setTimeout(() => {
+        nextAnimationTrigger();
+        scheduleFrame(num - 1, timems);
+      }, timems);
+    }
+  };
+
   return (
     <TransitionContext.Provider
-      value={{ nextAnimationTrigger, transitionNumber, resetAnimationFrame }}
+      value={{ scheduleFrame, nextAnimationTrigger, transitionNumber, resetAnimationFrame }}
     >
       {props.children}
     </TransitionContext.Provider>
@@ -52,11 +68,17 @@ export const useTransitionContext = () => useContext(TransitionContext);
 
 export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order } = props;
+  const [nowOpacity, setNowOpacity] = createSignal(0);
   const [local] = splitProps(useTransitionContext(), ["transitionNumber"]);
   return (
     <div
-      style={{ opacity: local.transitionNumber() >= order ? 1 : 0 }}
-      class={`${local.transitionNumber() >= order ? "animate-fadeIn" : ""}`}
+      onAnimationEnd={() => {
+        setNowOpacity(1);
+      }}
+      style={{ opacity: nowOpacity() }}
+      class={`${
+        local.transitionNumber() >= order ? "animate-fadeIn" : ""
+      } w-full h-full flex justify-center items-center flex-col`}
     >
       {props.children}
     </div>
