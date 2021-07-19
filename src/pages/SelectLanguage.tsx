@@ -10,6 +10,7 @@ function SelectLanguage() {
       <Button
         onClick={() => {
           locale("th");
+          localStorage.setItem("language", "th");
         }}
         href="/i18n"
       >
@@ -18,6 +19,7 @@ function SelectLanguage() {
       <Button
         onClick={() => {
           locale("en");
+          localStorage.setItem("language", "en");
         }}
         href="/i18n"
       >
