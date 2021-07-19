@@ -1,6 +1,6 @@
 {
-    "hello": "Hello World {{ name }}",
-    "nested": {
-      "hello": "Hello from inside {{ name }} "
-    }
+  "hello": "สวัสดีโลก {{ name }}",
+  "nested": {
+    "hello": "สวัสดีจากข้างใน {{ name }}"
+  }
 }
