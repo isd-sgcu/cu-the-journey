@@ -10,7 +10,7 @@ const TextBold: Component<{ text: string[] }> = props => {
   return (
     <div class="flex h-screen justify-center items-center">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
-        <h2>{text}</h2>
+        <h5>{text}</h5>
       </div>
     </div>
   );
