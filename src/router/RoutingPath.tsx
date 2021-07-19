@@ -1,4 +1,4 @@
-import { useI18n } from "@amoutonbrady/solid-i18n";
+import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import ThirdScene from "../pages/Scene3";
@@ -12,12 +12,12 @@ const SecondScene = () => <p>Second Scene</p>;
 const FallbackScene = () => <p>Not found</p>;
 
 const I18Testing = () => {
-  const [t, { locale }] = useI18n();
+  const [t, { locale }] = useTranslation("i18n");
   return (
     <>
       <button onClick={() => locale("th")}>Change to TH</button>
       <button onClick={() => locale("en")}>Change to EN</button>
-      <h1>{t("hello")}</h1>
+      <h1>{t("hello", { name: "earth" })}</h1>
     </>
   );
 };
