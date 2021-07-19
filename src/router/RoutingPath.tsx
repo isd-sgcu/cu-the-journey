@@ -18,7 +18,8 @@ const I18Testing = () => {
     <>
       <button onClick={() => locale("th")}>Change to TH</button>
       <button onClick={() => locale("en")}>Change to EN</button>
-      <h1>{t("hello", { name: "earth" })}</h1>
+      <h1>{t("hello", { name: "Outsider" })}</h1>
+      <h1>{t("nested.hello", { name: "Insider" })}</h1>
     </>
   );
 };
