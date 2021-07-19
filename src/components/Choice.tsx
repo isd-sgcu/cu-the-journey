@@ -9,7 +9,7 @@ interface ChoiceButtonProps {
 
 interface ChoiceComponentProps {
   question: string | string[];
-  choices: Array<string[]>;
+  choices: string[] | Array<string[]>;
   isLong?: boolean;
 }
 

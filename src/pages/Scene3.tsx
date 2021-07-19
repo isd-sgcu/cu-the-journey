@@ -22,13 +22,8 @@ const Scene3S0: Component = () => (
 const Scene3S1: Component = () => (
   <>
     <ChoiceComponent
-      question="วันนี้ของเธอเป็นวันแบบไหน"
-      choices={[
-        ["วันที่ฝนฟ้าคะนอง", "3-2"],
-        ["วันที่ฟ้าสดใส", "3-2"],
-        ["วันที่แดดจ้า", "3-2"],
-        ["วันที่ฝนเพิ่งหยุดตก", "3-2"]
-      ]}
+      question={t("3-1.q")}
+      choices={[t("3-1.c1"), t("3-1.c2"), t("3-1.c3"), t("3-1.c4")]}
     />
     <PrevScene page="/3-0" />
     <NextScene page="/3-2" />
@@ -37,7 +32,7 @@ const Scene3S1: Component = () => (
 
 const Scene3S2: Component = () => (
   <>
-    <TextMiddle text={["เธอนึกขึ้นได้ว่ายังไม่ได้เปิดซองจดหมาย", "ที่รับมาเมื่อเช้า"]} />
+    <TextMiddle text={t("3-2")} />
     <PrevScene page="/3-1" />
     <NextScene page="/3-3" />
   </>
@@ -46,14 +41,8 @@ const Scene3S2: Component = () => (
 const Scene3S3: Component = () => (
   <>
     <ChoiceComponent
-      question="เธอเก็บซองจดหมายไว้ที่ไหนกันนะ"
-      choices={[
-        ["บนโต๊ะทำงาน", "/3-4"],
-        ["บนโต๊ะกินช้าว", "/3-4"],
-        ["บนเตียงนอน", "/3-4"],
-        ["ในลิ้นชัก", "/3-4"],
-        ["อยู่ไหนก็ไม่รู้", "/3-3-1"]
-      ]}
+      question={t("3-3.q")}
+      choices={[t("3-3.c1"), t("3-3.c2"), t("3-3.c3"), t("3-3.c4"), t("3-3.c5")]}
     />
     <PrevScene page="/3-2" />
     <NextScene page="/3-4" />
@@ -62,7 +51,7 @@ const Scene3S3: Component = () => (
 
 const Scene3S3S1: Component = () => (
   <>
-    <TextMiddle text={["ลองหาดูใหม่สิ...", "นั่นไง! เธอเจอมันแล้ว!"]} />
+    <TextMiddle text={t("3-4")} />
     <PrevScene page="/3-3" />
     <NextScene page="/3-4" />
   </>
@@ -70,7 +59,7 @@ const Scene3S3S1: Component = () => (
 
 const Scene3S4: Component = () => (
   <>
-    <TextMiddle text="เธอเดินไปหยิบจดหมายมาเปิดอ่าน" />
+    <TextMiddle text={t("3-5")} />
     <PrevScene page="/3-3" />
     <NextScene page="/4-1" />
   </>
