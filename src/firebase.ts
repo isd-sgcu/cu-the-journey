@@ -30,7 +30,7 @@ app.auth().signInAnonymously();
 //* Store time capsule function
 
 const db = app.firestore();
-const collection = db.collection("time_capsules");
+const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION);
 
 export async function storeTimeCapsule(uid: string, text: string) {
   const docData = {
