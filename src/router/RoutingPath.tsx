@@ -9,8 +9,7 @@ import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/SelectLanguage";
 import Landing from "../pages/landing";
 import TW from "../pages/landing/TW";
-
-const FirstScene = () => <p>First Scene</p>;
+import DAE from "../pages/landing/DAE";
 
 const SecondScene = () => <p>Second Scene</p>;
 
@@ -40,8 +39,8 @@ const allPath = [
     component: TW
   },
   {
-    path: "/1",
-    component: FirstScene
+    path: "/inspired-by-DAE",
+    component: DAE
   },
   {
     path: "/2",
