@@ -1,9 +1,9 @@
-import i18n from "./i18n.json";
-import pickANumber from "./pickANumber.json";
-import souvenir from "./souvenir.json";
-import scene3 from "./scene3.json";
-import scene4 from "./scene4.json";
-import scene5 from "./scene5.json";
+import i18n from "./i18n";
+import pickANumber from "./pickANumber";
+import souvenir from "./souvenir";
+import scene3 from "./scene3";
+import scene4 from "./scene4";
+import scene5 from "./scene5";
 
 const th = {
   i18n,
