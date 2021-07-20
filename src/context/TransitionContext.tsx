@@ -49,7 +49,9 @@ export const TransitionProvider: Component = props => {
   });
 
   const nextAnimationTrigger = () => {
-    setTransitionNumber(prev => prev + 1);
+    if (!transitionQueue()) {
+      setTransitionNumber(prev => prev + 1);
+    }
   };
 
   const scheduleFrameHelper = (num: number, timems: number) => {
