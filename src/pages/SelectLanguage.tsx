@@ -12,7 +12,7 @@ function SelectLanguage() {
           locale("th");
           localStorage.setItem("language", "th");
         }}
-        href="/i18n"
+        href="/landing"
       >
         ภาษาไทย
       </Button>
@@ -21,7 +21,7 @@ function SelectLanguage() {
           locale("en");
           localStorage.setItem("language", "en");
         }}
-        href="/i18n"
+        href="/landing"
       >
         ENGLISH
       </Button>
