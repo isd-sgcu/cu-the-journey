@@ -1,26 +1,28 @@
-import { Component, createSignal } from "solid-js";
+import type { Component } from "solid-js";
+import { useRouter } from "solid-app-router";
 
-const [currentPage, setPage] = createSignal("3-0");
-const goToPage = (pg = "3-0") => setPage(pg);
-
-interface JumpTo {
-  pg: string;
+interface JumpToProps {
+  page: string;
 }
 
-const NextScene: Component<JumpTo> = props => (
-  <div class="flex">
-    <button onClick={() => goToPage(props.pg)}>
-      next
-      <br />
-      {currentPage()}
-    </button>
-  </div>
-);
+const NextScene: Component<JumpToProps> = props => {
+  const [router, { push }] = useRouter();
+  return (
+    <>
+      <button onClick={() => push(props.page)}>
+        next <br /> {router.current[0].path}
+      </button>
+    </>
+  );
+};
 
-const PrevScene: Component<JumpTo> = props => (
-  <div class="flex">
-    <button onClick={() => goToPage(props.pg)}>prev</button>
-  </div>
-);
+const PrevScene: Component<JumpToProps> = props => {
+  const [, { push }] = useRouter();
+  return (
+    <>
+      <button onClick={() => push(props.page)}>prev</button>
+    </>
+  );
+};
 
-export { NextScene, PrevScene, goToPage, currentPage };
+export { NextScene, PrevScene };
