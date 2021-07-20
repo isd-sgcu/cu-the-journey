@@ -7,6 +7,7 @@ import Scene4 from "../pages/Scene4";
 import Scene5 from "../pages/Scene5";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/SelectLanguage";
+import Landing from "../pages/landing";
 
 const FirstScene = () => <p>First Scene</p>;
 
@@ -28,6 +29,10 @@ const allPath = [
   {
     path: "/",
     component: SelectLanguage
+  },
+  {
+    path: "/landing",
+    component: Landing
   },
   {
     path: "/1",
