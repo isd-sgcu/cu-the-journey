@@ -133,15 +133,15 @@
       U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
   body {
-    @apply text-base text-purple font-normal font-BaiJam;
+    @apply text-base text-purple font-normal font-BaiJam tracking-[0.5px];
   }
 
   h1 {
-    @apply text-4xl font-semibold font-Mitr;
+    @apply text-4xl font-semibold font-Mitr tracking-[0.01em];
   }
 
   h2 {
-    @apply text-2xl font-semibold font-Mitr;
+    @apply text-2xl font-semibold font-Mitr tracking-[0.02em];
   }
 
   h3 {
@@ -153,7 +153,7 @@
   }
 
   h5 {
-    @apply text-lg font-medium font-Mitr;
+    @apply text-lg font-medium font-Mitr  tracking-[0.15px];
   }
 
   h6 {
