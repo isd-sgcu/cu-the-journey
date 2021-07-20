@@ -6,13 +6,15 @@ export interface SpriteSetting {
   sprite: StateSprite;
 }
 
+type SpriteName = "A" | "B";
+
 export interface SceneSwitcherOption {
-  name: string;
+  name: SpriteName;
   loop?: boolean;
   onComplete?: () => void;
 }
 
-export type SceneSwitchable = Array<string | SceneSwitcherOption>;
+export type SceneSwitchable = Array<SpriteName | SceneSwitcherOption>;
 
 export class SceneEngine {
   private sceneLists: SpriteSetting[];
@@ -52,7 +54,8 @@ export class SceneEngine {
     sprite.loop = true; // eslint-disable-line no-param-reassign
   }
 
-  sceneSwitcher = (newScenes: SceneSwitchable) => {
+  sceneSwitcher = (newScenes: SceneSwitchable, onNewScene: () => void = undefined) => {
+    this.onNewScene = onNewScene;
     const mappedScenes: SceneSwitcherOption[] = newScenes.map(scene => {
       if (typeof scene === "string") {
         return { name: scene };
@@ -69,8 +72,8 @@ export class SceneEngine {
 
     const oldScenes: SpriteSetting[] = [];
 
-    mappedScenes.forEach(({ name, loop = true, onComplete }) => {
-      const oldScene = this.currentScene.find(scene => scene.name === name);
+    mappedScenes.forEach(({ name: newName, loop = true, onComplete }) => {
+      const oldScene = this.currentScene.find(({ name }) => name === newName);
       if (oldScene) {
         if (loop !== oldScene.sprite.loop) {
           oldScene.sprite.gotoAndPlay(oldScene.sprite.currentFrame);
@@ -79,7 +82,7 @@ export class SceneEngine {
         oldScene.sprite.onComplete = onComplete;
         oldScenes.push(oldScene);
       } else {
-        const nextScene = this.sceneLists.find(sceneSetting => sceneSetting.name === name);
+        const nextScene = this.sceneLists.find(({ name }) => name === newName);
         nextScene.sprite.loop = loop;
         nextScene.sprite.onComplete = onComplete;
         this.willAddScene.push(nextScene);
