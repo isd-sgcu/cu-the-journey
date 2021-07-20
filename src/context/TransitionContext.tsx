@@ -11,6 +11,7 @@ import {
 } from "solid-js";
 
 interface ITransitionProvider {
+  transitionQueue: Accessor<boolean>;
   scheduleFrame: (num: number, timems: number) => void;
   isAnimated: Accessor<boolean>;
   setAnimated: (val: boolean) => boolean;
@@ -32,11 +33,13 @@ const fadeOutNumber = -1;
 export const TransitionProvider: Component = props => {
   const [transitionNumber, setTransitionNumber] = createSignal(0);
   const [isAnimated, setAnimated] = createSignal(false);
+  const [transitionQueue, setTransitionQueue] = createSignal(false);
   const [nextScene, setNextScene] = createSignal("");
   const [router] = useRouter();
 
   const resetAnimationFrame = () => {
     setTransitionNumber(0);
+    setTransitionQueue(false);
   };
 
   createEffect(() => {
@@ -49,20 +52,27 @@ export const TransitionProvider: Component = props => {
     setTransitionNumber(prev => prev + 1);
   };
 
-  const scheduleFrame = (num: number, timems: number) => {
+  const scheduleFrameHelper = (num: number, timems: number) => {
     if (num !== 0) {
-      setAnimated(true);
       setTimeout(() => {
         nextAnimationTrigger();
-        scheduleFrame(num - 1, timems);
+        scheduleFrameHelper(num - 1, timems);
       }, timems);
     } else {
-      setAnimated(false);
+      setTransitionQueue(false);
     }
   };
 
+  const scheduleFrame = (num: number, timems: number) => {
+    const newNum = Math.max(num, 0);
+    const newTimes = Math.max(timems, 0);
+
+    setTransitionQueue(true);
+    scheduleFrameHelper(newNum, newTimes);
+  };
+
   const fadeOut = (next: string) => {
-    if (!isAnimated() && next !== router.current[0].path) {
+    if (!transitionQueue() && !isAnimated() && next !== router.current[0].path) {
       setNextScene(next);
       setTransitionNumber(-1);
     }
@@ -71,6 +81,7 @@ export const TransitionProvider: Component = props => {
   return (
     <TransitionContext.Provider
       value={{
+        transitionQueue,
         isAnimated,
         setAnimated,
         nextScene,
