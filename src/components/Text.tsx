@@ -41,6 +41,6 @@ export { TextBold, TextMiddle };
 
 const TextComponent = {
   TextBold,
-  TextMiddle
+  TextMiddle,
 };
 export default TextComponent;

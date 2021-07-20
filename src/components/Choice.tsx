@@ -1,4 +1,4 @@
-import { Component, onMount } from "solid-js";
+import { Component, onCleanup, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface ChoiceButtonProps {
@@ -50,10 +50,11 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     return props.question;
   };
 
-  onMount(() => {
-    const { scheduleFrame } = useTransitionContext(true);
-    scheduleFrame(2, 1000);
-  });
+  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true);
+
+  onMount(() => scheduleFrame(2, 1000));
+
+  onCleanup(() => resetAnimationFrame());
 
   return (
     <>
