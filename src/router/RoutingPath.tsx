@@ -8,6 +8,7 @@ import Scene5 from "../pages/Scene5";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/SelectLanguage";
 import Landing from "../pages/landing";
+import TW from "../pages/landing/TW";
 
 const FirstScene = () => <p>First Scene</p>;
 
@@ -33,6 +34,10 @@ const allPath = [
   {
     path: "/landing",
     component: Landing
+  },
+  {
+    path: "/trigger-warning",
+    component: TW
   },
   {
     path: "/1",

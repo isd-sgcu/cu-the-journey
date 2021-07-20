@@ -2,24 +2,21 @@ import { Link } from "solid-app-router";
 
 function index() {
   return (
-    <div
-      class="flex-grow w-full flex flex-col justify-center text-white items-center"
-      style="background: linear-gradient(180deg, #F68E2E 0%, #DD7ED2 52.08%, #5F229F 100%);"
-    >
+    <>
       <img
         src="images/ftj-logo.svg"
         class="w-[79px] h-[79px] self-end mr-5 mb-[29px]"
         alt="ftj-logo"
       />
 
-      <h6 class="" style="text-shadow: 2px 2px #F46C2A;">
+      <h6 class="text-white" style="text-shadow: 2px 2px #F46C2A;">
         Freshy the Journey เปิดประตูสู่จุฬา
       </h6>
-      <h1 class="mt-[35px]" style="text-shadow: 4px 4px #90168B;">
+      <h1 class="text-white mt-[35px]" style="text-shadow: 4px 4px #90168B;">
         บันทึกการเดินทาง
       </h1>
 
-      <div style="text-shadow: 4px 4px #5F229F;">
+      <div class="text-white" style="text-shadow: 4px 4px #5F229F;">
         <h1 class="font-bold text-[144px] mt-[50px]">CU</h1>
         <h1 class="mt-11">The</h1>
         <h1 class="text-[48px]">Journey</h1>
@@ -40,10 +37,10 @@ function index() {
           <p class="absolute right-[-28px] bottom-[-20px]">”</p>
         </div>
       </div>
-      <Link href="/tw" class="mt-12 mb-10">
+      <Link href="/trigger-warning" class="mt-12 mb-10 text-white">
         <button>{"<< แตะเพื่อไปต่อ >>"}</button>
       </Link>
-    </div>
+    </>
   );
 }
 
