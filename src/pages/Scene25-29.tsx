@@ -50,10 +50,13 @@ const Scene28S0: Component = () => {
   };
   return (
     <>
-      <TextMiddle class="text-[13px]" text={t(`28-0.${rand}`)} />
-      <p class={`absolute bottom-[8rem] right-[6rem] text-[12px] italic text-right`}>
-        {quoteFrom(t(`28-0.quote${rand}`))}
-      </p>
+      <TextMiddle class="tracking-[0em] min-w-[350px]" text={t(`28-0.${rand}`)}>
+        <p class={`relative text-[13px] right-2 italic text-right tracking-[0em]`}>
+          <br />
+          <br />
+          {quoteFrom(t(`28-0.quote${rand}`))}
+        </p>
+      </TextMiddle>
       <PrevScene page="/27-0" />
       <NextScene page="/29-0" />
     </>
