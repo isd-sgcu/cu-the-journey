@@ -12,21 +12,19 @@ function t(JSONkey: string) {
 
 const Scene25S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]">
-      <TextMiddle class="text-white" text={t("25-0")} />
-      <PrevScene page="/24-0" />
-      <NextScene page="/26-0" />
-    </div>
+    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]"></div>
+    <TextMiddle class="text-white" text={t("25-0")} />
+    <PrevScene page="/24-0" />
+    <NextScene page="/26-0" />
   </>
 );
 
 const Scene26S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]">
-      <TextMiddle class="text-white" text={t("26-0")} />
-      <PrevScene page="/25-0" />
-      <NextScene page="/27-0" />
-    </div>
+    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]"></div>
+    <TextMiddle class="text-white" text={t("26-0")} />
+    <PrevScene page="/25-0" />
+    <NextScene page="/27-0" />
   </>
 );
 

@@ -51,7 +51,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
   };
   return (
     <>
-      <div class="flex h-screen justify-center items-center">
+      <div class="flex h-screen justify-center items-center z-10">
         <div class="flex flex-col items-center min-w-[20rem]">
           <div class="text-center w-[280px] selection:bg-purple selection:text-yellow">
             <h5>{question}</h5>
