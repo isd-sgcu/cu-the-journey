@@ -44,8 +44,9 @@ jobs:
           name: dist
           path: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: hosting:channel:deploy pull_request_${{ github.event.pull_request.number }} --expires 7d
-        env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.GCP_SA_KEY }}"
+          expires: 7d
+          projectId: freshy-the-journey
