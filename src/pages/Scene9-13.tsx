@@ -65,7 +65,15 @@ const Scene13S1: Component = () => (
 
 const Scene13S2: Component = () => (
   <>
-    <TextMiddle text={t("13-2")} />
+    <TextMiddle text={t("13-2")}>
+      <div class="flex justify-center place-items-center text-[11px]">
+        <p>
+          {t("13-2-quote.line1")}
+          <br />
+          {t("13-2-quote.line2")}
+        </p>
+      </div>
+    </TextMiddle>
     <PrevScene page="/13-1" />
     <NextScene page="/13-3" />
   </>

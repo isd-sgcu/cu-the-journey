@@ -26,25 +26,17 @@ const TextBold: Component<TextProps> = props => (
   </div>
 );
 
-const TextUpper: Component<TextProps> = props => (
-  <div class="flex h-screen justify-center items-center">
-    <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
-      <p>{addtText(props.text)}</p>
-    </div>
-  </div>
-);
-
 const TextMiddle: Component<TextProps> = props => (
   <div class="flex h-screen justify-center items-center">
     <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
       <p>{addtText(props.text)}</p>
+      {props.children}
     </div>
   </div>
 );
 
 const TextComponent = {
   TextBold,
-  TextUpper,
   TextMiddle
 };
 
