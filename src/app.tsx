@@ -29,7 +29,7 @@ export const App: Component = () => {
         <Route />
       </div>
       <AnimationScene />
-      <div class="absolute left-0 top-0 bg-white flex flex-col">
+      <div class="absolute left-0 top-0 bg-white flex flex-col z-20">
         <button onclick={() => sceneSwitcher(["bird", "ogbg"])}>Bird</button>
         <button onclick={() => sceneSwitcher(["ogbg"])}>remove Bird</button>
       </div>
