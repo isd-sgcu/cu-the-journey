@@ -4,7 +4,7 @@ import Typography from "../../components/common/Typography";
 
 function Souvenir() {
   const [t] = useTranslation("souvenir");
-  const [router] = useRouter();
+  const [router] = useRouter()!;
   let number = Number(router.query.number) || 0;
   if (number < 0 || number > 6) {
     number = 0;

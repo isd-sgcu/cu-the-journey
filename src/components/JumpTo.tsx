@@ -6,7 +6,7 @@ interface JumpToProps {
 }
 
 const NextScene: Component<JumpToProps> = props => {
-  const [router, { push }] = useRouter();
+  const [router, { push }] = useRouter()!;
   return (
     <>
       <button onClick={() => push(props.page)}>
@@ -17,7 +17,7 @@ const NextScene: Component<JumpToProps> = props => {
 };
 
 const PrevScene: Component<JumpToProps> = props => {
-  const [, { push }] = useRouter();
+  const [, { push }] = useRouter()!;
   return (
     <>
       <button onClick={() => push(props.page)}>prev</button>

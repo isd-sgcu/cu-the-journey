@@ -17,7 +17,7 @@ function Typography(props: IProps & JSX.HTMLAttributes<HTMLHeadingElement | HTML
 
   return (
     <Dynamic component={variant || "p"} {...attributes}>
-      <Index each={children.split(/\n|\\n/)}>
+      <Index each={children!.split(/\n|\\n/)}>
         {item => (
           <>
             {item}
