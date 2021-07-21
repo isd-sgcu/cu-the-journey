@@ -2,10 +2,7 @@ import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import Fallback from "../pages/Fallback";
-import Scene3 from "../pages/Scene3";
-import Scene4 from "../pages/Scene4";
-import Scene5 from "../pages/Scene5";
-import Scene7 from "../pages/Scene7";
+import AllScenes from "../pages/AllScenes";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/landing/SelectLanguage";
 import Landing from "../pages/landing";
@@ -83,10 +80,12 @@ const iterateScene = (scene: object) => {
   });
 };
 
-// this will be changed later
-iterateScene(Scene3);
-iterateScene(Scene4);
-iterateScene(Scene5);
-iterateScene(Scene7);
+const iterateSceneImport = (allscene: object) => {
+  Object.keys(allscene).forEach(scene => {
+    iterateScene(allscene[scene]);
+  });
+};
+
+iterateSceneImport(AllScenes);
 
 export default allPath;
