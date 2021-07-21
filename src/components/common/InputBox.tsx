@@ -15,7 +15,7 @@ const InputBox: Component<InputBoxProps> = props => {
       spellcheck={false}
       placeholder={props.placeHolder}
       style={props.isGoingNextScene() ? "border: none; cursor: pointer;" : ""}
-      class="placeholder-purple resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-center border-[1px] border-purple rounded-[10px] outline-none"
+      class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-center border-[1px] border-purple rounded-[10px] outline-none"
     ></textarea>
   );
 };
