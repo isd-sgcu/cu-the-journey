@@ -24,6 +24,7 @@ jobs:
           echo SNOWPACK_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}>>.env
           echo SNOWPACK_PUBLIC_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}>>.env
           echo SNOWPACK_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID }}>>.env
+          echo SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION=time_capsules>>.env
       - name: Build
         run: yarn run build
       - name: Archive Production Artifact
