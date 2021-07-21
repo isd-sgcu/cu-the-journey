@@ -44,13 +44,18 @@ async function storeTimeCapsule(uid: string, texts: string[], emails: string[]) 
 
 //* Get time capsule function.
 
+interface ITimeCapsuleData {
+  texts: string;
+  emails: string;
+}
+
 export async function manageTimeCapsule(uid: string, newText: string, newEmail: string) {
   collection
     .doc(uid)
     .get()
     .then(doc => {
       if (doc.exists) {
-        const { texts: textArr, emails: emailArr } = doc.data();
+        const { texts: textArr, emails: emailArr } = doc.data() as ITimeCapsuleData;
         storeTimeCapsule(uid, [...textArr, newText], [...emailArr, newEmail]);
       } else {
         storeTimeCapsule(uid, [newText], [newEmail]);
