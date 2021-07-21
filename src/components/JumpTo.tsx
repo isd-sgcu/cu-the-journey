@@ -9,7 +9,7 @@ const NextScene: Component<JumpToProps> = props => {
   const [router, { push }] = useRouter();
   return (
     <>
-      <button onClick={() => push(props.page)}>
+      <button class="text-green z-10" onClick={() => push(props.page)}>
         next <br /> {router.current[0].path}
       </button>
     </>
@@ -20,7 +20,9 @@ const PrevScene: Component<JumpToProps> = props => {
   const [, { push }] = useRouter();
   return (
     <>
-      <button onClick={() => push(props.page)}>prev</button>
+      <button class="text-green z-10" onClick={() => push(props.page)}>
+        prev
+      </button>
     </>
   );
 };

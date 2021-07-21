@@ -4,6 +4,7 @@ import type { JSX } from "solid-js/jsx-runtime";
 
 interface TextProps {
   text: string | string[];
+  class?: string;
 }
 
 function addtText(text: string | string[]): string | JSX.Element {
@@ -28,7 +29,9 @@ const TextBold: Component<TextProps> = props => (
 
 const TextMiddle: Component<TextProps> = props => (
   <div class="flex h-screen justify-center items-center">
-    <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
+    <div
+      class={`text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal ${props.class}`}
+    >
       <p>{addtText(props.text)}</p>
       {props.children}
     </div>
