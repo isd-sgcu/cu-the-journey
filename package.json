@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build",
+    "lint-staged": "lint-staged",
     "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
     "lint": "prettier --check \"src/**/*.{tsx,ts,js}\"",
     "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -w"
