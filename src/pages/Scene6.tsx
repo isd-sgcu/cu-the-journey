@@ -33,7 +33,7 @@ const Scene6S2: Component = () => (
 const Scene6S3: Component = () => {
   console.log(currentPage());
   const placeHolder = "ลองเล่าให้ฟังได้ไหม...";
-  const [text, setText] = createSignal(placeHolder);
+  const [text, setText] = createSignal("");
 
   return (
     <>

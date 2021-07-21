@@ -1,30 +1,28 @@
 const InputBox = props => {
   const { placeHolder } = props;
-  const [text, setText] = props.signal;
+  const setText = props.signal[1];
 
-  const updateText = event => {
-    const textInArea = event.target.value as string;
-    console.log(text());
-    if (textInArea === "") {
-      setText(placeHolder);
-      return;
-    }
+  const updateText = e => {
+    const textInArea = e.target.value as string;
     setText(textInArea);
   };
 
   return (
     <textarea
-      onfocus={() => {
-        if (text() === placeHolder) setText("");
+      onfocus={e => {
+        if ((e.target as HTMLTextAreaElement).value === placeHolder)
+          (e.target as HTMLTextAreaElement).value = "";
       }}
-      onblur={() => {
-        if (text() === "") setText(placeHolder);
+      onblur={e => {
+        if ((e.target as HTMLTextAreaElement).value.trim() === "") {
+          (e.target as HTMLTextAreaElement).value = placeHolder;
+        }
       }}
       oninput={updateText}
       spellcheck={false}
       class="placeholder-purple resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-center border-[1px] border-purple rounded-[10px] outline-none"
     >
-      {text()}
+      {placeHolder}
     </textarea>
   );
 };
