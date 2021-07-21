@@ -27,14 +27,34 @@ export default app;
 
 app.auth().signInAnonymously();
 
-//* Store time capsule function
-
 const db = app.firestore();
 const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION);
 
-export async function storeTimeCapsule(uid: string, text: string) {
+//* Store time capsule function
+
+async function storeTimeCapsule(uid: string, texts: string[], emails: string[]) {
   const docData = {
-    text
+    emails,
+    texts
   };
   await collection.doc(uid).set(docData);
+}
+
+//* Get time capsule function.
+
+export async function manageTimeCapsule(uid: string, newText: string, newEmail: string) {
+  collection
+    .doc(uid)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        const { texts: textArr, emails: emailArr } = doc.data();
+        storeTimeCapsule(uid, [...textArr, newText], [...emailArr, newEmail]);
+      } else {
+        storeTimeCapsule(uid, [newText], [newEmail]);
+      }
+    })
+    .catch(e => {
+      console.log(e);
+    });
 }
