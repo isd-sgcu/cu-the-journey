@@ -1,5 +1,6 @@
-import { Application, Loader, utils } from "pixi.js";
+import { Application, Loader } from "pixi.js";
 import { Component, createContext, onCleanup, useContext } from "solid-js";
+import { resources } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
 import { StateSprite } from "./StateSprite";
 
@@ -10,33 +11,25 @@ export interface SceneProviderProps {
 export const SceneContext = createContext<SceneProviderProps>();
 
 export const useScene = () => useContext<SceneProviderProps>(SceneContext);
+
 export const SceneProvider: Component = props => {
   const app = new Application({
     width: 375,
     height: 667,
     antialias: true,
-    transparent: true,
+    backgroundColor: 0xffffff,
     resolution: 1
   });
 
   const sceneEngine = new SceneEngine(app);
-
-  const resources = ["images/spritesheet.json"];
-
   const loader = Loader.shared;
   loader
-    .add(resources.filter(src => !utils.TextureCache[src] && !utils.TextureCache[`${src}_image`]))
+    .add([].concat(...Object.values(resources)).filter(src => !loader.resources[src]))
     .load(() => {
-      const sprites = [
-        {
-          name: "A",
-          sprite: new StateSprite("walk", { animationSpeed: 0.167, zIndex: 1 })
-        },
-        {
-          name: "B",
-          sprite: new StateSprite("slime", { animationSpeed: 0.167, zIndex: 2, x: 100 })
-        }
-      ];
+      const sprites = Object.keys(resources).map(name => ({
+        name,
+        sprite: new StateSprite(resources[name])
+      }));
       sceneEngine.addScenes(sprites);
       app.ticker.add(delta => {
         sceneEngine.update(delta);

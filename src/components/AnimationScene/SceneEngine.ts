@@ -1,12 +1,11 @@
 import { Application, Container } from "pixi.js";
+import type { SpriteName } from "./Resources";
 import type { StateSprite } from "./StateSprite";
 
 export interface SpriteSetting {
   name?: string;
   sprite: StateSprite;
 }
-
-type SpriteName = "A" | "B";
 
 export interface SceneSwitcherOption {
   name: SpriteName;
@@ -39,7 +38,6 @@ export class SceneEngine {
     this.sceneContainer = new Container();
 
     this.sceneContainer.sortableChildren = true;
-
     this.app.stage.addChild(this.sceneContainer);
   }
 
@@ -83,6 +81,10 @@ export class SceneEngine {
         oldScenes.push(oldScene);
       } else {
         const nextScene = this.sceneLists.find(({ name }) => name === newName);
+        if (!nextScene) {
+          console.log(`unknown scene name: ${newName}`);
+          return;
+        }
         nextScene.sprite.loop = loop;
         nextScene.sprite.onComplete = onComplete;
         this.willAddScene.push(nextScene);
@@ -116,8 +118,13 @@ export class SceneEngine {
   }
 
   update(delta: number) {
-    this.currentScene.forEach(scene => scene.sprite.updateState(delta));
-    this.willRemoveScene.forEach(scene => scene.sprite.updateState(delta));
+    const { width, height } = this.app.screen;
+    [].concat(this.currentScene, this.willRemoveScene).forEach(({ sprite }) => {
+      sprite.updateState(delta);
+      const ratio = Math.max(width / sprite.width, height / sprite.height);
+      sprite.width = Math.ceil(sprite.width * ratio); // eslint-disable-line no-param-reassign
+      sprite.height = Math.ceil(sprite.height * ratio); // eslint-disable-line no-param-reassign
+    });
 
     if (this.willRemoveScene.length !== 0) {
       if (this.willRemoveScene.every(({ sprite }) => sprite.getState() === "DONE")) {
@@ -125,5 +132,11 @@ export class SceneEngine {
         this.willRemoveScene = []; // clear
       }
     }
+
+    // update container size
+    this.sceneContainer.x = width / 2;
+    this.sceneContainer.y = height / 2;
+    this.sceneContainer.pivot.x = this.sceneContainer.width / 2;
+    this.sceneContainer.pivot.y = this.sceneContainer.height / 2;
   }
 }

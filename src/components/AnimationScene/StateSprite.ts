@@ -5,8 +5,6 @@ type SpriteState = "LOAD" | "PROCESS" | "FINALIZE" | "DONE";
 export interface StateSpriteOptions {
   animationSpeed?: number;
   zIndex?: number;
-  x?: number;
-  y?: number;
 }
 
 export class StateSprite extends AnimatedSprite {
@@ -14,15 +12,12 @@ export class StateSprite extends AnimatedSprite {
 
   private onDone: () => void;
 
-  constructor(spriteName: string, options: StateSpriteOptions) {
+  constructor(resources: string[], options?: StateSpriteOptions) {
     const loader = Loader.shared;
-    const sheet = loader.resources["images/spritesheet.json"].spritesheet;
-    super(sheet.animations[spriteName]);
-    super.animationSpeed = options.animationSpeed || 0;
-    super.zIndex = options.zIndex || 0;
-
-    super.x = options.x || 0;
-    super.y = options.y || 0;
+    const textures = resources.map(url => loader.resources[url].texture);
+    super(textures);
+    super.animationSpeed = options?.animationSpeed || 0.04;
+    super.zIndex = options?.zIndex || 0;
   }
 
   setup(sceneContainer: Container) {
