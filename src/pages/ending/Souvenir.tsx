@@ -1,30 +1,37 @@
 import { useRouter } from "solid-app-router";
+import { useTranslation } from "../../config/i18n";
+import Typography from "../../components/common/Typography";
 
 function Souvenir() {
+  const [t] = useTranslation("souvenir");
   const [router] = useRouter();
-  const number = router.query.number as string;
-  if (!number) {
-    return (
-      <>
-        <h4>ไม่เลือกหมายเลข</h4>
-      </>
-    );
+  let number = Number(router.query.number) || 0;
+  if (number < 0 || number > 6) {
+    number = 0;
   }
+
   return (
     <>
-      <h2>Your New Journey Begins</h2>
-      <h4 class="mt-3.5 mb-2">หมายเลข {number}</h4>
+      <div class="flex-grow mt-[23%] mb-4">
+        <Typography variant="h2">Your New Journey Begins</Typography>
+        <Typography variant="h4" class="mt-2 mb-[18px]">
+          {number ? `${t("number", { number: String(number) })}` : t("notChoose")}
+        </Typography>
 
-      <p class="mb-40">“ (คำทำนาย) “</p>
+        <Typography>{t(`choices.${number}`)}</Typography>
+      </div>
 
-      <h6>การเดินทางครั้งใหม่นี้</h6>
-      <h6>ขอให้เธอปล่อยตัวเองให้เป็นอิสระ</h6>
-      <h6>เลือกที่จะใช้ชีวิตตามเส้นทางของเธอ</h6>
-      <h6>แล้วเป็นตัวเธออย่างแท้จริง</h6>
-      <h6 class="mt-4">ใช้ช่วงเวลาต่อจากนี้ให้คุ้มค่า เหมือนที่ผ่านมานะ</h6>
-      <h6>- Free your mind, Find your way -</h6>
-      <p class="mt-4">อย่าลืม แอดไลน์ เพื่อติดตามข่าวสารต่าง ๆ จากอบจ.</p>
-      <p class="self-end mr-4">QR Line Official</p>
+      <div class="mb-[29px] w-full">
+        <Typography variant="h6" class="text-sm leading-4 tracking-[0.4px]">
+          {t("p1")}
+        </Typography>
+        <div class="flex mr-5 mt-[22px]">
+          <Typography class="text-xs text-[#410C89] text-right self-end flex-grow">
+            {t("qr")}
+          </Typography>
+          <div class="w-[74px] h-[74px] bg-gray-300 ml-[7px]"></div>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,8 +1,8 @@
-import { useI18n } from "@amoutonbrady/solid-i18n";
+import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
-import ThirdScene from "../pages/Scene3";
-import SixthScene from "../pages/Scene6";
+import Fallback from "../pages/Fallback";
+import AllScenes from "../pages/AllScenes";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/SelectLanguage";
 
@@ -10,20 +10,19 @@ const FirstScene = () => <p>First Scene</p>;
 
 const SecondScene = () => <p>Second Scene</p>;
 
-const FallbackScene = () => <p>Not found</p>;
-
 const I18Testing = () => {
-  const [t, { locale }] = useI18n();
+  const [t, { locale }] = useTranslation("i18n");
   return (
     <>
       <button onClick={() => locale("th")}>Change to TH</button>
       <button onClick={() => locale("en")}>Change to EN</button>
-      <h1>{t("hello")}</h1>
+      <h1>{t("hello", { name: "Outsider" })}</h1>
+      <h1>{t("nested.hello", { name: "Insider" })}</h1>
     </>
   );
 };
 
-export default [
+const allPath = [
   {
     path: "/",
     component: SelectLanguage
@@ -38,7 +37,7 @@ export default [
   },
   {
     path: "*all",
-    component: FallbackScene
+    component: Fallback
   },
   {
     path: "/choices",
@@ -49,14 +48,6 @@ export default [
     component: I18Testing
   },
   {
-    path: "/3",
-    component: ThirdScene
-  },
-  {
-    path: "/6",
-    component: SixthScene
-  },
-  {
     path: "/pick-a-number",
     component: PickANumber
   },
@@ -65,3 +56,27 @@ export default [
     component: Souvenir
   }
 ];
+
+/* will iterate through all scene in an import
+ * and create corresponding paths
+ * USE THIS FORMAT FOR ALL SCENES:
+ * Scene_S_S_ where _ is a number
+ * e.g. Scene12S5 -> /12-5
+ */
+const iterateScene = (scene: object) => {
+  Object.keys(scene).forEach(page => {
+    const convertPath = `/${page.toString().slice(5).replace(/S/g, "-")}`;
+    const link = { path: convertPath, component: scene[page] };
+    allPath.push(link);
+  });
+};
+
+const iterateSceneImport = (allscene: object) => {
+  Object.keys(allscene).forEach(scene => {
+    iterateScene(allscene[scene]);
+  });
+};
+
+iterateSceneImport(AllScenes);
+
+export default allPath;

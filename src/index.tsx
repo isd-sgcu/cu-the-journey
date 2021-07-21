@@ -5,7 +5,7 @@ import { render } from "solid-js/web";
 import { I18nProvider } from "@amoutonbrady/solid-i18n";
 import { App } from "./app";
 import RoutingPath from "./router/RoutingPath";
-import { dict } from "./config/i18n";
+import dict from "./locales";
 
 const dispose = render(
   () => (
