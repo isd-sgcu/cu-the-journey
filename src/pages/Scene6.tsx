@@ -1,8 +1,9 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, Show } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { NextScene, PrevScene, currentPage } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import InputBox from "../components/common/InputBox";
+import Button from "../components/common/Button";
 
 const { TextMiddle } = TextComponent;
 
@@ -35,6 +36,15 @@ const Scene6S3: Component = () => {
   const placeHolder = "ลองเล่าให้ฟังได้ไหม...";
   const [text, setText] = createSignal("");
 
+  const [isButtonShown, setIsButtonShown] = createSignal(true);
+
+  const proceed = () => {
+    setIsButtonShown(false);
+    document.querySelector("body").onclick = () => {
+      alert(`Going to the next scene with save text\n${text()}`);
+    }; // TODO go to the next scene
+  };
+
   return (
     <>
       <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
@@ -46,6 +56,9 @@ const Scene6S3: Component = () => {
           </h5>
         </div>
         <InputBox placeHolder={placeHolder} signal={[text, setText]} />
+        <Show when={isButtonShown()} fallback={() => <h5>{"<< แตะเพื่อไปต่อ >>"}</h5>}>
+          <Button children="บันทึก" onClick={proceed} />
+        </Show>
       </div>
       <PrevScene pg="6-2" />
       <NextScene pg="6-4" />
