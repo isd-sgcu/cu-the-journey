@@ -7,6 +7,7 @@ import scene4 from "./scene4";
 import scene5 from "./scene5";
 import scene6 from "./scene6";
 import scene7 from "./scene7";
+import scene8 from "./scene8";
 import scene9to13 from "./scene9-13";
 import scene25to29 from "./scene25-29";
 
@@ -20,6 +21,7 @@ const th = {
   scene5,
   scene6,
   scene7,
+  scene8,
   scene9to13,
   scene25to29
 };

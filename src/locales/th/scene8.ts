@@ -11,5 +11,6 @@ export default {
   ],
   "8-2-order": "เธอลองชมตัวเองสักหน่อยสิ",
   "8-2-placeholder": "พิมพ์คำตอบ",
-  "8-2-button-text": "บันทึก"
+  "8-2-button-text": "บันทึก",
+  "8-2-tap-proceed": "แตะเพื่อไปต่อ"
 };
