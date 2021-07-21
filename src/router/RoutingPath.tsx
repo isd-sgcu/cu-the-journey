@@ -5,6 +5,7 @@ import Fallback from "../pages/Fallback";
 import Scene3 from "../pages/Scene3";
 import Scene4 from "../pages/Scene4";
 import Scene5 from "../pages/Scene5";
+import Scene7 from "../pages/Scene7";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/landing/SelectLanguage";
 import Landing from "../pages/landing";
@@ -86,5 +87,6 @@ const iterateScene = (scene: object) => {
 iterateScene(Scene3);
 iterateScene(Scene4);
 iterateScene(Scene5);
+iterateScene(Scene7);
 
 export default allPath;
