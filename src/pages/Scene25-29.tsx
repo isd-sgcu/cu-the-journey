@@ -6,7 +6,7 @@ import { useTranslation } from "../config/i18n";
 const { TextMiddle } = TextComponent;
 
 function t(JSONkey: string) {
-  const [translate] = useTranslation("scene25to27");
+  const [translate] = useTranslation("scene25to29");
   return translate(JSONkey);
 }
 
@@ -36,10 +36,28 @@ const Scene27S0: Component = () => (
   </>
 );
 
+const Scene28S0: Component = () => (
+  <>
+    <TextMiddle class="text-[13px]" text={t("28-0.1")} />
+    <PrevScene page="/27-0" />
+    <NextScene page="/29-0" />
+  </>
+);
+
+const Scene29S0: Component = () => (
+  <>
+    <TextMiddle text={t("29-0")} />
+    <PrevScene page="/28-0" />
+    <NextScene page="/30-0" />
+  </>
+);
+
 const Scene25to27 = {
   Scene25S0,
   Scene26S0,
-  Scene27S0
+  Scene27S0,
+  Scene28S0,
+  Scene29S0
 };
 
 export default Scene25to27;
