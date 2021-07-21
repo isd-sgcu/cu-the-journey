@@ -19,6 +19,8 @@ let app: firebase.app.App;
 if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+} else {
+  app = firebase.app();
 }
 
 export default app;
@@ -28,7 +30,7 @@ export default app;
 app.auth().signInAnonymously();
 
 const db = app.firestore();
-const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION);
+const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION || "");
 
 //* Store time capsule function
 
