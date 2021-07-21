@@ -1,8 +1,8 @@
 {
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "snowpack dev",
-    "build": "snowpack build",
+    "dev": "snowpack dev --polyfill-node",
+    "build": "snowpack build --polyfill-node",
     "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
     "lint": "prettier --check \"src/**/*.{tsx,ts,js}\"",
     "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -w"
