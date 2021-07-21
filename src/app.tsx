@@ -1,29 +1,21 @@
-import { Component, createSignal } from 'solid-js';
+import { useI18n } from "@amoutonbrady/solid-i18n";
+import { Route } from "solid-app-router";
+import type { Component } from "solid-js";
+import "./firebase";
 
 export const App: Component = () => {
-  const [count, setCount] = createSignal(0);
-  const increment = (by = 1) => setCount(count() + by);
-  const decrement = (by = 1) => setCount(count() - by);
+  // Set language
+  const [, { locale }] = useI18n();
+  const language = localStorage.getItem("language");
+  if (language === "th" || language === "en") {
+    locale(language);
+  }
 
   return (
-    <>
-      <button
-        type="button"
-        onClick={() => decrement(2)}
-        class="bg-gray-900 text-gray-100 p-4 text-3xl"
-      >
-        -
-      </button>
-
-      <span class="p-4 text-3xl">{count()}</span>
-
-      <button
-        type="button"
-        onClick={() => increment(1)}
-        class="bg-gray-900 text-gray-100 p-4 text-3xl"
-      >
-        +
-      </button>
-    </>
+    <div class="w-screen min-h-screen flex justify-center items-center">
+      <div class="w-screen sm:max-w-[375px] min-h-screen sm:min-h-[667px] sm:max-h-[667px] bg-white flex justify-center items-center flex-col text-center">
+        <Route />
+      </div>
+    </div>
   );
 };

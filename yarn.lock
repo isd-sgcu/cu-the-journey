@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@amoutonbrady/solid-i18n@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@amoutonbrady/solid-i18n/-/solid-i18n-0.4.0.tgz#ccb138b58085d2a900fe169aa4a5311dd1eab613"
+  integrity sha512-r8tnmolZ+Fjy0SgideVmj0H4vh7Nfko/Fr1crRptrXsgoU1PftyG7m6MOAoCyG+ax2xy+Q5rvtBlJ6leIUD7WQ==
+  dependencies:
+    solid-js "^1.0.0"
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -699,6 +706,14 @@
   dependencies:
     "@babel/core" "^7.10.5"
     workerpool "^6.0.0"
+
+"@snowpack/plugin-dotenv@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@snowpack/plugin-dotenv/-/plugin-dotenv-2.1.0.tgz#dac77007bf657f999d222318506a850fd7d16875"
+  integrity sha512-NvwB+kQuxKheZLWrRvOgXB8i0cXhuIkljbgCn02fRGCIOigPIDk1jZrnn3x9skqqtul/XvW9dNulVi6Fa7CN6g==
+  dependencies:
+    dotenv "^8.2.0"
+    dotenv-expand "^5.1.0"
 
 "@snowpack/plugin-postcss@^1.4.3":
   version "1.4.3"
@@ -1519,6 +1534,16 @@ dom-storage@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dom-storage/-/dom-storage-2.1.0.tgz#00fb868bc9201357ea243c7bcfd3304c1e34ea39"
   integrity sha512-g6RpyWXzl0RR6OTElHKBl7nwnK87GUyZMYC7JWsB/IA73vpqK2K6LT39x4VepLxlSsWBFrPVLnsSR5Jyty0+2Q==
+
+dotenv-expand@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@^8.2.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
+  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -3851,6 +3876,11 @@ socks@^2.3.3:
   dependencies:
     ip "^1.1.5"
     smart-buffer "^4.1.0"
+
+solid-app-router@^0.0.51:
+  version "0.0.51"
+  resolved "https://registry.yarnpkg.com/solid-app-router/-/solid-app-router-0.0.51.tgz#796519ce04db58dff9964bcbf9a91face1095d28"
+  integrity sha512-9V7eassyze/v8lNp33YZ3cGadwjXN+OmCXcpmMU46BowgnzmYdJsl81crrM8WZ06CP9+mA4dvObUz7AuL8gwfg==
 
 solid-js@^1.0.0:
   version "1.0.1"
