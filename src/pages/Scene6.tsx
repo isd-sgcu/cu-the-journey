@@ -60,7 +60,10 @@ const Scene6S3: Component = () => {
           </h5>
         </div>
         <InputBox placeHolder={placeHolder} signal={[text, setText]} />
-        <Show when={isButtonShown()} fallback={() => <h5>{`<< ${t("6-3-tap-proceed")} >>`}</h5>}>
+        <Show
+          when={isButtonShown()}
+          fallback={() => <h5 class="block h-[40px]">{`<< ${t("6-3-tap-proceed")} >>`}</h5>}
+        >
           <Button children={t("6-3-button-text")} onClick={proceed} />
         </Show>
       </div>
