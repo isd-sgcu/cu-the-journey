@@ -1,29 +1,22 @@
-const InputBox = props => {
-  const { placeHolder } = props;
-  const setText = props.signal[1];
+import type { Accessor, Component } from "solid-js";
 
-  const updateText = e => {
-    const textInArea = e.target.value as string;
-    setText(textInArea);
-  };
+type InputBoxProps = {
+  signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
+  placeHolder: string;
+  isGoingNextScene: Accessor<boolean>;
+};
+
+const InputBox: Component<InputBoxProps> = props => {
+  const setText = props.signal[1];
 
   return (
     <textarea
-      onfocus={e => {
-        if ((e.target as HTMLTextAreaElement).value === placeHolder)
-          (e.target as HTMLTextAreaElement).value = "";
-      }}
-      onblur={e => {
-        if ((e.target as HTMLTextAreaElement).value.trim() === "") {
-          (e.target as HTMLTextAreaElement).value = placeHolder;
-        }
-      }}
-      oninput={updateText}
+      oninput={e => setText((e.target as HTMLTextAreaElement).value)}
       spellcheck={false}
+      placeholder={props.placeHolder}
+      style={props.isGoingNextScene() ? "border: none; cursor: pointer;" : ""}
       class="placeholder-purple resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-center border-[1px] border-purple rounded-[10px] outline-none"
-    >
-      {placeHolder}
-    </textarea>
+    ></textarea>
   );
 };
 

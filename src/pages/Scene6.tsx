@@ -1,4 +1,4 @@
-import { Component, createSignal, Show } from "solid-js";
+import { Component, createEffect, createSignal, Show } from "solid-js";
 import { Link } from "solid-app-router";
 import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
@@ -39,16 +39,18 @@ const Scene6S2: Component = () => (
 const Scene6S3: Component = () => {
   const placeHolder = t("6-3-placeholder");
   const [text, setText] = createSignal("");
-
-  const [isButtonShown, setIsButtonShown] = createSignal(true);
-
+  const [isButtonShown, setIsButtonShown] = createSignal(false);
+  createEffect(() => {
+    setIsButtonShown(text() !== "");
+  });
+  const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
   const nextPage = "/6-4";
 
   const proceed = () => {
     setIsButtonShown(false);
+    setIsGoingNextScene(true);
   };
 
-  // Without the link on the body to the next scene
   const sceneWithoutLink = (
     <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
@@ -58,10 +60,18 @@ const Scene6S3: Component = () => {
           {t("6-3-second-line")}
         </h5>
       </div>
-      <InputBox placeHolder={placeHolder} signal={[text, setText]} />
+      <InputBox
+        isGoingNextScene={isGoingNextScene}
+        placeHolder={placeHolder}
+        signal={[text, setText]}
+      />
       <Show
         when={isButtonShown()}
-        fallback={() => <h5 class="block h-[40px]">{`<< ${t("6-3-tap-proceed")} >>`}</h5>}
+        fallback={() => (
+          <h5 class="block h-[40px]">
+            {isGoingNextScene() ? `<< ${t("6-3-tap-proceed")} >>` : ""}
+          </h5>
+        )}
       >
         <Button children={t("6-3-button-text")} onClick={proceed} />
       </Show>
@@ -72,7 +82,7 @@ const Scene6S3: Component = () => {
     <>
       <Show
         // Show without link when the button is visible (haven't clicked save yet)
-        when={isButtonShown()}
+        when={!isGoingNextScene()}
         fallback={() => <Link href={nextPage}>{sceneWithoutLink}</Link>}
       >
         {sceneWithoutLink}
