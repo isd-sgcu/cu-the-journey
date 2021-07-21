@@ -10,29 +10,19 @@ function SelectLanguage() {
   const [page, setPage] = createSignal<number>(0);
   const [t] = useTranslation("landing");
 
+  const handleClick = (language: string) => {
+    locale(language);
+    localStorage.setItem("language", language);
+    setPage(1);
+  };
+
   return (
     <>
       {page() === 0 ? (
         <>
           <h5 class="mb-[15.5px]">Please choose a language</h5>
-          <Button
-            onClick={() => {
-              locale("th");
-              localStorage.setItem("language", "th");
-              setPage(1);
-            }}
-          >
-            ภาษาไทย
-          </Button>
-          <Button
-            onClick={() => {
-              locale("en");
-              localStorage.setItem("language", "en");
-              setPage(1);
-            }}
-          >
-            ENGLISH
-          </Button>
+          <Button onClick={() => handleClick("th")}>ภาษาไทย</Button>
+          <Button onClick={() => handleClick("en")}>ENGLISH</Button>
         </>
       ) : (
         <Link class="flex-grow w-full flex justify-center items-center" href="/landing">
