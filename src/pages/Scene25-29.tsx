@@ -36,13 +36,29 @@ const Scene27S0: Component = () => (
   </>
 );
 
-const Scene28S0: Component = () => (
-  <>
-    <TextMiddle class="text-[13px]" text={t("28-0.1")} />
-    <PrevScene page="/27-0" />
-    <NextScene page="/29-0" />
-  </>
-);
+const Scene28S0: Component = () => {
+  const rand = Math.floor(Math.random() * 8) + 1;
+  const quoteFrom = quote => {
+    if (Array.isArray(quote))
+      return quote.map(line => (
+        <>
+          {line}
+          <br />
+        </>
+      ));
+    return quote;
+  };
+  return (
+    <>
+      <TextMiddle class="text-[13px]" text={t(`28-0.${rand}`)} />
+      <p class={`absolute bottom-[8rem] right-[6rem] text-[12px] italic text-right`}>
+        {quoteFrom(t(`28-0.quote${rand}`))}
+      </p>
+      <PrevScene page="/27-0" />
+      <NextScene page="/29-0" />
+    </>
+  );
+};
 
 const Scene29S0: Component = () => (
   <>
