@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { NextScene, PrevScene } from "../components/JumpTo";
+import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { useTranslation } from "../config/i18n";
 
@@ -12,81 +12,81 @@ function t(JSONkey: string) {
 
 const Scene7S0: Component = () => (
   <>
-    <TextMiddle text={t("7-0")} />
-    <PrevScene page="/6-3" />
-    <NextScene page="/7-1" />
+    <NextScene page="/7-1">
+      <TextMiddle text={t("7-0")} />
+    </NextScene>
   </>
 );
 
 const Scene7S1: Component = () => (
   <>
-    <TextMiddle text={t("7-1")} />
-    <PrevScene page="/7-0" />
-    <NextScene page="/7-1-1" />
+    <NextScene page="/7-1-1">
+      <TextMiddle text={t("7-1")} />
+    </NextScene>
   </>
 );
 
 const Scene7S1S1: Component = () => (
   <>
-    <TextMiddle text={t("7-1-1")} />
-    <PrevScene page="/7-1" />
-    <NextScene page="/7-1-2" />
+    <NextScene page="/7-1-2">
+      <TextMiddle text={t("7-1-1")} />
+    </NextScene>
   </>
 );
 
 const Scene7S1S2: Component = () => (
   <>
-    <TextMiddle text={t("7-1-2")} />
-    <PrevScene page="/7-1-1" />
-    <NextScene page="/7-2" />
+    <NextScene page="/7-2">
+      <TextMiddle text={t("7-1-2")} />
+    </NextScene>
   </>
 );
 
 const Scene7S2: Component = () => (
   <>
-    <TextMiddle text={t("7-2")} />
-    <PrevScene page="/7-1-2" />
-    <NextScene page="/7-2-1" />
+    <NextScene page="/7-2-1">
+      <TextMiddle text={t("7-2")} />
+    </NextScene>
   </>
 );
 
 const Scene7S2S1: Component = () => (
   <>
-    <TextMiddle text={t("7-2-1")} />
-    <PrevScene page="/7-2" />
-    <NextScene page="/7-2-2" />
+    <NextScene page="/7-2-2">
+      <TextMiddle text={t("7-2-1")} />
+    </NextScene>
   </>
 );
 
 const Scene7S2S2: Component = () => (
   <>
-    <TextMiddle text={t("7-2-2")} />
-    <PrevScene page="/7-2-1" />
-    <NextScene page="/7-3" />
+    <NextScene page="/7-3">
+      <TextMiddle text={t("7-2-2")} />
+    </NextScene>
   </>
 );
 
 const Scene7S3: Component = () => (
   <>
-    <TextMiddle text={t("7-3")} />
-    <PrevScene page="/7-2-2" />
-    <NextScene page="/7-3-1" />
+    <NextScene page="/7-3-1">
+      <TextMiddle text={t("7-3")} />
+    </NextScene>
   </>
 );
 
 const Scene7S3S1: Component = () => (
   <>
-    <TextMiddle text={t("7-3-1")} />
-    <PrevScene page="/7-3" />
-    <NextScene page="/7-3-2" />
+    <NextScene page="/7-3-2">
+      <TextMiddle text={t("7-3-1")} />
+    </NextScene>
   </>
 );
 
 const Scene7S3S2: Component = () => (
   <>
-    <TextMiddle text={t("7-3-2")} />
-    <PrevScene page="/7-3-1" />
-    <NextScene page="/8-0" />
+    <NextScene page="/8-0">
+      <TextMiddle text={t("7-3-2")} />
+    </NextScene>
   </>
 );
 

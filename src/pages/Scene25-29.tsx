@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { NextScene, PrevScene } from "../components/JumpTo";
+import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { useTranslation } from "../config/i18n";
 
@@ -12,27 +12,29 @@ function t(JSONkey: string) {
 
 const Scene25S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]"></div>
-    <TextMiddle class="text-white" text={t("25-0")} />
-    <PrevScene page="/24-0" />
-    <NextScene page="/26-0" />
+    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]">
+      <NextScene page="/26-0">
+        <TextMiddle class="text-white" text={t("25-0")} />
+      </NextScene>
+    </div>
   </>
 );
 
 const Scene26S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]"></div>
-    <TextMiddle class="text-white" text={t("26-0")} />
-    <PrevScene page="/25-0" />
-    <NextScene page="/27-0" />
+    <div class="absolute bg-purple w-screen max-w-[375px] h-screen min-h-[667px] max-h-[667px]">
+      <NextScene page="/27-0">
+        <TextMiddle class="text-white" text={t("26-0")} />
+      </NextScene>
+    </div>
   </>
 );
 
 const Scene27S0: Component = () => (
   <>
-    <TextMiddle text={t("27-0")} />
-    <PrevScene page="/26-0" />
-    <NextScene page="/28-0" />
+    <NextScene page="/28-0">
+      <TextMiddle text={t("27-0")} />
+    </NextScene>
   </>
 );
 
@@ -50,24 +52,24 @@ const Scene28S0: Component = () => {
   };
   return (
     <>
-      <TextMiddle class="tracking-[0em] min-w-[350px]" text={t(`28-0.${rand}`)}>
-        <p class={`relative text-[13px] right-2 italic text-right tracking-[0em]`}>
-          <br />
-          <br />
-          {quoteFrom(t(`28-0.quote${rand}`))}
-        </p>
-      </TextMiddle>
-      <PrevScene page="/27-0" />
-      <NextScene page="/29-0" />
+      <NextScene page="/29-0">
+        <TextMiddle class="tracking-[0em] min-w-[350px]" text={t(`28-0.${rand}`)}>
+          <p class={`relative text-[13px] right-2 italic text-right tracking-[0em]`}>
+            <br />
+            <br />
+            {quoteFrom(t(`28-0.quote${rand}`))}
+          </p>
+        </TextMiddle>
+      </NextScene>
     </>
   );
 };
 
 const Scene29S0: Component = () => (
   <>
-    <TextMiddle text={t("29-0")} />
-    <PrevScene page="/28-0" />
-    <NextScene page="/30-0" />
+    <NextScene page="/pick-a-number">
+      <TextMiddle text={t("29-0")} />
+    </NextScene>
   </>
 );
 

@@ -4,9 +4,10 @@ import ChoiceComponent from "../components/Choice";
 import Fallback from "../pages/Fallback";
 import AllScenes from "../pages/AllScenes";
 import PickANumber from "../pages/ending/PickANumber";
-import SelectLanguage from "../pages/SelectLanguage";
-
-const FirstScene = () => <p>First Scene</p>;
+import SelectLanguage from "../pages/landing/SelectLanguage";
+import Landing from "../pages/landing";
+import TW from "../pages/landing/TW";
+import DAE from "../pages/landing/DAE";
 
 const SecondScene = () => <p>Second Scene</p>;
 
@@ -28,8 +29,16 @@ const allPath = [
     component: SelectLanguage
   },
   {
-    path: "/1",
-    component: FirstScene
+    path: "/landing",
+    component: Landing
+  },
+  {
+    path: "/trigger-warning",
+    component: TW
+  },
+  {
+    path: "/inspired-by-DAE",
+    component: DAE
   },
   {
     path: "/2",
