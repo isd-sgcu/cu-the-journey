@@ -6,7 +6,7 @@ import Scene3 from "../pages/Scene3";
 import Scene4 from "../pages/Scene4";
 import Scene5 from "../pages/Scene5";
 import PickANumber from "../pages/ending/PickANumber";
-import SelectLanguage from "../pages/SelectLanguage";
+import SelectLanguage from "../pages/landing/SelectLanguage";
 import Landing from "../pages/landing";
 import TW from "../pages/landing/TW";
 import DAE from "../pages/landing/DAE";
