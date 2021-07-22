@@ -12,9 +12,8 @@ function Souvenir() {
   if (number < 0 || number > 6) {
     number = 0;
   }
-
   return (
-    <div class={`flex flex-col flex-grow items-center w-full text-[${headlineColor[number]}]`}>
+    <div class="flex flex-col flex-grow items-center" style={`color:${headlineColor[number]}`}>
       <Typography variant="h2" class="mt-[19%]">
         Your New Journey Begins
       </Typography>
@@ -23,7 +22,7 @@ function Souvenir() {
       </Typography>
 
       <div class="flex-grow mb-4 flex items-center">
-        <Typography class={`text-[14px]  text-[${bodyColor[number]}]`}>
+        <Typography class="text-[14px]" style={`color:${bodyColor[number]}`}>
           {t(`choices.${number}`)}
         </Typography>
       </div>
@@ -33,7 +32,10 @@ function Souvenir() {
           {t("p1")}
         </Typography>
         <div class="flex mr-5 mt-[22px]">
-          <Typography class={`text-xs text-right self-end flex-grow text-[${bodyColor[number]}]`}>
+          <Typography
+            class="text-xs text-right self-end flex-grow"
+            style={`color:${bodyColor[number]}`}
+          >
             {t("qr")}
           </Typography>
           <div class="w-[74px] h-[74px] bg-gray-300 ml-[7px]"></div>
