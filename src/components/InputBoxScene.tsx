@@ -4,20 +4,32 @@ import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
 import "../styles/scrollbar.css";
+import { saveMessage, StorableKeys } from "../MessageStore";
 
-type InputBoxScenePropsType = {
+export { StorableKeys };
+
+export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
   placeHolderKey: string; // placeholder of the textarea
   nextPage: string; // ex. "/9-0"
   orderKeys: string | string[]; // key or array of keys of text lines above the textarea, ex. "8-0-order"
   buttonTextKey: string;
   onTapTextKey: string;
+  storeKey: StorableKeys;
   t: (key: string, params?: Record<string, string>, defaultValue?: string) => string; // eslint-disable-line
 };
 
 const InputBoxScene: Component<InputBoxScenePropsType> = props => {
-  const { isMinimized, placeHolderKey, nextPage, orderKeys, buttonTextKey, onTapTextKey, t } =
-    props;
+  const {
+    isMinimized,
+    placeHolderKey,
+    nextPage,
+    orderKeys,
+    buttonTextKey,
+    onTapTextKey,
+    storeKey,
+    t,
+  } = props;
   const placeHolder = t(placeHolderKey);
   const [text, setText] = createSignal("");
   const [isButtonShown, setIsButtonShown] = createSignal(false);
@@ -27,6 +39,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const proceed = () => {
+    saveMessage(storeKey, text());
     setIsButtonShown(false);
     setIsGoingNextScene(true);
   };

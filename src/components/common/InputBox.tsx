@@ -1,17 +1,12 @@
 import { Accessor, Component, createEffect, createSignal } from "solid-js";
 
-type InputBoxProps = {
-  signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
-  placeHolder: string;
-  isGoingNextScene: Accessor<boolean>;
-  isMinimized?: boolean;
-};
-
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
   isGoingNextScene: Accessor<boolean>;
 };
+
+type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
 
 const InputBox: Component<InputBoxProps> = props => {
   const setText = props.signal[1];

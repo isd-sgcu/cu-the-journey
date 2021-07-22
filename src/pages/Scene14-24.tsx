@@ -1,5 +1,6 @@
 import type { Component } from "solid-js";
-import InputBoxScene from "../components/InputBoxScene";
+import { getMessage } from "../MessageStore";
+import InputBoxScene, { InputBoxScenePropsType, StorableKeys } from "../components/InputBoxScene";
 import { NextScene } from "../components/JumpTo";
 import { TextMiddle } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
@@ -15,13 +16,14 @@ const Scene14S0: Component = () => (
 );
 
 const Scene14S1: Component = () => {
-  const props = {
+  const props: InputBoxScenePropsType = {
     isMinimized: true,
     placeHolderKey: "14-placeholder",
     nextPage: "/15-0",
     orderKeys: ["14-order1", "14-order2"],
     buttonTextKey: "14-buttonText",
     onTapTextKey: "14-tapText",
+    storeKey: StorableKeys.Scene14S1,
     t,
   };
   return <InputBoxScene {...props} />;
@@ -36,13 +38,14 @@ const Scene15S0: Component = () => (
 );
 
 const Scene16S0: Component = () => {
-  const props = {
+  const props: InputBoxScenePropsType = {
     isMinimized: false,
     nextPage: "/17-0",
     orderKeys: "16-order",
     placeHolderKey: "16-placeholder",
     buttonTextKey: "16-button",
     onTapTextKey: "16-tap",
+    storeKey: StorableKeys.Scene16S0,
     t,
   };
   return <InputBoxScene {...props} />;
@@ -67,8 +70,7 @@ const Scene18S0: Component = () => (
 const Scene18S1: Component = () => (
   <>
     <NextScene page="/19-0">
-      {/* TODO */}
-      <TextMiddle children={"Hi"} text={t("18-1")} />
+      <TextMiddle children={getMessage(StorableKeys.Scene8S2)} text={t("18-1")} />
     </NextScene>
   </>
 );

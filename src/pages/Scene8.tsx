@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import InputBoxScene from "../components/InputBoxScene";
+import InputBoxScene, { StorableKeys } from "../components/InputBoxScene";
 import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
@@ -48,7 +48,8 @@ const Scene8S2: Component = () => {
     orderKeys: "8-2-order",
     buttonTextKey: "8-2-button-text",
     onTapTextKey: "8-2-tap-proceed",
-    t
+    storeKey: StorableKeys.Scene8S2,
+    t,
   };
   return <InputBoxScene {...props} />;
 };
@@ -58,5 +59,5 @@ export default {
   Scene8S1S0,
   Scene8S1S1,
   Scene8S1S2,
-  Scene8S2
+  Scene8S2,
 };
