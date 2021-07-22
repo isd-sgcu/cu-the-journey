@@ -7,8 +7,8 @@ function Choice({ number }: { number: number }) {
   return (
     <Routing href={`/souvenir?number=${number}`} class="m-2">
       <button
-        class="w-[91px] h-[91px] flex items-center justify-center bg-white hover:bg-purple-light"
-        style="box-shadow: 0px 4px 8px -2px #A984D4;"
+        class="w-[91px] h-[91px] flex items-center justify-center bg-white hover:bg-purple-light shadow-normal hover:shadow-hover"
+        style=""
       >
         <h1>{number}</h1>
       </button>
@@ -31,14 +31,12 @@ function PickANumber() {
         </div>
 
         <Routing href="/souvenir" class="mt-5">
-          <Typography variant="h6" class="underline">
+          <Typography variant="h6" class="underline text-[14px]">
             {t("p3")}
           </Typography>
         </Routing>
       </div>
-      <Typography variant="p" class="mb-[28px] text-[#F46C2A]">
-        {t("footer")}
-      </Typography>
+      <Typography class="mb-[28px] text-[#90168B]">{t("footer")}</Typography>
     </>
   );
 }
