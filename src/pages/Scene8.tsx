@@ -4,8 +4,6 @@ import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 
-import "../styles/scrollbar.css";
-
 const { TextMiddle } = TextComponent;
 
 const t = sceneTranslator("scene8");

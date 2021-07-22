@@ -3,6 +3,8 @@ import { createSignal, createEffect, Show, Component, For } from "solid-js";
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
+import "../styles/scrollbar.css";
+
 type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
   placeHolderKey: string; // placeholder of the textarea
