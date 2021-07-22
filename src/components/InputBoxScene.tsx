@@ -39,6 +39,9 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const proceed = () => {
+    if (text().trim() === "") {
+      return;
+    }
     saveMessage(storeKey, text());
     setIsButtonShown(false);
     setIsGoingNextScene(true);
