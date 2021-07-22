@@ -9,7 +9,7 @@ interface IProps {
 
 function Button(props: IProps & JSX.HTMLAttributes<HTMLButtonElement>) {
   const { children, onClick, href, ...attributes } = props;
-  const [, { push }] = useRouter();
+  const [, { push }] = useRouter()!;
 
   const handleClick = async () => {
     if (onClick) {

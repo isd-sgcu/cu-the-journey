@@ -1,3 +1,4 @@
+import type { Component } from "solid-js";
 import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
@@ -26,44 +27,44 @@ const I18Testing = () => {
 const allPath = [
   {
     path: "/",
-    component: SelectLanguage
+    component: SelectLanguage,
   },
   {
     path: "/landing",
-    component: Landing
+    component: Landing,
   },
   {
     path: "/trigger-warning",
-    component: TW
+    component: TW,
   },
   {
     path: "/inspired-by-DAE",
-    component: DAE
+    component: DAE,
   },
   {
     path: "/2",
-    component: SecondScene
+    component: SecondScene,
   },
   {
     path: "*all",
-    component: Fallback
+    component: Fallback,
   },
   {
     path: "/choices",
-    component: ChoiceComponent
+    component: ChoiceComponent,
   },
   {
     path: "/i18n",
-    component: I18Testing
+    component: I18Testing,
   },
   {
     path: "/pick-a-number",
-    component: PickANumber
+    component: PickANumber,
   },
   {
     path: "/souvenir",
-    component: Souvenir
-  }
+    component: Souvenir,
+  },
 ];
 
 /* will iterate through all scene in an import
@@ -72,7 +73,11 @@ const allPath = [
  * Scene_S_S_ where _ is a number
  * e.g. Scene12S5 -> /12-5
  */
-const iterateScene = (scene: object) => {
+interface IScene {
+  [x: string]: Component<{}>;
+}
+
+const iterateScene = (scene: IScene) => {
   Object.keys(scene).forEach(page => {
     const convertPath = `/${page.toString().slice(5).replace(/S/g, "-")}`;
     const link = { path: convertPath, component: scene[page] };

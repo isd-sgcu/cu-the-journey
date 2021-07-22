@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: process.env.SNOWPACK_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.SNOWPACK_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.SNOWPACK_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.SNOWPACK_PUBLIC_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.SNOWPACK_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -19,6 +19,8 @@ let app: firebase.app.App;
 if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig);
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+} else {
+  app = firebase.app();
 }
 
 export default app;
@@ -27,14 +29,39 @@ export default app;
 
 app.auth().signInAnonymously();
 
+const db = app.firestore();
+const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION || "");
+
 //* Store time capsule function
 
-const db = app.firestore();
-const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION);
-
-export async function storeTimeCapsule(uid: string, text: string) {
+async function storeTimeCapsule(uid: string, texts: string[], emails: string[]) {
   const docData = {
-    text
+    emails,
+    texts,
   };
   await collection.doc(uid).set(docData);
+}
+
+//* Get time capsule function.
+
+interface ITimeCapsuleData {
+  texts: string;
+  emails: string;
+}
+
+export async function manageTimeCapsule(uid: string, newText: string, newEmail: string) {
+  collection
+    .doc(uid)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        const { texts: textArr, emails: emailArr } = doc.data() as ITimeCapsuleData;
+        storeTimeCapsule(uid, [...textArr, newText], [...emailArr, newEmail]);
+      } else {
+        storeTimeCapsule(uid, [newText], [newEmail]);
+      }
+    })
+    .catch(e => {
+      console.log(e);
+    });
 }

@@ -14,7 +14,7 @@ interface ChoiceComponentProps {
 }
 
 const ChoiceButton: Component<ChoiceButtonProps> = props => {
-  const [, { push }] = useRouter();
+  const [, { push }] = useRouter()!;
   return (
     <>
       <button
@@ -36,7 +36,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
   const buttons = props.choices.map(choice => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
-    return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong} />;
+    return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong || false} />;
   });
   const question = () => {
     if (Array.isArray(props.question)) {
