@@ -1,15 +1,13 @@
 import type { Component } from "solid-js";
 import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
-import { useTranslation } from "../config/i18n";
+import { sceneTranslator } from "../config/i18n";
 import InputBoxScene from "../components/InputBoxScene";
 
 const { TextMiddle } = TextComponent;
 
-function t(JSONkey: string) {
-  const [translate] = useTranslation("scene6");
-  return translate(JSONkey);
-}
+const t = sceneTranslator("scene6");
+
 const Scene6S0: Component = () => (
   <>
     <NextScene page="/6-1">

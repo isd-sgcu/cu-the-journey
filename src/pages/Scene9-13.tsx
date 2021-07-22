@@ -2,14 +2,11 @@ import type { Component } from "solid-js";
 import { NextScene } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
-import { useTranslation } from "../config/i18n";
+import { sceneTranslator } from "../config/i18n";
 
 const { TextBold, TextMiddle } = TextComponent;
 
-function t(JSONkey: string) {
-  const [translate] = useTranslation("scene9to13");
-  return translate(JSONkey);
-}
+const t = sceneTranslator("scene9to13");
 
 const Scene9S0: Component = () => (
   <>
