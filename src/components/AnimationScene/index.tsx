@@ -9,7 +9,14 @@ export default () => {
     sceneRef.appendChild(scene.app.view);
   });
 
-  return <div class="absolute" ref={sceneRef}></div>;
+  return (
+    <div
+      class="absolute"
+      ref={ref => {
+        sceneRef = ref;
+      }}
+    ></div>
+  );
 };
 
 export { useScene, SceneProvider };

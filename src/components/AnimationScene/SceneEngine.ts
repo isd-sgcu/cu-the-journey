@@ -28,10 +28,11 @@ export class SceneEngine {
 
   private willRemoveScene: SpriteSetting[];
 
-  onNewScene: () => void;
+  onNewScene?: () => void;
 
   constructor(app: Application) {
     this.app = app;
+    this.sceneLists = [];
     this.currentScene = [];
     this.willAddScene = [];
     this.willRemoveScene = [];
@@ -52,7 +53,10 @@ export class SceneEngine {
     sprite.loop = true; // eslint-disable-line no-param-reassign
   }
 
-  sceneSwitcher = (newScenes: SceneSwitchable, onNewScene: () => void = undefined) => {
+  sceneSwitcher = (
+    newScenes: SceneSwitchable,
+    onNewScene: (() => void) | undefined = undefined
+  ) => {
     this.onNewScene = onNewScene;
     const mappedScenes: SceneSwitcherOption[] = newScenes.map(scene => {
       if (typeof scene === "string") {
@@ -119,7 +123,7 @@ export class SceneEngine {
 
   update(delta: number) {
     const { width, height } = this.app.screen;
-    [].concat(this.currentScene, this.willRemoveScene).forEach(({ sprite }) => {
+    [...this.currentScene, ...this.willRemoveScene].forEach(({ sprite }) => {
       sprite.updateState(delta);
       const ratio = Math.max(width / sprite.width, height / sprite.height);
       sprite.width = Math.ceil(sprite.width * ratio); // eslint-disable-line no-param-reassign
