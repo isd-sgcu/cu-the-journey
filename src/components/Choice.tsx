@@ -33,7 +33,7 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
 };
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {
-  const buttons = props.choices.map(choice => {
+  const buttons = props.choices.map((choice: string | string[]) => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
     return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong || false} />;

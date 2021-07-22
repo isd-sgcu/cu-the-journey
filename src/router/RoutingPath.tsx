@@ -85,7 +85,7 @@ const iterateScene = (scene: IScene) => {
   });
 };
 
-const iterateSceneImport = (allscene: object) => {
+const iterateSceneImport = (allscene: Record<string, IScene>) => {
   Object.keys(allscene).forEach(scene => {
     iterateScene(allscene[scene]);
   });

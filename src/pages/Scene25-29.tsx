@@ -37,7 +37,7 @@ const Scene27S0: Component = () => (
 
 const Scene28S0: Component = () => {
   const rand = Math.floor(Math.random() * 8) + 1;
-  const quoteFrom = quote => {
+  const quoteFrom = (quote: string | any[]) => {
     if (Array.isArray(quote))
       return quote.map(line => (
         <>
@@ -75,7 +75,7 @@ const Scene25to27 = {
   Scene26S0,
   Scene27S0,
   Scene28S0,
-  Scene29S0
+  Scene29S0,
 };
 
 export default Scene25to27;
