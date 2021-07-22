@@ -1,10 +1,10 @@
-import { Component, createEffect, createSignal, Show } from "solid-js";
-import { Link } from "solid-app-router";
+import type { Component } from "solid-js";
+import InputBoxScene from "../components/InputBoxScene";
 import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
-import InputBox from "../components/common/InputBox";
-import Button from "../components/common/Button";
 import { useTranslation } from "../config/i18n";
+
+import "../styles/scrollbar.css";
 
 const { TextMiddle } = TextComponent;
 
@@ -46,54 +46,16 @@ const Scene8S1S2: Component = () => (
 );
 
 const Scene8S2: Component = () => {
-  const placeHolder = t("8-2-placeholder");
-  const [text, setText] = createSignal("");
-  const [isButtonShown, setIsButtonShown] = createSignal(false);
-  createEffect(() => {
-    setIsButtonShown(text() !== "");
-  });
-  const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
-  const nextPage = "/9-0";
-
-  const proceed = () => {
-    setIsButtonShown(false);
-    setIsGoingNextScene(true);
+  const props = {
+    isMinimized: true,
+    placeHolderKey: "8-2-placeholder",
+    nextPage: "/9-0",
+    orderKeys: "8-2-order",
+    buttonTextKey: "8-2-button-text",
+    onTapTextKey: "8-2-tap-proceed",
+    t
   };
-
-  const sceneWithoutLink = (
-    <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
-      <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
-        <h5>{t("8-2-order")}</h5>
-      </div>
-      <InputBox
-        isGoingNextScene={isGoingNextScene}
-        placeHolder={placeHolder}
-        signal={[text, setText]}
-      />
-      <Show
-        when={isButtonShown()}
-        fallback={() => (
-          <h5 class="block h-[40px]">
-            {isGoingNextScene() ? `<< ${t("8-2-tap-proceed")} >>` : ""}
-          </h5>
-        )}
-      >
-        <Button children={t("8-2-button-text")} onClick={proceed} />
-      </Show>
-    </div>
-  );
-
-  return (
-    <>
-      <Show
-        // Show without link when the button is visible (haven't clicked save yet)
-        when={!isGoingNextScene()}
-        fallback={() => <Link href={nextPage}>{sceneWithoutLink}</Link>}
-      >
-        {sceneWithoutLink}
-      </Show>
-    </>
-  );
+  return <InputBoxScene {...props} />;
 };
 
 export default {
