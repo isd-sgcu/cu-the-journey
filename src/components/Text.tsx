@@ -36,9 +36,11 @@ const TextMiddle: Component<TextProps> = props => (
   </div>
 );
 
+// 👽
+export { TextBold, TextMiddle };
+
 const TextComponent = {
   TextBold,
   TextMiddle
 };
-
 export default TextComponent;
