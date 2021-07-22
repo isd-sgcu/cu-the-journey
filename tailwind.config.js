@@ -58,6 +58,10 @@ module.exports = {
       xs: { max: "374px" }, // Separate small mobile (iPhone 5 and Galaxy Fold) and normal mobile.
       sm: "500px",
     },
+    boxShadow: {
+      normal: "0px 4px 8px 4px #A984D41A",
+      hover: "0px 4px 8px -2px #A984D4",
+    },
   },
   variants: {},
   plugins: [],
