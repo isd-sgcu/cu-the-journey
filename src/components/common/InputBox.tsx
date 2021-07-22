@@ -11,7 +11,6 @@ type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
   isGoingNextScene: Accessor<boolean>;
-  isMinimized?: boolean;
 };
 
 const InputBox: Component<InputBoxProps> = props => {
@@ -20,8 +19,8 @@ const InputBox: Component<InputBoxProps> = props => {
   const [inlineStyle, setInlineStyle] = createSignal(props.isMinimized ? minimizedStyle : "");
   createEffect(() =>
     setInlineStyle(
-      prev => (prev += props.isGoingNextScene() ? "border: none; cursor: pointer;" : "") // eslint-disable-line
-    )
+      prev => (prev += props.isGoingNextScene() ? "border: none; cursor: pointer;" : ""), // eslint-disable-line
+    ),
   );
 
   return (

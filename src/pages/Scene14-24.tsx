@@ -48,4 +48,29 @@ const Scene16S0: Component = () => {
   return <InputBoxScene {...props} />;
 };
 
-export default { Scene14S0, Scene14S1, Scene15S0, Scene16S0 };
+const Scene17S0: Component = () => (
+  <>
+    <NextScene page="/18-0">
+      <TextMiddle text={t("17-0")} />
+    </NextScene>
+  </>
+);
+
+const Scene18S0: Component = () => (
+  <>
+    <NextScene page="/18-1">
+      <TextMiddle text={t("18-0")} />
+    </NextScene>
+  </>
+);
+
+const Scene18S1: Component = () => (
+  <>
+    <NextScene page="/19-0">
+      {/* TODO */}
+      <TextMiddle children={"Hi"} text={t("18-1")} />
+    </NextScene>
+  </>
+);
+
+export default { Scene14S0, Scene14S1, Scene15S0, Scene16S0, Scene17S0, Scene18S0, Scene18S1 };
