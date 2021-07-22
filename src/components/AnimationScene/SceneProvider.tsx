@@ -2,11 +2,11 @@ import { Application, Loader } from "pixi.js";
 import { Component, createContext, onCleanup, useContext } from "solid-js";
 import { resources, SpriteName } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
-import { StateSprite } from "./StateSprite";
+import { FadeSprite } from "./Sprite/FadeSprite";
 
 export interface SceneProviderProps {
   app: Application;
-  sceneSwitcher: (newScenes: SceneSwitchable, onNewScene?: () => void) => void; // eslint-disable-line no-unused-vars
+  sceneSwitcher: (newScenes: SceneSwitchable, onNewScene?: () => void) => void;
 }
 export const SceneContext = createContext<SceneProviderProps>();
 
@@ -39,7 +39,7 @@ export const SceneProvider: Component = props => {
       const names = Object.keys(resources) as SpriteName[];
       const sprites = names.map(name => ({
         name,
-        sprite: new StateSprite(resources[name])
+        sprite: new FadeSprite(resources[name])
       }));
       sceneEngine.addScenes(sprites);
       app.ticker.add(delta => {
