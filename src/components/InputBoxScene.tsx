@@ -32,14 +32,12 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const sceneWithoutLink = (
     <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
-        <h5>
-          <Show
-            when={typeof orderKeys === "string"}
-            fallback={<For each={orderKeys as string[]}>{key => `${t(key)}<br/>`}</For>}
-          >
-            {t(orderKeys as string)}
-          </Show>
-        </h5>
+        <Show
+          when={typeof orderKeys === "string"}
+          fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
+        >
+          <h5>{t(orderKeys as string)}</h5>
+        </Show>
       </div>
       <InputBox
         isGoingNextScene={isGoingNextScene}
