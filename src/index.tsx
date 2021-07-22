@@ -6,12 +6,15 @@ import { I18nProvider } from "@amoutonbrady/solid-i18n";
 import { App } from "./app";
 import RoutingPath from "./router/RoutingPath";
 import dict from "./locales";
+import { SceneProvider } from "./components/AnimationScene";
 
 const dispose = render(
   () => (
     <I18nProvider dict={dict} locale="th">
       <Router routes={RoutingPath}>
-        <App />
+        <SceneProvider>
+          <App />
+        </SceneProvider>
       </Router>
     </I18nProvider>
   ),
