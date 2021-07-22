@@ -1,6 +1,6 @@
 import { Application, Loader } from "pixi.js";
 import { Component, createContext, onCleanup, useContext } from "solid-js";
-import { resources } from "./Resources";
+import { resources, SpriteName } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
 import { StateSprite } from "./StateSprite";
 
@@ -10,7 +10,13 @@ export interface SceneProviderProps {
 }
 export const SceneContext = createContext<SceneProviderProps>();
 
-export const useScene = () => useContext<SceneProviderProps>(SceneContext);
+export const useScene = () => {
+  const scene = useContext(SceneContext);
+  if (typeof scene === "undefined") {
+    throw new Error("Can't find scene provider");
+  }
+  return scene;
+};
 
 export const SceneProvider: Component = props => {
   const app = new Application({
@@ -24,9 +30,14 @@ export const SceneProvider: Component = props => {
   const sceneEngine = new SceneEngine(app);
   const loader = Loader.shared;
   loader
-    .add([].concat(...Object.values(resources)).filter(src => !loader.resources[src]))
+    .add(
+      Object.values(resources)
+        .flatMap(res => res)
+        .filter(src => !loader.resources[src])
+    )
     .load(() => {
-      const sprites = Object.keys(resources).map(name => ({
+      const names = Object.keys(resources) as SpriteName[];
+      const sprites = names.map(name => ({
         name,
         sprite: new StateSprite(resources[name])
       }));

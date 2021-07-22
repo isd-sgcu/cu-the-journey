@@ -23,7 +23,9 @@ export const App: Component = () => {
   return (
     <div class="w-screen min-h-screen flex justify-center items-center">
       <div
-        ref={screenRef}
+        ref={ref => {
+          screenRef = ref;
+        }}
         class="w-screen sm:max-w-[375px] min-h-screen sm:min-h-[667px] sm:max-h-[667px] flex justify-center items-center flex-col text-center z-10"
       >
         <Route />

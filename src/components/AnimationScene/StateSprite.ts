@@ -1,4 +1,4 @@
-import { AnimatedSprite, Container, Loader } from "pixi.js";
+import { AnimatedSprite, Container, Loader, Texture } from "pixi.js";
 
 type SpriteState = "LOAD" | "PROCESS" | "FINALIZE" | "DONE";
 
@@ -8,13 +8,15 @@ export interface StateSpriteOptions {
 }
 
 export class StateSprite extends AnimatedSprite {
-  private state: SpriteState;
+  private state: SpriteState = "LOAD";
 
-  private onDone: () => void;
+  private onDone?: () => void;
 
   constructor(resources: string[], options?: StateSpriteOptions) {
     const loader = Loader.shared;
-    const textures = resources.map(url => loader.resources[url].texture);
+    const textures = resources
+      .map(url => loader.resources[url].texture)
+      .filter(texture => typeof texture !== "undefined") as Texture[];
     super(textures);
     super.animationSpeed = options?.animationSpeed || 0.04;
     super.zIndex = options?.zIndex || 0;
