@@ -1,7 +1,7 @@
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 export function AnimationRoute() {
-  const { nextAnimationTrigger, scheduleFrame } = useTransitionContext();
+  const { nextAnimationTrigger, scheduleFrame } = useTransitionContext()!;
   scheduleFrame(5, 2000);
   return (
     <div class="flex items-center justify-center flex-col">

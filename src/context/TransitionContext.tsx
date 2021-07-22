@@ -35,7 +35,7 @@ export const TransitionProvider: Component = props => {
   const [isAnimated, setAnimated] = createSignal(false);
   const [transitionQueue, setTransitionQueue] = createSignal(false);
   const [nextScene, setNextScene] = createSignal("");
-  const [router] = useRouter();
+  const [router] = useRouter()!;
 
   const resetAnimationFrame = () => {
     setTransitionNumber(0);
@@ -99,7 +99,7 @@ export const TransitionProvider: Component = props => {
 };
 
 export const useTransitionContext = (isReset?: boolean) => {
-  const contextValue = useContext(TransitionContext);
+  const contextValue = useContext(TransitionContext)!;
   if (isReset) {
     contextValue.resetAnimationFrame();
   }
@@ -110,7 +110,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order: propsOrder } = props;
   const order = Math.max(0, propsOrder);
 
-  const [, { push }] = useRouter();
+  const [, { push }] = useRouter()!;
   const [nowOpacity, setNowOpacity] = createSignal(0);
   const { setAnimated, transitionNumber, nextScene } = useTransitionContext();
 

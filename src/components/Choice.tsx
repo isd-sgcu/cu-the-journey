@@ -14,7 +14,7 @@ interface ChoiceComponentProps {
 }
 
 const ChoiceButton: Component<ChoiceButtonProps> = props => {
-  const { fadeOut } = useTransitionContext();
+  const { fadeOut } = useTransitionContext()!;
   return (
     <>
       <button
@@ -50,7 +50,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     return props.question;
   };
 
-  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true);
+  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true)!;
 
   onMount(() => scheduleFrame(2, 1000));
 
