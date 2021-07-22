@@ -8,6 +8,8 @@ import { saveMessage, StorableKeys } from "../MessageStore";
 
 export { StorableKeys };
 
+// TODO after clicking save, the bird behind should be visible.
+
 export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
   placeHolderKey: string; // placeholder of the textarea
@@ -34,14 +36,11 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [text, setText] = createSignal("");
   const [isButtonShown, setIsButtonShown] = createSignal(false);
   createEffect(() => {
-    setIsButtonShown(text() !== "");
+    setIsButtonShown(text().trim() !== "");
   });
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const proceed = () => {
-    if (text().trim() === "") {
-      return;
-    }
     saveMessage(storeKey, text());
     setIsButtonShown(false);
     setIsGoingNextScene(true);
