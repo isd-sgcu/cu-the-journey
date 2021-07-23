@@ -2,7 +2,8 @@
 
 ## Deployment 
 
-Our site uses [Firebase Hosting](https://firebase.google.com) for deploying the app. You can visit our site here, [Freshy the Journey 2021](https://freshy-the-journey.firebaseapp.com)
+- main: [cuthejourney.com](https://cuthejourney.com/)
+- dev: [freshy-the-journey--dev-tcvptfng.web.app](https://freshy-the-journey--dev-tcvptfng.web.app/)
 
 ## Install
 
