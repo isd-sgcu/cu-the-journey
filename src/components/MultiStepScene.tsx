@@ -16,10 +16,7 @@ const MultiStepScene: Component<MultiStepScenePropsType> = props => {
   const transitionDur = 300; // ms
 
   const sceneWithoutLink = (
-    <div
-      onclick={() => setStep(prev => ++prev)} // eslint-disable-line
-      class="flex h-screen justify-center items-center flex-col space-y-[25px]"
-    >
+    <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
       <div class="text-purple text-[16px] text-center leading-[24px] tracking-[0.5px] font-BaiJam font-normal">
         <For each={textKeys}>
           {(key, index) => (
@@ -39,9 +36,15 @@ const MultiStepScene: Component<MultiStepScenePropsType> = props => {
 
   return (
     <>
-      <Show when={step() === textKeys.length} fallback={sceneWithoutLink}>
-        <Link href={nextPage}>{sceneWithoutLink}</Link>
-      </Show>
+      <div
+        // 375px to match with the visible content width
+        class="w-[375px]"
+        onclick={() => setStep(prev => ++prev)} // eslint-disable-line
+      >
+        <Show when={step() === textKeys.length - 1} fallback={sceneWithoutLink}>
+          <Link href={nextPage}>{sceneWithoutLink}</Link>
+        </Show>
+      </div>
     </>
   );
 };
