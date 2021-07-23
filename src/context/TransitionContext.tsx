@@ -6,7 +6,6 @@ import {
   createEffect,
   createSignal,
   JSX,
-  onMount,
   useContext,
 } from "solid-js";
 import PreventRoute from "./PreventRoute";
@@ -23,7 +22,6 @@ interface ITransitionProvider {
   fadeOut: (prev: string) => boolean;
   nextScene: Accessor<string>;
   setNextScene: (prev: string) => string;
-  setMaxFrame: (v: number | ((prev: number) => number)) => number;
 }
 
 interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -41,7 +39,7 @@ export const TransitionProvider: Component = props => {
   const [nextScene, setNextScene] = createSignal("");
   const [frame, setFrame] = createSignal(0);
   const [time, setTime] = createSignal(0);
-  const [maxFrame, setMaxFrame] = createSignal(0);
+  const [maxFrame, setMaxFrame] = createSignal(1);
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [router, { push }] = useRouter()!;
@@ -53,7 +51,7 @@ export const TransitionProvider: Component = props => {
     setAnimated(false);
     setFrame(0);
     setTime(0);
-    setMaxFrame(0);
+    setMaxFrame(1);
     setNextScene("");
     setNowTransition(-1);
 
@@ -78,7 +76,7 @@ export const TransitionProvider: Component = props => {
         setTransitionNumber(fadeOutNumber);
       } else if (transitionNumber() === fadeOutNumber) {
         setTransitionNumber(fadeOutFinishNumber);
-      } else if (transitionNumber() !== maxFrame()) {
+      } else if (transitionNumber() < maxFrame()) {
         setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
       }
     }
@@ -124,6 +122,7 @@ export const TransitionProvider: Component = props => {
     const newNum = Math.max(num, 0);
     const newTimes = Math.max(timems, 0);
 
+    setMaxFrame(newNum + 1);
     setFrame(newNum);
     setTime(newTimes);
 
@@ -176,7 +175,6 @@ export const TransitionProvider: Component = props => {
         setAnimated,
         nextScene,
         setNextScene,
-        setMaxFrame,
         fadeOut,
         scheduleFrame,
         nextAnimationTrigger,
@@ -214,11 +212,8 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const order = Math.max(0, propsOrder);
 
   const [router, { push }] = useRouter()!;
-  const { setAnimated, transitionNumber, nextScene, setMaxFrame } = useTransitionContext();
+  const { setAnimated, transitionNumber, nextScene } = useTransitionContext();
   const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
-  const newOrder = isPrevented ? order + 1 : order;
-
-  onMount(() => setMaxFrame(prev => Math.max(prev, newOrder)));
 
   return (
     <div
