@@ -9,7 +9,7 @@ export const App: Component = () => {
   const [, { locale }] = useI18n();
 
   let screenRef: HTMLDivElement;
-  const { app, sceneSwitcher } = useScene();
+  const { app, sceneSwitcher, soundControl } = useScene();
 
   const language = localStorage.getItem("language");
   if (language === "th" || language === "en") {
@@ -21,7 +21,7 @@ export const App: Component = () => {
   });
 
   return (
-    <div class="w-screen min-h-screen flex justify-center items-center">
+    <div class="relative w-screen min-h-screen flex justify-center items-center">
       <div
         ref={ref => {
           screenRef = ref;
@@ -34,6 +34,8 @@ export const App: Component = () => {
       <div class="absolute left-0 top-0 bg-white flex flex-col z-20">
         <button onclick={() => sceneSwitcher(["bird", "ogbg"])}>Bird</button>
         <button onclick={() => sceneSwitcher(["ogbg"])}>remove Bird</button>
+        <button onclick={() => soundControl.play("bg")}>play sound</button>
+        <button onclick={() => soundControl.muted()}>Muted</button>
       </div>
     </div>
   );
