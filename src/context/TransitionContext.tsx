@@ -166,7 +166,7 @@ export const TransitionProvider: Component = props => {
     console.log(transitionNumber());
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
-      if (RouteMapping[nowRoute] || !nextScene()) {
+      if (RouteMapping[nowRoute]) {
         console.log(nowRoute);
         push(RouteMapping[nowRoute]);
       } else {
@@ -245,8 +245,6 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
           } else {
             push(nextScene());
           }
-        } else {
-          console.log("end of fade in");
         }
       }}
       style={{ opacity: transitionNumber() >= order ? 1 : 0 }}
