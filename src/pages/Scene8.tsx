@@ -18,7 +18,6 @@ const Scene8S0: Component = () => (
   </>
 );
 
-// TODO combine these 3 scenes into one
 const Scene8S1: Component = () => {
   const props: MultiStepScenePropsType = {
     textKeys: ["8-1-0", "8-1-1", "8-1-2"],
