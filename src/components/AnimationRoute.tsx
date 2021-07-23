@@ -1,11 +1,15 @@
+import { onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 export function AnimationRoute() {
-  const { nextAnimationTrigger, scheduleFrame } = useTransitionContext()!;
-  scheduleFrame(5, 2000);
+  const { scheduleFrame } = useTransitionContext();
+
+  onMount(() => {
+    scheduleFrame(5, 1000);
+  });
+
   return (
     <div class="flex items-center justify-center flex-col">
-      <button onClick={() => nextAnimationTrigger()}>Next frame</button>
       <TransitionFade order={0}>
         <h4>Hello</h4>
       </TransitionFade>
