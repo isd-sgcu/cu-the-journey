@@ -28,6 +28,10 @@ interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
   order: number;
 }
 
+interface IRouting extends JSX.HTMLAttributes<HTMLDivElement> {
+  href: string;
+}
+
 const TransitionContext = createContext<ITransitionProvider>();
 const fadeOutNumber = -1;
 const fadeOutFinishNumber = -2;
@@ -241,3 +245,12 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
     </div>
   );
 };
+
+export function Routing(props: IRouting) {
+  const { fadeOut } = useTransitionContext();
+  return (
+    <div {...props} onClick={() => fadeOut(props.href)}>
+      {props.children}
+    </div>
+  );
+}

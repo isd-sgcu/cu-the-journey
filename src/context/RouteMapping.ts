@@ -18,11 +18,12 @@ interface IRouteMapping {
 
 export default {
   "/": "/landing",
-  "/landing": "/3-0",
+  "/trigger-warning": "/inspired-by-DAE",
+  "/inspired-by-DAE": "/2",
 
   // Scene 3
   "/3-0": "/3-1",
-  "/3-2": "/3-3-1",
+  "/3-2": "/3-3",
   "/3-3-1": "/3-4",
   "/3-4": "/4-1",
 
