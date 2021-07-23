@@ -1,13 +1,12 @@
 import type { Component } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
-// import { useTranslation } from "../config/i18n";
 
 interface TextProps {
   text: string | string[];
+  class?: string;
 }
 
 function addtText(text: string | string[]): string | JSX.Element {
-  // const [t] = useTranslation("scene3");
   if (Array.isArray(text))
     return text.map(line => (
       <>
@@ -19,33 +18,29 @@ function addtText(text: string | string[]): string | JSX.Element {
 }
 
 const TextBold: Component<TextProps> = props => (
-  <div class="flex h-screen justify-center items-center">
+  <div class="flex h-[667px] w-[375px] justify-center items-center z-10">
     <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
       <h2>{addtText(props.text)}</h2>
     </div>
   </div>
 );
 
-const TextUpper: Component<TextProps> = props => (
-  <div class="flex h-screen justify-center items-center">
-    <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
+const TextMiddle: Component<TextProps> = props => (
+  <div class="flex h-[667px] w-[375px] justify-center items-center z-10">
+    <div
+      class={`text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal ${props.class}`}
+    >
       <p>{addtText(props.text)}</p>
+      {props.children}
     </div>
   </div>
 );
 
-const TextMiddle: Component<TextProps> = props => (
-  <div class="flex h-screen justify-center items-center">
-    <div class="text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal">
-      <p>{addtText(props.text)}</p>
-    </div>
-  </div>
-);
+// 👽
+export { TextBold, TextMiddle };
 
 const TextComponent = {
   TextBold,
-  TextUpper,
   TextMiddle
 };
-
 export default TextComponent;

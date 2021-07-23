@@ -1,0 +1,8 @@
+textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #a984d4;
+  outline: none;
+}

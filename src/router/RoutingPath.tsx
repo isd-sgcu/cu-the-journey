@@ -3,9 +3,7 @@ import { useTranslation } from "../config/i18n";
 import Souvenir from "../pages/ending/Souvenir";
 import ChoiceComponent from "../components/Choice";
 import Fallback from "../pages/Fallback";
-import Scene3 from "../pages/Scene3";
-import Scene4 from "../pages/Scene4";
-import Scene5 from "../pages/Scene5";
+import AllScenes from "../pages/AllScenes";
 import PickANumber from "../pages/ending/PickANumber";
 import SelectLanguage from "../pages/landing/SelectLanguage";
 import Landing from "../pages/landing";
@@ -29,44 +27,44 @@ const I18Testing = () => {
 const allPath = [
   {
     path: "/",
-    component: SelectLanguage
+    component: SelectLanguage,
   },
   {
     path: "/landing",
-    component: Landing
+    component: Landing,
   },
   {
     path: "/trigger-warning",
-    component: TW
+    component: TW,
   },
   {
     path: "/inspired-by-DAE",
-    component: DAE
+    component: DAE,
   },
   {
     path: "/2",
-    component: SecondScene
+    component: SecondScene,
   },
   {
     path: "*all",
-    component: Fallback
+    component: Fallback,
   },
   {
     path: "/choices",
-    component: ChoiceComponent
+    component: ChoiceComponent,
   },
   {
     path: "/i18n",
-    component: I18Testing
+    component: I18Testing,
   },
   {
     path: "/pick-a-number",
-    component: PickANumber
+    component: PickANumber,
   },
   {
     path: "/souvenir",
-    component: Souvenir
-  }
+    component: Souvenir,
+  },
 ];
 
 /* will iterate through all scene in an import
@@ -87,9 +85,12 @@ const iterateScene = (scene: IScene) => {
   });
 };
 
-// this will be changed later
-iterateScene(Scene3);
-iterateScene(Scene4);
-iterateScene(Scene5);
+const iterateSceneImport = (allscene: Record<string, IScene>) => {
+  Object.keys(allscene).forEach(scene => {
+    iterateScene(allscene[scene]);
+  });
+};
+
+iterateSceneImport(AllScenes);
 
 export default allPath;

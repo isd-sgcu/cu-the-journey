@@ -24,7 +24,7 @@ export const SceneProvider: Component = props => {
     height: 667,
     antialias: true,
     backgroundColor: 0xffffff,
-    resolution: 1
+    resolution: 1,
   });
 
   const sceneEngine = new SceneEngine(app);
@@ -33,13 +33,13 @@ export const SceneProvider: Component = props => {
     .add(
       Object.values(resources)
         .flatMap(res => res)
-        .filter(src => !loader.resources[src])
+        .filter(src => !loader.resources[src]),
     )
     .load(() => {
       const names = Object.keys(resources) as SpriteName[];
       const sprites = names.map(name => ({
         name,
-        sprite: new FadeSprite(resources[name])
+        sprite: new FadeSprite(resources[name]),
       }));
       sceneEngine.addScenes(sprites);
       app.ticker.add(delta => {
@@ -55,7 +55,7 @@ export const SceneProvider: Component = props => {
 
   const store = {
     app,
-    sceneSwitcher: sceneEngine.sceneSwitcher
+    sceneSwitcher: sceneEngine.sceneSwitcher,
   };
 
   return <SceneContext.Provider value={store}>{props.children}</SceneContext.Provider>;

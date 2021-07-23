@@ -53,7 +53,7 @@ export class SceneEngine {
 
   sceneSwitcher = (
     newScenes: SceneSwitchable,
-    onNewScene: (() => void) | undefined = undefined
+    onNewScene: (() => void) | undefined = undefined,
   ) => {
     this.onNewScene = onNewScene;
     const mappedScenes: SceneSwitcherOption[] = newScenes.map(scene => {

@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: process.env.SNOWPACK_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.SNOWPACK_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.SNOWPACK_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.SNOWPACK_PUBLIC_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.SNOWPACK_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -37,7 +37,7 @@ const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLEC
 async function storeTimeCapsule(uid: string, texts: string[], emails: string[]) {
   const docData = {
     emails,
-    texts
+    texts,
   };
   await collection.doc(uid).set(docData);
 }

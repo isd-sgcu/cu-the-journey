@@ -14,6 +14,7 @@ module.exports = {
         yellow: "#F4AE23",
         orange: "#F68E2E",
         pink: "#DD7ED2",
+        primary: { 300: "#A984D4" },
         purple: {
           lightest: "#F6EFFE",
           light: "#D0B6EF",

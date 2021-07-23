@@ -18,7 +18,7 @@ const dispose = render(
       </Router>
     </I18nProvider>
   ),
-  document.getElementById("app")!
+  document.getElementById("app")!,
 );
 
 /**

@@ -7,7 +7,7 @@ function createSpriteResource(name: string, frames: number) {
 
 export const resources = <const>{
   bird: createSpriteResource("bird", 7),
-  ogbg: createSpriteResource("ogbg", 3)
+  ogbg: createSpriteResource("ogbg", 3),
 };
 
 export type SpriteName = keyof typeof resources;
