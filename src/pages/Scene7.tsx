@@ -1,5 +1,4 @@
 import type { Component } from "solid-js";
-import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 
@@ -9,81 +8,61 @@ const t = sceneTranslator("scene7");
 
 const Scene7S0: Component = () => (
   <>
-    <NextScene page="/7-1">
-      <TextMiddle text={t("7-0")} />
-    </NextScene>
+    <TextMiddle text={t("7-0")} />
   </>
 );
 
 const Scene7S1: Component = () => (
   <>
-    <NextScene page="/7-1-1">
-      <TextMiddle text={t("7-1")} />
-    </NextScene>
+    <TextMiddle text={t("7-1")} />
   </>
 );
 
 const Scene7S1S1: Component = () => (
   <>
-    <NextScene page="/7-1-2">
-      <TextMiddle text={t("7-1-1")} />
-    </NextScene>
+    <TextMiddle text={t("7-1-1")} />
   </>
 );
 
 const Scene7S1S2: Component = () => (
   <>
-    <NextScene page="/7-2">
-      <TextMiddle text={t("7-1-2")} />
-    </NextScene>
+    <TextMiddle text={t("7-1-2")} />
   </>
 );
 
 const Scene7S2: Component = () => (
   <>
-    <NextScene page="/7-2-1">
-      <TextMiddle text={t("7-2")} />
-    </NextScene>
+    <TextMiddle text={t("7-2")} />
   </>
 );
 
 const Scene7S2S1: Component = () => (
   <>
-    <NextScene page="/7-2-2">
-      <TextMiddle text={t("7-2-1")} />
-    </NextScene>
+    <TextMiddle text={t("7-2-1")} />
   </>
 );
 
 const Scene7S2S2: Component = () => (
   <>
-    <NextScene page="/7-3">
-      <TextMiddle text={t("7-2-2")} />
-    </NextScene>
+    <TextMiddle text={t("7-2-2")} />
   </>
 );
 
 const Scene7S3: Component = () => (
   <>
-    <NextScene page="/7-3-1">
-      <TextMiddle text={t("7-3")} />
-    </NextScene>
+    <TextMiddle text={t("7-3")} />
   </>
 );
 
 const Scene7S3S1: Component = () => (
   <>
-    <NextScene page="/7-3-2">
-      <TextMiddle text={t("7-3-1")} />
-    </NextScene>
+    <TextMiddle text={t("7-3-1")} />
   </>
 );
 
 const Scene7S3S2: Component = () => (
   <>
-    <NextScene page="/8-0">
-      <TextMiddle text={t("7-3-2")} />
-    </NextScene>
+    <TextMiddle text={t("7-3-2")} />
   </>
 );
 
@@ -97,7 +76,7 @@ const Scene7 = {
   Scene7S2S2,
   Scene7S3,
   Scene7S3S1,
-  Scene7S3S2
+  Scene7S3S2,
 };
 
 export default Scene7;

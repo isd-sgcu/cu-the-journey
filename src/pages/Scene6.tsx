@@ -1,5 +1,4 @@
 import type { Component } from "solid-js";
-import { NextScene } from "../components/JumpTo";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import InputBoxScene, { InputBoxScenePropsType, StorableKeys } from "../components/InputBoxScene";
@@ -10,25 +9,19 @@ const t = sceneTranslator("scene6");
 
 const Scene6S0: Component = () => (
   <>
-    <NextScene page="/6-1">
-      <TextMiddle text={t("6-0")} />
-    </NextScene>
+    <TextMiddle text={t("6-0")} />
   </>
 );
 
 const Scene6S1: Component = () => (
   <>
-    <NextScene page="/6-2">
-      <TextMiddle text={t("6-1")} />
-    </NextScene>
+    <TextMiddle text={t("6-1")} />
   </>
 );
 
 const Scene6S2: Component = () => (
   <>
-    <NextScene page="/6-3">
-      <TextMiddle text={t("6-2")} />
-    </NextScene>
+    <TextMiddle text={t("6-2")} />
   </>
 );
 
@@ -48,9 +41,7 @@ const Scene6S3: Component = () => {
 
 const Scene6S4: Component = () => (
   <>
-    <NextScene page="/7-0">
-      <TextMiddle text={t("6-4")} />
-    </NextScene>
+    <TextMiddle text={t("6-4")} />
   </>
 );
 
