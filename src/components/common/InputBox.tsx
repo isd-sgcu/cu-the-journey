@@ -24,7 +24,7 @@ const InputBox: Component<InputBoxProps> = props => {
     ),
   );
   const className = `placeholder-primary-300 resize-none w-[311px] h-[${
-    props.height || INPUTBOX_HEIGHT
+    props.height ? props.height : INPUTBOX_HEIGHT
   }px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none`;
 
   return (
