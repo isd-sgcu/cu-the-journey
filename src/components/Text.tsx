@@ -6,7 +6,8 @@ interface TextProps {
   class?: string;
 }
 
-function addtText(text: string | string[]): string | JSX.Element {
+// also used in MultiStepScene
+export function addtText(text: string | string[]): string | JSX.Element {
   if (Array.isArray(text))
     return text.map(line => (
       <>
@@ -41,6 +42,6 @@ export { TextBold, TextMiddle };
 
 const TextComponent = {
   TextBold,
-  TextMiddle
+  TextMiddle,
 };
 export default TextComponent;
