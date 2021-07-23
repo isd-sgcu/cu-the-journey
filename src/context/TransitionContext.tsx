@@ -46,6 +46,7 @@ export const TransitionProvider: Component = props => {
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [router, { push }] = useRouter()!;
 
+  // Reset all state that used in this context
   const resetAnimationFrame = () => {
     setTransitionNumber(0);
     setTransitionQueue(false);
@@ -59,6 +60,7 @@ export const TransitionProvider: Component = props => {
     setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
   };
 
+  // Trigger the next frame animation
   const nextAnimationTrigger = () => {
     const nowNum = transitionNumber();
 
@@ -82,6 +84,8 @@ export const TransitionProvider: Component = props => {
     }
   };
 
+  // This is where sequencial transition begin
+  // If the frame is still remaining then make the timeout
   const scheduleFrameHelper = (num: number, timems: number) => {
     setFrame(num);
     if (num > 0) {
@@ -97,6 +101,7 @@ export const TransitionProvider: Component = props => {
     }
   };
 
+  // Handle the click event
   const clickAction = () => {
     const timeOutId = nowTransition();
 
@@ -109,11 +114,12 @@ export const TransitionProvider: Component = props => {
       }, 0);
     } else if (!isPrevented()) {
       nextAnimationTrigger();
-    } else if (isPrevented() && frame() !== -1 && frame() !== maxFrame()) {
+    } else if (isPrevented() && frame() !== maxFrame()) {
       nextAnimationTrigger();
     }
   };
 
+  // This function will be called to setup before scheduleFrameHelper
   const scheduleFrame = (num: number, timems: number) => {
     const newNum = Math.max(num, 0);
     const newTimes = Math.max(timems, 0);
@@ -125,6 +131,7 @@ export const TransitionProvider: Component = props => {
     scheduleFrameHelper(newNum, newTimes);
   };
 
+  // Provide fade out and push to next scene
   const fadeOut = (next: string) => {
     if (
       transitionNumber() !== -1 &&
@@ -133,26 +140,30 @@ export const TransitionProvider: Component = props => {
       next !== router.current[0].path
     ) {
       setNextScene(next);
-      setTransitionNumber(-1);
+      setTransitionNumber(fadeOutNumber);
       return true;
     }
     return false;
   };
 
+  // Reset all state when routes to new path
   createEffect(() => {
     // eslint-disable-next-line no-console
     console.log("Now path", router.current[0].path);
     resetAnimationFrame();
   });
 
+  // Listen when transitionNumber equals to fadeOutFinishNumber
   createEffect(() => {
-    if (transitionNumber() === -2) {
+    if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
       if (!isPrevented() || RouteMapping[nowRoute] || !nextScene()) {
         push(RouteMapping[nowRoute]);
       } else {
         push(nextScene());
       }
+
+      // Prevent Race condition
       setTransitionNumber(0);
     }
   });
@@ -187,6 +198,7 @@ export const TransitionProvider: Component = props => {
   );
 };
 
+// This function is created for simplified syntax and some setup
 export const useTransitionContext = (isReset?: boolean) => {
   const contextValue = useContext(TransitionContext)!;
   if (isReset) {
@@ -195,6 +207,8 @@ export const useTransitionContext = (isReset?: boolean) => {
   return contextValue;
 };
 
+// The wrapper for wrapping the component that want to fade (By default is wrapping at the root component)
+// Need to specify parameter "order" for ordering component displaying
 export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order: propsOrder } = props;
   const order = Math.max(0, propsOrder);
