@@ -19,9 +19,13 @@ const InputBox: Component<InputBoxProps> = props => {
   }px; padding: 10px 10px;`;
   const [inlineStyle, setInlineStyle] = createSignal(props.isMinimized ? minimizedStyle : "");
   createEffect(() =>
-    setInlineStyle(
-      prev => (prev += props.isGoingNextScene() ? "border: none; cursor: pointer;" : ""), // eslint-disable-line
-    ),
+    setInlineStyle(prev => {
+      let newStyle = prev;
+      newStyle += props.isGoingNextScene()
+        ? "border: none; cursor: pointer; background-color: transparent;"
+        : "";
+      return newStyle;
+    }),
   );
   const className = `placeholder-primary-300 resize-none w-[311px] h-[${
     props.height ? props.height : INPUTBOX_HEIGHT
