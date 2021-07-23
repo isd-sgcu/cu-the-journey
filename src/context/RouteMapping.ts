@@ -18,6 +18,6 @@ interface IRouteMapping {
 
 export default {
   "/": "/landing",
-  "/3-0": "/3-1",
-  "/3-1": "/3-2"
+  "/landing": "/3-0",
+  "/3-0": "/3-1"
 } as IRouteMapping;

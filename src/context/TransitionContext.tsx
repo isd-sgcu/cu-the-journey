@@ -42,6 +42,7 @@ export const TransitionProvider: Component = props => {
   const [time, setTime] = createSignal(0);
   const [maxFrame, setMaxFrame] = createSignal(0);
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
+  const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [router, { push }] = useRouter()!;
 
   const resetAnimationFrame = () => {
@@ -51,26 +52,28 @@ export const TransitionProvider: Component = props => {
     setTime(0);
     setMaxFrame(0);
     setNextScene("");
+    setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
   };
 
   const nextAnimationTrigger = () => {
-    const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
-    const maxFrameAnimation = maxFrame();
     const nowNum = transitionNumber();
 
-    if (isPrevented) {
+    if (isPrevented()) {
       if (nowNum === fadeOutNumber) {
         setTransitionNumber(fadeOutFinishNumber);
-      } else if (nowNum !== maxFrameAnimation) {
-        setTransitionNumber(prev => Math.min(prev + 1, maxFrameAnimation));
+      } else if (nowNum < maxFrame()) {
+        if (nowNum + 1 === maxFrame()) {
+          setAnimated(false);
+        }
+        setTransitionNumber(prev => prev + 1);
       }
-    } else if (!isPrevented) {
-      if (transitionNumber() === maxFrameAnimation) {
+    } else if (!isPrevented()) {
+      if (transitionNumber() === maxFrame()) {
         setTransitionNumber(fadeOutNumber);
       } else if (transitionNumber() === fadeOutNumber) {
         setTransitionNumber(fadeOutFinishNumber);
-      } else if (transitionNumber() !== maxFrameAnimation) {
-        setTransitionNumber(prev => Math.min(prev + 1, maxFrameAnimation));
+      } else if (transitionNumber() !== maxFrame()) {
+        setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
       }
     }
   };
@@ -92,6 +95,7 @@ export const TransitionProvider: Component = props => {
 
   const clickAction = () => {
     const timeOutId = nowTransition();
+
     if (timeOutId !== -1) {
       clearTimeout(timeOutId);
 
@@ -99,7 +103,9 @@ export const TransitionProvider: Component = props => {
         nextAnimationTrigger();
         scheduleFrameHelper(frame() - 1, time());
       }, 0);
-    } else {
+    } else if (!isPrevented()) {
+      nextAnimationTrigger();
+    } else if (isPrevented() && frame() !== -1 && frame() !== maxFrame()) {
       nextAnimationTrigger();
     }
   };
@@ -136,8 +142,7 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     if (transitionNumber() === -2) {
       const nowRoute = router.current[0].path;
-      const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
-      if (!isPrevented) {
+      if (!isPrevented || RouteMapping[nowRoute] || !nextScene()) {
         push(RouteMapping[nowRoute]);
       } else {
         push(nextScene());
@@ -164,7 +169,9 @@ export const TransitionProvider: Component = props => {
       <div
         onClick={el => {
           el.stopPropagation();
-          clickAction();
+          if (transitionNumber() !== -1 || !isPrevented()) {
+            clickAction();
+          }
         }}
       >
         {props.children}
@@ -187,8 +194,10 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
 
   const [router, { push }] = useRouter()!;
   const { setAnimated, transitionNumber, nextScene, setMaxFrame } = useTransitionContext();
+  const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
+  const newOrder = isPrevented ? order + 1 : order;
 
-  onMount(() => setMaxFrame(prev => Math.max(prev, order)));
+  onMount(() => setMaxFrame(prev => Math.max(prev, newOrder)));
 
   return (
     <div
@@ -199,8 +208,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
         const isFadeOut = transitionNumber() === fadeOutNumber;
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
-          const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
-          if (!isPrevented) {
+          if (!isPrevented || RouteMapping[nowRoute] || !nextScene()) {
             push(RouteMapping[nowRoute]);
           } else {
             push(nextScene());

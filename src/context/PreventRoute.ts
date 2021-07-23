@@ -1,1 +1,1 @@
-export default ["/", "/poc-transition"];
+export default ["/", "/poc-transition", "/3-1", "*all"];
