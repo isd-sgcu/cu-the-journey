@@ -41,13 +41,13 @@ export const TransitionProvider: Component = props => {
   const [transitionNumber, setTransitionNumber] = createSignal(0);
   const [isAnimated, setAnimated] = createSignal(false);
   const [transitionQueue, setTransitionQueue] = createSignal(false);
-  const [nextScene, setNextScene] = createSignal("");
+  const [nextScene, setNextScene] = createSignal("/");
   const [frame, setFrame] = createSignal(0);
   const [time, setTime] = createSignal(0);
   const [maxFrame, setMaxFrame] = createSignal(1);
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
-  const [router, { push }] = useRouter()!;
+  const [router, { replace }] = useRouter()!;
 
   // Reset all state that used in this context
   const resetAnimationFrame = () => {
@@ -167,11 +167,9 @@ export const TransitionProvider: Component = props => {
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
       if (RouteMapping[nowRoute]) {
-        console.log(nowRoute);
-        push(RouteMapping[nowRoute]);
+        replace(RouteMapping[nowRoute]);
       } else {
-        console.log(nextScene());
-        push(nextScene());
+        replace(nextScene());
       }
 
       // Prevent Race condition
@@ -202,6 +200,7 @@ export const TransitionProvider: Component = props => {
             clickAction();
           }
         }}
+        class="w-full flex flex-grow items-center"
       >
         {props.children}
       </div>
@@ -224,7 +223,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order: propsOrder } = props;
   const order = Math.max(0, propsOrder);
 
-  const [router, { push }] = useRouter()!;
+  const [router, { replace }] = useRouter()!;
   const { setAnimated, transitionNumber, nextScene, setNextTransition } = useTransitionContext();
 
   return (
@@ -241,16 +240,16 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
           if (RouteMapping[nowRoute]) {
-            push(RouteMapping[nowRoute]);
+            replace(RouteMapping[nowRoute]);
           } else {
-            push(nextScene());
+            replace(nextScene());
           }
         }
       }}
       style={{ opacity: transitionNumber() >= order ? 1 : 0 }}
       class={`${transitionNumber() === order ? "animate-fadeIn" : ""} ${
         transitionNumber() === -1 ? "animate-fadeOut" : ""
-      } w-full h-full flex justify-center items-center flex-col`}
+      } w-full flex-grow flex justify-center items-center flex-col`}
       {...props}
     >
       {props.children}
