@@ -1,10 +1,12 @@
-import { Component, onCleanup, onMount } from "solid-js";
+import { Accessor, Component, createSignal, onCleanup, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface ChoiceButtonProps {
   href: string;
   text: string;
   isLongBtn: boolean;
+  isClick: Accessor<boolean>;
+  setClick: (v: boolean | ((prev: boolean) => boolean)) => boolean;
 }
 
 interface ChoiceComponentProps {
@@ -18,7 +20,9 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
   return (
     <>
       <button
-        onClick={() => fadeOut(props.href)}
+        onClick={() => {
+          props.setClick(() => fadeOut(props.href));
+        }}
         class={`${
           props.isLongBtn ? "w-[220px]" : "w-[150px]"
         } h-[40px] mt-[16px] rounded-full cursor-pointer
@@ -33,10 +37,19 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
 };
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {
+  const [isClick, setClick] = createSignal(false);
   const buttons = props.choices.map((choice: string | string[]) => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
-    return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong || false} />;
+    return (
+      <ChoiceButton
+        text={text}
+        href={ref}
+        isLongBtn={props.isLong || false}
+        isClick={isClick}
+        setClick={setClick}
+      />
+    );
   });
   const question = () => {
     if (Array.isArray(props.question)) {
@@ -52,7 +65,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 
   const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true)!;
 
-  onMount(() => scheduleFrame(2, 1000));
+  onMount(() => scheduleFrame(1, 1000));
 
   onCleanup(() => resetAnimationFrame());
 

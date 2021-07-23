@@ -5,8 +5,9 @@ import {
   createContext,
   createEffect,
   createSignal,
+  JSX,
   onMount,
-  useContext
+  useContext,
 } from "solid-js";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
@@ -19,13 +20,13 @@ interface ITransitionProvider {
   nextAnimationTrigger: () => void;
   resetAnimationFrame: () => void;
   transitionNumber: Accessor<number>;
-  fadeOut: (prev: string) => void;
+  fadeOut: (prev: string) => boolean;
   nextScene: Accessor<string>;
   setNextScene: (prev: string) => string;
   setMaxFrame: (v: number | ((prev: number) => number)) => number;
 }
 
-interface ITransitionFadeProp {
+interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
   order: number;
 }
 
@@ -48,10 +49,13 @@ export const TransitionProvider: Component = props => {
   const resetAnimationFrame = () => {
     setTransitionNumber(0);
     setTransitionQueue(false);
+    setAnimated(false);
     setFrame(0);
     setTime(0);
     setMaxFrame(0);
     setNextScene("");
+    setNowTransition(-1);
+
     setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
   };
 
@@ -130,7 +134,9 @@ export const TransitionProvider: Component = props => {
     ) {
       setNextScene(next);
       setTransitionNumber(-1);
+      return true;
     }
+    return false;
   };
 
   createEffect(() => {
@@ -142,11 +148,12 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     if (transitionNumber() === -2) {
       const nowRoute = router.current[0].path;
-      if (!isPrevented || RouteMapping[nowRoute] || !nextScene()) {
+      if (!isPrevented() || RouteMapping[nowRoute] || !nextScene()) {
         push(RouteMapping[nowRoute]);
       } else {
         push(nextScene());
       }
+      setTransitionNumber(0);
     }
   });
 
@@ -163,7 +170,7 @@ export const TransitionProvider: Component = props => {
         scheduleFrame,
         nextAnimationTrigger,
         transitionNumber,
-        resetAnimationFrame
+        resetAnimationFrame,
       }}
     >
       <div
@@ -219,6 +226,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
       class={`${transitionNumber() === order ? "animate-fadeIn" : ""} ${
         transitionNumber() === -1 ? "animate-fadeOut" : ""
       } w-full h-full flex justify-center items-center flex-col`}
+      {...props}
     >
       {props.children}
     </div>
