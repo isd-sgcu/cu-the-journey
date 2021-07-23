@@ -9,6 +9,7 @@ import {
   useContext
 } from "solid-js";
 import PreventRoute from "./PreventRoute";
+import RouteMapping from "./RouteMapping";
 
 interface ITransitionProvider {
   transitionQueue: Accessor<boolean>;
@@ -134,7 +135,13 @@ export const TransitionProvider: Component = props => {
 
   createEffect(() => {
     if (transitionNumber() === -2) {
-      push(nextScene());
+      const nowRoute = router.current[0].path;
+      const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
+      if (!isPrevented) {
+        push(RouteMapping[nowRoute]);
+      } else {
+        push(nextScene());
+      }
     }
   });
 
@@ -178,7 +185,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order: propsOrder } = props;
   const order = Math.max(0, propsOrder);
 
-  const [, { push }] = useRouter()!;
+  const [router, { push }] = useRouter()!;
   const { setAnimated, transitionNumber, nextScene, setMaxFrame } = useTransitionContext();
 
   onMount(() => setMaxFrame(prev => Math.max(prev, order)));
@@ -191,7 +198,13 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
 
         const isFadeOut = transitionNumber() === fadeOutNumber;
         if (isFadeOut) {
-          push(nextScene());
+          const nowRoute = router.current[0].path;
+          const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
+          if (!isPrevented) {
+            push(RouteMapping[nowRoute]);
+          } else {
+            push(nextScene());
+          }
         }
       }}
       style={{ opacity: transitionNumber() >= order ? 1 : 0 }}
