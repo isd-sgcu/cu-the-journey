@@ -5,8 +5,12 @@ import { resources, SoundName, SpriteName } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
 import { FadeSprite } from "./Sprite/FadeSprite";
 
+interface ISoundControlOption {
+  loop: boolean;
+}
+
 interface ISoundControl {
-  play: (name: SoundName) => void;
+  play: (name: SoundName, options?: ISoundControlOption) => void;
   muted: () => boolean;
 }
 
@@ -66,11 +70,12 @@ export const SceneProvider: Component = props => {
   });
 
   const soundControl = {
-    play: (name: SoundName) => {
+    play: (name: SoundName, options?: ISoundControlOption) => {
       if (isLoading()) return;
       const soundRes: any = loader.resources[resources.sound[name]];
       const playSound: Sound = soundRes.sound;
       if (!playSound.isPlaying) {
+        playSound.loop = options?.loop ?? false;
         playSound.play();
       }
     },
