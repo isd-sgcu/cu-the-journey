@@ -22,6 +22,7 @@ interface ITransitionProvider {
   fadeOut: (prev: string) => boolean;
   nextScene: Accessor<string>;
   setNextScene: (prev: string) => string;
+  setNextTransition: () => void;
 }
 
 interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -60,6 +61,12 @@ export const TransitionProvider: Component = props => {
     setNowTransition(-1);
 
     setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
+  };
+
+  const setNextTransition = () => {
+    if (time() === 0) {
+      setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
+    }
   };
 
   // Trigger the next frame animation
@@ -110,10 +117,8 @@ export const TransitionProvider: Component = props => {
     if (timeOutId !== -1) {
       clearTimeout(timeOutId);
 
-      window.setTimeout(() => {
-        nextAnimationTrigger();
-        scheduleFrameHelper(frame() - 1, time());
-      }, 0);
+      nextAnimationTrigger();
+      scheduleFrameHelper(frame() - 1, time());
     } else if (!isPrevented()) {
       nextAnimationTrigger();
     } else if (isPrevented() && frame() !== maxFrame()) {
@@ -158,11 +163,14 @@ export const TransitionProvider: Component = props => {
 
   // Listen when transitionNumber equals to fadeOutFinishNumber
   createEffect(() => {
+    console.log(transitionNumber());
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
-      if (!isPrevented() || RouteMapping[nowRoute] || !nextScene()) {
+      if (RouteMapping[nowRoute] || !nextScene()) {
+        console.log(nowRoute);
         push(RouteMapping[nowRoute]);
       } else {
+        console.log(nextScene());
         push(nextScene());
       }
 
@@ -184,6 +192,7 @@ export const TransitionProvider: Component = props => {
         nextAnimationTrigger,
         transitionNumber,
         resetAnimationFrame,
+        setNextTransition,
       }}
     >
       <div
@@ -216,23 +225,28 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const order = Math.max(0, propsOrder);
 
   const [router, { push }] = useRouter()!;
-  const { setAnimated, transitionNumber, nextScene } = useTransitionContext();
-  const isPrevented = PreventRoute.indexOf(router.current[0].path) !== -1;
+  const { setAnimated, transitionNumber, nextScene, setNextTransition } = useTransitionContext();
 
   return (
     <div
       onAnimationStart={() => setAnimated(true)}
-      onAnimationEnd={() => {
+      onAnimationEnd={el => {
         setAnimated(false);
+
+        if (el.animationName === "fadeIn") {
+          setNextTransition();
+        }
 
         const isFadeOut = transitionNumber() === fadeOutNumber;
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
-          if (!isPrevented || RouteMapping[nowRoute] || !nextScene()) {
+          if (RouteMapping[nowRoute]) {
             push(RouteMapping[nowRoute]);
           } else {
             push(nextScene());
           }
+        } else {
+          console.log("end of fade in");
         }
       }}
       style={{ opacity: transitionNumber() >= order ? 1 : 0 }}
