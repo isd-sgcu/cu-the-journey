@@ -23,6 +23,7 @@ interface ITransitionProvider {
   nextScene: Accessor<string>;
   setNextScene: (prev: string) => string;
   setNextTransition: () => void;
+  cancelPrevented: () => void;
 }
 
 interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -154,6 +155,10 @@ export const TransitionProvider: Component = props => {
     return false;
   };
 
+  const cancelPrevented = () => {
+    setPrevented(false);
+  };
+
   // Reset all state when routes to new path
   createEffect(() => {
     // eslint-disable-next-line no-console
@@ -190,6 +195,7 @@ export const TransitionProvider: Component = props => {
         transitionNumber,
         resetAnimationFrame,
         setNextTransition,
+        cancelPrevented,
       }}
     >
       <div
@@ -199,7 +205,9 @@ export const TransitionProvider: Component = props => {
             clickAction();
           }
         }}
-        class="w-full flex flex-grow items-center"
+        class={`w-full flex flex-grow items-center ${
+          !isPrevented() ? "cursor-pointer" : "cursor-default"
+        }`}
       >
         {props.children}
       </div>
