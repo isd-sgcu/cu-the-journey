@@ -13,13 +13,24 @@ export enum StorableKeys {
   TimeCapsule,
 }
 
-// TODO prevent user from randomly accessing scenes, it should be played in order
-// run a function on each scene to check if the page is skipped to
-// TODO function to restart, going to the landing page
+const MESSAGE_NOT_FOUND = "NOT FOUND";
+const IGNORE_PATHS = [
+  "/",
+  "/landing",
+  "/poc-transition",
+  "/trigger-warning",
+  "/inspired-by-DAE",
+  "/2-0",
+  "/27-0",
+  "/28-0",
+  "/29-0",
+  "/pick-a-number",
+  "/souvenir",
+];
 
 export const getMessage = (key: StorableKeys): string => {
   const value = localStorage.getItem(key.toString());
-  if (value === null) return "The value of this key is not yet set.";
+  if (value === null) return MESSAGE_NOT_FOUND;
   return value;
 };
 
@@ -29,6 +40,23 @@ export const saveMessage = (key: StorableKeys, val: string): void => {
 
 export const clearSavedMessages = () => {
   localStorage.clear();
+};
+
+// tells if the user skips Scene 2
+// Info from Scene 2 is necessary.
+export const areScenesSkipped = () => {
+  const necessaryKeys = [StorableKeys.Nickname, StorableKeys.ID, StorableKeys.Email];
+  return necessaryKeys.some(key => getMessage(key) === MESSAGE_NOT_FOUND);
+};
+
+export const restartApp = () => {
+  clearSavedMessages();
+  location.href = "/landing"; // eslint-disable-line
+};
+
+export const preventScenesSkipping = (currentPath: string) => {
+  if (IGNORE_PATHS.some(path => path === currentPath)) return;
+  if (areScenesSkipped()) restartApp();
 };
 
 // Fancier context below breaks when the page is refreshed so 😒😒😒

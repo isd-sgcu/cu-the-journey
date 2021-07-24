@@ -9,6 +9,7 @@ import {
   JSX,
   useContext,
 } from "solid-js";
+import { preventScenesSkipping } from "../MessageStore";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
 
@@ -169,6 +170,7 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     // eslint-disable-next-line no-console
     console.log("Now path", router.current[0].path);
+    preventScenesSkipping(router.current[0].path);
     resetAnimationFrame();
   });
 
