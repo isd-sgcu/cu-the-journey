@@ -1,9 +1,10 @@
-import type { Component } from "solid-js";
-import { getMessage } from "../MessageStore";
+import { Component, createSignal } from "solid-js";
+import { clearSavedMessages, getMessage } from "../MessageStore";
 import InputBoxScene, { InputBoxScenePropsType, StorableKeys } from "../components/InputBoxScene";
 import { TextMiddle } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import ChoiceComponent from "../components/Choice";
+import { uploadTimeCapsule } from "../firebase";
 
 const t = sceneTranslator("scene14to24");
 
@@ -110,6 +111,7 @@ const Scene23S0: Component = () => (
 );
 
 const Scene24S0: Component = () => {
+  const [text, setText] = createSignal("");
   const props: InputBoxScenePropsType = {
     isMinimized: false,
     nextPage: "/27-0",
@@ -117,8 +119,17 @@ const Scene24S0: Component = () => {
     placeHolderKey: "24-0-placeHolder",
     buttonTextKey: "24-0-buttonText",
     onTapTextKey: "24-0-tap",
-    storeKey: StorableKeys.Scene19S1,
+    storeKey: StorableKeys.TimeCapsule,
     t,
+    text,
+    setText,
+    onButtonClicked: () => {
+      uploadTimeCapsule(getMessage(StorableKeys.ID), getMessage(StorableKeys.Email), {
+        text: getMessage(StorableKeys.TimeCapsule),
+        name: getMessage(StorableKeys.Nickname),
+      });
+      clearSavedMessages();
+    },
   };
   return <InputBoxScene {...props} />;
 };
