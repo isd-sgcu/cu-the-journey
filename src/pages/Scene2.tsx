@@ -48,11 +48,11 @@ const Scene2S0: Component = () => {
   });
 
   // inline style of button depending on the state of areAllFilled
-  const commonStyle = "margin-top: 46px; transition: all 300ms;";
+  const commonButtonStyle = "margin-top: 46px; transition: all 300ms;";
   const buttonStyle = () =>
     areAllFilled()
-      ? commonStyle
-      : `${commonStyle} filter: grayscale(0.7); opacity: 0.7; cursor: not-allowed;`;
+      ? commonButtonStyle
+      : `${commonButtonStyle} filter: grayscale(0.7); opacity: 0.7; cursor: not-allowed;`;
 
   const { fadeOut } = useTransitionContext();
   const nextPage = "/3-0";
