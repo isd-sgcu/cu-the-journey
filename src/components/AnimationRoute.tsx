@@ -11,7 +11,7 @@ export const AnimationRoute: Component<IAnimationRoute> = props => {
   const { children, transitionDur } = props;
 
   onMount(() => {
-    scheduleFrame(5, transitionDur || 1000);
+    scheduleFrame(children.length, transitionDur || 1000);
   });
 
   return (
