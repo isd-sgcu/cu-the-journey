@@ -38,7 +38,7 @@ function Souvenir() {
       </Typography>
 
       <div class="flex-grow mb-4 flex items-center">
-        <Typography class="text-[14px]" style={`color:${bodyColor[number]}`}>
+        <Typography class="text-[14px] leading-[22px]" style={`color:${bodyColor[number]}`}>
           {t(`choices.${number}`)}
         </Typography>
       </div>
