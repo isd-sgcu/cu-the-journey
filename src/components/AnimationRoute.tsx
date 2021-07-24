@@ -3,14 +3,15 @@ import { TransitionFade, useTransitionContext } from "../context/TransitionConte
 
 interface IAnimationRoute {
   children: JSX.Element[];
+  transitionDur: number; // ms
 }
 
 export const AnimationRoute: Component<IAnimationRoute> = props => {
   const { scheduleFrame } = useTransitionContext();
-  const { children } = props;
+  const { children, transitionDur } = props;
 
   onMount(() => {
-    scheduleFrame(5, 1000);
+    scheduleFrame(5, transitionDur || 1000);
   });
 
   return (
