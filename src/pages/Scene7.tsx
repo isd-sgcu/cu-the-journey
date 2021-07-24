@@ -17,6 +17,7 @@ const Scene7S1: Component = () => {
   const textKeys = ["7-1-a", "7-1-b", "7-1-c"];
   return (
     <AnimationRoute
+      transitionDur={2000}
       children={textKeys.map((key, index) => (
         <span>
           {addtText(t(key))}
@@ -44,6 +45,7 @@ const Scene7S2: Component = () => {
   const textKeys = ["7-2-a", "7-2-b", "7-2-c"];
   return (
     <AnimationRoute
+      transitionDur={2000}
       children={textKeys.map((key, index) => (
         <span>
           {addtText(t(key))}

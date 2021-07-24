@@ -18,6 +18,7 @@ const Scene8S1: Component = () => {
   const textKeys = ["8-1-0", "8-1-1", "8-1-2"];
   return (
     <AnimationRoute
+      transitionDur={2000}
       children={textKeys.map((key, index) => (
         <span>
           {addtText(t(key))}

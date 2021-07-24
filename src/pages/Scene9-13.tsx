@@ -70,7 +70,7 @@ const Scene13S3: Component = () => {
   const eachLine = [...t("13-3")].map(q => <p>{q}</p>);
   return (
     <>
-      <AnimationRoute children={eachLine} />
+      <AnimationRoute children={eachLine} transitionDur={2500} />
     </>
   );
 };
