@@ -1,4 +1,4 @@
-import { Link } from "solid-app-router";
+import { Routing } from "../../context/TransitionContext";
 
 function index() {
   return (
@@ -37,9 +37,9 @@ function index() {
           <p class="absolute right-[-28px] bottom-[-20px]">”</p>
         </div>
       </div>
-      <Link href="/trigger-warning" class="mt-12 mb-10 text-white">
+      <Routing href="/trigger-warning" class="mt-12 mb-10 text-white">
         <button>{"<< แตะเพื่อไปต่อ >>"}</button>
-      </Link>
+      </Routing>
     </>
   );
 }
