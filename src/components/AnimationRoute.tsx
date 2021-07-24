@@ -1,8 +1,13 @@
-import { onMount } from "solid-js";
+import { Component, For, JSX, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
-export function AnimationRoute() {
+interface IAnimationRoute {
+  children: JSX.Element[];
+}
+
+export const AnimationRoute: Component<IAnimationRoute> = props => {
   const { scheduleFrame } = useTransitionContext();
+  const { children } = props;
 
   onMount(() => {
     scheduleFrame(5, 1000);
@@ -10,21 +15,9 @@ export function AnimationRoute() {
 
   return (
     <div class="flex items-center justify-center flex-col">
-      <TransitionFade order={0}>
-        <h4>Hello</h4>
-      </TransitionFade>
-      <TransitionFade order={1}>
-        <h4>Hello</h4>
-      </TransitionFade>
-      <TransitionFade order={2}>
-        <h4>Hello</h4>
-      </TransitionFade>
-      <TransitionFade order={3}>
-        <h4>Hello</h4>
-      </TransitionFade>
-      <TransitionFade order={4}>
-        <h4>Hello</h4>
-      </TransitionFade>
+      <For each={children}>
+        {(elem, index) => <TransitionFade order={index()}>{elem}</TransitionFade>}
+      </For>
     </div>
   );
-}
+};
