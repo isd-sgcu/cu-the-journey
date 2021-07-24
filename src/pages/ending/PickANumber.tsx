@@ -21,18 +21,16 @@ function PickANumber() {
   return (
     <>
       <div class="flex-grow flex flex-col items-center justify-center ">
-        <Typography variant="h6">{t("p1")}</Typography>
-        <Typography variant="h6" class="mt-3 mb-6">
-          {t("p2")}
+        <Typography variant="h6" class="leading-[20px] mb-6">
+          {t("p1")}
         </Typography>
-
         <div class="flex flex-wrap justify-center max-w-[375px]">
           <Index each={Array(6)}>{(_, idx) => <Choice number={idx + 1} />}</Index>
         </div>
 
         <Routing href="/souvenir" class="mt-5">
           <Typography variant="h6" class="underline text-[14px]">
-            {t("p3")}
+            {t("p2")}
           </Typography>
         </Routing>
       </div>
