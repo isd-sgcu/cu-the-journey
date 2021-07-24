@@ -217,7 +217,7 @@ export const TransitionProvider: Component = props => {
             setFadeOut(false);
           }
         }}
-        class={`w-full flex flex-grow items-center ${
+        class={`w-full flex flex-grow items-center px-6 ${
           !isPrevented() ? "cursor-pointer" : "cursor-default"
         }`}
       >
