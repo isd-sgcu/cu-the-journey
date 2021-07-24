@@ -8,8 +8,12 @@
  * This will tell the transition controller to routing
  * from [from] to [to]
  *
- * The component that need to choose or fill the form should not provide
+ * The component that need to choose should not provide
  * in this file, please fill the route name in PreventRoute.ts instead
+ *
+ * In the case of fill something (such as 8-2 pages) we need to specify in both file because
+ * we do not want to click when fill the form but we still want to be able to
+ * click the screen after save
  */
 
 interface IRouteMapping {
@@ -46,6 +50,7 @@ export default {
   "/6-0": "/6-1",
   "/6-1": "/6-2",
   "/6-2": "/6-3",
+  "/6-3": "/6-4",
   "/6-4": "/7-0",
 
   // Scene 7
