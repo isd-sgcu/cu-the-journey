@@ -20,6 +20,7 @@ const InputBox: Component<InputBoxProps> = props => {
       ? minimizedStyle
       : "",
   );
+
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
@@ -31,12 +32,40 @@ const InputBox: Component<InputBoxProps> = props => {
     }),
   );
 
+  const hasScrollbar = (textarea: HTMLTextAreaElement) =>
+    textarea.clientHeight < textarea.scrollHeight;
+
+  let hasResized = false;
+
   return (
     <textarea
-      oninput={e => setText((e.target as HTMLTextAreaElement).value)}
+      oninput={e => {
+        const self = e.target as HTMLTextAreaElement;
+        setText(self.value);
+
+        if (!props.isMinimized) return;
+        if (props.noWrap) return;
+
+        if (!hasResized && hasScrollbar(self)) {
+          hasResized = true;
+          self.style.height = "233px";
+          self.style.width = "311px";
+          self.style.padding = "30px 35px";
+          self.style.borderRadius = "10px";
+          return;
+        }
+
+        if (self.value === "") {
+          hasResized = false; // reset the resizing state
+          self.style.height = "46px";
+          self.style.width = "200px";
+          self.style.padding = "10px 10px";
+          self.style.borderRadius = "4px";
+        }
+      }}
       spellcheck={false}
       placeholder={props.placeHolder}
-      style={inlineStyle()}
+      style={`transition: all 300ms;${inlineStyle()}`}
       class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
     ></textarea>
   );
