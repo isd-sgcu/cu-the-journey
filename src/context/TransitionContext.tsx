@@ -1,6 +1,7 @@
 import { useRouter } from "solid-app-router";
 import {
   Accessor,
+  batch,
   Component,
   createContext,
   createEffect,
@@ -48,20 +49,24 @@ export const TransitionProvider: Component = props => {
   const [maxFrame, setMaxFrame] = createSignal(1);
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
+  const [isFadeOut, setFadeOut] = createSignal(false);
   const [router, { replace }] = useRouter()!;
 
   // Reset all state that used in this context
   const resetAnimationFrame = () => {
-    setTransitionNumber(0);
-    setTransitionQueue(false);
-    setAnimated(false);
-    setFrame(0);
-    setTime(0);
-    setMaxFrame(1);
-    setNextScene("");
-    setNowTransition(-1);
+    batch(() => {
+      setTransitionNumber(0);
+      setTransitionQueue(false);
+      setAnimated(false);
+      setFrame(0);
+      setTime(0);
+      setMaxFrame(1);
+      setNextScene("");
+      setNowTransition(-1);
+      setFadeOut(false);
 
-    setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
+      setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
+    });
   };
 
   const setNextTransition = () => {
@@ -150,6 +155,7 @@ export const TransitionProvider: Component = props => {
     ) {
       setNextScene(next);
       setTransitionNumber(fadeOutNumber);
+      setFadeOut(true);
       return true;
     }
     return false;
@@ -201,8 +207,14 @@ export const TransitionProvider: Component = props => {
       <div
         onClick={el => {
           el.stopPropagation();
-          if (transitionNumber() !== -1 || !isPrevented()) {
+          if (
+            (transitionNumber() === -1 && !isFadeOut()) ||
+            transitionNumber() !== -1 ||
+            !isPrevented()
+          ) {
             clickAction();
+          } else if (isFadeOut()) {
+            setFadeOut(false);
           }
         }}
         class={`w-full flex flex-grow items-center ${
