@@ -1,18 +1,17 @@
 import { Accessor, Component, createEffect, createSignal } from "solid-js";
 
-export const SMALL_INPUTBOX_HEIGHT = 50; // px
-
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
-  isGoingNextScene?: Accessor<boolean>;
+  isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
 
 const InputBox: Component<InputBoxProps> = props => {
   const setText = props.signal[1];
-  const minimizedStyle = `border-radius: 4px; width: 200px; height: 50px; padding: 10px 10px;`;
+
+  const minimizedStyle = "border-radius: 4px; width: 200px; height: 46px; padding: 10px 10px;";
   const [inlineStyle, setInlineStyle] = createSignal(props.isMinimized ? minimizedStyle : "");
   createEffect(() =>
     setInlineStyle(prev => {
@@ -24,7 +23,6 @@ const InputBox: Component<InputBoxProps> = props => {
       return newStyle;
     }),
   );
-  const className = `placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none`;
 
   return (
     <textarea
@@ -32,7 +30,7 @@ const InputBox: Component<InputBoxProps> = props => {
       spellcheck={false}
       placeholder={props.placeHolder}
       style={inlineStyle()}
-      class={className}
+      class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none"
     ></textarea>
   );
 };
