@@ -1,3 +1,4 @@
+import Scene2 from "../pages/Scene2";
 import Scene3 from "../pages/Scene3";
 import Scene4 from "../pages/Scene4";
 import Scene5 from "../pages/Scene5";
@@ -9,6 +10,7 @@ import Scene14to24 from "../pages/Scene14-24";
 import Scene25to29 from "../pages/Scene25-29";
 
 const AllScenes = {
+  Scene2,
   Scene3,
   Scene4,
   Scene5,
@@ -17,7 +19,7 @@ const AllScenes = {
   Scene8,
   Scene9to13,
   Scene14to24,
-  Scene25to29
+  Scene25to29,
 };
 
 export default AllScenes;

@@ -2,6 +2,7 @@ import i18n from "./i18n";
 import landing from "./landing";
 import pickANumber from "./pickANumber";
 import souvenir from "./souvenir";
+import scene2 from "./scene2";
 import scene3 from "./scene3";
 import scene4 from "./scene4";
 import scene5 from "./scene5";
@@ -17,6 +18,7 @@ const th = {
   landing,
   pickANumber,
   souvenir,
+  scene2,
   scene3,
   scene4,
   scene5,
@@ -25,7 +27,7 @@ const th = {
   scene8,
   scene9to13,
   scene14to24,
-  scene25to29
+  scene25to29,
 };
 
 export default th;
