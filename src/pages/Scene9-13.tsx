@@ -66,11 +66,14 @@ const Scene13S2: Component = () => (
   </>
 );
 
-const Scene13S3: Component = () => (
-  <>
-    <TextMiddle text={t("13-3")} />
-  </>
-);
+const Scene13S3: Component = () => {
+  const eachLine = [...t("13-3")].map(q => <p>{q}</p>);
+  return (
+    <>
+      <AnimationRoute children={eachLine} />
+    </>
+  );
+};
 
 const Scene9to13 = {
   Scene9S0,
