@@ -17,6 +17,7 @@ interface ISoundControl {
 export interface SceneProviderProps {
   app: Application;
   isLoading: Accessor<boolean>;
+  loadProgress: Accessor<number>;
   soundControl: ISoundControl;
   sceneSwitcher: (newScenes: SceneSwitchable, onNewScene?: () => void) => void;
 }
@@ -32,6 +33,7 @@ export const useScene = () => {
 
 export const SceneProvider: Component = props => {
   const [isLoading, setLoading] = createSignal<boolean>(true);
+  const [loadProgress, setLoadProgress] = createSignal<number>(0);
   const app = new Application({
     width: 375,
     height: 667,
@@ -61,12 +63,12 @@ export const SceneProvider: Component = props => {
     });
 
   loader.onComplete.add(() => {
-    setLoading(false);
     console.log("All resources are loaded.");
+    setLoading(false);
   });
 
   loader.onProgress.add(({ progress }: Loader) => {
-    console.log(`Load resources: ${Math.round(progress)} %`);
+    setLoadProgress(Math.round(progress));
   });
 
   const soundControl = {
@@ -89,8 +91,9 @@ export const SceneProvider: Component = props => {
 
   const store = {
     app,
-    soundControl,
     isLoading,
+    loadProgress,
+    soundControl,
     sceneSwitcher: sceneEngine.sceneSwitcher,
   };
 

@@ -47,6 +47,12 @@ module.exports = {
         fadeIn: "fadeIn 850ms linear",
         fadeOut: "fadeOut 850ms linear",
       },
+      transitionDuration: {
+        4000: "4000ms",
+      },
+      zIndex: {
+        "-10": "-10",
+      },
     },
     screens: {
       xs: { max: "374px" }, // Separate small mobile (iPhone 5 and Galaxy Fold) and normal mobile.

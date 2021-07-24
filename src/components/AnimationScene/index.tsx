@@ -11,7 +11,8 @@ export default () => {
 
   return (
     <div
-      class="absolute"
+      id="pixi-canvas"
+      class="absolute -z-10"
       ref={ref => {
         sceneRef = ref;
       }}
