@@ -11,9 +11,9 @@
  * The component that need to choose should not provide
  * in this file, please fill the route name in PreventRoute.ts instead
  *
- * In the case of fill something (such as 8-2 pages) we need to specify in both file because
- * we do not want to click when fill the form but we still want to be able to
- * click the screen after save
+ * In the case of fill something (such as "8-2" pages [not "2" page])
+ * we need to specify in both file because we do not want to click
+ * when fill the form but we still want to be able to click the screen after save
  */
 
 interface IRouteMapping {
@@ -89,9 +89,13 @@ export default {
 
   // Scene 14
   "/14-0": "/14-1",
+  "/14-1": "/15-0",
 
   // Scene 15
   "/15-0": "/16-0",
+
+  // Scene 16
+  "/16-0": "/17-0",
 
   // Scene 17
   "/17-0": "/18-0",
@@ -115,6 +119,9 @@ export default {
 
   // Scene 23
   "/23-0": "/24-0",
+
+  // Scene 24
+  "/24-0": "/27-0",
 
   // Scene 27
   "/27-0": "/28-0",
