@@ -3,7 +3,7 @@ import { TransitionFade, useTransitionContext } from "../context/TransitionConte
 
 interface IAnimationRoute {
   children: JSX.Element[];
-  transitionDur: number; // ms
+  transitionDur?: number; // ms
 }
 
 export const AnimationRoute: Component<IAnimationRoute> = props => {
