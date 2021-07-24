@@ -13,6 +13,10 @@ export enum StorableKeys {
   TimeCapsule,
 }
 
+// TODO prevent user from randomly accessing scenes, it should be played in order
+// run a function on each scene to check if the page is skipped to
+// TODO function to restart, going to the landing page
+
 export const getMessage = (key: StorableKeys): string => {
   const value = localStorage.getItem(key.toString());
   if (value === null) return "The value of this key is not yet set.";
