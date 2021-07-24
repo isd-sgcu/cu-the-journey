@@ -90,4 +90,4 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 };
 
 export default ChoiceComponent;
-export { ChoiceButton, getButtons };
+export { getButtons };

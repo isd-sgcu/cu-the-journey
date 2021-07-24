@@ -1,5 +1,6 @@
 import type { Component } from "solid-js";
-import ChoiceComponent from "../components/Choice";
+import { getButtons } from "../components/Choice";
+import { AnimationRoute } from "../components/AnimationRoute";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 
@@ -31,15 +32,19 @@ const Scene12S0: Component = () => (
   </>
 );
 
-const Scene13S0: Component = () => (
-  <>
-    <ChoiceComponent
-      question={t("13-0.q")}
-      choices={[t("13-0.c1"), t("13-0.c2"), t("13-0.c3")]}
-      isLong={true}
-    />
-  </>
-);
+const Scene13S0: Component = () => {
+  const questions = [t("13-0-q0"), t("13-0-q1")].map(q => <h5>{q}</h5>);
+  const buttons = getButtons(
+    [t("13-0-choices.c1"), t("13-0-choices.c2"), t("13-0-choices.c3")],
+    true,
+  );
+
+  return (
+    <>
+      <AnimationRoute children={[...questions, buttons]}></AnimationRoute>
+    </>
+  );
+};
 
 const Scene13S1: Component = () => (
   <>
