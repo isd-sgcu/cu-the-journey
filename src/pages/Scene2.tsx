@@ -2,6 +2,7 @@ import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
+import { useTransitionContext } from "../context/TransitionContext";
 import Button from "../components/common/Button";
 
 const t = sceneTranslator("scene2");
@@ -53,6 +54,9 @@ const Scene2S0: Component = () => {
       ? commonStyle
       : `${commonStyle} filter: grayscale(0.7); opacity: 0.7; cursor: not-allowed;`;
 
+  const { fadeOut } = useTransitionContext();
+  const nextPage = "/3-0";
+
   return (
     <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
@@ -69,7 +73,7 @@ const Scene2S0: Component = () => {
       </For>
       <Button
         onClick={() => {
-          if (areAllFilled()) alert("Hi");
+          if (areAllFilled()) fadeOut(nextPage);
         }}
         style={buttonStyle()}
       >
