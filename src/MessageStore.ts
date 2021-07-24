@@ -55,7 +55,7 @@ export const restartApp = () => {
 };
 
 export const preventScenesSkipping = (currentPath: string) => {
-  if (IGNORE_PATHS.some(path => path === currentPath)) return;
+  if (IGNORE_PATHS.includes(currentPath)) return;
   if (areScenesSkipped()) restartApp();
 };
 
