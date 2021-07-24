@@ -3,6 +3,7 @@ import { Accessor, Component, createEffect, createSignal } from "solid-js";
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
+  noWrap?: boolean;
   isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
 };
 
@@ -12,7 +13,13 @@ const InputBox: Component<InputBoxProps> = props => {
   const setText = props.signal[1];
 
   const minimizedStyle = "border-radius: 4px; width: 200px; height: 46px; padding: 10px 10px;";
-  const [inlineStyle, setInlineStyle] = createSignal(props.isMinimized ? minimizedStyle : "");
+  const [inlineStyle, setInlineStyle] = createSignal(
+    props.isMinimized && props.noWrap
+      ? `${minimizedStyle}white-space: nowrap;`
+      : props.isMinimized
+      ? minimizedStyle
+      : "",
+  );
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
@@ -30,7 +37,7 @@ const InputBox: Component<InputBoxProps> = props => {
       spellcheck={false}
       placeholder={props.placeHolder}
       style={inlineStyle()}
-      class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none"
+      class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
     ></textarea>
   );
 };

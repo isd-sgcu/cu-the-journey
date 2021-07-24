@@ -67,6 +67,7 @@ const Scene2S0: Component = () => {
             <SmallInputBox
               placeHolder={manager.placeHolder}
               signal={[manager.text, manager.setText]}
+              noWrap={true}
             />
           </div>
         )}
