@@ -36,36 +36,20 @@ app.auth().signInAnonymously();
 const db = app.firestore();
 const collection = db.collection(process.env.SNOWPACK_PUBLIC_TIME_CAPSULE_COLLECTION || "");
 
-//* Store time capsule function
+type CapsuleDetailType = {
+  text: string;
+  name: string;
+  timestamp?: firebase.firestore.FieldValue;
+};
 
-async function storeTimeCapsule(uid: string, texts: string[], emails: string[]) {
-  const docData = {
-    emails,
-    texts,
-  };
-  await collection.doc(uid).set(docData);
-}
-
-//* Get time capsule function.
-
-interface ITimeCapsuleData {
-  texts: string;
-  emails: string;
-}
-
-export async function manageTimeCapsule(uid: string, newText: string, newEmail: string) {
-  collection
-    .doc(uid)
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        const { texts: textArr, emails: emailArr } = doc.data() as ITimeCapsuleData;
-        storeTimeCapsule(uid, [...textArr, newText], [...emailArr, newEmail]);
-      } else {
-        storeTimeCapsule(uid, [newText], [newEmail]);
-      }
-    })
-    .catch(e => {
-      console.log(e);
-    });
-}
+export const uploadTimeCapsule = (studentId: string, email: string, detail: CapsuleDetailType) => {
+  collection.doc(studentId).set(
+    {
+      [email]: firebase.firestore.FieldValue.arrayUnion({
+        ...detail,
+        timestamp: firebase.firestore.Timestamp.now(),
+      }),
+    },
+    { merge: true },
+  );
+};
