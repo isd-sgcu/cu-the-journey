@@ -23,7 +23,7 @@ class InputManager {
     this.placeHolder = t(placeHolderKey);
   }
 
-  saveMessage() {
+  save() {
     saveMessage(this.storeKey, this.text());
   }
 
@@ -43,6 +43,7 @@ const Scene2S0: Component = () => {
   const [areAllFilled, setAreAllFilled] = createSignal(false);
   createEffect(() => {
     setAreAllFilled(inputPairs.find(manager => manager.isEmpty()) === undefined);
+    if (areAllFilled()) inputPairs.forEach(manager => manager.save()); // auto save if all boxes are filled
   });
 
   // inline style of button depending on the state of areAllFilled
