@@ -8,8 +8,6 @@ import { useTransitionContext } from "../context/TransitionContext";
 
 export { StorableKeys };
 
-// TODO after clicking save, the bird behind should be visible.
-
 export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
   onButtonClicked?: () => void; // on clicking the save button
