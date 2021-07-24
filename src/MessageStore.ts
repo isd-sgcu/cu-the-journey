@@ -23,7 +23,7 @@ export const saveMessage = (key: StorableKeys, val: string): void => {
   localStorage.setItem(key.toString(), val);
 };
 
-export const clearMessages = () => {
+export const clearSavedMessages = () => {
   localStorage.clear();
 };
 
