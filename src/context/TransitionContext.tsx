@@ -64,7 +64,7 @@ export const TransitionProvider: Component = props => {
   };
 
   const setNextTransition = () => {
-    if (time() === 0) {
+    if (time() === 0 || (time() !== 0 && frame() === 0)) {
       setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
     }
   };
@@ -163,7 +163,6 @@ export const TransitionProvider: Component = props => {
 
   // Listen when transitionNumber equals to fadeOutFinishNumber
   createEffect(() => {
-    console.log(transitionNumber());
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
       if (RouteMapping[nowRoute]) {
