@@ -13,6 +13,8 @@ const preventedRoute = [
   "/5-4",
   "/5-5-3",
   "/6-3",
+  "/8-2",
+  "/13-0",
   "*all",
   "/souvenir",
   "/pick-a-number",
