@@ -57,6 +57,7 @@ module.exports = {
     screens: {
       xs: { max: "374px" }, // Separate small mobile (iPhone 5 and Galaxy Fold) and normal mobile.
       sm: "500px",
+      lg: "1024px",
     },
     boxShadow: {
       normal: "0px 4px 8px 4px #A984D41A",
