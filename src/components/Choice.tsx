@@ -36,21 +36,25 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
   );
 };
 
-const ChoiceComponent: Component<ChoiceComponentProps> = props => {
+const getButtons = (choices: string[] | string[][], isLong: boolean = false) => {
   const [isClick, setClick] = createSignal(false);
-  const buttons = props.choices.map((choice: string | string[]) => {
+  return choices.map((choice: string | string[]) => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
     return (
       <ChoiceButton
         text={text}
         href={ref}
-        isLongBtn={props.isLong || false}
+        isLongBtn={isLong}
         isClick={isClick}
         setClick={setClick}
       />
     );
   });
+};
+
+const ChoiceComponent: Component<ChoiceComponentProps> = props => {
+  const buttons = getButtons(props.choices, props.isLong);
   const question = () => {
     if (Array.isArray(props.question)) {
       return props.question.map(line => (
@@ -86,3 +90,4 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 };
 
 export default ChoiceComponent;
+export { ChoiceButton, getButtons };
