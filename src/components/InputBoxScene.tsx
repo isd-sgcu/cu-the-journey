@@ -1,10 +1,10 @@
-import { Link } from "solid-app-router";
 import { createSignal, createEffect, Show, Component, For } from "solid-js";
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
 import "../styles/scrollbar.css";
 import { saveMessage, StorableKeys } from "../MessageStore";
+import { useTransitionContext } from "../context/TransitionContext";
 
 export { StorableKeys };
 
@@ -22,28 +22,24 @@ export type InputBoxScenePropsType = {
 };
 
 const InputBoxScene: Component<InputBoxScenePropsType> = props => {
-  const {
-    isMinimized,
-    placeHolderKey,
-    nextPage,
-    orderKeys,
-    buttonTextKey,
-    onTapTextKey,
-    storeKey,
-    t,
-  } = props;
+  const { isMinimized, placeHolderKey, orderKeys, buttonTextKey, onTapTextKey, storeKey, t } =
+    props;
   const placeHolder = t(placeHolderKey);
   const [text, setText] = createSignal("");
   const [isButtonShown, setIsButtonShown] = createSignal(false);
+  const { cancelPrevented } = useTransitionContext();
+
   createEffect(() => {
     setIsButtonShown(text().trim() !== "");
   });
+
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const proceed = () => {
     saveMessage(storeKey, text());
     setIsButtonShown(false);
     setIsGoingNextScene(true);
+    cancelPrevented();
   };
 
   const sceneWithoutLink = (
@@ -79,7 +75,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
       <Show
         // Show without link when the button is visible (haven't clicked save yet)
         when={!isGoingNextScene()}
-        fallback={() => <Link href={nextPage}>{sceneWithoutLink}</Link>}
+        fallback={() => <div>{sceneWithoutLink}</div>}
       >
         {sceneWithoutLink}
       </Show>
