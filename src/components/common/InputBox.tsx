@@ -5,7 +5,7 @@ export const SMALL_INPUTBOX_HEIGHT = 50; // px
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
-  isGoingNextScene: Accessor<boolean>;
+  isGoingNextScene?: Accessor<boolean>;
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
@@ -17,9 +17,10 @@ const InputBox: Component<InputBoxProps> = props => {
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
-      newStyle += props.isGoingNextScene()
-        ? "border: none; cursor: pointer; background-color: transparent;"
-        : "";
+      if (props.isGoingNextScene)
+        newStyle += props.isGoingNextScene()
+          ? "border: none; cursor: pointer; background-color: transparent;"
+          : "";
       return newStyle;
     }),
   );
