@@ -111,7 +111,7 @@ const Scene23S0: Component = () => (
 
 const Scene24S0: Component = () => {
   const props: InputBoxScenePropsType = {
-    isMinimized: true,
+    isMinimized: false,
     nextPage: "/27-0",
     orderKeys: "24-0-order",
     placeHolderKey: "24-0-placeHolder",
