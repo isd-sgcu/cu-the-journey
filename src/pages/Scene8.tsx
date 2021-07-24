@@ -1,10 +1,8 @@
 import type { Component } from "solid-js";
-import type { MultiStepScenePropsType } from "../components/MultiStepScene";
-import MultiStepScene from "../components/MultiStepScene";
 import InputBoxScene, { StorableKeys } from "../components/InputBoxScene";
-import { NextScene } from "../components/JumpTo";
-import TextComponent from "../components/Text";
+import TextComponent, { addtText } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
+import { AnimationRoute } from "../components/AnimationRoute";
 
 const { TextMiddle } = TextComponent;
 
@@ -12,19 +10,23 @@ const t = sceneTranslator("scene8");
 
 const Scene8S0: Component = () => (
   <>
-    <NextScene page="/8-1">
-      <TextMiddle text={t("8-0")} />
-    </NextScene>
+    <TextMiddle text={t("8-0")} />
   </>
 );
 
 const Scene8S1: Component = () => {
-  const props: MultiStepScenePropsType = {
-    textKeys: ["8-1-0", "8-1-1", "8-1-2"],
-    nextPage: "/8-2",
-    t,
-  };
-  return <MultiStepScene {...props} />;
+  const textKeys = ["8-1-0", "8-1-1", "8-1-2"];
+  return (
+    <AnimationRoute
+      children={textKeys.map((key, index) => (
+        <span>
+          {addtText(t(key))}
+          {index === textKeys.length ? "" : <br />}
+          <br />
+        </span>
+      ))}
+    ></AnimationRoute>
+  );
 };
 
 const Scene8S2: Component = () => {
