@@ -25,6 +25,9 @@ export default {
   "/trigger-warning": "/inspired-by-DAE",
   "/inspired-by-DAE": "/2",
 
+  // Scene 2
+  "/2-0": "/3-0",
+
   // Scene 3
   "/3-0": "/3-1",
   "/3-2": "/3-3",
