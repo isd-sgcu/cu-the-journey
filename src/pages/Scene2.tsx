@@ -34,7 +34,7 @@ class InputManager {
 }
 
 const Scene2S0: Component = () => {
-  const inputPairs = [
+  const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
     new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID),
     new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email),
@@ -43,8 +43,8 @@ const Scene2S0: Component = () => {
   // tells if all input boxes are filled
   const [areAllFilled, setAreAllFilled] = createSignal(false);
   createEffect(() => {
-    setAreAllFilled(inputPairs.find(manager => manager.isEmpty()) === undefined);
-    if (areAllFilled()) inputPairs.forEach(manager => manager.save()); // auto save if all boxes are filled
+    setAreAllFilled(inputManagers.find(manager => manager.isEmpty()) === undefined);
+    if (areAllFilled()) inputManagers.forEach(manager => manager.save()); // auto save if all boxes are filled
   });
 
   // inline style of button depending on the state of areAllFilled
@@ -60,7 +60,7 @@ const Scene2S0: Component = () => {
   return (
     <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
-      <For each={inputPairs}>
+      <For each={inputManagers}>
         {manager => (
           <div class="flex flex-col space-y-[12px]">
             <h5>{manager.name}</h5>
