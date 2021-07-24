@@ -1,10 +1,12 @@
-import type { Component } from "solid-js";
-import { useRouter } from "solid-app-router";
+import { Accessor, Component, createSignal, onCleanup, onMount } from "solid-js";
+import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface ChoiceButtonProps {
   href: string;
   text: string;
   isLongBtn: boolean;
+  isClick: Accessor<boolean>;
+  setClick: (v: boolean | ((prev: boolean) => boolean)) => boolean;
 }
 
 interface ChoiceComponentProps {
@@ -14,11 +16,13 @@ interface ChoiceComponentProps {
 }
 
 const ChoiceButton: Component<ChoiceButtonProps> = props => {
-  const [, { push }] = useRouter()!;
+  const { fadeOut } = useTransitionContext()!;
   return (
     <>
       <button
-        onClick={() => push(props.href)}
+        onClick={() => {
+          props.setClick(() => fadeOut(props.href));
+        }}
         class={`${
           props.isLongBtn ? "w-[220px]" : "w-[150px]"
         } h-[40px] mt-[16px] rounded-full cursor-pointer
@@ -33,10 +37,19 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
 };
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {
+  const [isClick, setClick] = createSignal(false);
   const buttons = props.choices.map((choice: string | string[]) => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
-    return <ChoiceButton text={text} href={ref} isLongBtn={props.isLong || false} />;
+    return (
+      <ChoiceButton
+        text={text}
+        href={ref}
+        isLongBtn={props.isLong || false}
+        isClick={isClick}
+        setClick={setClick}
+      />
+    );
   });
   const question = () => {
     if (Array.isArray(props.question)) {
@@ -49,14 +62,23 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     }
     return props.question;
   };
+
+  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true)!;
+
+  onMount(() => scheduleFrame(1, 1000));
+
+  onCleanup(() => resetAnimationFrame());
+
   return (
     <>
       <div class="flex h-screen justify-center items-center z-10">
         <div class="flex flex-col items-center min-w-[20rem]">
-          <div class="text-center w-[280px] selection:bg-purple selection:text-yellow">
-            <h5>{question}</h5>
-          </div>
-          {buttons}
+          <TransitionFade order={0}>
+            <div class="text-center w-[280px] selection:bg-purple selection:text-yellow">
+              <h5>{question}</h5>
+            </div>
+          </TransitionFade>
+          <TransitionFade order={1}>{buttons}</TransitionFade>
         </div>
       </div>
     </>

@@ -1,5 +1,4 @@
 import type { Component } from "solid-js";
-import { NextScene } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
@@ -10,33 +9,25 @@ const t = sceneTranslator("scene5");
 
 const Scene5S0: Component = () => (
   <>
-    <NextScene page="/5-1">
-      <TextMiddle text={t("5-0")} />
-    </NextScene>
+    <TextMiddle text={t("5-0")} />
   </>
 );
 
 const Scene5S1: Component = () => (
   <>
-    <NextScene page="/5-2">
-      <TextMiddle text={t("5-1")} />
-    </NextScene>
+    <TextMiddle text={t("5-1")} />
   </>
 );
 
 const Scene5S2: Component = () => (
   <>
-    <NextScene page="/5-3">
-      <TextMiddle text={t("5-2")} />
-    </NextScene>
+    <TextMiddle text={t("5-2")} />
   </>
 );
 
 const Scene5S3: Component = () => (
   <>
-    <NextScene page="/5-4">
-      <TextMiddle text={t("5-3")} />
-    </NextScene>
+    <TextMiddle text={t("5-3")} />
   </>
 );
 
@@ -48,17 +39,13 @@ const Scene5S4: Component = () => (
 
 const Scene5S5S1: Component = () => (
   <>
-    <NextScene page="/5-5-2">
-      <TextMiddle text={t("5-5-1")} />
-    </NextScene>
+    <TextMiddle text={t("5-5-1")} />
   </>
 );
 
 const Scene5S5S2: Component = () => (
   <>
-    <NextScene page="/5-5-3">
-      <TextMiddle text={t("5-5-2")} />
-    </NextScene>
+    <TextMiddle text={t("5-5-2")} />
   </>
 );
 
@@ -76,7 +63,7 @@ const Scene5 = {
   Scene5S4,
   Scene5S5S1,
   Scene5S5S2,
-  Scene5S5S3
+  Scene5S5S3,
 };
 
 export default Scene5;

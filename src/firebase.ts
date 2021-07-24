@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/auth";
+import "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: process.env.SNOWPACK_PUBLIC_FIREBASE_API_KEY,
@@ -24,6 +25,9 @@ if (!firebase.apps.length) {
 }
 
 export default app;
+
+//* Initialize analytics
+firebase.analytics();
 
 //* Sign in as anonymous
 

@@ -18,19 +18,41 @@ module.exports = {
         purple: {
           lightest: "#F6EFFE",
           light: "#D0B6EF",
-          DEFAULT: "#5F229F"
-        }
+          DEFAULT: "#5F229F",
+        },
       },
       fontFamily: {
         Mitr: ["Mitr", "Arial", "sans"],
-        BaiJam: ["Bai Jamjuree", "Arial", "sans"]
-      }
+        BaiJam: ["Bai Jamjuree", "Arial", "sans"],
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+        fadeOut: {
+          "0%": {
+            opacity: 1,
+          },
+          "100%": {
+            opacity: 0,
+          },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 850ms linear",
+        fadeOut: "fadeOut 850ms linear",
+      },
     },
     screens: {
       xs: { max: "374px" }, // Separate small mobile (iPhone 5 and Galaxy Fold) and normal mobile.
-      sm: "500px"
-    }
+      sm: "500px",
+    },
   },
   variants: {},
-  plugins: []
+  plugins: [],
 };
