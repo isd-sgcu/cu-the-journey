@@ -46,9 +46,9 @@ const Scene2S0: Component = () => {
   });
 
   // inline style of button depending on the state of areAllFilled
-  const commonStyle = "margin-top: 46px; transition: all 300ms";
+  const commonStyle = "margin-top: 46px; transition: all 300ms;";
   const buttonStyle = () =>
-    areAllFilled() ? commonStyle : `${commonStyle}filter: grayscale(0.7); opacity: 0.7`;
+    areAllFilled() ? commonStyle : `${commonStyle} filter: grayscale(0.7); opacity: 0.7;`;
 
   return (
     <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
