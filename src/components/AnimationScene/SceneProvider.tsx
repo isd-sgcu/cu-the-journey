@@ -52,7 +52,7 @@ export const SceneProvider: Component = props => {
       const names = Object.keys(resources.sprite) as SpriteName[];
       const sprites = names.map(name => ({
         name,
-        sprite: new FadeSprite(resources.sprite[name])
+        sprite: new FadeSprite(resources.sprite[name]),
       }));
       sceneEngine.addScenes(sprites);
       app.ticker.add(delta => {
@@ -79,7 +79,7 @@ export const SceneProvider: Component = props => {
         playSound.play();
       }
     },
-    muted: () => sound.toggleMuteAll()
+    muted: () => sound.toggleMuteAll(),
   };
 
   onCleanup(() => {
@@ -91,7 +91,7 @@ export const SceneProvider: Component = props => {
     app,
     soundControl,
     isLoading,
-    sceneSwitcher: sceneEngine.sceneSwitcher
+    sceneSwitcher: sceneEngine.sceneSwitcher,
   };
 
   return <SceneContext.Provider value={store}>{props.children}</SceneContext.Provider>;

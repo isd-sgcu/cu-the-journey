@@ -8,11 +8,11 @@ function createSpriteResource(name: string, frames: number) {
 export const resources = <const>{
   sprite: {
     bird: createSpriteResource("bird", 7),
-    ogbg: createSpriteResource("ogbg", 3)
+    ogbg: createSpriteResource("ogbg", 3),
   },
   sound: {
-    bg: "music/background-sound.mp3"
-  }
+    bg: "music/background-sound.mp3",
+  },
 };
 
 export type SpriteName = keyof typeof resources.sprite;

@@ -1,5 +1,4 @@
 import type { Component } from "solid-js";
-import { NextScene } from "../components/JumpTo";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
@@ -19,25 +18,19 @@ const Scene4S1: Component = () => (
 
 const Scene4S1S1: Component = () => (
   <>
-    <NextScene page="/4-2">
-      <TextMiddle text={t("4-1-1")} />
-    </NextScene>
+    <TextMiddle text={t("4-1-1")} />
   </>
 );
 
 const Scene4S1S2: Component = () => (
   <>
-    <NextScene page="/4-2">
-      <TextMiddle text={t("4-1-2")} />
-    </NextScene>
+    <TextMiddle text={t("4-1-2")} />
   </>
 );
 
 const Scene4S2: Component = () => (
   <>
-    <NextScene page="/5-0">
-      <TextMiddle text={t("4-2")} />
-    </NextScene>
+    <TextMiddle text={t("4-2")} />
   </>
 );
 
@@ -45,7 +38,7 @@ const Scene4 = {
   Scene4S1,
   Scene4S1S1,
   Scene4S1S2,
-  Scene4S2
+  Scene4S2,
 };
 
 export default Scene4;

@@ -2,6 +2,7 @@ import { useI18n } from "@amoutonbrady/solid-i18n";
 import { Route } from "solid-app-router";
 import { Component, createEffect } from "solid-js";
 import AnimationScene, { useScene } from "./components/AnimationScene";
+import { TransitionProvider, TransitionFade } from "./context/TransitionContext";
 import "./firebase";
 
 export const App: Component = () => {
@@ -28,7 +29,11 @@ export const App: Component = () => {
         }}
         class="w-screen sm:max-w-[375px] min-h-screen sm:min-h-[667px] sm:max-h-[667px] flex justify-center items-center flex-col text-center z-10"
       >
-        <Route />
+        <TransitionProvider>
+          <TransitionFade order={0}>
+            <Route />
+          </TransitionFade>
+        </TransitionProvider>
       </div>
       <AnimationScene />
       <div class="absolute left-0 top-0 bg-white flex flex-col z-20">
