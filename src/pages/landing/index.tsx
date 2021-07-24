@@ -1,6 +1,9 @@
+import { useTranslation } from "../../config/i18n";
 import { Routing } from "../../context/TransitionContext";
 
 function index() {
+  const [t] = useTranslation("landing");
+
   return (
     <>
       <img
@@ -38,7 +41,7 @@ function index() {
         </div>
       </div>
       <Routing href="/trigger-warning" class="mt-12 mb-10 text-white">
-        <button>{"<< แตะเพื่อไปต่อ >>"}</button>
+        <button>{t("tapToContinue")}</button>
       </Routing>
     </>
   );
