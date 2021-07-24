@@ -14,7 +14,7 @@ export enum StorableKeys {
 }
 
 const MESSAGE_NOT_FOUND = "NOT FOUND";
-const IGNORE_PATHS = [
+const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/",
   "/landing",
   "/poc-transition",
@@ -55,7 +55,7 @@ export const restartApp = () => {
 };
 
 export const preventScenesSkipping = (currentPath: string) => {
-  if (IGNORE_PATHS.includes(currentPath)) return;
+  if (PREVENT_SKIPPING_IGNORE_PATHS.includes(currentPath)) return;
   if (areScenesSkipped()) restartApp();
 };
 
