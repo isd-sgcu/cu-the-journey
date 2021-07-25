@@ -1,6 +1,6 @@
 import { useRouter } from "solid-app-router";
 import { createEffect, onMount } from "solid-js";
-import BackgroundMapping, { BackgroundMappingProps } from "../../context/BackgroundMapping";
+import BackgroundMapping from "../../context/BackgroundMapping";
 import { useFadeSignal } from "../../context/FadeSignalContext";
 import { useScene, SceneProvider } from "./SceneProvider";
 
