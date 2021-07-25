@@ -29,7 +29,7 @@ const Scene27S0: Component = () => (
 );
 
 const Scene28S0: Component = () => {
-  const rand = Math.floor(Math.random() * 8) + 1;
+  const rand = Math.floor(Math.random() * 10) + 1;
   const quoteFrom = (quote: string | any[]) => {
     if (Array.isArray(quote))
       return quote.map(line => (
