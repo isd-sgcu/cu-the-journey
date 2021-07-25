@@ -21,7 +21,7 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
         onClick={() => {
           props.setClick(() => fadeOut(props.href));
         }}
-        class={`break-words min-w-[150px] py-2 max-w-[100%] min-h-[40px] mt-[16px] rounded-full px-3 border-[1px] border-purple
+        class={`break-words min-w-[150px] py-2 max-w-[100%] w-[100%] min-h-[40px] mt-[16px] rounded-full px-3 border-[1px] border-purple bg-white
                 hover:bg-purple-light
                 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1`}
       >
@@ -62,7 +62,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 
   return (
     <>
-      <div class="flex h-screen justify-center items-center z-10 max-w-full">
+      <div class="flex justify-center items-center z-10 max-w-full">
         <div class="flex flex-col items-center min-w-[20rem]">
           <TransitionFade order={0}>
             <div class="text-center selection:bg-purple selection:text-yellow mb-[6.5px]">
@@ -70,7 +70,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
             </div>
           </TransitionFade>
           <TransitionFade order={1}>
-            <div class="flex flex-col max-w-full">{buttons}</div>
+            <div class="flex flex-col">{buttons}</div>
           </TransitionFade>
         </div>
       </div>
