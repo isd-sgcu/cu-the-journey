@@ -1,7 +1,7 @@
-import { getMessage, StorableKeys } from "../MessageStore";
+import { getMessage, StorableKeys, saveMessage, clearSavedMessages } from "../MessageStore";
 import { ENGLISH_SIGNATURE, LANGUAGE_KEY } from "./landing/SelectLanguage";
 
-export { getMessage };
+export { getMessage, saveMessage, clearSavedMessages };
 
 export const FACULTIES: {
   [code: string]: {
