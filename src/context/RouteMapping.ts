@@ -21,7 +21,7 @@ interface IRouteMapping {
 }
 
 export default {
-  "/": "/landing",
+  "/": "/door-open",
   "/landing": "/trigger-warning",
   "/trigger-warning": "/inspired-by-DAE",
   "/inspired-by-DAE": "/2-0",

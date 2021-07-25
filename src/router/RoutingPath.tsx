@@ -31,6 +31,10 @@ const allPath = [
     component: SelectLanguage,
   },
   {
+    path: "/door-open",
+    component: () => <></>,
+  },
+  {
     path: "/landing",
     component: Landing,
   },

@@ -41,7 +41,8 @@ export const SceneProvider: Component = props => {
     height: 667,
     antialias: true,
     backgroundColor: 0xffffff,
-    resolution: 1,
+    resolution: window.devicePixelRatio,
+    autoDensity: true,
   });
   const sceneEngine = new SceneEngine(app);
   const loader = Loader.shared;
@@ -88,7 +89,6 @@ export const SceneProvider: Component = props => {
 
   const soundControl = {
     play: (name: SoundName, options?: ISoundControlOption) => {
-      if (isLoading()) return;
       const soundRes: any = loader.resources[resources.sound[name]];
       const playSound: Sound = soundRes.sound;
       if (!playSound.isPlaying) {

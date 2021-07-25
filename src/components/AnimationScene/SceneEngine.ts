@@ -121,7 +121,10 @@ export class SceneEngine {
       this.currentScene.push(scene);
     });
     this.willAddScene = []; // clear
-    this.onNewScene?.();
+    if (this.onNewScene) {
+      this.onNewScene();
+      this.onNewScene = undefined;
+    }
   }
 
   update(delta: number) {
