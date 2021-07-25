@@ -2,8 +2,13 @@ import { useRouter } from "solid-app-router";
 import { useScene } from "../components/AnimationScene";
 import type { SceneSwitchable } from "../components/AnimationScene/SceneEngine";
 
+export interface BackgroundMappingProps {
+  scene: SceneSwitchable;
+  force: boolean;
+}
+
 interface IBackgroundMapping {
-  [k: string]: SceneSwitchable;
+  [k: string]: SceneSwitchable | BackgroundMappingProps;
 }
 
 export default (): IBackgroundMapping => {
@@ -26,7 +31,7 @@ export default (): IBackgroundMapping => {
       "star-dark",
     ],
     "/landing": ["landing"],
-    "/trigger-warning": ["trigger-warning"],
+    "/trigger-warning": { scene: ["trigger-warning"], force: true },
     "/inspired-by-DAE": ["trigger-warning"],
 
     //   // Scene 2

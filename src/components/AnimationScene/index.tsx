@@ -1,6 +1,6 @@
 import { useRouter } from "solid-app-router";
 import { createEffect, onMount } from "solid-js";
-import BackgroundMapping from "../../context/BackgroundMapping";
+import BackgroundMapping, { BackgroundMappingProps } from "../../context/BackgroundMapping";
 import { useFadeSignal } from "../../context/FadeSignalContext";
 import { useScene, SceneProvider } from "./SceneProvider";
 
@@ -16,7 +16,14 @@ export default () => {
 
   createEffect(() => {
     if (!isLoading()) {
-      sceneSwitcher(BackgroundMapping()[current()] || []);
+      const next = BackgroundMapping()[current()];
+      if (!next) {
+        sceneSwitcher([]);
+      } else if (Array.isArray(next)) {
+        sceneSwitcher(next);
+      } else {
+        sceneSwitcher(next.scene, next.force);
+      }
     }
   });
 
