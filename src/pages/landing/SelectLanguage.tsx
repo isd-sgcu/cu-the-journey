@@ -5,12 +5,8 @@ import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
 import { TransitionFade, useTransitionContext } from "../../context/TransitionContext";
-import { isEnglish } from "../TextReplacer";
+import { ENGLISH_SIGNATURE, isEnglish, THAI_SIGNATURE } from "../TextReplacer";
 import { getMessage, clearSavedMessages, StorableKeys } from "../../MessageStore";
-
-export const LANGUAGE_KEY = "language";
-export const ENGLISH_SIGNATURE = "en";
-export const THAI_SIGNATURE = "th";
 
 const wasNotFinished = () => {
   // If these are saved = was here before
@@ -18,7 +14,7 @@ const wasNotFinished = () => {
     StorableKeys.Nickname,
     StorableKeys.ID,
     StorableKeys.Email,
-    LANGUAGE_KEY as unknown as StorableKeys, // so that it can be passed into the function
+    StorableKeys.LanguageKey,
   ];
   if (wasHereIdentifierKeys.some(key => getMessage(key) === null)) return false;
   const lastSeenPath = getMessage(StorableKeys.LastSeenPath);
@@ -60,7 +56,7 @@ function SelectLanguage() {
 
   const handleClick = (language: string) => {
     locale(language);
-    localStorage.setItem(LANGUAGE_KEY, language);
+    localStorage.setItem(StorableKeys.LanguageKey, language);
     setPage(1);
     nextAnimationTrigger();
     setTimeout(() => fadeOut("/landing"), 2000);
