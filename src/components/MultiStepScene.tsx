@@ -16,7 +16,7 @@ const MultiStepScene: Component<MultiStepScenePropsType> = props => {
   const transitionDur = 300; // ms
 
   const sceneWithoutLink = (
-    <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
+    <div class="flex justify-center items-center flex-col space-y-[25px]">
       <div class="text-purple text-[16px] text-center leading-[24px] tracking-[0.5px] font-BaiJam font-normal">
         <For each={textKeys}>
           {(key, index) => (

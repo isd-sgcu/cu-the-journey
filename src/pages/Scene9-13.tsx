@@ -49,7 +49,7 @@ const Scene13S0: Component = () => {
 
   return (
     <>
-      <AnimationRoute children={[...questions, buttons]}></AnimationRoute>
+      <AnimationRoute children={[...questions, buttons]} />
     </>
   );
 };
