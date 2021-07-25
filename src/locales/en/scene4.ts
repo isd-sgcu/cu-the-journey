@@ -1,4 +1,7 @@
 export default {
+  "4-0": {
+    header: "“It’s an Invitation card!!”",
+  },
   "4-1": {
     q: "What do you feel about this new journey that’s about to begin?",
     c1: ["Excited", "/4-1-1"],

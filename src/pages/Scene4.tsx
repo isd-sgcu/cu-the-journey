@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import { InvitationPage } from "../components/invitation/InvitationPage";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
@@ -6,6 +7,12 @@ import { sceneTranslator } from "../config/i18n";
 const { TextMiddle } = TextComponent;
 
 const t = sceneTranslator("scene4");
+
+const Scene4S0: Component = () => (
+  <>
+    <InvitationPage header={t("4-0.header")} />
+  </>
+);
 
 const Scene4S1: Component = () => (
   <>
@@ -35,6 +42,7 @@ const Scene4S2: Component = () => (
 );
 
 const Scene4 = {
+  Scene4S0,
   Scene4S1,
   Scene4S1S1,
   Scene4S1S2,
