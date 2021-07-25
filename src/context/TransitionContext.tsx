@@ -9,7 +9,8 @@ import {
   JSX,
   useContext,
 } from "solid-js";
-import { preventScenesSkipping, saveMessage, StorableKeys } from "../MessageStore";
+import { preventScenesSkipping } from "../preventScene2Skipping";
+import { saveMessage, StorableKeys } from "../MessageStore";
 import { useFadeSignal } from "./FadeSignalContext";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
