@@ -1,4 +1,5 @@
 import { splitProps } from "solid-js";
+import { replaceLine } from "../../pages/TextReplacer";
 
 interface IInvitationPage {
   header: string;
@@ -25,10 +26,14 @@ export function InvitationPage(props: IInvitationPage) {
             top: "7.25rem",
           }}
         >
-          <p style={{ "font-size": "0.6rem", "line-height": "3.2" }}>Dear (Name)</p>
+          <p style={{ "font-size": "0.6rem", "line-height": "3.2" }}>
+            {replaceLine("Dear (name)")}
+          </p>
           <h6 style={{ "font-size": "0.6rem", "line-height": "1.6" }}>FREE YOUR MIND, Find</h6>
           <h6 style={{ "font-size": "0.6rem", "line-height": "1.6" }}>YOUR WAYS</h6>
-          <p style={{ "font-size": "0.6rem", "line-height": "1.6" }}>CU at (Faculty)</p>
+          <p style={{ "font-size": "0.6rem", "line-height": "1.6" }}>
+            {replaceLine("CU at (faculty)")}
+          </p>
         </div>
       </div>
     </div>
