@@ -102,7 +102,7 @@ class InputManager {
   };
 
   getError = () => this.errorMessage;
-  clearError = () => (this.errorMessage = ""); // eslint-disable-line
+  clearError = () => (this.errorMessage = InputManager.NOT_ERROR_MESSAGE); // eslint-disable-line
 }
 
 const Scene2S0: Component = () => {
@@ -156,7 +156,7 @@ const Scene2S0: Component = () => {
               return err;
             });
             // TODO make nicer alert?
-            alert(errorMessages.filter(err => err !== "").join("\n")); // eslint-disable-line
+            alert(errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n")); // eslint-disable-line
             return;
           }
 
