@@ -2,6 +2,7 @@ import type { Component } from "solid-js";
 import ChoiceComponent from "../components/Choice";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
+import { replaceNameAndFaculty } from "./TextReplacer";
 
 const { TextMiddle } = TextComponent;
 
@@ -9,7 +10,7 @@ const t = sceneTranslator("scene3");
 
 const Scene3S0: Component = () => (
   <>
-    <TextMiddle text={t("3-0")} />
+    <TextMiddle text={replaceNameAndFaculty(t("3-0"))} />
   </>
 );
 
