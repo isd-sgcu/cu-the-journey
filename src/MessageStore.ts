@@ -15,7 +15,6 @@ export enum StorableKeys {
   TimeCapsule,
 }
 
-const MESSAGE_NOT_FOUND = "NOT FOUND";
 const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/",
   "/landing",
@@ -30,11 +29,8 @@ const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/souvenir",
 ];
 
-export const getMessage = (key: StorableKeys): string => {
-  const value = localStorage.getItem(key.toString());
-  if (value === null) return MESSAGE_NOT_FOUND;
-  return value;
-};
+export const getMessage = (key: StorableKeys): string | null =>
+  localStorage.getItem(key.toString());
 
 export const saveMessage = (key: StorableKeys, val: string): void => {
   localStorage.setItem(key.toString(), val);
@@ -48,7 +44,7 @@ export const clearSavedMessages = () => {
 // Info from Scene 2 is necessary.
 export const areScenesSkipped = () => {
   const necessaryKeys = [StorableKeys.Nickname, StorableKeys.ID, StorableKeys.Email];
-  return necessaryKeys.some(key => getMessage(key) === MESSAGE_NOT_FOUND);
+  return necessaryKeys.some(key => getMessage(key) === null);
 };
 
 export const restartApp = () => {
