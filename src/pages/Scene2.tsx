@@ -123,6 +123,28 @@ const Scene2S0: Component = () => {
   const { fadeOut } = useTransitionContext();
   const nextPage = "/3-0";
 
+  const showAlert = () => {
+    const errorMessages = inputManagers.map(manager => {
+      const err = manager.getError();
+      manager.clearError();
+      return err;
+    });
+
+    swal(
+      "",
+      errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
+      "error",
+      {
+        className: "font-Mitr",
+      },
+    );
+  };
+
+  const validateForms = () => {
+    const validatedResults = inputManagers.map(manager => manager.isValid());
+    return !validatedResults.includes(false);
+  };
+
   return (
     <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
@@ -141,27 +163,10 @@ const Scene2S0: Component = () => {
       <Button
         onClick={() => {
           if (!areAllFilled()) return;
-
-          const validatedResults = inputManagers.map(manager => manager.isValid());
-          if (validatedResults.includes(false)) {
-            const errorMessages = inputManagers.map(manager => {
-              const err = manager.getError();
-              manager.clearError();
-              return err;
-            });
-
-            // alerts
-            swal(
-              "",
-              errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
-              "error",
-              {
-                className: "font-Mitr",
-              },
-            );
+          if (!validateForms()) {
+            showAlert();
             return;
           }
-
           fadeOut(nextPage);
         }}
         style={buttonStyle()}
