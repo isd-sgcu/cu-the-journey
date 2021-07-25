@@ -65,7 +65,7 @@ function Souvenir() {
         {/* Mobile */}
         <div class="flex mt-[68px] lg:hidden  xs:mt-[25px]">
           <Typography
-            class="text-xs text-right self-end flex-grow"
+            class="text-xs text-right self-end flex-grow xs:text-[10px]"
             style={`color:${bodyColor[number]}`}
           >
             {t("qrMobile")}
