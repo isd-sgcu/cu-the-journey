@@ -22,7 +22,13 @@ export const App: Component = () => {
   });
 
   return (
-    <div class="relative w-screen min-h-screen flex justify-center items-center">
+    <div
+      class="relative w-screen min-h-screen flex justify-center items-center"
+      style="
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */"
+    >
       <div
         ref={ref => {
           screenRef = ref;
