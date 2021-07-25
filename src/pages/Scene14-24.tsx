@@ -125,10 +125,14 @@ const Scene24S0: Component = () => {
     text,
     setText,
     onButtonClicked: () => {
-      uploadTimeCapsule(getMessage(StorableKeys.ID), getMessage(StorableKeys.Email), {
-        text: getMessage(StorableKeys.TimeCapsule),
-        name: getMessage(StorableKeys.Nickname),
-      });
+      uploadTimeCapsule(
+        getMessage(StorableKeys.ID) as string,
+        getMessage(StorableKeys.Email) as string,
+        {
+          text: getMessage(StorableKeys.TimeCapsule) as string,
+          name: getMessage(StorableKeys.Nickname) as string,
+        },
+      );
       clearSavedMessages();
     },
   };
