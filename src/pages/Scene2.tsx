@@ -62,25 +62,25 @@ class InputManager {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.toLowerCase())) return true;
-    this.setErrorMessage();
+    this.setError();
     return false;
   };
 
   validateId = (id: string) => {
     // check length
     if (id.length !== 10) {
-      this.setErrorMessage();
+      this.setError();
       return false;
     }
     // check if id is composed with only number digits
     const regExNumbersOnly = /^\d+$/;
     if (!regExNumbersOnly.test(id)) {
-      this.setErrorMessage();
+      this.setError();
       return false;
     }
     // check faculty code
     if (InputManager.VALID_FACULTY_CODE.includes(id.slice(8, 10))) return true;
-    this.setErrorMessage();
+    this.setError();
     return false;
   };
 
@@ -97,7 +97,7 @@ class InputManager {
 
   isEmpty = () => this.text().trim() === "";
 
-  setErrorMessage = () => {
+  setError = () => {
     this.errorMessage = InputManager.ALL_ERROR_MESSAGES[this.type];
   };
 
