@@ -17,6 +17,8 @@ class InputManager {
   text: Accessor<string>;
   setText: (v: string | ((prev: string) => string)) => string; // eslint-disable-line
 
+  errorMessage: string;
+
   readonly name: string;
 
   readonly placeHolder: string;
@@ -31,6 +33,17 @@ class InputManager {
     return [...codes, "51", "53", "55", "56", "58", "99", "01", "02"];
   })();
 
+  static readonly ALL_ERROR_MESSAGES: {
+    [InputType: number]: string;
+  } = {
+    [InputType.ID]: "Invalid student ID",
+    // [InputType.ID]: t("2-0-invalidIdErr"), // TODO This breaks ???
+    [InputType.EMAIL]: "Invalid email address",
+    // [InputType.EMAIL]: t("2-0-invalidEmailErr"),
+  };
+
+  static readonly NOT_ERROR_MESSAGE = "";
+
   constructor(
     nameKey: string,
     placeHolderKey: string,
@@ -42,17 +55,33 @@ class InputManager {
     this.setText = s;
     this.name = t(nameKey);
     this.placeHolder = t(placeHolderKey);
+    this.errorMessage = "";
   }
 
   validateEmail = (email: string) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    if (re.test(email.toLowerCase())) return true;
+    this.setErrorMessage();
+    return false;
   };
 
   validateId = (id: string) => {
-    if (id.length !== 10) return false;
-    return InputManager.VALID_FACULTY_CODE.includes(id.slice(8, 10));
+    // check length
+    if (id.length !== 10) {
+      this.setErrorMessage();
+      return false;
+    }
+    // check if id is composed with only number digits
+    const regExNumbersOnly = /^\d+$/;
+    if (!regExNumbersOnly.test(id)) {
+      this.setErrorMessage();
+      return false;
+    }
+    // check faculty code
+    if (InputManager.VALID_FACULTY_CODE.includes(id.slice(8, 10))) return true;
+    this.setErrorMessage();
+    return false;
   };
 
   isValid = () => {
@@ -67,6 +96,13 @@ class InputManager {
   };
 
   isEmpty = () => this.text().trim() === "";
+
+  setErrorMessage = () => {
+    this.errorMessage = InputManager.ALL_ERROR_MESSAGES[this.type];
+  };
+
+  getError = () => this.errorMessage;
+  clearError = () => (this.errorMessage = ""); // eslint-disable-line
 }
 
 const Scene2S0: Component = () => {
@@ -110,7 +146,21 @@ const Scene2S0: Component = () => {
       </For>
       <Button
         onClick={() => {
-          if (areAllFilled()) fadeOut(nextPage);
+          if (!areAllFilled()) return;
+
+          const validatedResults = inputManagers.map(manager => manager.isValid());
+          if (validatedResults.includes(false)) {
+            const errorMessages = inputManagers.map(manager => {
+              const err = manager.getError();
+              manager.clearError();
+              return err;
+            });
+            // TODO make nicer alert?
+            alert(errorMessages.filter(err => err !== "").join("\n")); // eslint-disable-line
+            return;
+          }
+
+          fadeOut(nextPage);
         }}
         style={buttonStyle()}
       >
