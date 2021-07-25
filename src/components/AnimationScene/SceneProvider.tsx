@@ -41,7 +41,8 @@ export const SceneProvider: Component = props => {
     height: 667,
     antialias: true,
     backgroundColor: 0xffffff,
-    resolution: 1,
+    resolution: window.devicePixelRatio,
+    autoDensity: true,
   });
   const sceneEngine = new SceneEngine(app);
   const loader = Loader.shared;
