@@ -4,10 +4,25 @@ import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
 import { TransitionFade, useTransitionContext } from "../../context/TransitionContext";
+import { StorableKeys } from "../AllScenes";
+import { getMessage } from "../TextReplacer";
 
 export const LANGUAGE_KEY = "language";
 export const ENGLISH_SIGNATURE = "en";
 export const THAI_SIGNATURE = "th";
+
+const wasNotFinished = () => {
+  // If these are saved = was here before
+  const necessaryKeys = [
+    StorableKeys.Nickname,
+    StorableKeys.ID,
+    StorableKeys.Email,
+    LANGUAGE_KEY as unknown as StorableKeys, // so that it can be passed into the function
+  ];
+  if (necessaryKeys.some(key => getMessage(key)) === null) return false;
+  const lastSeenPath = getMessage(StorableKeys.CurrentPath) as string;
+  return lastSeenPath !== "/";
+};
 
 function SelectLanguage() {
   const [, { locale }] = useI18n();
