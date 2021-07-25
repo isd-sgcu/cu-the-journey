@@ -12,12 +12,8 @@ export default {
   },
   "13-1":
     "Congratulations, you are absolutely lucky. I hope this dream is wonderful and lives up to your hopes!",
-  "13-2": [
-    "Your dreams may have not become true,",
-    "but please don’t give up on dreaming.",
-    "",
-    "“Isn’t a dream that has not come true, a dream nonetheless?”",
-  ],
+  "13-2-q0": ["Your dreams may have not become true,", "but please don’t give up on dreaming.", ""],
+  "13-2-q1": ["“Isn’t a dream that has not come true, a dream nonetheless?”"],
   "13-2-quote": { line1: "- Josephine (Lakorn Nitade 63)", line2: "Tuesday At Ephémère -" },
   "13-3": [
     "But that's okay.",

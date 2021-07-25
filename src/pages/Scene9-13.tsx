@@ -35,10 +35,7 @@ const Scene12S0: Component = () => (
 
 const Scene13S0: Component = () => {
   const questions = [t("13-0-q0"), t("13-0-q1")].map(q => <h5>{q}</h5>);
-  const buttons = getButtons(
-    [t("13-0-choices.c1"), t("13-0-choices.c2"), t("13-0-choices.c3")],
-    true,
-  );
+  const buttons = getButtons([t("13-0-choices.c1"), t("13-0-choices.c2"), t("13-0-choices.c3")]);
 
   return (
     <>
@@ -55,8 +52,10 @@ const Scene13S1: Component = () => (
 
 const Scene13S2: Component = () => (
   <>
-    <TextMiddle text={t("13-2")}>
-      <div class="flex justify-center place-items-center text-[11px]">
+    <TextMiddle text={t("13-2-q0")}>
+      <div class="text-[#884BC1]">{t("13-2-q1")}</div>
+      <div class="text-[#884BC1]">{t("13-2-q2")}</div>
+      <div class="flex justify-center place-items-center text-[11px] leading-[18px] text-[#884BC1] mt-[5px]">
         <p>
           {t("13-2-quote.line1")}
           <br />
