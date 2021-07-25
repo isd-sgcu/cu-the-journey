@@ -5,6 +5,7 @@ import Typography from "../../components/common/Typography";
 const headlineColor = ["#5F229F", "#0E8516", "#884BC1", "#B74AAB", "#0E8516", "#007E31", "#B74AAB"];
 const bodyColor = ["#410C89", "#006706", "#5F229F", "#90168B", "#006706", "#006021", "#90168B"];
 const QrColor = ["#EADBFB", "#9BE097", "#D0B6EF", "#F5A7EC", "#9BE097", "#BCE9C7", "#F5A7EC"];
+const QrBorderColor = ["#A984D4", "#39B836", "#A984D4", "#DD7ED2", "#39B836", "#46BD6A", "#DD7ED2"];
 
 function Souvenir() {
   const [t] = useTranslation("souvenir");
@@ -15,14 +16,25 @@ function Souvenir() {
   }
 
   const OpenQrImage = () => (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M3.33333 3.33333V26.6667H26.6667V15H30V26.6667C30 28.5 28.5 30 26.6667 30H3.33333C1.48333 30 0 28.5 0 26.6667V3.33333C0 1.5 1.48333 0 3.33333 0H15V3.33333H3.33333ZM18.3333 3.33333V0H30V11.6667H26.6667V5.68333L10.2833 22.0667L7.93333 19.7167L24.3167 3.33333H18.3333Z"
-        fill={QrColor[number]}
-      />
-    </svg>
+    <div
+      class="w-[46px] h-[46px] flex justify-center items-center rounded-[10px]"
+      style={`border: 1px solid ${QrBorderColor[number]}`}
+    >
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M3.33333 3.33333V26.6667H26.6667V15H30V26.6667C30 28.5 28.5 30 26.6667 30H3.33333C1.48333 30 0 28.5 0 26.6667V3.33333C0 1.5 1.48333 0 3.33333 0H15V3.33333H3.33333ZM18.3333 3.33333V0H30V11.6667H26.6667V5.68333L10.2833 22.0667L7.93333 19.7167L24.3167 3.33333H18.3333Z"
+          fill={QrColor[number]}
+        />
+      </svg>
+    </div>
   );
 
   return (
@@ -63,17 +75,15 @@ function Souvenir() {
         </div>
 
         {/* Mobile */}
-        <div class="flex mt-[68px] lg:hidden  xs:mt-[25px]">
+        <div class="flex mt-[68px] lg:hidden xs:mt-[25px] items-center">
           <Typography
-            class="text-xs text-right self-end flex-grow xs:text-[10px]"
+            class="text-xs text-right flex-grow xs:text-[10px]"
             style={`color:${bodyColor[number]}`}
           >
             {t("qrMobile")}
           </Typography>
-          <a href="https://line.me/R/ti/p/%40594hejnh">
-            <div class="w-[30px] h-[30px] ml-[13px]">
-              <OpenQrImage />
-            </div>
+          <a href="https://line.me/R/ti/p/%40594hejnh" class="ml-[13px]">
+            <OpenQrImage />
           </a>
         </div>
       </div>
