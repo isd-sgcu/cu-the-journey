@@ -1,5 +1,5 @@
 export default {
-  tapToContinue: "<<Tap to continue>>",
+  tapToContinue: "<< Tap to continue >>",
   sound: "Enable audio\nfor the best experience.",
   tw: {
     title: "Warning",

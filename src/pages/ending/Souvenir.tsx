@@ -1,4 +1,4 @@
-import { Link, useRouter } from "solid-app-router";
+import { useRouter } from "solid-app-router";
 import { useTranslation } from "../../config/i18n";
 import Typography from "../../components/common/Typography";
 
@@ -70,11 +70,11 @@ function Souvenir() {
           >
             {t("qrMobile")}
           </Typography>
-          <Link href="https://line.me/R/ti/p/%40594hejnh">
+          <a href="https://line.me/R/ti/p/%40594hejnh">
             <div class="w-[30px] h-[30px] ml-[13px]">
               <OpenQrImage />
             </div>
-          </Link>
+          </a>
         </div>
       </div>
     </div>
