@@ -39,7 +39,11 @@ const InputBox: Component<InputBoxProps> = props => {
 
   return (
     <textarea
-      oninput={e => {
+      onKeyPress={e => {
+        // No new line on enter in noWrap InputBox
+        if (props.noWrap && e.key === "Enter") e.preventDefault();
+      }}
+      onKeyUp={e => {
         const self = e.target as HTMLTextAreaElement;
         setText(self.value);
 
