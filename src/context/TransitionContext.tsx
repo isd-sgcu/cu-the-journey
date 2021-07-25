@@ -9,6 +9,7 @@ import {
   JSX,
   useContext,
 } from "solid-js";
+import { saveMessage, StorableKeys } from "../MessageStore";
 import { useFadeSignal } from "./FadeSignalContext";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
@@ -172,10 +173,15 @@ export const TransitionProvider: Component = props => {
     setPrevented(false);
   };
 
+  const saveCurrentPath = (path: string) => {
+    saveMessage(StorableKeys.CurrentPath, path);
+  };
+
   // Reset all state when routes to new path
   createEffect(() => {
     // eslint-disable-next-line no-console
     console.log("Now path", router.current[0].path);
+    saveCurrentPath(router.current[0].path);
     resetAnimationFrame();
   });
 
