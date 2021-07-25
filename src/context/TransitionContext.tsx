@@ -9,7 +9,7 @@ import {
   JSX,
   useContext,
 } from "solid-js";
-import { saveMessage, StorableKeys } from "../MessageStore";
+import { preventScenesSkipping, saveMessage, StorableKeys } from "../MessageStore";
 import { useFadeSignal } from "./FadeSignalContext";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
@@ -183,6 +183,7 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     // eslint-disable-next-line no-console
     console.log("Now path", router.current[0].path);
+    preventScenesSkipping(router.current[0].path);
     saveCurrentPath(router.current[0].path);
     resetAnimationFrame();
   });
