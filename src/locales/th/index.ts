@@ -1,4 +1,5 @@
 import i18n from "./i18n";
+import fallback from "./fallback";
 import landing from "./landing";
 import pickANumber from "./pickANumber";
 import souvenir from "./souvenir";
@@ -15,6 +16,7 @@ import scene25to29 from "./scene25-29";
 
 const th = {
   i18n,
+  fallback,
   landing,
   pickANumber,
   souvenir,
