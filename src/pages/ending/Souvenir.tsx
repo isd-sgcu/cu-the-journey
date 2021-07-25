@@ -49,7 +49,7 @@ function Souvenir() {
         </Typography>
 
         {/* Desktop */}
-        <div class="mr-5 mt-[22px] hidden lg:flex">
+        <div class=" mt-[22px] hidden lg:flex">
           <Typography
             class="text-xs text-right self-end flex-grow mb-[4px]"
             style={`color:${bodyColor[number]}`}
@@ -60,7 +60,7 @@ function Souvenir() {
         </div>
 
         {/* Mobile */}
-        <div class="flex mr-5 mt-[68px] lg:hidden">
+        <div class="flex mt-[68px] lg:hidden">
           <Typography
             class="text-xs text-right self-end flex-grow"
             style={`color:${bodyColor[number]}`}
