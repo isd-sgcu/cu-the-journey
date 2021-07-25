@@ -14,11 +14,8 @@ export enum StorableKeys {
   CurrentPath,
 }
 
-export const getMessage = (key: StorableKeys): string => {
-  const value = localStorage.getItem(key.toString());
-  if (value === null) return "The value of this key is not yet set.";
-  return value;
-};
+export const getMessage = (key: StorableKeys): string | null =>
+  localStorage.getItem(key.toString());
 
 export const saveMessage = (key: StorableKeys, val: string): void => {
   localStorage.setItem(key.toString(), val);
