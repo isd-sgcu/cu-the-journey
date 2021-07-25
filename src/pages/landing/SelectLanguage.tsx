@@ -18,7 +18,7 @@ const wasNotFinished = () => {
   ];
   if (wasHereIdentifierKeys.some(key => getMessage(key) === null)) return false;
   const lastSeenPath = getMessage(StorableKeys.LastSeenPath);
-  if (lastSeenPath === null) return false;
+  if (lastSeenPath === null || lastSeenPath === "*all") return false;
   return lastSeenPath !== "/";
 };
 

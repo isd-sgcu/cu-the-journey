@@ -175,7 +175,7 @@ export const TransitionProvider: Component = props => {
 
   const saveCurrentPath = (path: string) => {
     saveMessage(StorableKeys.CurrentPath, path);
-    if (path === "/") return;
+    if (path === "/" || path === "*all") return;
     saveMessage(StorableKeys.LastSeenPath, path);
   };
 
