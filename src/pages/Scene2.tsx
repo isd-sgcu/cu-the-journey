@@ -1,10 +1,13 @@
 import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
+import swal from "sweetalert";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
 import Button from "../components/common/Button";
-import { FACULTIES, getFacultyCode } from "./TextReplacer";
+import { FACULTIES, getFacultyCode, isEnglish } from "./TextReplacer";
+
+import "../styles/swal.css";
 
 const t = sceneTranslator("scene2");
 
@@ -27,10 +30,10 @@ class InputManager {
   static readonly ALL_ERROR_MESSAGES: {
     [InputType: number]: string;
   } = {
-    [InputType.ID]: "Invalid student ID",
-    // [InputType.ID]: t("2-0-invalidIdErr"), // TODO This breaks ???
-    [InputType.EMAIL]: "Invalid email address",
-    // [InputType.EMAIL]: t("2-0-invalidEmailErr"),
+    [InputType.ID]: isEnglish() ? "Please enter a valid student ID" : "โปรดใส่รหัสนิสิตที่ถูกต้อง",
+    [InputType.EMAIL]: isEnglish()
+      ? "Please enter a valid email address"
+      : "โปรดใส่ที่อยู่อีเมลล์ที่ถูกต้อง",
   };
 
   static readonly NOT_ERROR_MESSAGE = "";
@@ -146,8 +149,16 @@ const Scene2S0: Component = () => {
               manager.clearError();
               return err;
             });
-            // TODO make nicer alert?
-            alert(errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n")); // eslint-disable-line
+
+            // alerts
+            swal(
+              "",
+              errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
+              "error",
+              {
+                className: "font-Mitr",
+              },
+            );
             return;
           }
 
