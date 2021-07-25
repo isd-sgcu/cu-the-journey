@@ -1,8 +1,15 @@
 import { useRouter } from "solid-app-router";
 import { useTranslation } from "../../config/i18n";
 import Typography from "../../components/common/Typography";
+import { clearSavedMessages, getMessage, StorableKeys, saveMessage } from "../../MessageStore";
+import { LANGUAGE_KEY } from "../../pages/landing/SelectLanguage";
 
 function Souvenir() {
+  // clear all saved messages here
+  const lang = getMessage(LANGUAGE_KEY as unknown as StorableKeys) as string;
+  clearSavedMessages();
+  saveMessage(LANGUAGE_KEY as unknown as StorableKeys, lang);
+
   const [t] = useTranslation("souvenir");
   const [router] = useRouter()!;
   let number = Number(router.query.number) || 0;
