@@ -15,8 +15,6 @@ export default () => {
   });
 
   createEffect(() => {
-    console.log(current());
-
     if (!isLoading()) {
       sceneSwitcher(BackgroundMapping()[current()] || []);
     }
