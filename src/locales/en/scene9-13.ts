@@ -1,7 +1,7 @@
 export default {
   "9-0": "Your flip the pages of that journal until the final page.",
   "10-0": "Now, your journey has reached its destination.",
-  "11-0": ["Congratulations", "(ชื่อ)", "Has been accepted into", "(คณะภาษาไทย)"],
+  "11-0": ["Congratulations", "(name)", "Has been accepted into", "(faculty)"],
   "12-0": "You close the journal gently.",
   "13-0-q0": "“Do you think this path you chose...",
   "13-0-q1": "is the path you dreamt of?”",
