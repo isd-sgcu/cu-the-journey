@@ -1,10 +1,10 @@
 export default {
-  "8-0": ["เธอเดินทางผ่านเรื่องราวทั้งหมดนั่น", "มาได้แล้ว"],
-  "8-1-0": "อย่าลืมที่จะขอบคุณตัวเองนะ",
-  "8-1-1": "คำชมอะไรที่นึกออกบอกตัวเองให้เต็มที่เลย",
-  "8-1-2": "เธอเก่งมาก ๆ เลยล่ะ ทำได้ดีมาก ๆ",
-  "8-2-order": "เธอลองชมตัวเองสักหน่อยสิ",
-  "8-2-placeholder": "พิมพ์คำตอบ",
-  "8-2-button-text": "บันทึก",
-  "8-2-tap-proceed": "แตะเพื่อไปต่อ",
+  "8-0": "All those memories have come to pass, and you’ve reached the end of that journey.",
+  "8-1-0": "Don’t forget to thank yourself.",
+  "8-1-1": "You deserve any kind of praise you can think of.",
+  "8-1-2": "You’re amazing, and you did really well!",
+  "8-2-order": "Give it a try and compliment yourself!",
+  "8-2-placeholder": "Write some compliment",
+  "8-2-button-text": "Save",
+  "8-2-tap-proceed": "Tap to proceed",
 };
