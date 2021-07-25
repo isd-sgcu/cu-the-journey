@@ -1,6 +1,6 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
 import { Route } from "solid-app-router";
-import { Component, createSignal, onCleanup } from "solid-js";
+import { Component, createEffect, createSignal, onCleanup, Show } from "solid-js";
 import AnimationScene, { useScene } from "./components/AnimationScene";
 import { TransitionProvider, TransitionFade } from "./context/TransitionContext";
 import "./firebase";
@@ -13,7 +13,7 @@ export const App: Component = () => {
     locale(language);
   }
 
-  const { app, sceneSwitcher, soundControl, loadProgress, isLoading } = useScene();
+  const { app, soundControl, loadProgress, isLoading } = useScene();
   const resizeObserver = new ResizeObserver(() => {
     if (app.renderer) {
       app.resize?.();
@@ -21,11 +21,16 @@ export const App: Component = () => {
     }
   });
 
+  const [isFullScreen, setFullScreen] = createSignal(true);
+  createEffect(() => {
+    if (!isLoading()) {
+      setFullScreen(false);
+    }
+  });
+
   onCleanup(() => {
     resizeObserver.disconnect();
   });
-
-  const [isFullScreen, setFullScreen] = createSignal(false);
 
   return (
     <div
@@ -44,20 +49,17 @@ export const App: Component = () => {
           isFullScreen() ? "" : "sm:w-[375px] sm:min-h-[667px]"
         } `}
       >
-        <TransitionProvider>
-          <TransitionFade order={0}>
-            <Route />
-          </TransitionFade>
-        </TransitionProvider>
+        <Show when={!isLoading()} fallback={<div>Loading... {loadProgress()} %</div>}>
+          <TransitionProvider>
+            <TransitionFade order={0}>
+              <Route />
+            </TransitionFade>
+          </TransitionProvider>
+        </Show>
         <AnimationScene />
       </div>
       <div class="absolute left-0 top-0 bg-white flex flex-col z-20">
-        <button onclick={() => sceneSwitcher(["bird", "ogbg"])}>Bird</button>
-        <button onclick={() => sceneSwitcher(["ogbg"])}>remove Bird</button>
-        <button onclick={() => soundControl.play("bg", { loop: true })}>play sound</button>
         <button onclick={() => soundControl.muted()}>toggle mute</button>
-        <button onclick={() => setFullScreen(!isFullScreen())}>toggle fullscreen</button>
-        {isLoading() && <div>Load: {loadProgress()} %</div>}
       </div>
     </div>
   );
