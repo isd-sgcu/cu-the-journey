@@ -25,7 +25,7 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
         }}
         class={`${
           props.isLongBtn ? "w-[220px]" : "w-[150px]"
-        } h-[40px] mt-[16px] rounded-full cursor-pointer
+        } h-[40px] mt-[16px] rounded-full cursor-pointer bg-white 
                   text-[14px] leading-[28px] text-purple font-normal font-Mitr border-[1px] border-purple
                   hover:bg-purple-light
                   focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1`}
