@@ -5,7 +5,7 @@ export default {
   qr: "Don’t forget to add SGCU\nat LINE to receive campus\nactivity updates from us\nQR Line Official",
   qrMobile: "Don’t forget to add SGCU at LINE\nto receive campus activity updates from us",
   choices: {
-    "0": "“ Twenty years from now you will be more\n disappointed by the things that you didn’t\n do than by the ones you did do, so throw off\n the bowlines, sail away from safe harbor,\n catch the trade winds in your sails.\nExplore, Dream, Discover.\n\n – Mark Twain “",
+    "0": "“ Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do, so throw off the bowlines, sail away from safe harbor, catch the trade winds in your sails. Explore, Dream, Discover.\n\n – Mark Twain “",
     "1": "“ เธอมักเป็นจุดเด่นเวลาไปที่ไหนก็ตาม\nและจะได้ออกเดินทางไกล\nและอาจจะพบกับปัญหารอบด้าน\nระหว่างการเดินทาง\n(แต่ถ้าการเมืองดี เธอจะสามารถเดินทาง\nได้อย่างสบายเพราะเราจะมีขนส่งสาธารณะ\nที่มีคุณภาพและทั่วถึง)\nและเธอมีแนวโน้มที่จะได้ทำสิ่งใหม่ ๆ\nกับคนใหม่ ๆ ในสถานที่ใหม่อย่างที่คิดไม่ถึงเลย “",
     "2": "“ เธอมีแนวโน้มที่จะได้รับของที่ราคาแพง\n(แต่ไม่มีคุณภาพ)\nและของสิ่งนั้นอาจไม่ได้เป็นสิ่งที่เธอต้องการ\nสักเท่าไร แต่เธอก็ยังอาจจะมีโอกาส\nได้ของที่ต้องการอยู่บ้าง\nแต่อาจจะต้องแลกมาด้วยอะไรบางอย่าง\nที่ปกติแล้วเขาไม่ต้องเสียกัน “",
     "3": "“ ในการเดินทางครั้งใหม่นี้เธออาจจะต้องเผชิญ\nกับปัญหาบางอย่าง แต่ไม่ต้องกังวลไป\nเพราะจะมีบุคคลที่มีดีกรีเป็นถึงอันดับหนึ่ง\nยื่นมือเข้ามาช่วยเหลือคุณให้ผ่านวิกฤตนั้นไปได้\nเลขมงคลของคุณกับการเดินทางครั้งนี้คือ 10+ “",

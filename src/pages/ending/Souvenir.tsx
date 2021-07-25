@@ -30,21 +30,24 @@ function Souvenir() {
       class="flex flex-col flex-grow items-center w-full"
       style={`color:${headlineColor[number]}`}
     >
-      <Typography variant="h2" class="mt-[19%]">
+      <Typography variant="h2" class="mt-[19%] xs:text-[20px]">
         Your New Journey Begins
       </Typography>
-      <Typography variant="h4" class="mt-2 mb-[18px]">
+      <Typography variant="h4" class="mt-2 mb-[18px] xs:text-[16px]">
         {number ? `${t("number", { number: String(number) })}` : t("notChoose")}
       </Typography>
 
       <div class="flex-grow mb-4 flex items-center">
-        <Typography class="text-[14px] leading-[22px]" style={`color:${bodyColor[number]}`}>
+        <Typography
+          class="text-[14px] leading-[22px] xs:text-[12px]"
+          style={`color:${bodyColor[number]}`}
+        >
           {t(`choices.${number}`)}
         </Typography>
       </div>
 
       <div class="mb-[29px] w-full">
-        <Typography variant="h6" class="text-sm leading-4 tracking-[0.4px]">
+        <Typography variant="h6" class="text-sm leading-4 tracking-[0.4px]  xs:text-[12px]">
           {t("p1")}
         </Typography>
 
@@ -60,7 +63,7 @@ function Souvenir() {
         </div>
 
         {/* Mobile */}
-        <div class="flex mt-[68px] lg:hidden">
+        <div class="flex mt-[68px] lg:hidden  xs:mt-[25px]">
           <Typography
             class="text-xs text-right self-end flex-grow"
             style={`color:${bodyColor[number]}`}
