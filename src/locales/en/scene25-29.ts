@@ -37,14 +37,14 @@ export default {
       "This is an important moment for all of you, ",
       "and the choices you make here will change the society going forward.",
     ],
-    quote1: ["Frank Netiwit Chotiphatphaisal", "President of the Student Union SGCU ‘64"],
+    quote1: ["Frank Netiwit Chotiphatphaisal", "President of the Student Union"],
     2: [
       'Congratulations "CU105" 🎉✨',
       "Welcome, everyone, to Chulalongkorn University!",
       "I hope you can make the most out of the experience, ",
       "friendship, and knowledge you find, and enjoy your time in this new home.",
     ],
-    quote2: ["Parn Prapasiri Yoosuk", "President of Arts and Culture Affairs SGCU ‘64"],
+    quote2: ["Parn Prapasiri Yoosuk", "Director of Arts and Culture Affairs SGCU ‘64"],
     3: [
       "Welcome to Chulalongkorn University.",
       "I hope this opportunity will help you improve yourself to the fullest,",
@@ -52,7 +52,7 @@ export default {
       "Take the knowledge and the good moments here with you into life, ",
       "to make the society a better place and be successful.",
     ],
-    quote3: ["Gunn Phatsawat Sakdaprayoon", "President of Sports Affairs SGCU‘64"],
+    quote3: ["Gunn Phatsawat Sakdaprayoon", "Director of Sports Affairs SGCU‘64"],
     4: [
       "A university life is a time of “change”.",
       "From school to university. New friend, new places.",
@@ -72,17 +72,17 @@ export default {
       "We may find a new aspect of our lives, and the connection between you and everyone in the community.",
       "Let's make this university a better place. 🙂",
     ],
-    quote4: ["Bambi Nutchaya Mainitha", "Treasurer SGCU ‘64"],
+    quote4: ["Bambi Nutchaya Mainitha", "Treasurer, SGCU ‘64"],
     5: [
       "Hello, everyone.",
       "University is a place to express yourself freely, so I hope you make the most out of your time at Chula.",
       "Give it all in your studies, give back to society, ",
       "and don't forget that your friends, professors, juniors, and seniors are always there to help.",
-      " Best of luck with university life, I'm rooting for you :)",
+      "Best of luck with university life, I'm rooting for you :)",
     ],
     quote5: [
       "Kiki Tanyatorn Rojmahamongkol",
-      "President of Social Development and Community Service Affairs",
+      "Director of Social Development and Community Service Affairs",
       "SGCU ‘64",
     ],
     6: [
@@ -94,14 +94,14 @@ export default {
       "Congratulations, hope the next 4 years are fun and exciting!",
       "Do what you do to the fullest, that's always gonna be alright.",
     ],
-    quote6: ["Looknum Nutcha Mansin", "President of Student Relations SGCU ‘64"],
+    quote6: ["Looknum Nutcha Mansin", "Director of Student Relations SGCU ‘64"],
     7: [
       "Welcome, CU105.",
       "You all did really well, congratulations on passing TCAS64✨",
       "I hope you will enjoy the things to come 💖",
       "P.S. Don't forget to take care of your physical and mental health.",
     ],
-    quote7: ["Maiplong Torpob Laolomwong", "Secretary SGCU ‘64"],
+    quote7: ["Maiplong Torpob Laolomwong", "Secretary, SGCU ‘64"],
     8: [
       "Welcome to university,",
       "I hope this new step is a step free for you to decide",
@@ -110,7 +110,7 @@ export default {
       "widen your horizons, see things from different perspectives,",
       "and be inspired to help make our society a better place.",
     ],
-    quote8: ["Toon Nannapat Aiewsakul", "2nd Vice President SGCU ‘64"],
+    quote8: ["Toon Nannapat Aiewsakul", "2nd Vice President, SGCU ‘64"],
     9: [
       "Welcome, CU105! Congratulations on your first step in this university.",
       "I wish for you to live this university life to the fullest.",
@@ -118,7 +118,7 @@ export default {
       "Study well, enjoy activities, and be the force that drives the country forward.",
       "“Believing that you can, is good. Thinking that you can't, is not.”",
     ],
-    quote9: ["Baconn Ekkaphong Atsem", "President of Academic Affairs SGCU ‘64"],
+    quote9: ["Baconn Ekkaphong Atsem", "Director of Academic Affairs SGCU ‘64"],
     10: [
       "Before anything else, welcome and congratulations to all of CU105!",
       "You did well in your efforts and overcame everything that has happened.",
@@ -130,7 +130,7 @@ export default {
       "I hope univesity life is fun, and I hope you will be able to become a better version of yourself.",
       "See you then :-)",
     ],
-    quote10: ["Nink Pitchakorn Roeksompong", "1st Vice President SGCU ‘64"],
+    quote10: ["Nink Pitchakorn Roeksompong", "1st Vice President, SGCU ‘64"],
   },
   "29-0": "You have prepared yourself for this new journey.",
 };

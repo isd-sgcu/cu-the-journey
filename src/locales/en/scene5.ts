@@ -2,7 +2,7 @@ export default {
   "5-0": "You begin to prepare for this new journey.",
   "5-1": "You pack up your bags...",
   "5-2": "...you find a journal. A journal kept safe through the depths of time.",
-  "5-3": ["ลองให้กาลเวลาพาเธอย้อนกลับไปดู", "การเดินทางที่ผ่านมา", "ของเธอกันสักหน่อยดีไหม"],
+  "5-3": ["Shall we take the time to look back", "upon your past journey?"],
   "5-4": {
     q: "Shall we take the time to look back upon your past journey?",
     c1: ["Yes, I’m ready", "/6-0"],
