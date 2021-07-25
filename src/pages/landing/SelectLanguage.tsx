@@ -35,12 +35,6 @@ const resumeIfWantTo = () => {
     dangerMode: true,
   }).then(willDelete => {
     if (willDelete) {
-      // eslint-disable-next-line
-      console.log(
-        "🤷‍♂️👍👍👍 | getMessage(StorableKeys.LastSeenPath)",
-        getMessage(StorableKeys.LastSeenPath),
-      );
-      // TODO wrong path!!!
       fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
     } else clearSavedMessages();
   });

@@ -181,10 +181,9 @@ export const TransitionProvider: Component = props => {
 
   // Reset all state when routes to new path
   createEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log("Now path", router.current[0].path);
-    preventScenesSkipping(router.current[0].path);
-    saveCurrentPath(router.current[0].path);
+    const currentPath = router.current[0].path;
+    preventScenesSkipping(currentPath);
+    saveCurrentPath(currentPath);
     resetAnimationFrame();
   });
 
