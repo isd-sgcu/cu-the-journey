@@ -5,7 +5,6 @@
 
 const preventedRoute = [
   "/",
-  "/landing",
   "/poc-transition",
   "/2-0",
   "/3-1",
