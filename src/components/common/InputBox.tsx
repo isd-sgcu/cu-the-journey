@@ -24,10 +24,17 @@ const InputBox: Component<InputBoxProps> = props => {
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
-      if (props.isGoingNextScene)
-        newStyle += props.isGoingNextScene()
-          ? "border: none; cursor: pointer; background-color: transparent;"
+      if (props.isGoingNextScene) {
+        // This right below prevents resizable SmallInputBox from shrinking after clicking save
+        const eh = props.isMinimized
+          ? "height: 233px; width: 311px; padding: 30px 35px; border-radius: 10px;"
           : "";
+
+        newStyle += props.isGoingNextScene()
+          ? `border: none; cursor: pointer; background-color: transparent;${eh}`
+          : "";
+      }
+
       return newStyle;
     }),
   );
