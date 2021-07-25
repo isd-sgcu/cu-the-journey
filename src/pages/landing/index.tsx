@@ -36,8 +36,8 @@ function index() {
           <h6 class="text-[14px] font-semibold">สู่ชีวิตในแบบของเรา</h6>
         </div>
         <div class="text-[#F4AE23] font-semibold text-[48px]">
-          <p class="absolute left-[-33px] top-[-5px]">“</p>
-          <p class="absolute right-[-28px] bottom-[-20px]">”</p>
+          <p class="absolute left-[-33px] top-[-5px] xs:left-[-17px]">“</p>
+          <p class="absolute right-[-28px] bottom-[-20px] xs:right-[-22px]">”</p>
         </div>
       </div>
       <Routing href="/trigger-warning" class="mt-12 mb-10 text-white">
