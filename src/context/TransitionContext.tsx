@@ -191,10 +191,10 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
-      if (RouteMapping[nowRoute]) {
-        replace(RouteMapping[nowRoute]);
-      } else {
+      if (nextScene() !== "") {
         replace(nextScene());
+      } else {
+        replace(RouteMapping[nowRoute]);
       }
 
       // Prevent Race condition
@@ -272,10 +272,10 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
         const isFadeOut = transitionNumber() === fadeOutNumber;
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
-          if (RouteMapping[nowRoute]) {
-            replace(RouteMapping[nowRoute]);
-          } else {
+          if (nextScene() !== "") {
             replace(nextScene());
+          } else {
+            replace(RouteMapping[nowRoute]);
           }
         }
       }}
