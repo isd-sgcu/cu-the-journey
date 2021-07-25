@@ -4,6 +4,7 @@ import { useRouter } from "solid-app-router";
 
 const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/",
+  "/door-open",
   "/landing",
   "/poc-transition",
   "/trigger-warning",
@@ -51,7 +52,7 @@ export const areScenesSkipped = () => {
 export const restartApp = () => {
   const [, { replace }] = useRouter()!;
   clearSavedMessages();
-  replace("/landing");
+  replace("/");
 };
 
 export const preventScenesSkipping = (currentPath: string) => {
