@@ -7,7 +7,7 @@ export interface BaseSpriteOptions {
   zIndex?: number;
 }
 
-export abstract class BaseSprite extends AnimatedSprite {
+export class BaseSprite extends AnimatedSprite {
   protected state: SpriteState = "LOAD";
 
   protected onDone?: () => void;

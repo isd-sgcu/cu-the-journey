@@ -11,7 +11,6 @@ export interface SceneSwitcherOption {
   name: SpriteName;
   loop?: boolean;
   animationSpeed?: number;
-  force?: boolean;
   onComplete?: () => void;
 }
 
@@ -21,6 +20,8 @@ export class SceneEngine {
   private sceneLists: SpriteSetting[];
 
   private sceneContainer: Container;
+
+  private removeContainer: Container;
 
   private app: Application;
 
@@ -40,8 +41,10 @@ export class SceneEngine {
     this.willRemoveScene = [];
     this.sceneContainer = new Container();
 
+    this.removeContainer = new Container();
+
     this.sceneContainer.sortableChildren = true;
-    this.app.stage.addChild(this.sceneContainer);
+    this.app.stage.addChild(this.removeContainer, this.sceneContainer);
   }
 
   addScenes(sceneLists: SpriteSetting[]) {
@@ -49,12 +52,13 @@ export class SceneEngine {
   }
 
   clearSprite(sprite: BaseSprite) {
-    this.sceneContainer.removeChild(sprite);
+    this.removeContainer.removeChild(sprite);
     sprite.reset();
   }
 
   sceneSwitcher = (
     newScenes: SceneSwitchable,
+    force: boolean = false,
     onNewScene: (() => void) | undefined = undefined,
   ) => {
     this.onNewScene = onNewScene;
@@ -68,42 +72,39 @@ export class SceneEngine {
     this.currentScene.forEach(scene => {
       if (!mappedScenes.find(({ name }) => name === scene.name)) {
         scene.sprite.setFinalizing(() => this.clearSprite(scene.sprite));
+        this.sceneContainer.removeChild(scene.sprite);
+        this.removeContainer.addChild(scene.sprite);
         this.willRemoveScene.push(scene);
       }
     });
 
     const intersectScenes: SpriteSetting[] = [];
 
-    mappedScenes.forEach(
-      ({ name: newName, loop = true, force = false, animationSpeed = 0.02, onComplete }) => {
-        const oldScene = this.currentScene.find(({ name }) => name === newName);
-        if (oldScene) {
-          if (loop !== oldScene.sprite.loop) {
-            oldScene.sprite.gotoAndPlay(oldScene.sprite.currentFrame);
-          }
-          oldScene.sprite.loop = loop;
-          oldScene.sprite.onComplete = onComplete;
-          intersectScenes.push(oldScene);
-        } else {
-          const newScene = this.sceneLists.find(({ name }) => name === newName);
-          if (!newScene) {
-            throw new Error(`unknown scene name: ${newName}`);
-          }
-          newScene.sprite.loop = loop;
-          newScene.sprite.animationSpeed = animationSpeed;
-          newScene.sprite.onComplete = onComplete;
-
-          if (force) {
-            intersectScenes.push(newScene);
-          } else this.willAddScene.push(newScene);
+    mappedScenes.forEach(({ name: newName, loop = true, animationSpeed = 0.02, onComplete }) => {
+      const oldScene = this.currentScene.find(({ name }) => name === newName);
+      if (oldScene) {
+        if (loop !== oldScene.sprite.loop) {
+          oldScene.sprite.gotoAndPlay(oldScene.sprite.currentFrame);
         }
-      },
-    );
+        oldScene.sprite.loop = loop;
+        oldScene.sprite.onComplete = onComplete;
+        intersectScenes.push(oldScene);
+      } else {
+        const newScene = this.sceneLists.find(({ name }) => name === newName);
+        if (!newScene) {
+          throw new Error(`unknown scene name: ${newName}`);
+        }
+        newScene.sprite.loop = loop;
+        newScene.sprite.animationSpeed = animationSpeed;
+        newScene.sprite.onComplete = onComplete;
+        this.willAddScene.push(newScene);
+      }
+    });
 
     this.currentScene = intersectScenes;
 
-    // force add when not have sprite to remove
-    if (this.willRemoveScene.length === 0) {
+    // force add when not have sprite to remove or force
+    if (this.willRemoveScene.length === 0 || force) {
       this.applyWillAddScene();
     }
   };
@@ -138,6 +139,11 @@ export class SceneEngine {
     }
 
     // update container position
+    this.removeContainer.x = width / 2;
+    this.removeContainer.y = height / 2;
+    this.removeContainer.pivot.x = this.removeContainer.width / 2;
+    this.removeContainer.pivot.y = this.removeContainer.height / 2;
+
     this.sceneContainer.x = width / 2;
     this.sceneContainer.y = height / 2;
     this.sceneContainer.pivot.x = this.sceneContainer.width / 2;
