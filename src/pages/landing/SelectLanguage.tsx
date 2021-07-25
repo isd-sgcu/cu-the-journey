@@ -33,8 +33,8 @@ const resumeIfWantTo = () => {
     icon: "warning",
     buttons: true as unknown as [boolean], // this can actually be a boolean
     dangerMode: true,
-  }).then(willDelete => {
-    if (willDelete) {
+  }).then(willResume => {
+    if (willResume) {
       fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
     } else clearSavedMessages();
   });
