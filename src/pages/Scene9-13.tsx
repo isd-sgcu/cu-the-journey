@@ -3,9 +3,10 @@ import { getButtons } from "../components/Choice";
 import { AnimationRoute } from "../components/AnimationRoute";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
-import { replaceNameAndFaculty } from "./TextReplacer";
+import { replaceLine } from "./TextReplacer";
+import Typography from "../components/common/Typography";
 
-const { TextBold, TextMiddle } = TextComponent;
+const { TextMiddle } = TextComponent;
 
 const t = sceneTranslator("scene9to13");
 
@@ -22,9 +23,18 @@ const Scene10S0: Component = () => (
 );
 
 const Scene11S0: Component = () => (
-  <>
-    <TextBold text={replaceNameAndFaculty(t("11-0"))} />
-  </>
+  <div
+    class="max-w-full w-full min-h-[244px] flex items-center bg-[#FFFFFFCC] rounded-[10px]"
+    style="border: 1px solid #5F229F"
+  >
+    <Typography
+      variant="h2"
+      style="overflow-wrap: break-word;max-width:100%"
+      class="px-3 py-3 w-full"
+    >
+      {replaceLine(t("11-0"))}
+    </Typography>
+  </div>
 );
 
 const Scene12S0: Component = () => (
