@@ -92,9 +92,11 @@ const FACULTY_SIGNATURE = "(faculty)";
 
 export const getFacultyCode = (studentId: string) => studentId.slice(8, 10);
 
+export const isEnglish = () => localStorage.getItem(LANGUAGE_KEY) === ENGLISH_SIGNATURE;
+
 const getFacultyText = (studentId: string) => {
   const faculty = FACULTIES[getFacultyCode(studentId)];
-  return localStorage.getItem(LANGUAGE_KEY) === ENGLISH_SIGNATURE ? faculty.en : faculty.th;
+  return isEnglish() ? faculty.en : faculty.th;
 };
 
 const replaceLine = (line: string) =>
