@@ -1,5 +1,7 @@
 import { getMessage, StorableKeys } from "../MessageStore";
-import { ENGLISH_SIGNATURE, LANGUAGE_KEY } from "./landing/SelectLanguage";
+
+export const ENGLISH_SIGNATURE = "en";
+export const THAI_SIGNATURE = "th";
 
 export const FACULTIES: {
   [code: string]: {
@@ -92,7 +94,7 @@ const FACULTY_SIGNATURE = "(faculty)";
 
 export const getFacultyCode = (studentId: string) => studentId.slice(8, 10);
 
-export const isEnglish = () => localStorage.getItem(LANGUAGE_KEY) === ENGLISH_SIGNATURE;
+export const isEnglish = () => localStorage.getItem(StorableKeys.LanguageKey) === ENGLISH_SIGNATURE;
 
 const getFacultyText = (studentId: string) => {
   const faculty = FACULTIES[getFacultyCode(studentId)];
@@ -101,8 +103,8 @@ const getFacultyText = (studentId: string) => {
 
 const replaceLine = (line: string) =>
   line
-    .replaceAll(NAME_SIGNATURE, getMessage(StorableKeys.Nickname))
-    .replaceAll(FACULTY_SIGNATURE, getFacultyText(getMessage(StorableKeys.ID)));
+    .replaceAll(NAME_SIGNATURE, getMessage(StorableKeys.Nickname) as string)
+    .replaceAll(FACULTY_SIGNATURE, getFacultyText(getMessage(StorableKeys.ID) as string));
 
 // The parameter of this must be t("sceneXX")
 export const replaceNameAndFaculty = (translatedTexts: string): string | string[] => {

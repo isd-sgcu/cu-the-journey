@@ -5,6 +5,7 @@
 
 const preventedRoute = [
   "/",
+  "/door-open",
   "/poc-transition",
   "/2-0",
   "/3-1",

@@ -3,10 +3,8 @@ import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
 import "../styles/scrollbar.css";
-import { saveMessage, StorableKeys } from "../MessageStore";
+import { saveMessage } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
-
-export { StorableKeys };
 
 export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
@@ -18,7 +16,7 @@ export type InputBoxScenePropsType = {
   orderKeys: string | string[]; // key or array of keys of text lines above the textarea, ex. "8-0-order"
   buttonTextKey: string;
   onTapTextKey: string;
-  storeKey: StorableKeys;
+  storeKey: string;
   t: (key: string, params?: Record<string, string>, defaultValue?: string) => string; // eslint-disable-line
 };
 

@@ -41,7 +41,7 @@ class InputManager {
   constructor(
     nameKey: string,
     placeHolderKey: string,
-    readonly storeKey: StorableKeys,
+    readonly storeKey: string,
     readonly type: InputType = InputType.NICKNAME,
   ) {
     const [g, s] = createSignal("");

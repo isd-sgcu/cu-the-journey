@@ -9,7 +9,8 @@ import {
   JSX,
   useContext,
 } from "solid-js";
-import { preventScenesSkipping } from "../MessageStore";
+import { preventScenesSkipping, saveMessage, StorableKeys } from "../MessageStore";
+
 import { useFadeSignal } from "./FadeSignalContext";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
@@ -173,11 +174,18 @@ export const TransitionProvider: Component = props => {
     setPrevented(false);
   };
 
+  const saveCurrentPath = (path: string) => {
+    saveMessage(StorableKeys.CurrentPath, path);
+    if (path === "/") return;
+    saveMessage(StorableKeys.LastSeenPath, path);
+  };
+
   // Reset all state when routes to new path
   createEffect(() => {
     // eslint-disable-next-line no-console
     console.log("Now path", router.current[0].path);
     preventScenesSkipping(router.current[0].path);
+    saveCurrentPath(router.current[0].path);
     resetAnimationFrame();
   });
 
@@ -185,10 +193,10 @@ export const TransitionProvider: Component = props => {
   createEffect(() => {
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
-      if (RouteMapping[nowRoute]) {
-        replace(RouteMapping[nowRoute]);
-      } else {
+      if (nextScene() !== "") {
         replace(nextScene());
+      } else {
+        replace(RouteMapping[nowRoute]);
       }
 
       // Prevent Race condition
@@ -267,10 +275,10 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
         const isFadeOut = transitionNumber() === fadeOutNumber;
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
-          if (RouteMapping[nowRoute]) {
-            replace(RouteMapping[nowRoute]);
-          } else {
+          if (nextScene() !== "") {
             replace(nextScene());
+          } else {
+            replace(RouteMapping[nowRoute]);
           }
         }
       }}

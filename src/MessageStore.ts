@@ -2,19 +2,6 @@
 
 import { useRouter } from "solid-app-router";
 
-export enum StorableKeys {
-  // keys are used to identify the texts
-  Nickname,
-  ID,
-  Email,
-  Scene6S3,
-  Scene8S2,
-  Scene14S1,
-  Scene16S0,
-  Scene19S1,
-  TimeCapsule,
-}
-
 const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/",
   "/landing",
@@ -29,10 +16,24 @@ const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/souvenir",
 ];
 
-export const getMessage = (key: StorableKeys): string | null =>
-  localStorage.getItem(key.toString());
+export const StorableKeys = {
+  Nickname: "Nickname",
+  ID: "ID",
+  Email: "Email",
+  Scene6S3: "Scene6S3",
+  Scene8S2: "Scene8S2",
+  Scene14S1: "Scene14S1",
+  Scene16S0: "Scene16S0",
+  Scene19S1: "Scene19S1",
+  TimeCapsule: "TimeCapsule",
+  CurrentPath: "CurrentPath",
+  LastSeenPath: "LastSeenPath",
+  LanguageKey: "LanguageKey",
+};
 
-export const saveMessage = (key: StorableKeys, val: string): void => {
+export const getMessage = (key: string): string | null => localStorage.getItem(key.toString());
+
+export const saveMessage = (key: string, val: string): void => {
   localStorage.setItem(key.toString(), val);
 };
 

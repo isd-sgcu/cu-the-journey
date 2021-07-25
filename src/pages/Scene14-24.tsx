@@ -1,6 +1,6 @@
 import { Component, createSignal } from "solid-js";
-import { clearSavedMessages, getMessage } from "../MessageStore";
-import InputBoxScene, { InputBoxScenePropsType, StorableKeys } from "../components/InputBoxScene";
+import { StorableKeys, getMessage } from "../MessageStore";
+import InputBoxScene, { InputBoxScenePropsType } from "../components/InputBoxScene";
 import { TextMiddle } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import ChoiceComponent from "../components/Choice";
@@ -133,7 +133,6 @@ const Scene24S0: Component = () => {
           name: getMessage(StorableKeys.Nickname) as string,
         },
       );
-      clearSavedMessages();
     },
   };
   return <InputBoxScene {...props} />;
