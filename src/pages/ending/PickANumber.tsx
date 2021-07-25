@@ -20,7 +20,7 @@ function PickANumber() {
   const [t] = useTranslation("pickANumber");
   return (
     <>
-      <div class="flex-grow flex flex-col items-center justify-center ">
+      <div class="flex-grow flex flex-col items-center justify-center xs:mt-6">
         <Typography variant="h6" class="leading-[20px] mb-6">
           {t("p1")}
         </Typography>
@@ -34,7 +34,7 @@ function PickANumber() {
           </Typography>
         </Routing>
       </div>
-      <Typography class="mb-[28px] text-[#90168B]">{t("footer")}</Typography>
+      <Typography class="mb-[28px] text-[#90168B] xs:mb-[20px]">{t("footer")}</Typography>
     </>
   );
 }
