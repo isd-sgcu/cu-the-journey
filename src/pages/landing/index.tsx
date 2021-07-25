@@ -1,5 +1,4 @@
 import { useTranslation } from "../../config/i18n";
-import { Routing } from "../../context/TransitionContext";
 
 function index() {
   const [t] = useTranslation("landing");
@@ -40,9 +39,7 @@ function index() {
           <p class="absolute right-[-28px] bottom-[-20px] xs:right-[-22px]">”</p>
         </div>
       </div>
-      <Routing href="/trigger-warning" class="mt-12 mb-10 text-white">
-        <button>{t("tapToContinue")}</button>
-      </Routing>
+      <h6 class="mt-12 mb-10 text-white text-sm font-medium">{t("tapToContinue")}</h6>
     </>
   );
 }
