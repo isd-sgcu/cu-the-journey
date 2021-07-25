@@ -10,6 +10,8 @@ export interface SpriteSetting {
 export interface SceneSwitcherOption {
   name: SpriteName;
   loop?: boolean;
+  animationSpeed?: number;
+  force?: boolean;
   onComplete?: () => void;
 }
 
@@ -72,25 +74,31 @@ export class SceneEngine {
 
     const intersectScenes: SpriteSetting[] = [];
 
-    mappedScenes.forEach(({ name: newName, loop = true, onComplete }) => {
-      const oldScene = this.currentScene.find(({ name }) => name === newName);
-      if (oldScene) {
-        if (loop !== oldScene.sprite.loop) {
-          oldScene.sprite.gotoAndPlay(oldScene.sprite.currentFrame);
+    mappedScenes.forEach(
+      ({ name: newName, loop = true, force = false, animationSpeed = 0.02, onComplete }) => {
+        const oldScene = this.currentScene.find(({ name }) => name === newName);
+        if (oldScene) {
+          if (loop !== oldScene.sprite.loop) {
+            oldScene.sprite.gotoAndPlay(oldScene.sprite.currentFrame);
+          }
+          oldScene.sprite.loop = loop;
+          oldScene.sprite.onComplete = onComplete;
+          intersectScenes.push(oldScene);
+        } else {
+          const newScene = this.sceneLists.find(({ name }) => name === newName);
+          if (!newScene) {
+            throw new Error(`unknown scene name: ${newName}`);
+          }
+          newScene.sprite.loop = loop;
+          newScene.sprite.animationSpeed = animationSpeed;
+          newScene.sprite.onComplete = onComplete;
+
+          if (force) {
+            intersectScenes.push(newScene);
+          } else this.willAddScene.push(newScene);
         }
-        oldScene.sprite.loop = loop;
-        oldScene.sprite.onComplete = onComplete;
-        intersectScenes.push(oldScene);
-      } else {
-        const newScene = this.sceneLists.find(({ name }) => name === newName);
-        if (!newScene) {
-          throw new Error(`unknown scene name: ${newName}`);
-        }
-        newScene.sprite.loop = loop;
-        newScene.sprite.onComplete = onComplete;
-        this.willAddScene.push(newScene);
-      }
-    });
+      },
+    );
 
     this.currentScene = intersectScenes;
 
