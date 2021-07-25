@@ -4,6 +4,7 @@ import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
 import Button from "../components/common/Button";
+import { FACULTIES, getFacultyCode } from "./TextReplacer";
 
 const t = sceneTranslator("scene2");
 
@@ -22,16 +23,6 @@ class InputManager {
   readonly name: string;
 
   readonly placeHolder: string;
-
-  // This only gets called once
-  static readonly VALID_FACULTY_CODE = (() => {
-    const codes = [];
-    // 20 - 40
-    for (let i = 20; i < 41; i += 1) {
-      codes.push(i.toString());
-    }
-    return [...codes, "51", "53", "55", "56", "58", "99", "01", "02"];
-  })();
 
   static readonly ALL_ERROR_MESSAGES: {
     [InputType: number]: string;
@@ -79,7 +70,7 @@ class InputManager {
       return false;
     }
     // check faculty code
-    if (InputManager.VALID_FACULTY_CODE.includes(id.slice(8, 10))) return true;
+    if (FACULTIES[getFacultyCode(id)]) return true;
     this.setError();
     return false;
   };
