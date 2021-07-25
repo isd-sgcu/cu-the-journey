@@ -19,7 +19,6 @@ class InputManager {
     const [g, s] = createSignal("");
     this.text = g;
     this.setText = s;
-
     this.name = t(nameKey);
     this.placeHolder = t(placeHolderKey);
   }
