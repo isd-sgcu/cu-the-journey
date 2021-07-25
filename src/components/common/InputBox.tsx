@@ -21,14 +21,17 @@ const InputBox: Component<InputBoxProps> = props => {
       : "",
   );
 
+  let hasResized = false;
+
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
       if (props.isGoingNextScene) {
         // This right below prevents resizable SmallInputBox from shrinking after clicking save
-        const eh = props.isMinimized
-          ? "height: 233px; width: 311px; padding: 30px 35px; border-radius: 10px;"
-          : "";
+        const eh =
+          props.isMinimized && hasResized
+            ? "height: 233px; width: 311px; padding: 30px 35px; border-radius: 10px;"
+            : "";
 
         newStyle += props.isGoingNextScene()
           ? `border: none; cursor: pointer; background-color: transparent;${eh}`
@@ -41,8 +44,6 @@ const InputBox: Component<InputBoxProps> = props => {
 
   const hasScrollbar = (textarea: HTMLTextAreaElement) =>
     textarea.clientHeight < textarea.scrollHeight;
-
-  let hasResized = false;
 
   return (
     <textarea
