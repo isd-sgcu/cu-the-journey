@@ -127,10 +127,7 @@ export class SceneEngine {
     const { width, height } = this.app.screen;
     [...this.currentScene, ...this.willRemoveScene].forEach(({ sprite }) => {
       sprite.updateState(delta);
-      const ratio = Math.max(width / sprite.width, height / sprite.height);
-      const newWidth = Math.ceil(sprite.width * ratio);
-      const newHeight = Math.ceil(sprite.height * ratio);
-      sprite.setSize(newWidth, newHeight);
+      sprite.resizeToApp(this.app);
     });
 
     if (this.willRemoveScene.length !== 0) {
