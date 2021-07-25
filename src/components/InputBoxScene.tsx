@@ -6,8 +6,6 @@ import "../styles/scrollbar.css";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
 
-export { StorableKeys };
-
 export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
   onButtonClicked?: () => void; // on clicking the save button

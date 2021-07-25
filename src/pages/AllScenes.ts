@@ -9,10 +9,6 @@ import Scene9to13 from "../pages/Scene9-13";
 import Scene14to24 from "../pages/Scene14-24";
 import Scene25to29 from "../pages/Scene25-29";
 
-import { StorableKeys } from "../components/InputBoxScene";
-
-export { StorableKeys };
-
 const AllScenes = {
   Scene2,
   Scene3,

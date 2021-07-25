@@ -1,8 +1,9 @@
 import type { Component } from "solid-js";
-import InputBoxScene, { StorableKeys } from "../components/InputBoxScene";
+import InputBoxScene from "../components/InputBoxScene";
 import TextComponent, { addtText } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import { AnimationRoute } from "../components/AnimationRoute";
+import { StorableKeys } from "../MessageStore";
 
 const { TextMiddle } = TextComponent;
 
