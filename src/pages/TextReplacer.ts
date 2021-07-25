@@ -101,7 +101,7 @@ const getFacultyText = (studentId: string) => {
   return isEnglish() ? faculty.en : faculty.th;
 };
 
-const replaceLine = (line: string) =>
+export const replaceLine = (line: string) =>
   line
     .replaceAll(NAME_SIGNATURE, getMessage(StorableKeys.Nickname) as string)
     .replaceAll(FACULTY_SIGNATURE, getFacultyText(getMessage(StorableKeys.ID) as string));
