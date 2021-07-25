@@ -41,26 +41,28 @@ export default (): IBackgroundMapping => {
     "/3-4": ["star-light"],
 
     //   // Scene 4
-    //   "/4-1-1": "/4-2",
-    //   "/4-1-2": "/4-2",
-    //   "/4-2": "/5-0",
+    "/4-0": ["star-dark"],
+    "/4-1": ["star-light", "leaf"],
+    "/4-1-1": ["star-light", "leaf"],
+    "/4-1-2": ["star-light", "leaf"],
+    "/4-2": ["star-light", "leaf"],
 
     //   // Scene 5
-    //   "/5-0": "/5-1",
-    //   "/5-1": "/5-2",
-    //   "/5-2": "/5-3",
-    //   "/5-3": "/5-4",
-
-    //   // Scene 5-5
-    //   "/5-5-1": "/5-5-2",
-    //   "/5-5-2": "/5-5-3",
+    "/5-0": ["star-light-full"],
+    "/5-1": ["star-light-full"],
+    "/5-2": ["star-light", "book"],
+    "/5-3": ["star-light", "book"],
+    "/5-4": ["star-light", "book"],
+    "/5-5-1": ["star-light", "book"],
+    "/5-5-2": ["star-light", "book"],
+    "/5-5-3": ["star-light", "book"],
 
     //   // Scene 6
-    //   "/6-0": "/6-1",
-    //   "/6-1": "/6-2",
-    //   "/6-2": "/6-3",
-    //   "/6-3": "/6-4",
-    //   "/6-4": "/7-0",
+    "/6-0": ["star-light", { name: "book-open", loop: false }],
+    "/6-1": ["star-light", "book-flip"],
+    "/6-2": ["star-light", "book-flip"],
+    "/6-3": ["star-light", "book-flip"],
+    "/6-4": ["star-light-full"],
 
     //   // Scene 7
     //   "/7-0": "/7-1",
