@@ -5,8 +5,8 @@ import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
 import { TransitionFade, useTransitionContext } from "../../context/TransitionContext";
-import { StorableKeys } from "../AllScenes";
-import { getMessage, isEnglish, clearSavedMessages } from "../TextReplacer";
+import { isEnglish } from "../TextReplacer";
+import { getMessage, clearSavedMessages, StorableKeys } from "../../MessageStore";
 
 export const LANGUAGE_KEY = "language";
 export const ENGLISH_SIGNATURE = "en";
