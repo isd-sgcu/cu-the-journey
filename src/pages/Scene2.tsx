@@ -7,6 +7,12 @@ import Button from "../components/common/Button";
 
 const t = sceneTranslator("scene2");
 
+enum InputType { // eslint-disable-line
+  NICKNAME,
+  ID,
+  EMAIL,
+}
+
 class InputManager {
   text: Accessor<string>;
   setText: (v: string | ((prev: string) => string)) => string; // eslint-disable-line
@@ -15,7 +21,22 @@ class InputManager {
 
   readonly placeHolder: string;
 
-  constructor(nameKey: string, placeHolderKey: string, readonly storeKey: StorableKeys) {
+  // This only gets called once
+  static readonly VALID_FACULTY_CODE = (() => {
+    const codes = [];
+    // 20 - 40
+    for (let i = 20; i < 41; i += 1) {
+      codes.push(i.toString());
+    }
+    return [...codes, "51", "53", "55", "56", "58", "99", "01", "02"];
+  })();
+
+  constructor(
+    nameKey: string,
+    placeHolderKey: string,
+    readonly storeKey: StorableKeys,
+    readonly type: InputType = InputType.NICKNAME,
+  ) {
     const [g, s] = createSignal("");
     this.text = g;
     this.setText = s;
@@ -23,20 +44,36 @@ class InputManager {
     this.placeHolder = t(placeHolderKey);
   }
 
-  save() {
-    saveMessage(this.storeKey, this.text());
-  }
+  validateEmail = (email: string) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
 
-  isEmpty() {
-    return this.text().trim() === "";
-  }
+  validateId = (id: string) => {
+    if (id.length !== 10) return false;
+    return InputManager.VALID_FACULTY_CODE.includes(id.slice(8, 10));
+  };
+
+  isValid = () => {
+    if (this.type === InputType.NICKNAME) return true;
+    if (this.type === InputType.EMAIL) return this.validateEmail(this.text());
+    return this.validateId(this.text());
+  };
+
+  // Should be called only if all input fields are filled
+  save = () => {
+    saveMessage(this.storeKey, this.text());
+  };
+
+  isEmpty = () => this.text().trim() === "";
 }
 
 const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
-    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID),
-    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email),
+    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID),
+    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL),
   ];
 
   // tells if all input boxes are filled
