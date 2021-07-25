@@ -20,7 +20,7 @@ function SelectLanguage() {
     localStorage.setItem(LANGUAGE_KEY, language);
     setPage(1);
     nextAnimationTrigger();
-    setTimeout(() => fadeOut("/landing"), 2000);
+    setTimeout(() => fadeOut("/door-open"), 2000);
   };
 
   return (
@@ -34,7 +34,7 @@ function SelectLanguage() {
       ) : (
         <div
           class="flex-grow w-full flex justify-center items-center"
-          onClick={() => fadeOut("/landing")}
+          onClick={() => fadeOut("/door-open")}
         >
           <TransitionFade order={1}>
             <Typography variant="h5">{t("sound")}</Typography>
