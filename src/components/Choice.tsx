@@ -75,7 +75,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 
   return (
     <>
-      <div class="flex h-screen justify-center items-center z-10">
+      <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
         <div class="flex flex-col items-center min-w-[20rem]">
           <TransitionFade order={0}>
             <div class="text-center w-[280px] selection:bg-purple selection:text-yellow">
