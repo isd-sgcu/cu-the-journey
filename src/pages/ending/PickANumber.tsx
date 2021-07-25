@@ -29,7 +29,7 @@ function PickANumber() {
         </div>
 
         <Routing href="/souvenir" class="mt-5">
-          <Typography variant="h6" class="underline text-[14px]">
+          <Typography variant="h6" class="underline text-[14px] cursor-pointer">
             {t("p2")}
           </Typography>
         </Routing>
