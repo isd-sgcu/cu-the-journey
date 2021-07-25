@@ -11,6 +11,7 @@ export enum StorableKeys {
   Scene16S0,
   Scene19S1,
   TimeCapsule,
+  CurrentPath,
 }
 
 export const getMessage = (key: StorableKeys): string => {
