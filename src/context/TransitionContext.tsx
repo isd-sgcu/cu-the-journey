@@ -175,6 +175,8 @@ export const TransitionProvider: Component = props => {
 
   const saveCurrentPath = (path: string) => {
     saveMessage(StorableKeys.CurrentPath, path);
+    if (path === "/") return;
+    saveMessage(StorableKeys.LastSeenPath, path);
   };
 
   // Reset all state when routes to new path
