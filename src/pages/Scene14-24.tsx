@@ -133,7 +133,6 @@ const Scene24S0: Component = () => {
           name: getMessage(StorableKeys.Nickname) as string,
         },
       );
-      clearSavedMessages();
     },
   };
   return <InputBoxScene {...props} />;

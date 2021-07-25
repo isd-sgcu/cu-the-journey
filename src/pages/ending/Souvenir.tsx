@@ -1,6 +1,8 @@
 import { useRouter } from "solid-app-router";
 import { useTranslation } from "../../config/i18n";
 import Typography from "../../components/common/Typography";
+import { clearSavedMessages, getMessage, StorableKeys, saveMessage } from "../../MessageStore";
+import { LANGUAGE_KEY } from "../../pages/landing/SelectLanguage";
 
 const headlineColor = ["#5F229F", "#0E8516", "#884BC1", "#B74AAB", "#0E8516", "#007E31", "#B74AAB"];
 const bodyColor = ["#410C89", "#006706", "#5F229F", "#90168B", "#006706", "#006021", "#90168B"];
@@ -8,6 +10,11 @@ const QrColor = ["#EADBFB", "#9BE097", "#D0B6EF", "#F5A7EC", "#9BE097", "#BCE9C7
 const QrBorderColor = ["#A984D4", "#39B836", "#A984D4", "#DD7ED2", "#39B836", "#46BD6A", "#DD7ED2"];
 
 function Souvenir() {
+  // clear all saved messages here
+  const lang = getMessage(LANGUAGE_KEY as unknown as StorableKeys) as string;
+  clearSavedMessages();
+  saveMessage(LANGUAGE_KEY as unknown as StorableKeys, lang);
+
   const [t] = useTranslation("souvenir");
   const [router] = useRouter()!;
   let number = Number(router.query.number) || 0;
