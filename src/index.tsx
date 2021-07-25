@@ -7,14 +7,17 @@ import { App } from "./app";
 import RoutingPath from "./router/RoutingPath";
 import dict from "./locales";
 import { SceneProvider } from "./components/AnimationScene";
+import { FadeSignalProvider } from "./context/FadeSignalContext";
 
 const dispose = render(
   () => (
     <I18nProvider dict={dict} locale="th">
       <Router routes={RoutingPath}>
-        <SceneProvider>
-          <App />
-        </SceneProvider>
+        <FadeSignalProvider>
+          <SceneProvider>
+            <App />
+          </SceneProvider>
+        </FadeSignalProvider>
       </Router>
     </I18nProvider>
   ),

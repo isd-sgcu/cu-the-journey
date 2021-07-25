@@ -1,12 +1,12 @@
 export default {
   "4-1": {
-    q: "เธอรู้สึกอย่างไรกับการเดินทาง",
-    c1: ["ตื่นเต้น", "/4-1-1"],
-    c2: ["กังวลใจ", "/4-1-2"],
-    c3: ["เฉย ๆ", "/4-2"],
-    c4: ["สับสนวุ่นวายใจ", "/4-1-2"]
+    q: "What do you feel about this new journey that’s about to begin?",
+    c1: ["Excited", "/4-1-1"],
+    c2: ["Nervous", "/4-1-2"],
+    c3: ["Nothing in particular", "/4-2"],
+    c4: ["Anxious", "/4-1-2"],
   },
-  "4-1-1": ["เป็นเรื่องปกติที่เราจะต้องรู้สึกตื่นเต้น", "กับการเดินทางครั้งใหม่"],
-  "4-1-2": ["อย่าพึ่งคิดมากไปเลยนะ", "เธอผ่านมันไปได้อยู่แล้วแหละ"],
-  "4-2": ["แต่ไม่ว่าเธอจะรู้สึกอย่างไร", "การเดินทางครั้งใหม่นี้ก็ได้เริ่มขึ้นแล้ว"]
+  "4-1-1": "No wonder - in the face of a new adventure, who wouldn’t be excited?",
+  "4-1-2": "That’s okay, I’m sure that you’ll be alright!",
+  "4-2": "But no matter what you feel, the journey has begun.",
 };

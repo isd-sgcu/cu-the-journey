@@ -2,6 +2,7 @@ import type { Component } from "solid-js";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import InputBoxScene, { InputBoxScenePropsType, StorableKeys } from "../components/InputBoxScene";
+import { replaceNameAndFaculty } from "./TextReplacer";
 
 const { TextMiddle } = TextComponent;
 
@@ -41,7 +42,7 @@ const Scene6S3: Component = () => {
 
 const Scene6S4: Component = () => (
   <>
-    <TextMiddle text={t("6-4")} />
+    <TextMiddle text={replaceNameAndFaculty(t("6-4"))} />
   </>
 );
 

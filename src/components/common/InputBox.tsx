@@ -21,13 +21,23 @@ const InputBox: Component<InputBoxProps> = props => {
       : "",
   );
 
+  let hasResized = false;
+
   createEffect(() =>
     setInlineStyle(prev => {
       let newStyle = prev;
-      if (props.isGoingNextScene)
+      if (props.isGoingNextScene) {
+        // This right below prevents resizable SmallInputBox from shrinking after clicking save
+        const eh =
+          props.isMinimized && hasResized
+            ? "height: 233px; width: 311px; padding: 30px 35px; border-radius: 10px;"
+            : "";
+
         newStyle += props.isGoingNextScene()
-          ? "border: none; cursor: pointer; background-color: transparent;"
+          ? `border: none; cursor: pointer; background-color: transparent;${eh}`
           : "";
+      }
+
       return newStyle;
     }),
   );
@@ -35,11 +45,13 @@ const InputBox: Component<InputBoxProps> = props => {
   const hasScrollbar = (textarea: HTMLTextAreaElement) =>
     textarea.clientHeight < textarea.scrollHeight;
 
-  let hasResized = false;
-
   return (
     <textarea
-      oninput={e => {
+      onKeyPress={e => {
+        // No new line on enter in noWrap InputBox
+        if (props.noWrap && e.key === "Enter") e.preventDefault();
+      }}
+      onKeyUp={e => {
         const self = e.target as HTMLTextAreaElement;
         setText(self.value);
 
@@ -65,6 +77,7 @@ const InputBox: Component<InputBoxProps> = props => {
       }}
       spellcheck={false}
       placeholder={props.placeHolder}
+      disabled={props.isGoingNextScene && props.isGoingNextScene()}
       style={`transition: all 300ms;${inlineStyle()}`}
       class="placeholder-primary-300 resize-none w-[311px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
     ></textarea>

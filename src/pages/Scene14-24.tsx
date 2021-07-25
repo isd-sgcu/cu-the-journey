@@ -5,12 +5,13 @@ import { TextMiddle } from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
 import ChoiceComponent from "../components/Choice";
 import { uploadTimeCapsule } from "../firebase";
+import { replaceNameAndFaculty } from "./TextReplacer";
 
 const t = sceneTranslator("scene14to24");
 
 const Scene14S0: Component = () => (
   <>
-    <TextMiddle text={t("14-0")} />
+    <TextMiddle text={replaceNameAndFaculty(t("14-0"))} />
   </>
 );
 

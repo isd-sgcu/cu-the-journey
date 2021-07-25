@@ -61,7 +61,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   };
 
   const sceneWithoutLink = (
-    <div class="flex h-screen justify-center items-center flex-col space-y-[25px]">
+    <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
         <Show
           when={typeof orderKeys === "string"}

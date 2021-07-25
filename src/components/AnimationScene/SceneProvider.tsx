@@ -4,6 +4,8 @@ import { Sound, sound } from "@pixi/sound";
 import { resources, SoundName, SpriteName } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
 import { FadeSprite } from "./Sprite/FadeSprite";
+import { ZoomSprite } from "./Sprite/ZoomSprite";
+import { BaseSprite } from "./Sprite/BaseSprite";
 
 interface ISoundControlOption {
   loop: boolean;
@@ -17,8 +19,9 @@ interface ISoundControl {
 export interface SceneProviderProps {
   app: Application;
   isLoading: Accessor<boolean>;
+  loadProgress: Accessor<number>;
   soundControl: ISoundControl;
-  sceneSwitcher: (newScenes: SceneSwitchable, onNewScene?: () => void) => void;
+  sceneSwitcher: (newScenes: SceneSwitchable, force?: boolean, onNewScene?: () => void) => void;
 }
 export const SceneContext = createContext<SceneProviderProps>();
 
@@ -32,6 +35,7 @@ export const useScene = () => {
 
 export const SceneProvider: Component = props => {
   const [isLoading, setLoading] = createSignal<boolean>(true);
+  const [loadProgress, setLoadProgress] = createSignal<number>(0);
   const app = new Application({
     width: 375,
     height: 667,
@@ -43,17 +47,30 @@ export const SceneProvider: Component = props => {
   const loader = Loader.shared;
   loader
     .add(
-      Object.values(resources)
-        .flatMap(collet => Object.values(collet))
+      Object.values(resources.sprite)
+        .map(item => Object.values(item.frames))
         .flatMap(res => res)
+        .filter(src => !loader.resources[src]),
+    )
+    .add(
+      Object.values(resources.sound)
+        .flatMap(item => item)
         .filter(src => !loader.resources[src]),
     )
     .load(() => {
       const names = Object.keys(resources.sprite) as SpriteName[];
-      const sprites = names.map(name => ({
-        name,
-        sprite: new FadeSprite(resources.sprite[name]),
-      }));
+      const sprites = names.map(name => {
+        const { frames, type } = resources.sprite[name];
+        return {
+          name,
+          sprite:
+            type === "Base"
+              ? new BaseSprite(frames)
+              : type === "Fade"
+              ? new FadeSprite(frames)
+              : new ZoomSprite(frames),
+        };
+      });
       sceneEngine.addScenes(sprites);
       app.ticker.add(delta => {
         sceneEngine.update(delta);
@@ -61,12 +78,12 @@ export const SceneProvider: Component = props => {
     });
 
   loader.onComplete.add(() => {
-    setLoading(false);
     console.log("All resources are loaded.");
+    setLoading(false);
   });
 
   loader.onProgress.add(({ progress }: Loader) => {
-    console.log(`Load resources: ${Math.round(progress)} %`);
+    setLoadProgress(Math.round(progress));
   });
 
   const soundControl = {
@@ -89,8 +106,9 @@ export const SceneProvider: Component = props => {
 
   const store = {
     app,
-    soundControl,
     isLoading,
+    loadProgress,
+    soundControl,
     sceneSwitcher: sceneEngine.sceneSwitcher,
   };
 

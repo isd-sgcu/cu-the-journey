@@ -1,4 +1,4 @@
-import { AnimatedSprite, Container, Loader, Texture } from "pixi.js";
+import { AnimatedSprite, Application, Container, Loader, Texture } from "pixi.js";
 
 type SpriteState = "LOAD" | "PROCESS" | "FINALIZE" | "DONE";
 
@@ -7,7 +7,7 @@ export interface BaseSpriteOptions {
   zIndex?: number;
 }
 
-export abstract class BaseSprite extends AnimatedSprite {
+export class BaseSprite extends AnimatedSprite {
   protected state: SpriteState = "LOAD";
 
   protected onDone?: () => void;
@@ -18,11 +18,31 @@ export abstract class BaseSprite extends AnimatedSprite {
       .map(url => loader.resources[url].texture)
       .filter(texture => typeof texture !== "undefined") as Texture[];
     super(textures);
-    super.animationSpeed = options?.animationSpeed ?? 0.04;
+    super.animationSpeed = options?.animationSpeed ?? 0.02;
     super.zIndex = options?.zIndex || 0;
   }
 
-  abstract updateState(delta: number): void;
+  updateState(_delta: number): void {
+    switch (this.state) {
+      case "LOAD":
+        this.state = "PROCESS";
+        break;
+      case "FINALIZE":
+        this.state = "DONE";
+        this.onDone?.();
+        break;
+      default:
+        break;
+    }
+  }
+
+  resizeToApp(app: Application) {
+    const { width, height } = app.screen;
+    const ratio = Math.max(width / this.width, height / this.height);
+    const newWidth = Math.ceil(this.width * ratio);
+    const newHeight = Math.ceil(this.height * ratio);
+    this.setSize(newWidth, newHeight);
+  }
 
   setup(sceneContainer: Container) {
     this.state = "LOAD";

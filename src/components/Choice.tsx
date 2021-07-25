@@ -4,7 +4,6 @@ import { TransitionFade, useTransitionContext } from "../context/TransitionConte
 interface ChoiceButtonProps {
   href: string;
   text: string;
-  isLongBtn: boolean;
   isClick: Accessor<boolean>;
   setClick: (v: boolean | ((prev: boolean) => boolean)) => boolean;
 }
@@ -12,7 +11,6 @@ interface ChoiceButtonProps {
 interface ChoiceComponentProps {
   question: string | string[];
   choices: string[] | Array<string[]>;
-  isLong?: boolean;
 }
 
 const ChoiceButton: Component<ChoiceButtonProps> = props => {
@@ -23,12 +21,9 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
         onClick={() => {
           props.setClick(() => fadeOut(props.href));
         }}
-        class={`${
-          props.isLongBtn ? "w-[220px]" : "w-[150px]"
-        } h-[40px] mt-[16px] rounded-full cursor-pointer
-                  text-[14px] leading-[28px] text-purple font-normal font-Mitr border-[1px] border-purple
-                  hover:bg-purple-light
-                  focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1`}
+        class={`break-words min-w-[150px] py-2 max-w-[100%] min-h-[40px] mt-[16px] rounded-full px-3 border-[1px] border-purple
+                hover:bg-purple-light
+                focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-mint focus:ring-offset-1`}
       >
         {props.text}
       </button>
@@ -36,25 +31,17 @@ const ChoiceButton: Component<ChoiceButtonProps> = props => {
   );
 };
 
-const getButtons = (choices: string[] | string[][], isLong: boolean = false) => {
+const getButtons = (choices: string[] | string[][]) => {
   const [isClick, setClick] = createSignal(false);
   return choices.map((choice: string | string[]) => {
     const text: string = choice[0];
     const ref: string = choice[1] ? choice[1] : "/";
-    return (
-      <ChoiceButton
-        text={text}
-        href={ref}
-        isLongBtn={isLong}
-        isClick={isClick}
-        setClick={setClick}
-      />
-    );
+    return <ChoiceButton text={text} href={ref} isClick={isClick} setClick={setClick} />;
   });
 };
 
 const ChoiceComponent: Component<ChoiceComponentProps> = props => {
-  const buttons = getButtons(props.choices, props.isLong);
+  const buttons = getButtons(props.choices);
   const question = () => {
     if (Array.isArray(props.question)) {
       return props.question.map(line => (
@@ -75,14 +62,16 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 
   return (
     <>
-      <div class="flex h-screen justify-center items-center z-10">
+      <div class="flex h-screen justify-center items-center z-10 max-w-full">
         <div class="flex flex-col items-center min-w-[20rem]">
           <TransitionFade order={0}>
-            <div class="text-center w-[280px] selection:bg-purple selection:text-yellow">
+            <div class="text-center selection:bg-purple selection:text-yellow mb-[6.5px]">
               <h5>{question}</h5>
             </div>
           </TransitionFade>
-          <TransitionFade order={1}>{buttons}</TransitionFade>
+          <TransitionFade order={1}>
+            <div class="flex flex-col max-w-full">{buttons}</div>
+          </TransitionFade>
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import {
   useContext,
 } from "solid-js";
 import { preventScenesSkipping } from "../MessageStore";
+import { useFadeSignal } from "./FadeSignalContext";
 import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
 
@@ -51,7 +52,9 @@ export const TransitionProvider: Component = props => {
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [isFadeOut, setFadeOut] = createSignal(false);
+
   const [router, { replace }] = useRouter()!;
+  const { setCurrent } = useFadeSignal()!;
 
   // Reset all state that used in this context
   const resetAnimationFrame = () => {
@@ -91,6 +94,9 @@ export const TransitionProvider: Component = props => {
       }
     } else if (!isPrevented()) {
       if (transitionNumber() === maxFrame()) {
+        const nowRoute = router.current[0].path;
+
+        setCurrent(RouteMapping[nowRoute]);
         setTransitionNumber(fadeOutNumber);
       } else if (transitionNumber() === fadeOutNumber) {
         setTransitionNumber(fadeOutFinishNumber);
@@ -154,6 +160,7 @@ export const TransitionProvider: Component = props => {
       !isAnimated() &&
       next !== router.current[0].path
     ) {
+      setCurrent(next);
       setNextScene(next);
       setTransitionNumber(fadeOutNumber);
       setFadeOut(true);
@@ -219,7 +226,7 @@ export const TransitionProvider: Component = props => {
             setFadeOut(false);
           }
         }}
-        class={`w-full flex flex-grow items-center px-6 ${
+        class={`w-full flex flex-grow items-center px-6 xs:px-5 flex-col ${
           !isPrevented() ? "cursor-pointer" : "cursor-default"
         }`}
       >

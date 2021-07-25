@@ -1,43 +1,109 @@
 import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
+import swal from "sweetalert";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
 import Button from "../components/common/Button";
+import { FACULTIES, getFacultyCode, isEnglish } from "./TextReplacer";
+
+import "../styles/swal.css";
 
 const t = sceneTranslator("scene2");
+
+enum InputType { // eslint-disable-line
+  NICKNAME,
+  ID,
+  EMAIL,
+}
 
 class InputManager {
   text: Accessor<string>;
   setText: (v: string | ((prev: string) => string)) => string; // eslint-disable-line
 
+  errorMessage: string;
+
   readonly name: string;
 
   readonly placeHolder: string;
 
-  constructor(nameKey: string, placeHolderKey: string, readonly storeKey: StorableKeys) {
+  static readonly ALL_ERROR_MESSAGES: {
+    [InputType: number]: string;
+  } = {
+    [InputType.ID]: isEnglish() ? "Please enter a valid student ID" : "โปรดใส่รหัสนิสิตที่ถูกต้อง",
+    [InputType.EMAIL]: isEnglish()
+      ? "Please enter a valid email address"
+      : "โปรดใส่ที่อยู่อีเมลล์ที่ถูกต้อง",
+  };
+
+  static readonly NOT_ERROR_MESSAGE = "";
+
+  constructor(
+    nameKey: string,
+    placeHolderKey: string,
+    readonly storeKey: StorableKeys,
+    readonly type: InputType = InputType.NICKNAME,
+  ) {
     const [g, s] = createSignal("");
     this.text = g;
     this.setText = s;
-
     this.name = t(nameKey);
     this.placeHolder = t(placeHolderKey);
+    this.errorMessage = "";
   }
 
-  save() {
+  validateEmail = (email: string) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email.toLowerCase())) return true;
+    this.setError();
+    return false;
+  };
+
+  validateId = (id: string) => {
+    // check length
+    if (id.length !== 10) {
+      this.setError();
+      return false;
+    }
+    // check if id is composed with only number digits
+    const regExNumbersOnly = /^\d+$/;
+    if (!regExNumbersOnly.test(id)) {
+      this.setError();
+      return false;
+    }
+    // check faculty code
+    if (FACULTIES[getFacultyCode(id)]) return true;
+    this.setError();
+    return false;
+  };
+
+  isValid = () => {
+    if (this.type === InputType.NICKNAME) return true;
+    if (this.type === InputType.EMAIL) return this.validateEmail(this.text());
+    return this.validateId(this.text());
+  };
+
+  // Should be called only if all input fields are filled
+  save = () => {
     saveMessage(this.storeKey, this.text());
-  }
+  };
 
-  isEmpty() {
-    return this.text().trim() === "";
-  }
+  isEmpty = () => this.text().trim() === "";
+
+  setError = () => {
+    this.errorMessage = InputManager.ALL_ERROR_MESSAGES[this.type];
+  };
+
+  getError = () => this.errorMessage;
+  clearError = () => (this.errorMessage = InputManager.NOT_ERROR_MESSAGE); // eslint-disable-line
 }
 
 const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
-    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID),
-    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email),
+    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID),
+    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL),
   ];
 
   // tells if all input boxes are filled
@@ -57,6 +123,28 @@ const Scene2S0: Component = () => {
   const { fadeOut } = useTransitionContext();
   const nextPage = "/3-0";
 
+  const showAlert = () => {
+    const errorMessages = inputManagers.map(manager => {
+      const err = manager.getError();
+      manager.clearError();
+      return err;
+    });
+
+    swal(
+      "",
+      errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
+      "error",
+      {
+        className: "font-Mitr",
+      },
+    );
+  };
+
+  const validateForms = () => {
+    const validatedResults = inputManagers.map(manager => manager.isValid());
+    return !validatedResults.includes(false);
+  };
+
   return (
     <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
@@ -74,7 +162,12 @@ const Scene2S0: Component = () => {
       </For>
       <Button
         onClick={() => {
-          if (areAllFilled()) fadeOut(nextPage);
+          if (!areAllFilled()) return;
+          if (!validateForms()) {
+            showAlert();
+            return;
+          }
+          fadeOut(nextPage);
         }}
         style={buttonStyle()}
       >

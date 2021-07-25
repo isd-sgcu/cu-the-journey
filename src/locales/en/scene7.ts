@@ -1,0 +1,16 @@
+export default {
+  "7-0": "Do you remember how it felt on your journey?",
+  "7-1-a": "Remember how hard you studied",
+  "7-1-b": "how much you prepared",
+  "7-1-c": "in order to be selected into university?",
+  "7-1-1": "It was tough, wasn’t it?",
+  "7-1-2": "But your hard work paid off.",
+  "7-2-1": "It was stressful, wasn’t it?",
+  "7-2-2": "But your hard work paid off.",
+  "7-2-a": "Remember the pressure you felt",
+  "7-2-b": "how nervous you were",
+  "7-2-c": "in the exams or interviews?",
+  "7-3": "Remember how it felt to wait for the final results?",
+  "7-3-1": "It was nerve-wracking, wasn’t it?",
+  "7-3-2": "Your hard work has paid off.",
+};
