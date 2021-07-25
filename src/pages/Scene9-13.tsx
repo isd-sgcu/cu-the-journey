@@ -3,6 +3,7 @@ import { getButtons } from "../components/Choice";
 import { AnimationRoute } from "../components/AnimationRoute";
 import TextComponent from "../components/Text";
 import { sceneTranslator } from "../config/i18n";
+import { replaceNameAndFaculty } from "./TextReplacer";
 
 const { TextBold, TextMiddle } = TextComponent;
 
@@ -22,7 +23,7 @@ const Scene10S0: Component = () => (
 
 const Scene11S0: Component = () => (
   <>
-    <TextBold text={t("11-0")} />
+    <TextBold text={replaceNameAndFaculty(t("11-0"))} />
   </>
 );
 
