@@ -1,4 +1,3 @@
-import { useRouter } from "solid-app-router";
 import { Accessor, createContext, createSignal, useContext } from "solid-js";
 
 interface IFadeSignalContext {
@@ -9,8 +8,8 @@ interface IFadeSignalContext {
 const FadeSignalContext = createContext<IFadeSignalContext>();
 
 export function FadeSignalProvider(props: { children: any }) {
-  const [router] = useRouter()!;
-  const [current, setCurrent] = createSignal(router.current[0].path);
+  const { pathname, search } = window.location;
+  const [current, setCurrent] = createSignal(pathname + search);
   return (
     <FadeSignalContext.Provider value={{ current, setCurrent }}>
       {props.children}
