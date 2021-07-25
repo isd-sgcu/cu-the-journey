@@ -13,7 +13,7 @@ interface IBackgroundMapping {
 
 export default (): IBackgroundMapping => {
   const { sceneSwitcher } = useScene();
-  const [_, { replace }] = useRouter()!;
+  const [_, { push }] = useRouter()!;
   return {
     "/": ["star-dark"],
     "/door-open": [
@@ -23,7 +23,7 @@ export default (): IBackgroundMapping => {
         animationSpeed: 0.01,
         onComplete: () => {
           sceneSwitcher(
-            [{ name: "landing", loop: false, onComplete: () => replace("/landing") }],
+            [{ name: "landing", loop: false, onComplete: () => push("/landing") }],
             true,
           );
         },

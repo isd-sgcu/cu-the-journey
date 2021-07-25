@@ -53,7 +53,7 @@ export const TransitionProvider: Component = props => {
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [isFadeOut, setFadeOut] = createSignal(false);
 
-  const [router, { replace }] = useRouter()!;
+  const [router, { push }] = useRouter()!;
   const { setCurrent } = useFadeSignal()!;
 
   // Reset all state that used in this context
@@ -193,9 +193,9 @@ export const TransitionProvider: Component = props => {
     if (transitionNumber() === fadeOutFinishNumber) {
       const nowRoute = router.current[0].path;
       if (nextScene() !== "") {
-        replace(nextScene());
+        push(nextScene());
       } else {
-        replace(RouteMapping[nowRoute]);
+        push(RouteMapping[nowRoute]);
       }
 
       // Prevent Race condition
@@ -258,7 +258,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
   const { order: propsOrder } = props;
   const order = Math.max(0, propsOrder);
 
-  const [router, { replace }] = useRouter()!;
+  const [router, { push }] = useRouter()!;
   const { setAnimated, transitionNumber, nextScene, setNextTransition } = useTransitionContext();
 
   return (
@@ -275,9 +275,9 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
         if (isFadeOut) {
           const nowRoute = router.current[0].path;
           if (nextScene() !== "") {
-            replace(nextScene());
+            push(nextScene());
           } else {
-            replace(RouteMapping[nowRoute]);
+            push(RouteMapping[nowRoute]);
           }
         }
       }}
