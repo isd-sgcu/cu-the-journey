@@ -3,11 +3,13 @@ import firebase from "firebase/app";
 import { useTranslation } from "../../config/i18n";
 import Typography from "../../components/common/Typography";
 import { clearSavedMessages, getMessage, StorableKeys, saveMessage } from "../../MessageStore";
+import Title from "../../components/souvenir/Title";
+import OpenQrButton from "../../components/souvenir/OpenQrButton";
 
-const headlineColor = ["#5F229F", "#0E8516", "#884BC1", "#B74AAB", "#0E8516", "#007E31", "#B74AAB"];
-const bodyColor = ["#410C89", "#006706", "#5F229F", "#90168B", "#006706", "#006021", "#90168B"];
-const QrColor = ["#EADBFB", "#9BE097", "#D0B6EF", "#F5A7EC", "#9BE097", "#BCE9C7", "#F5A7EC"];
-const QrBorderColor = ["#A984D4", "#39B836", "#A984D4", "#DD7ED2", "#39B836", "#46BD6A", "#DD7ED2"];
+const headlineColor = ["#884BC1", "#A8249D", "#884BC1", "#B74AAB", "#A8249D", "#008E3C", "#B74AAB"];
+const bodyColor = ["#410C89", "#58026F", "#410C89", "#FFFFFF", "#58026F", "#DEF5E4", "#FFFFFF"];
+const QrColor = ["#410C89", "#71067B", "#410C89", "#71067B", "#71067B", "#008E3C", "#71067B"];
+const QrBorderColor = ["#410C89", "#58026F", "#410C89", "#58026F", "#58026F", "#DEF5E4", "#58026F"];
 
 function Souvenir() {
   // clear all saved messages here
@@ -23,51 +25,41 @@ function Souvenir() {
     number = 0;
   }
 
-  const OpenQrImage = () => (
-    <div
-      class="w-[46px] h-[46px] flex justify-center items-center rounded-[10px]"
-      style={`border: 1px solid ${QrBorderColor[number]}`}
-    >
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 30 30"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M3.33333 3.33333V26.6667H26.6667V15H30V26.6667C30 28.5 28.5 30 26.6667 30H3.33333C1.48333 30 0 28.5 0 26.6667V3.33333C0 1.5 1.48333 0 3.33333 0H15V3.33333H3.33333ZM18.3333 3.33333V0H30V11.6667H26.6667V5.68333L10.2833 22.0667L7.93333 19.7167L24.3167 3.33333H18.3333Z"
-          fill={QrColor[number]}
-        />
-      </svg>
-    </div>
-  );
-
   return (
     <div
       class="flex flex-col flex-grow items-center w-full max-w-[327px]"
-      style={`color:${headlineColor[number]}`}
+      style={`background: linear-gradient(180deg, rgba(245, 167, 236, 0.8) 0%, rgba(245, 170, 143, 0.8) 74.48%, rgba(249, 210, 134, 0.8) 100%);`}
     >
-      <Typography variant="h2" class="mt-[19%] xs:text-[20px]">
-        Your New Journey Begins
-      </Typography>
-      <Typography variant="h4" class="mt-2 mb-[18px] xs:text-[16px]">
-        {number ? `${t("number", { number: String(number) })}` : t("notChoose")}
-      </Typography>
+      {/* Title and logo */}
+      <img
+        src="images/ftj-logo.svg"
+        class="w-[55px] h-[55px] self-start mr-5 mt-[25px] mb-[5px]"
+        alt="ftj-logo"
+      />
+      <Title number={number} fill={headlineColor[number]} language={lang} />
 
-      <div class="flex-grow mb-4 flex items-center">
+      {/* Content */}
+      <div class="flex-grow mb-4 flex items-center relative w-full justify-center">
         <Typography
           class="text-[14px] leading-[22px] xs:text-[12px]"
           style={`color:${bodyColor[number]}`}
         >
           {t(`choices.${number}`)}
         </Typography>
+
+        <div class="text-white">
+          <h1 class="absolute left-[5px] top-[10px]">“</h1>
+          <h1 class="absolute right-[5px] bottom-[0px]">”</h1>
+        </div>
       </div>
 
-      <div class="mb-[29px] w-full">
-        <Typography variant="h6" class="text-sm leading-4 tracking-[0.4px]  xs:text-[12px]">
+      {/* Footer */}
+      <div class="mb-[20px] w-full">
+        <Typography
+          variant="h6"
+          class="text-sm leading-4 tracking-[0.4px] xs:text-[12px]"
+          style={`color:${bodyColor[number]}`}
+        >
           {t("p1")}
         </Typography>
 
@@ -83,15 +75,15 @@ function Souvenir() {
         </div>
 
         {/* Mobile */}
-        <div class="flex mt-[68px] lg:hidden xs:mt-[25px] items-center">
+        <div class="flex mt-[41px] lg:hidden xs:mt-[25px] items-center">
           <Typography
             class="text-xs text-right flex-grow xs:text-[10px]"
-            style={`color:${bodyColor[number]}`}
+            style={`color:${QrBorderColor[number]}`}
           >
             {t("qrMobile")}
           </Typography>
-          <a href="https://line.me/R/ti/p/%40594hejnh" class="ml-[13px]">
-            <OpenQrImage />
+          <a href="https://line.me/R/ti/p/%40594hejnh" class="ml-[9px]">
+            <OpenQrButton qrColor={QrColor[number]} borderColor={QrBorderColor[number]} />
           </a>
         </div>
       </div>
