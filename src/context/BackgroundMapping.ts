@@ -119,7 +119,7 @@ export default (): IBackgroundMapping => {
 
     //   // Scene 18
     "/18-0": ["star-light-full"],
-    "/18-1": ["star-light-full", "post-pp-sm"],
+    "/18-1": ["star-light-full"],
 
     //   // Scene 19
     "/19-0": ["star-light-full"],

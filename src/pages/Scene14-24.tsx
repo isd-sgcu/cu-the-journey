@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, onMount } from "solid-js";
 import { StorableKeys, getMessage } from "../MessageStore";
 import InputBoxScene, { InputBoxScenePropsType } from "../components/InputBoxScene";
 import { TextMiddle } from "../components/Text";
@@ -7,6 +7,7 @@ import ChoiceComponent from "../components/Choice";
 import { uploadTimeCapsule } from "../firebase";
 import { replaceNameAndFaculty } from "./TextReplacer";
 import Typography from "../components/common/Typography";
+import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 const t = sceneTranslator("scene14to24");
 
@@ -62,17 +63,31 @@ const Scene18S0: Component = () => (
   </>
 );
 
-const Scene18S1: Component = () => (
-  <>
-    <Typography class="flex-grow flex items-end">{t("18-1")}</Typography>
-    <Typography
-      class="max-w-[200px] xs:max-w-[180px] mt-20 h-[40vh] sm:h-[267px] mb-16 overflow-y-hidden"
-      style="overflow-wrap: break-word"
-    >
-      {getMessage(StorableKeys.Scene8S2) || ""}
-    </Typography>
-  </>
-);
+const Scene18S1: Component = () => {
+  const { scheduleFrame } = useTransitionContext();
+
+  onMount(() => scheduleFrame(1));
+
+  return (
+    <div>
+      <TransitionFade order={0}>
+        <Typography class="mb-5">{t("18-1")}</Typography>
+      </TransitionFade>
+      <TransitionFade class="relative" order={1}>
+        <div class="relative">
+          <img class="max-w-[250px]" src="images/screen/post-pp-sm-1.png" />
+          <Typography
+            class="absolute top-10 left-5 px-3 max-w-[200px] h-[40vh] max-h-[220px] overflow-y-hidden"
+            style="overflow-wrap: break-word"
+            variant="p"
+          >
+            {getMessage(StorableKeys.Scene8S2) || ""}
+          </Typography>
+        </div>
+      </TransitionFade>
+    </div>
+  );
+};
 
 const Scene19S0: Component = () => (
   <>
