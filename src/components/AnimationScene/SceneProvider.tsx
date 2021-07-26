@@ -1,18 +1,14 @@
 import { Application, Loader } from "pixi.js";
 import { Accessor, Component, createContext, createSignal, onCleanup, useContext } from "solid-js";
 import { Sound, sound } from "@pixi/sound";
-import { resources, SoundName, SpriteName } from "./Resources";
+import { resources, SpriteName } from "./Resources";
 import { SceneEngine, SceneSwitchable } from "./SceneEngine";
 import { FadeSprite } from "./Sprite/FadeSprite";
 import { ZoomSprite } from "./Sprite/ZoomSprite";
 import { BaseSprite } from "./Sprite/BaseSprite";
 
-interface ISoundControlOption {
-  loop: boolean;
-}
-
 interface ISoundControl {
-  play: (name: SoundName, options?: ISoundControlOption) => void;
+  play: () => void;
   muted: () => boolean;
 }
 
@@ -36,6 +32,7 @@ export const useScene = () => {
 export const SceneProvider: Component = props => {
   const [isLoading, setLoading] = createSignal<boolean>(true);
   const [loadProgress, setLoadProgress] = createSignal<number>(0);
+  const [playSound, setPlaySound] = createSignal<boolean>(false);
   const app = new Application({
     width: 375,
     height: 667,
@@ -88,13 +85,14 @@ export const SceneProvider: Component = props => {
   });
 
   const soundControl = {
-    play: (name: SoundName, options?: ISoundControlOption) => {
-      const soundRes: any = loader.resources[resources.sound[name]];
-      const playSound: Sound = soundRes.sound;
-      if (!playSound.isPlaying) {
-        playSound.loop = options?.loop ?? false;
-        playSound.play();
-      }
+    play: () => {
+      const intro: Sound = (loader.resources[resources.sound.intro] as any).sound;
+      const loop: Sound = (loader.resources[resources.sound.loop] as any).sound;
+      if (loop.isPlaying || intro.isPlaying || playSound()) return;
+
+      setPlaySound(true);
+      // intro.play({ complete: () => loop.play({ loop: true }) });
+      loop.play({ loop: true });
     },
     muted: () => sound.toggleMuteAll(),
   };

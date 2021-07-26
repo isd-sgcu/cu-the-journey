@@ -49,7 +49,8 @@ export const resources = <const>{
     "door-open": createSpriteResource("door-open", 2, "Zoom"),
   },
   sound: {
-    bg: "music/background-sound.mp3",
+    intro: "music/intro.mp3",
+    loop: "music/loop.mp3",
   },
 };
 
