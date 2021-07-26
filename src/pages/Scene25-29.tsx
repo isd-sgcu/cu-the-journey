@@ -8,7 +8,7 @@ const t = sceneTranslator("scene25to29");
 
 const Scene25S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] min-h-[667px] max-h-[667px]">
+    <div class="absolute bg-purple w-screen max-w-[327px] min-h-[667px] max-h-[667px]">
       <TextMiddle class="text-white" text={t("25-0")} />
     </div>
   </>
@@ -16,7 +16,7 @@ const Scene25S0: Component = () => (
 
 const Scene26S0: Component = () => (
   <>
-    <div class="absolute bg-purple w-screen max-w-[375px] min-h-[667px] max-h-[667px]">
+    <div class="absolute bg-purple w-screen max-w-[327px] min-h-[667px] max-h-[667px]">
       <TextMiddle class="text-white" text={t("26-0")} />
     </div>
   </>
@@ -42,7 +42,10 @@ const Scene28S0: Component = () => {
   };
   return (
     <>
-      <TextMiddle class="tracking-[0em] min-w-[350px]" text={t(`28-0.${rand}`)}>
+      <TextMiddle
+        class="text-[14px] xs:text-[12px] tracking-[0em] max-w-[327px]"
+        text={t(`28-0.${rand}`)}
+      >
         <p class={`relative text-[13px] right-2 italic text-right tracking-[0em]`}>
           <br />
           <br />

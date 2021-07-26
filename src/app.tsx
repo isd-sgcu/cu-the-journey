@@ -15,7 +15,7 @@ export const App: Component = () => {
     locale(language);
   }
 
-  const { app, soundControl, loadProgress, isLoading } = useScene();
+  const { app, loadProgress, isLoading } = useScene();
   const resizeObserver = new ResizeObserver(() => {
     if (app.renderer) {
       app.resize?.();
@@ -59,9 +59,6 @@ export const App: Component = () => {
           </TransitionProvider>
         </Show>
         <AnimationScene />
-      </div>
-      <div class="absolute left-0 top-0 bg-white flex flex-col z-20">
-        <button onclick={() => soundControl.muted()}>toggle mute</button>
       </div>
     </div>
   );

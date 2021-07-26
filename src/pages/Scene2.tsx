@@ -146,7 +146,7 @@ const Scene2S0: Component = () => {
   };
 
   return (
-    <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
+    <div class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
       <For each={inputManagers}>
         {manager => (

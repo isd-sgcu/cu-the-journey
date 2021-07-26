@@ -19,14 +19,22 @@ export function InvitationPage(props: IInvitationPage) {
           style={{ "max-width": "250px", height: "auto" }}
         />
         <div
-          class="absolute left-5"
+          class="absolute left-6 px-2"
           style={{
             transform: "rotate(-9deg)",
             width: "157px",
             top: "7.25rem",
           }}
         >
-          <p style={{ "font-size": "0.6rem", "line-height": "3.2" }}>
+          <p
+            style={{
+              "font-size": "0.6rem",
+              "line-height": "1.6",
+              "margin-bottom": "10px",
+              overflow: "hidden",
+              "white-space": "nowrap",
+            }}
+          >
             {replaceLine("Dear (name)")}
           </p>
           <h6 style={{ "font-size": "0.6rem", "line-height": "1.6" }}>FREE YOUR MIND, Find</h6>

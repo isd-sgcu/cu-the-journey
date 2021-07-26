@@ -24,7 +24,7 @@ function PickANumber() {
         <Typography variant="h6" class="leading-[20px] mb-6">
           {t("p1")}
         </Typography>
-        <div class="flex flex-wrap justify-center max-w-[375px]">
+        <div class="flex flex-wrap justify-center max-w-[327px]">
           <Index each={Array(6)}>{(_, idx) => <Choice number={idx + 1} />}</Index>
         </div>
 
