@@ -53,12 +53,15 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const { current } = useFadeSignal();
+  const [showOrderKey, setShowOrderKey] = createSignal(true);
   const { sceneSwitcher, isLoading } = useScene();
   createEffect(() => {
     if (isGoingNextScene() && !isLoading()) {
       if (current() === "/16-0") {
+        setShowOrderKey(false);
         sceneSwitcher(["star-light", "post-pp"]);
       } else if (current() === "/24-0") {
+        setShowOrderKey(false);
         sceneSwitcher(["star-light-full", "post-yl"]);
       }
     }
@@ -75,11 +78,13 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const sceneWithoutLink = (
     <div class="flex flex-col h-[667px] max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
-        <Show
-          when={typeof orderKeys === "string"}
-          fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
-        >
-          <h5>{t(orderKeys as string)}</h5>
+        <Show when={showOrderKey()} fallback={<div class="h-[29px]"></div>}>
+          <Show
+            when={typeof orderKeys === "string"}
+            fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
+          >
+            <h5>{t(orderKeys as string)}</h5>
+          </Show>
         </Show>
       </div>
       <InputBox
@@ -92,7 +97,10 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
         when={isButtonShown()}
         // 40px below is the height of the button
         fallback={() => (
-          <h5 class="block h-[40px] " style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;">
+          <h5
+            class={`block h-[40px]`}
+            style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;"
+          >
             {isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}
           </h5>
         )}
