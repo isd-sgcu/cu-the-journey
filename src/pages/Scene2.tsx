@@ -139,6 +139,7 @@ const Scene2S0: Component = () => {
       text,
       icon: "error",
       target: document.getElementById("swal") as HTMLDivElement,
+      width: 325,
     });
   };
 
