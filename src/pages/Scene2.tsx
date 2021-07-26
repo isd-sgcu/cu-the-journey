@@ -28,10 +28,13 @@ class InputManager {
   readonly placeHolder: string;
 
   static readonly ALL_ERROR_MESSAGES: {
-    [InputType: number]: string;
+    [InputType: number]: { [lang: string]: string };
   } = {
-    [InputType.ID]: isEnglish() ? "a valid student ID" : "รหัสนิสิต",
-    [InputType.EMAIL]: isEnglish() ? "a valid email address" : "ที่อยู่อีเมลล์",
+    [InputType.ID]: { en: "a valid student ID", th: "รหัสนิสิต" },
+    [InputType.EMAIL]: {
+      en: "a valid email address",
+      th: "ที่อยู่อีเมลล์",
+    },
   };
 
   static readonly NOT_ERROR_MESSAGE = "";
@@ -90,7 +93,8 @@ class InputManager {
   isEmpty = () => this.text().trim() === "";
 
   setError = () => {
-    this.errorMessage = InputManager.ALL_ERROR_MESSAGES[this.type];
+    const err = InputManager.ALL_ERROR_MESSAGES[this.type];
+    this.errorMessage = isEnglish() ? err.en : err.th;
   };
 
   getError = () => this.errorMessage;
