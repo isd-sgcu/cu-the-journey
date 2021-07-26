@@ -41,9 +41,9 @@ export default (): IBackgroundMapping => {
     "/3-0": ["star-light", "leaf-og"],
     "/3-1": ["star-light", "leaf-og"],
     "/3-2": ["star-light", "leaf-og"],
-    "/3-3": ["star-light"],
-    "/3-3-1": ["star-light"],
-    "/3-4": ["star-light"],
+    "/3-3": ["star-light", "leaf-og"],
+    "/3-3-1": ["star-light", "leaf-og"],
+    "/3-4": ["star-light", "leaf-og"],
 
     //   // Scene 4
     "/4-0": ["star-dark"],
