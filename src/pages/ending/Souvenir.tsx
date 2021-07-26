@@ -14,7 +14,7 @@ function Souvenir() {
   const lang = getMessage(StorableKeys.LanguageKey) as string;
   clearSavedMessages();
   saveMessage(StorableKeys.LanguageKey, lang);
-  firebase.analytics().logEvent("Ending", { page_name: "Souvenir" });
+  firebase.analytics().logEvent("screen_view");
 
   const [t] = useTranslation("souvenir");
   const [router] = useRouter()!;
