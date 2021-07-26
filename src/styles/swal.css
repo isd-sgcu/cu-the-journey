@@ -8,3 +8,7 @@
   background-color: #5f229f;
   border: 1px solid #a984d4;
 }
+
+.swal-modal {
+  width: 300px;
+}

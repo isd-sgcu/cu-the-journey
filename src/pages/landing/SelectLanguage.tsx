@@ -1,6 +1,6 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
-import Swal from "sweetalert2";
 import { createSignal, onMount } from "solid-js";
+import swal from "sweetalert";
 import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
@@ -25,15 +25,16 @@ const wasNotFinished = () => {
 const resumeIfWantTo = () => {
   const { fadeOut } = useTransitionContext()!;
 
-  Swal.fire({
+  swal({
+    title: "",
     text: isEnglish()
       ? "It looks like you did not finish last time.\nDo you want to continue where you left off?"
       : "เหมือนว่าคุณยังเล่นไม่จบครั้งที่แล้วนะ\nอยากเริ่มต่อจากครั้งที่แล้วไหม?",
-    icon: "question",
-    showCancelButton: true,
-    width: 325,
-  }).then(result => {
-    if (result.isConfirmed) {
+    icon: "warning",
+    buttons: true as unknown as [boolean], // this can actually be a boolean
+    dangerMode: true,
+  }).then(willResume => {
+    if (willResume) {
       fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
     } else clearSavedMessages();
   });
