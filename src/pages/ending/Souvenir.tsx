@@ -1,4 +1,5 @@
 import { useRouter } from "solid-app-router";
+import firebase from "firebase/app";
 import { useTranslation } from "../../config/i18n";
 import Typography from "../../components/common/Typography";
 import { clearSavedMessages, getMessage, StorableKeys, saveMessage } from "../../MessageStore";
@@ -13,6 +14,7 @@ function Souvenir() {
   const lang = getMessage(StorableKeys.LanguageKey) as string;
   clearSavedMessages();
   saveMessage(StorableKeys.LanguageKey, lang);
+  firebase.analytics().logEvent("Ending", { page_name: "Souvenir" });
 
   const [t] = useTranslation("souvenir");
   const [router] = useRouter()!;
