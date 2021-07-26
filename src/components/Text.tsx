@@ -19,7 +19,7 @@ export function addtText(text: string | string[]): string | JSX.Element {
 }
 
 const TextBold: Component<TextProps> = props => (
-  <div class={`flex h-[667px] w-[375px] justify-center items-center z-10 ${props.class}`}>
+  <div class={`flex h-[667px] max-w-[327px] justify-center items-center z-10 ${props.class}`}>
     <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
       <h2>{addtText(props.text)}</h2>
     </div>
@@ -27,9 +27,10 @@ const TextBold: Component<TextProps> = props => (
 );
 
 const TextMiddle: Component<TextProps> = props => (
-  <div class={`flex h-[667px] w-[375px] justify-center items-center z-10 ${props.class}`}>
+  <div class={`flex h-[667px] max-w-[327px] justify-center items-center z-10 ${props.class}`}>
     <div
       class={`text-purple text-[16px] text-center leading=[24px] tracking-[0.5px] font-BaiJam font-normal ${props.class}`}
+      style="overflow-wrap: break-word;max-width:100%"
     >
       <p>{addtText(props.text)}</p>
       {props.children}

@@ -59,7 +59,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   };
 
   const sceneWithoutLink = (
-    <div class="flex flex-col h-[667px] w-[375px] justify-center items-center z-10 space-y-[24px] purple">
+    <div class="flex flex-col h-[667px] max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
         <Show
           when={typeof orderKeys === "string"}
@@ -78,7 +78,9 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
         when={isButtonShown()}
         // 40px below is the height of the button
         fallback={() => (
-          <h5 class="block h-[40px]">{isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}</h5>
+          <h5 class="block h-[40px] " style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;">
+            {isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}
+          </h5>
         )}
       >
         <Button children={t(buttonTextKey)} onClick={proceed} />

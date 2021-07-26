@@ -6,6 +6,7 @@ import { sceneTranslator } from "../config/i18n";
 import ChoiceComponent from "../components/Choice";
 import { uploadTimeCapsule } from "../firebase";
 import { replaceNameAndFaculty } from "./TextReplacer";
+import Typography from "../components/common/Typography";
 
 const t = sceneTranslator("scene14to24");
 
@@ -107,7 +108,8 @@ const Scene22S0: Component = () => (
 
 const Scene23S0: Component = () => (
   <>
-    <TextMiddle text={t("23-0")} class="mt-64" />
+    <div class="flex-grow" />
+    <Typography class="mb-20 xs:mb-10">{t("23-0")}</Typography>
   </>
 );
 

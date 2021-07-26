@@ -38,7 +38,7 @@ const MultiStepScene: Component<MultiStepScenePropsType> = props => {
     <>
       <div
         // 375px to match with the visible content width
-        class="w-[375px]"
+        class="max-w-[327px]"
         onclick={() => setStep(prev => ++prev)} // eslint-disable-line
       >
         <Show when={step() === textKeys.length - 1} fallback={sceneWithoutLink}>
