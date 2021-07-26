@@ -5,6 +5,8 @@ import InputBox from "./common/InputBox";
 import "../styles/scrollbar.css";
 import { saveMessage } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
+import { useFadeSignal } from "../context/FadeSignalContext";
+import { useScene } from "./AnimationScene";
 
 export type InputBoxScenePropsType = {
   isMinimized?: boolean; // shrink down the height of the textarea
@@ -49,6 +51,18 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   });
 
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
+
+  const { current } = useFadeSignal();
+  const { sceneSwitcher, isLoading } = useScene();
+  createEffect(() => {
+    if (isGoingNextScene() && !isLoading()) {
+      if (current() === "/16-0") {
+        sceneSwitcher(["star-light", "post-pp"]);
+      } else if (current() === "/24-0") {
+        sceneSwitcher(["star-light-full", "post-yl"]);
+      }
+    }
+  });
 
   const proceed = () => {
     saveMessage(storeKey, textGetter());
