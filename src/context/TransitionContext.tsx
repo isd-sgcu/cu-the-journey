@@ -143,7 +143,10 @@ export const TransitionProvider: Component = props => {
 
   // Provide fade out and push to next scene
   const fadeOut = (next: string, force?: boolean) => {
-    if ((transitionNumber() !== -1 && !isAnimated() && next !== router.current[0].path) || force) {
+    if (
+      (transitionNumber() === maxFrame() && !isAnimated() && next !== router.current[0].path) ||
+      force
+    ) {
       setCurrent(next);
       setNextScene(next);
       setTransitionNumber(fadeOutNumber);
