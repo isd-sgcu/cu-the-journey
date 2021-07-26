@@ -24,7 +24,7 @@ const Scene10S0: Component = () => (
 
 const Scene11S0: Component = () => (
   <div
-    class="max-w-full w-full min-h-[244px] flex items-center bg-[#FFFFFFCC] rounded-[10px]"
+    class="max-w-[327px] w-full min-h-[244px] flex items-center bg-[#FFFFFFCC] rounded-[10px]"
     style="border: 1px solid #5F229F"
   >
     <Typography
