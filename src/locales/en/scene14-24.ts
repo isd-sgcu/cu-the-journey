@@ -15,7 +15,7 @@ export default {
   "16-tap": "Tap to continue",
   "17-0": ["In the journey forward,", "no matter what lays in your path", "..."],
   "18-0": ["don't be too hard on yourself.", "Just give it your all!!", "💜"],
-  "18-1": ["Whenever you feel down,", "don’t forget to compliment yourself.", "", "Like this:", ""],
+  "18-1": "Whenever you feel down,\ndon’t forget to compliment yourself.\n\nLike this:",
   "19-0": {
     q: "Is there anything you really want to try while on this journey?",
     c1: ["Yes, there is", "19-1"],

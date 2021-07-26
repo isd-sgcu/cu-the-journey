@@ -64,7 +64,13 @@ const Scene18S0: Component = () => (
 
 const Scene18S1: Component = () => (
   <>
-    <TextMiddle children={getMessage(StorableKeys.Scene8S2)} text={t("18-1")} />
+    <Typography class="flex-grow flex items-end">{t("18-1")}</Typography>
+    <Typography
+      class="max-w-[200px] xs:max-w-[180px] mt-20 h-[40vh] sm:h-[267px] mb-16 overflow-y-hidden"
+      style="overflow-wrap: break-word"
+    >
+      {getMessage(StorableKeys.Scene8S2) || ""}
+    </Typography>
   </>
 );
 
