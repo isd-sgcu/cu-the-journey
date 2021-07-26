@@ -1,5 +1,5 @@
 import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
@@ -28,12 +28,13 @@ class InputManager {
   readonly placeHolder: string;
 
   static readonly ALL_ERROR_MESSAGES: {
-    [InputType: number]: string;
+    [InputType: number]: { [lang: string]: string };
   } = {
-    [InputType.ID]: isEnglish() ? "Please enter a valid student ID" : "โปรดใส่รหัสนิสิตที่ถูกต้อง",
-    [InputType.EMAIL]: isEnglish()
-      ? "Please enter a valid email address"
-      : "โปรดใส่ที่อยู่อีเมลล์ที่ถูกต้อง",
+    [InputType.ID]: { en: "a valid student ID", th: "รหัสนิสิต" },
+    [InputType.EMAIL]: {
+      en: "a valid email address",
+      th: "ที่อยู่อีเมลล์",
+    },
   };
 
   static readonly NOT_ERROR_MESSAGE = "";
@@ -92,7 +93,8 @@ class InputManager {
   isEmpty = () => this.text().trim() === "";
 
   setError = () => {
-    this.errorMessage = InputManager.ALL_ERROR_MESSAGES[this.type];
+    const err = InputManager.ALL_ERROR_MESSAGES[this.type];
+    this.errorMessage = isEnglish() ? err.en : err.th;
   };
 
   getError = () => this.errorMessage;
@@ -130,14 +132,19 @@ const Scene2S0: Component = () => {
       return err;
     });
 
-    swal(
-      "",
-      errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
-      "error",
-      {
-        className: "font-Mitr",
-      },
-    );
+    const isUsingEnglish = isEnglish();
+    let text = isUsingEnglish ? "Please enter " : "โปรดใส่";
+    text += errorMessages
+      .filter(err => err !== InputManager.NOT_ERROR_MESSAGE)
+      .join(isUsingEnglish ? " and " : "และ");
+    text += isUsingEnglish ? "." : "ที่ถูกต้อง";
+    Swal.fire({
+      title: "",
+      text,
+      icon: "error",
+      target: document.getElementById("swal") as HTMLDivElement,
+      width: 325,
+    });
   };
 
   const validateForms = () => {
