@@ -42,6 +42,24 @@ const TransitionContext = createContext<ITransitionProvider>();
 const fadeOutNumber = -1;
 const fadeOutFinishNumber = -2;
 
+const elem = document.getElementById("app") as HTMLElement & {
+  mozRequestFullScreen(): Promise<void>;
+  webkitRequestFullscreen(): Promise<void>;
+  msRequestFullscreen(): Promise<void>;
+};
+
+const fullScreen = () => {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE11 */
+    elem.msRequestFullscreen();
+  }
+};
+
 export const TransitionProvider: Component = props => {
   const [transitionNumber, setTransitionNumber] = createSignal(0);
   const [isAnimated, setAnimated] = createSignal(false);
@@ -53,6 +71,7 @@ export const TransitionProvider: Component = props => {
   const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [isFadeOut, setFadeOut] = createSignal(false);
+  const [isFullScreen, setFullScreen] = createSignal(true);
 
   const [router, { push }] = useRouter()!;
   const { setCurrent } = useFadeSignal()!;
@@ -223,6 +242,10 @@ export const TransitionProvider: Component = props => {
       <div
         onClick={el => {
           el.stopPropagation();
+          if (isFullScreen()) {
+            fullScreen();
+            setFullScreen(false);
+          }
           if (
             (transitionNumber() === -1 && !isFadeOut()) ||
             transitionNumber() !== -1 ||
