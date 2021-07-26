@@ -26,7 +26,7 @@ export const resources = <const>{
     leaf: createSpriteResource("leaf", 4),
     book: createSpriteResource("book", 3),
     "book-open": createSpriteResource("book-open", 3),
-    "book-flip": createSpriteResource("book-flip", 5),
+    "book-flip": createSpriteResource("book-flip", 4),
     "book-close": createSpriteResource("book-close", 4),
     "book-first": createSpriteResource("book-first", 4),
     "post-pp": createSpriteResource("post-pp", 2),
