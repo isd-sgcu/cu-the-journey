@@ -26,7 +26,7 @@ export const App: Component = () => {
     }
   });
 
-  const [, setFullScreen] = createSignal(true);
+  const [isFullScreen, setFullScreen] = createSignal(true);
   createEffect(() => {
     if (!isLoading()) {
       setFullScreen(false);
@@ -38,15 +38,22 @@ export const App: Component = () => {
   });
 
   return (
-    <div>
-      <div id="swal"></div>
+    <div
+      class="relative w-screen min-h-screen flex justify-center items-center"
+      style="
+    -webkit-tap-highlight-color: transparent; /* Mobile */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */"
+    >
       <div
-        class="relative w-screen min-h-screen flex justify-center items-center"
-        style="
-        -webkit-tap-highlight-color: transparent; /* Mobile */
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */"
+        ref={ref => {
+          app.resizeTo = ref;
+          resizeObserver.observe(ref);
+        }}
+        class={`transition-all duration-4000 ease-in-out w-screen min-h-screen flex justify-center items-center flex-col text-center ${
+          isFullScreen() ? "" : "sm:w-[375px] sm:min-h-[667px]"
+        } `}
       >
         <Show when={!isLoading()} fallback={<div>Loading... {loadProgress()} %</div>}>
           <TransitionProvider>
