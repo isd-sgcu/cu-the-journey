@@ -68,7 +68,7 @@ export default {
       "Today, I'm honored to welcome a new friend into our university.",
       "Apart from the blessings of happiness and well-being,",
       "I'd also like to take opportunity to tell you; Use this opportunity to the fullest.",
-      "Learn as much as you can, and look back at the problems of the people who live bere.",
+      "Learn as much as you can, and look back at the problems of the people who live here.",
       "We may find a new aspect of our lives, and the connection between you and everyone in the community.",
       "Let's make this university a better place. 🙂",
     ],
