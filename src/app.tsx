@@ -41,6 +41,7 @@ export const App: Component = () => {
     <div
       class="relative w-screen min-h-screen flex justify-center items-center"
       style="
+    -webkit-tap-highlight-color: transparent; /* Mobile */
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */"
