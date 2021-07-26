@@ -7,24 +7,6 @@ import "./firebase";
 import { StorableKeys } from "./MessageStore";
 import { ENGLISH_SIGNATURE, THAI_SIGNATURE } from "./pages/TextReplacer";
 
-const elem = document.getElementById("app") as HTMLElement & {
-  mozRequestFullScreen(): Promise<void>;
-  webkitRequestFullscreen(): Promise<void>;
-  msRequestFullscreen(): Promise<void>;
-};
-
-function fullScreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) {
-    /* Safari */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    /* IE11 */
-    elem.msRequestFullscreen();
-  }
-}
-
 export const App: Component = () => {
   // Set language
   const [, { locale }] = useI18n();
@@ -54,8 +36,6 @@ export const App: Component = () => {
   onCleanup(() => {
     resizeObserver.disconnect();
   });
-
-  fullScreen();
 
   return (
     <div
