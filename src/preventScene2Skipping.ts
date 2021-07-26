@@ -12,6 +12,7 @@ const PREVENT_SKIPPING_IGNORE_PATHS = [
   "/27-0",
   "/28-0",
   "/29-0",
+  "*all",
   "/pick-a-number",
   "/souvenir",
 ];
