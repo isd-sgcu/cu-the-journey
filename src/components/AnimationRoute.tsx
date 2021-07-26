@@ -1,14 +1,13 @@
-import { Component, For, JSX, onCleanup, onMount } from "solid-js";
+import { Component, For, JSX, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface IAnimationRoute {
   children: JSX.Element[];
-  transitionDur?: number; // ms
 }
 
 export const AnimationRoute: Component<IAnimationRoute> = props => {
   const { scheduleFrame } = useTransitionContext();
-  const { children, transitionDur } = props;
+  const { children } = props;
 
   onMount(() => {
     scheduleFrame(children.length - 1);

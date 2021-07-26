@@ -1,4 +1,4 @@
-import { Accessor, Component, createSignal, onCleanup, onMount } from "solid-js";
+import { Accessor, Component, createSignal, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface ChoiceButtonProps {
