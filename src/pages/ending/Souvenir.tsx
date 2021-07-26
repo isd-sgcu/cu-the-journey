@@ -26,10 +26,7 @@ function Souvenir() {
   }
 
   return (
-    <div
-      class="flex flex-col flex-grow items-center w-full max-w-[327px]"
-      style={`background: linear-gradient(180deg, rgba(245, 167, 236, 0.8) 0%, rgba(245, 170, 143, 0.8) 74.48%, rgba(249, 210, 134, 0.8) 100%);`}
-    >
+    <div class="flex flex-col flex-grow items-center w-full max-w-[327px]">
       {/* Title and logo */}
       <img
         src="images/ftj-logo.svg"
