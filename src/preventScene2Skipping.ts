@@ -25,7 +25,10 @@ export const areScenesSkipped = () => {
     StorableKeys.Email,
     StorableKeys.LanguageKey,
   ];
-  return necessaryKeys.some(key => getMessage(key) === null);
+  return necessaryKeys.some(key => {
+    const message = getMessage(key);
+    return message === null || message === "";
+  });
 };
 
 export const restartApp = () => {
