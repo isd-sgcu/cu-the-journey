@@ -16,7 +16,7 @@ import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
 
 interface ITransitionProvider {
-  scheduleFrame: (num: number) => void;
+  scheduleFrame: (num: number, wait?: number) => void;
   isAnimated: Accessor<boolean>;
   setAnimated: (val: boolean) => boolean;
   nextAnimationTrigger: () => void;
@@ -28,6 +28,7 @@ interface ITransitionProvider {
   setNextTransition: () => void;
   cancelPrevented: () => void;
   maxFrame: Accessor<number>;
+  waitingOrder: Accessor<number>;
 }
 
 interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -69,6 +70,7 @@ export const TransitionProvider: Component = props => {
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [isFadeOut, setFadeOut] = createSignal(false);
   const [isFullScreen, setFullScreen] = createSignal(true);
+  const [waitingOrder, setWaitingOrder] = createSignal(-99);
 
   const [router, { push }] = useRouter()!;
   const { setCurrent } = useFadeSignal()!;
@@ -79,6 +81,7 @@ export const TransitionProvider: Component = props => {
       setTransitionNumber(0);
       setAnimated(false);
       setMaxFrame(1);
+      setWaitingOrder(-99);
       setNextScene("");
       setFadeOut(false);
 
@@ -127,10 +130,14 @@ export const TransitionProvider: Component = props => {
   };
 
   // This function will be called to setup before scheduleFrameHelper
-  const scheduleFrame = (num: number) => {
+  const scheduleFrame = (num: number, wait?: number) => {
     const newNum = Math.max(num, 0);
 
     setMaxFrame(newNum * 2 + 1);
+
+    if (wait) {
+      setWaitingOrder(wait);
+    }
   };
 
   // Provide fade out and push to next scene
@@ -193,6 +200,7 @@ export const TransitionProvider: Component = props => {
         setNextTransition,
         cancelPrevented,
         maxFrame,
+        waitingOrder,
       }}
     >
       <div
@@ -203,9 +211,10 @@ export const TransitionProvider: Component = props => {
             setFullScreen(false);
           }
           if (
-            (transitionNumber() === -1 && !isFadeOut()) ||
-            transitionNumber() !== -1 ||
-            !isPrevented()
+            ((transitionNumber() === -1 && !isFadeOut()) ||
+              transitionNumber() !== -1 ||
+              !isPrevented()) &&
+            waitingOrder() !== transitionNumber()
           ) {
             clickAction();
           } else if (isFadeOut()) {

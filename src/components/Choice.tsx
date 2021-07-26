@@ -56,7 +56,7 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
 
   const { scheduleFrame } = useTransitionContext(true)!;
 
-  onMount(() => scheduleFrame(2));
+  onMount(() => scheduleFrame(1));
 
   return (
     <>
