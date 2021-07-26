@@ -57,7 +57,7 @@ export const App: Component = () => {
       >
         <Show when={!isLoading()} fallback={<div>Loading... {loadProgress()} %</div>}>
           <TransitionProvider>
-            <TransitionFade order={0}>
+            <TransitionFade order={0} isOuter={true}>
               <Route />
             </TransitionFade>
           </TransitionProvider>
