@@ -54,11 +54,9 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     return props.question;
   };
 
-  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true)!;
+  const { scheduleFrame } = useTransitionContext(true)!;
 
-  onMount(() => scheduleFrame(1, 1000));
-
-  onCleanup(() => resetAnimationFrame());
+  onMount(() => scheduleFrame(2));
 
   return (
     <>

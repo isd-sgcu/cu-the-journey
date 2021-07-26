@@ -16,8 +16,7 @@ import PreventRoute from "./PreventRoute";
 import RouteMapping from "./RouteMapping";
 
 interface ITransitionProvider {
-  transitionQueue: Accessor<boolean>;
-  scheduleFrame: (num: number, timems: number) => void;
+  scheduleFrame: (num: number) => void;
   isAnimated: Accessor<boolean>;
   setAnimated: (val: boolean) => boolean;
   nextAnimationTrigger: () => void;
@@ -28,10 +27,12 @@ interface ITransitionProvider {
   setNextScene: (prev: string) => string;
   setNextTransition: () => void;
   cancelPrevented: () => void;
+  maxFrame: Accessor<number>;
 }
 
 interface ITransitionFadeProp extends JSX.HTMLAttributes<HTMLDivElement> {
   order: number;
+  isOuter?: boolean;
 }
 
 interface IRouting extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -63,12 +64,8 @@ const fullScreen = () => {
 export const TransitionProvider: Component = props => {
   const [transitionNumber, setTransitionNumber] = createSignal(0);
   const [isAnimated, setAnimated] = createSignal(false);
-  const [transitionQueue, setTransitionQueue] = createSignal(false);
   const [nextScene, setNextScene] = createSignal("/");
-  const [frame, setFrame] = createSignal(0);
-  const [time, setTime] = createSignal(0);
   const [maxFrame, setMaxFrame] = createSignal(1);
-  const [nowTransition, setNowTransition] = createSignal<number>(-1);
   const [isPrevented, setPrevented] = createSignal<boolean>(true);
   const [isFadeOut, setFadeOut] = createSignal(false);
   const [isFullScreen, setFullScreen] = createSignal(true);
@@ -80,13 +77,9 @@ export const TransitionProvider: Component = props => {
   const resetAnimationFrame = () => {
     batch(() => {
       setTransitionNumber(0);
-      setTransitionQueue(false);
       setAnimated(false);
-      setFrame(0);
-      setTime(0);
       setMaxFrame(1);
       setNextScene("");
-      setNowTransition(-1);
       setFadeOut(false);
 
       setPrevented(PreventRoute.indexOf(router.current[0].path) !== -1);
@@ -94,9 +87,7 @@ export const TransitionProvider: Component = props => {
   };
 
   const setNextTransition = () => {
-    if (time() === 0 || (time() !== 0 && frame() === 0)) {
-      setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
-    }
+    setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
   };
 
   // Trigger the next frame animation
@@ -110,7 +101,7 @@ export const TransitionProvider: Component = props => {
         if (nowNum + 1 === maxFrame()) {
           setAnimated(false);
         }
-        setTransitionNumber(prev => prev + 1);
+        setNextTransition();
       }
     } else if (!isPrevented()) {
       if (transitionNumber() === maxFrame()) {
@@ -121,65 +112,30 @@ export const TransitionProvider: Component = props => {
       } else if (transitionNumber() === fadeOutNumber) {
         setTransitionNumber(fadeOutFinishNumber);
       } else if (transitionNumber() < maxFrame()) {
-        setTransitionNumber(prev => Math.min(prev + 1, maxFrame()));
+        setNextTransition();
       }
-    }
-  };
-
-  // This is where sequencial transition begin
-  // If the frame is still remaining then make the timeout
-  const scheduleFrameHelper = (num: number, timems: number) => {
-    setFrame(num);
-    if (num > 0) {
-      const timeOut = window.setTimeout(() => {
-        nextAnimationTrigger();
-        scheduleFrameHelper(num - 1, timems);
-      }, timems);
-
-      setNowTransition(timeOut);
-    } else {
-      setTransitionQueue(false);
-      setNowTransition(-1);
     }
   };
 
   // Handle the click event
   const clickAction = () => {
-    const timeOutId = nowTransition();
-
-    if (timeOutId !== -1) {
-      clearTimeout(timeOutId);
-
+    if (!isPrevented()) {
       nextAnimationTrigger();
-      scheduleFrameHelper(frame() - 1, time());
-    } else if (!isPrevented()) {
-      nextAnimationTrigger();
-    } else if (isPrevented() && frame() !== maxFrame()) {
+    } else if (isPrevented() && transitionNumber() !== maxFrame()) {
       nextAnimationTrigger();
     }
   };
 
   // This function will be called to setup before scheduleFrameHelper
-  const scheduleFrame = (num: number, timems: number) => {
+  const scheduleFrame = (num: number) => {
     const newNum = Math.max(num, 0);
-    const newTimes = Math.max(timems, 0);
 
-    setMaxFrame(newNum + 1);
-    setFrame(newNum);
-    setTime(newTimes);
-
-    setTransitionQueue(true);
-    scheduleFrameHelper(newNum, newTimes);
+    setMaxFrame(newNum * 2 + 1);
   };
 
   // Provide fade out and push to next scene
   const fadeOut = (next: string) => {
-    if (
-      transitionNumber() !== -1 &&
-      !transitionQueue() &&
-      !isAnimated() &&
-      next !== router.current[0].path
-    ) {
+    if (transitionNumber() !== -1 && !isAnimated() && next !== router.current[0].path) {
       setCurrent(next);
       setNextScene(next);
       setTransitionNumber(fadeOutNumber);
@@ -225,7 +181,6 @@ export const TransitionProvider: Component = props => {
   return (
     <TransitionContext.Provider
       value={{
-        transitionQueue,
         isAnimated,
         setAnimated,
         nextScene,
@@ -237,6 +192,7 @@ export const TransitionProvider: Component = props => {
         resetAnimationFrame,
         setNextTransition,
         cancelPrevented,
+        maxFrame,
       }}
     >
       <div
@@ -278,19 +234,20 @@ export const useTransitionContext = (isReset?: boolean) => {
 // The wrapper for wrapping the component that want to fade (By default is wrapping at the root component)
 // Need to specify parameter "order" for ordering component displaying
 export const TransitionFade: Component<ITransitionFadeProp> = props => {
-  const { order: propsOrder } = props;
-  const order = Math.max(0, propsOrder);
+  const { order: propsOrder, isOuter } = props;
+  const { setAnimated, transitionNumber, nextScene, setNextTransition, maxFrame } =
+    useTransitionContext();
+
+  const order = Math.max(0, propsOrder * 2);
 
   const [router, { push }] = useRouter()!;
-  const { setAnimated, transitionNumber, nextScene, setNextTransition } = useTransitionContext();
-
   return (
     <div
       onAnimationStart={() => setAnimated(true)}
       onAnimationEnd={el => {
         setAnimated(false);
 
-        if (el.animationName === "fadeIn") {
+        if (el.animationName === "fadeIn" && (!isOuter || maxFrame() === 1)) {
           setNextTransition();
         }
 
