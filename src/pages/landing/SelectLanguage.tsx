@@ -1,5 +1,5 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
-import { createSignal, onMount } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 import Swal from "sweetalert2";
 import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
@@ -34,7 +34,7 @@ const resumeIfWantTo = () => {
     width: 325,
   }).then(result => {
     if (result.isConfirmed) {
-      fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
+      fadeOut(getMessage(StorableKeys.LastSeenPath) as string, true);
     } else clearSavedMessages();
   });
 };
@@ -45,7 +45,8 @@ function SelectLanguage() {
   const [, { locale }] = useI18n();
   const [page, setPage] = createSignal<number>(0);
   const [t] = useTranslation("landing");
-  const { scheduleFrame, cancelPrevented, nextAnimationTrigger } = useTransitionContext();
+  const { scheduleFrame, cancelPrevented, nextAnimationTrigger, resetAnimationFrame } =
+    useTransitionContext(true);
 
   const handleClick = (language: string) => {
     locale(language);
@@ -56,6 +57,8 @@ function SelectLanguage() {
   };
 
   onMount(() => scheduleFrame(1, 1));
+
+  onCleanup(() => resetAnimationFrame());
 
   return (
     <>

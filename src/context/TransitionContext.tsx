@@ -7,6 +7,7 @@ import {
   createEffect,
   createSignal,
   JSX,
+  splitProps,
   useContext,
 } from "solid-js";
 import { preventScenesSkipping } from "../preventScene2Skipping";
@@ -22,7 +23,7 @@ interface ITransitionProvider {
   nextAnimationTrigger: () => void;
   resetAnimationFrame: () => void;
   transitionNumber: Accessor<number>;
-  fadeOut: (prev: string) => boolean;
+  fadeOut: (prev: string, force?: boolean) => boolean;
   nextScene: Accessor<string>;
   setNextScene: (prev: string) => string;
   setNextTransition: () => void;
@@ -141,8 +142,8 @@ export const TransitionProvider: Component = props => {
   };
 
   // Provide fade out and push to next scene
-  const fadeOut = (next: string) => {
-    if (transitionNumber() !== -1 && !isAnimated() && next !== router.current[0].path) {
+  const fadeOut = (next: string, force?: boolean) => {
+    if ((transitionNumber() !== -1 && !isAnimated() && next !== router.current[0].path) || force) {
       setCurrent(next);
       setNextScene(next);
       setTransitionNumber(fadeOutNumber);
@@ -243,11 +244,11 @@ export const useTransitionContext = (isReset?: boolean) => {
 // The wrapper for wrapping the component that want to fade (By default is wrapping at the root component)
 // Need to specify parameter "order" for ordering component displaying
 export const TransitionFade: Component<ITransitionFadeProp> = props => {
-  const { order: propsOrder, isOuter } = props;
+  const [local] = splitProps(props, ["order", "isOuter"]);
   const { setAnimated, transitionNumber, nextScene, setNextTransition, maxFrame } =
     useTransitionContext();
 
-  const order = Math.max(0, propsOrder * 2);
+  const order = Math.max(0, local.order * 2);
 
   const [router, { push }] = useRouter()!;
   return (
@@ -256,7 +257,7 @@ export const TransitionFade: Component<ITransitionFadeProp> = props => {
       onAnimationEnd={el => {
         setAnimated(false);
 
-        if (el.animationName === "fadeIn" && (!isOuter || maxFrame() === 1)) {
+        if (el.animationName === "fadeIn" && (!local.isOuter || maxFrame() === 1)) {
           setNextTransition();
         }
 

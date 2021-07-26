@@ -6,7 +6,7 @@ interface IAnimationRoute {
 }
 
 export const AnimationRoute: Component<IAnimationRoute> = props => {
-  const { scheduleFrame } = useTransitionContext();
+  const { scheduleFrame } = useTransitionContext(true);
   const { children } = props;
 
   onMount(() => {
