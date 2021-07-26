@@ -23,21 +23,21 @@ export function InvitationPage(props: IInvitationPage) {
           style={{
             transform: "rotate(-9deg)",
             width: "157px",
-            top: "8.25rem",
+            top: "8.5rem",
           }}
         >
           <p
             style={{
               "font-size": "0.8rem",
-              "line-height": "1.6",
+              "line-height": "2.4",
               overflow: "hidden",
               "white-space": "nowrap",
             }}
           >
             {replaceLine("Dear (name)")}
           </p>
-          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>FREE YOUR MIND, Find</h6>
-          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>YOUR WAYS</h6>
+          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>FREE YOUR MIND,</h6>
+          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>Find YOUR WAYS</h6>
           <p style={{ "font-size": "0.8rem", "line-height": "1.6" }}>
             {replaceLine("CU at (faculty)")}
           </p>
