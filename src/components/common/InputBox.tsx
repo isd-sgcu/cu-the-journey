@@ -47,7 +47,7 @@ const InputBox: Component<InputBoxProps> = props => {
 
   return (
     <textarea
-      onKeyPress={e => {
+      onKeyDown={e => {
         // No new line on enter in noWrap InputBox
         if (props.noWrap && e.key === "Enter") e.preventDefault();
       }}
