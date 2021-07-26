@@ -167,6 +167,6 @@
   *:fullscreen,
   *:-webkit-full-screen,
   *:-moz-full-screen {
-    background-color: #262626;
+    background: transparent; /* for safari on macos */
   }
 }
