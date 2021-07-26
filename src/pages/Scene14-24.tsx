@@ -107,7 +107,7 @@ const Scene22S0: Component = () => (
 
 const Scene23S0: Component = () => (
   <>
-    <TextMiddle text={t("23-0")} />
+    <TextMiddle text={t("23-0")} class="mt-64" />
   </>
 );
 
