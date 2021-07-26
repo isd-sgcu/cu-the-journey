@@ -55,6 +55,8 @@ export const App: Component = () => {
     resizeObserver.disconnect();
   });
 
+  fullScreen();
+
   return (
     <div
       class="relative w-screen min-h-screen flex justify-center items-center"
@@ -67,7 +69,6 @@ export const App: Component = () => {
         ref={ref => {
           app.resizeTo = ref;
           resizeObserver.observe(ref);
-          fullScreen();
         }}
         class={`transition-all duration-4000 ease-in-out w-screen min-h-screen flex justify-center items-center flex-col text-center ${
           isFullScreen() ? "" : "sm:w-[375px] sm:min-h-[667px]"
