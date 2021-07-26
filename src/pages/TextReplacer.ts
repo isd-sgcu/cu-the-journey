@@ -97,6 +97,7 @@ export const getFacultyCode = (studentId: string) => studentId.slice(8, 10);
 export const isEnglish = () => localStorage.getItem(StorableKeys.LanguageKey) === ENGLISH_SIGNATURE;
 
 const getFacultyText = (studentId: string) => {
+  if (!studentId) return "";
   const faculty = FACULTIES[getFacultyCode(studentId)];
   return isEnglish() ? faculty.en : faculty.th;
 };
