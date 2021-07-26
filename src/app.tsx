@@ -11,7 +11,10 @@ export const App: Component = () => {
   // Set language
   const [, { locale }] = useI18n();
   const language = localStorage.getItem(StorableKeys.LanguageKey);
-  if (language === THAI_SIGNATURE || language === ENGLISH_SIGNATURE) {
+  if (!language) {
+    localStorage.setItem(StorableKeys.LanguageKey, THAI_SIGNATURE);
+    locale(THAI_SIGNATURE);
+  } else if (language === THAI_SIGNATURE || language === ENGLISH_SIGNATURE) {
     locale(language);
   }
 
