@@ -30,10 +30,8 @@ class InputManager {
   static readonly ALL_ERROR_MESSAGES: {
     [InputType: number]: string;
   } = {
-    [InputType.ID]: isEnglish() ? "Please enter a valid student ID" : "โปรดใส่รหัสนิสิตที่ถูกต้อง",
-    [InputType.EMAIL]: isEnglish()
-      ? "Please enter a valid email address"
-      : "โปรดใส่ที่อยู่อีเมลล์ที่ถูกต้อง",
+    [InputType.ID]: isEnglish() ? "a valid student ID" : "รหัสนิสิต",
+    [InputType.EMAIL]: isEnglish() ? "a valid email address" : "ที่อยู่อีเมลล์",
   };
 
   static readonly NOT_ERROR_MESSAGE = "";
@@ -130,9 +128,15 @@ const Scene2S0: Component = () => {
       return err;
     });
 
+    const isUsingEnglish = isEnglish();
+    let text = isUsingEnglish ? "Please enter " : "โปรดใส่";
+    text += errorMessages
+      .filter(err => err !== InputManager.NOT_ERROR_MESSAGE)
+      .join(isUsingEnglish ? " and " : "และ");
+    text += isUsingEnglish ? "." : "ที่ถูกต้อง";
     Swal.fire({
       title: "",
-      text: errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
+      text,
       icon: "error",
       target: document.getElementById("swal") as HTMLDivElement,
     });
