@@ -45,12 +45,40 @@ const InputBox: Component<InputBoxProps> = props => {
   const hasScrollbar = (textarea: HTMLTextAreaElement) =>
     textarea.clientHeight < textarea.scrollHeight;
 
+  const expand = (self: HTMLTextAreaElement) => {
+    self.style.height = "233px"; // eslint-disable-line
+    self.style.width = "311px"; // eslint-disable-line
+    self.style.padding = "30px 35px"; // eslint-disable-line
+    self.style.borderRadius = "10px"; // eslint-disable-line
+  };
+
+  const shrink = (self: HTMLTextAreaElement) => {
+    self.style.height = "46px"; // eslint-disable-line
+    self.style.width = "200px"; // eslint-disable-line
+    self.style.padding = "10px 10px"; // eslint-disable-line
+    self.style.borderRadius = "4px"; // eslint-disable-line
+  };
+
   return (
     <textarea
       onKeyDown={e => {
         // No new line on enter in noWrap InputBox
-        if (!props.noWrap) return;
-        if (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)) e.preventDefault();
+        if (props.noWrap && (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)))
+          e.preventDefault();
+
+        if (!props.isMinimized) return;
+        if (props.noWrap) return;
+
+        const self = e.target as HTMLTextAreaElement;
+        if (!hasResized && hasScrollbar(self)) {
+          hasResized = true;
+          expand(self);
+          return;
+        }
+        if (self.value === "") {
+          hasResized = false; // reset the resizing state
+          shrink(self);
+        }
       }}
       onKeyUp={e => {
         const self = e.target as HTMLTextAreaElement;
@@ -58,22 +86,9 @@ const InputBox: Component<InputBoxProps> = props => {
 
         if (!props.isMinimized) return;
         if (props.noWrap) return;
-
-        if (!hasResized && hasScrollbar(self)) {
-          hasResized = true;
-          self.style.height = "233px";
-          self.style.width = "311px";
-          self.style.padding = "30px 35px";
-          self.style.borderRadius = "10px";
-          return;
-        }
-
         if (self.value === "") {
           hasResized = false; // reset the resizing state
-          self.style.height = "46px";
-          self.style.width = "200px";
-          self.style.padding = "10px 10px";
-          self.style.borderRadius = "4px";
+          shrink(self);
         }
       }}
       spellcheck={false}
