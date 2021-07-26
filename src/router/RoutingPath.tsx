@@ -1,8 +1,5 @@
 import type { Component } from "solid-js";
-import { useTranslation } from "../config/i18n";
-import { AnimationRoute } from "../components/AnimationRoute";
 import Souvenir from "../pages/ending/Souvenir";
-import ChoiceComponent from "../components/Choice";
 import Fallback from "../pages/Fallback";
 import AllScenes from "../pages/AllScenes";
 import PickANumber from "../pages/ending/PickANumber";
@@ -10,20 +7,6 @@ import SelectLanguage from "../pages/landing/SelectLanguage";
 import Landing from "../pages/landing";
 import TW from "../pages/landing/TW";
 import DAE from "../pages/landing/DAE";
-
-const SecondScene = () => <p>Second Scene</p>;
-
-const I18Testing = () => {
-  const [t, { locale }] = useTranslation("i18n");
-  return (
-    <>
-      <button onClick={() => locale("th")}>Change to TH</button>
-      <button onClick={() => locale("en")}>Change to EN</button>
-      <h1>{t("hello", { name: "Outsider" })}</h1>
-      <h1>{t("nested.hello", { name: "Insider" })}</h1>
-    </>
-  );
-};
 
 const allPath = [
   {
@@ -47,20 +30,8 @@ const allPath = [
     component: DAE,
   },
   {
-    path: "/2",
-    component: SecondScene,
-  },
-  {
     path: "*all",
     component: Fallback,
-  },
-  {
-    path: "/choices",
-    component: ChoiceComponent,
-  },
-  {
-    path: "/i18n",
-    component: I18Testing,
   },
   {
     path: "/pick-a-number",
@@ -69,10 +40,6 @@ const allPath = [
   {
     path: "/souvenir",
     component: Souvenir,
-  },
-  {
-    path: "/poc-transition",
-    component: AnimationRoute,
   },
 ];
 
