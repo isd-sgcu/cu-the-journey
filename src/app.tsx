@@ -4,12 +4,14 @@ import { Component, createEffect, createSignal, onCleanup, Show } from "solid-js
 import AnimationScene, { useScene } from "./components/AnimationScene";
 import { TransitionProvider, TransitionFade } from "./context/TransitionContext";
 import "./firebase";
+import { StorableKeys } from "./MessageStore";
+import { ENGLISH_SIGNATURE, THAI_SIGNATURE } from "./pages/TextReplacer";
 
 export const App: Component = () => {
   // Set language
   const [, { locale }] = useI18n();
-  const language = localStorage.getItem("LanguageKey");
-  if (language === "th" || language === "en") {
+  const language = localStorage.getItem(StorableKeys.LanguageKey);
+  if (language === THAI_SIGNATURE || language === ENGLISH_SIGNATURE) {
     locale(language);
   }
 
