@@ -31,6 +31,7 @@ const resumeIfWantTo = () => {
       : "เหมือนว่าคุณยังเล่นไม่จบครั้งที่แล้วนะ\nอยากเริ่มต่อจากครั้งที่แล้วไหม?",
     icon: "question",
     showCancelButton: true,
+    width: 325,
   }).then(result => {
     if (result.isConfirmed) {
       fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
