@@ -53,7 +53,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
   const { current } = useFadeSignal();
-  const [showOrderKey, setShowOrderKey] = createSignal(true);
+  const [showOrderKey, setShowOrderKey] = createSignal(true); // false on /16-0 and /24-0
   const { sceneSwitcher, isLoading } = useScene();
   createEffect(() => {
     if (isGoingNextScene() && !isLoading()) {
@@ -87,12 +87,20 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
           </Show>
         </Show>
       </div>
+      {/* To push down "Tap to continue" */}
+      <Show when={!showOrderKey()}>
+        <div class="h-20"> </div>
+      </Show>
       <InputBox
         isGoingNextScene={isGoingNextScene}
         placeHolder={placeHolder}
         signal={[textGetter, textSetter]}
         isMinimized={isMinimized || false}
       />
+      {/* To push down "Tap to continue" */}
+      <Show when={!showOrderKey()}>
+        <div class="h-20"> </div>
+      </Show>
       <Show
         when={isButtonShown()}
         // 40px below is the height of the button
