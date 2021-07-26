@@ -56,7 +56,7 @@ function SelectLanguage() {
     cancelPrevented();
   };
 
-  onMount(() => scheduleFrame(1));
+  onMount(() => scheduleFrame(1, 1));
 
   return (
     <>
