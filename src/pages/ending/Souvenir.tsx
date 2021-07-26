@@ -45,7 +45,7 @@ function Souvenir() {
 
   return (
     <div
-      class="flex flex-col flex-grow items-center w-full"
+      class="flex flex-col flex-grow items-center w-full max-w-[327px]"
       style={`color:${headlineColor[number]}`}
     >
       <Typography variant="h2" class="mt-[19%] xs:text-[20px]">
