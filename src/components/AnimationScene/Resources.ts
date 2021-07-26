@@ -29,7 +29,7 @@ export const resources = <const>{
     "book-flip": createSpriteResource("book-flip", 4),
     "book-close": createSpriteResource("book-close", 4),
     "book-first": createSpriteResource("book-first", 4),
-    "post-pp": createSpriteResource("post-pp", 2),
+    "post-pp": createSpriteResource("post-pp", 1),
     "post-pp-sm": createSpriteResource("post-pp-sm", 1),
     "post-yl": createSpriteResource("post-yl", 1),
     clock: createSpriteResource("clock", 3),
