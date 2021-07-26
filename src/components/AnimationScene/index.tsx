@@ -30,7 +30,7 @@ export default () => {
   createEffect(() => {
     if (!isLoading()) {
       if (!["/", "/door-open"].includes(router.current[0].path)) {
-        soundControl.play("bg");
+        soundControl.play("bg", { loop: true });
       }
     }
   });
