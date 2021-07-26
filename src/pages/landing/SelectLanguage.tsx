@@ -1,6 +1,6 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
-import { createSignal } from "solid-js";
 import Swal from "sweetalert2";
+import { createSignal, onMount } from "solid-js";
 import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
@@ -45,15 +45,17 @@ function SelectLanguage() {
   const [, { locale }] = useI18n();
   const [page, setPage] = createSignal<number>(0);
   const [t] = useTranslation("landing");
-  const { fadeOut, nextAnimationTrigger } = useTransitionContext();
+  const { scheduleFrame, cancelPrevented, nextAnimationTrigger } = useTransitionContext();
 
   const handleClick = (language: string) => {
     locale(language);
     localStorage.setItem(StorableKeys.LanguageKey, language);
     setPage(1);
     nextAnimationTrigger();
-    setTimeout(() => fadeOut("/door-open"), 2000);
+    cancelPrevented();
   };
+
+  onMount(() => scheduleFrame(1, 1));
 
   return (
     <>
@@ -64,10 +66,7 @@ function SelectLanguage() {
           <Button onClick={() => handleClick(ENGLISH_SIGNATURE)}>ENGLISH</Button>
         </TransitionFade>
       ) : (
-        <div
-          class="flex-grow w-full flex justify-center items-center"
-          onClick={() => fadeOut("/door-open")}
-        >
+        <div class="flex-grow w-full flex justify-center items-center">
           <TransitionFade order={1}>
             <Typography variant="h5">{t("sound")}</Typography>
           </TransitionFade>
