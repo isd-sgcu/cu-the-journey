@@ -16,6 +16,9 @@ export const StorableKeys = {
 export const getMessage = (key: string): string | null => localStorage.getItem(key.toString());
 
 export const saveMessage = (key: string, val: string): void => {
+  if (key.toString() === "LastSeenPath" && val === "*all") {
+    return;
+  }
   localStorage.setItem(key.toString(), val);
 };
 
