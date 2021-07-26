@@ -26,7 +26,7 @@ export const App: Component = () => {
     }
   });
 
-  const [isFullScreen, setFullScreen] = createSignal(true);
+  const [, setFullScreen] = createSignal(true);
   createEffect(() => {
     if (!isLoading()) {
       setFullScreen(false);
