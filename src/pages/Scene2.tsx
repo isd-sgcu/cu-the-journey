@@ -1,5 +1,5 @@
 import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
@@ -130,14 +130,12 @@ const Scene2S0: Component = () => {
       return err;
     });
 
-    swal(
-      "",
-      errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
-      "error",
-      {
-        className: "font-Mitr",
-      },
-    );
+    Swal.fire({
+      title: "",
+      text: errorMessages.filter(err => err !== InputManager.NOT_ERROR_MESSAGE).join("\n"),
+      icon: "error",
+      target: document.getElementById("swal") as HTMLDivElement,
+    });
   };
 
   const validateForms = () => {
