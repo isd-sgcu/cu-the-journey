@@ -61,6 +61,7 @@ export class SceneEngine {
     force: boolean = false,
     onNewScene: (() => void) | undefined = undefined,
   ) => {
+    this.willAddScene = []; // clear
     this.onNewScene = onNewScene;
     const mappedScenes: SceneSwitcherOption[] = newScenes.map(scene => {
       if (typeof scene === "string") {
