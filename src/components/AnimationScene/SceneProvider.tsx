@@ -61,15 +61,15 @@ export const SceneProvider: Component = props => {
     .load(() => {
       const names = Object.keys(resources.sprite) as SpriteName[];
       const sprites = names.map(name => {
-        const { frames, type } = resources.sprite[name];
+        const { frames, type, zIndex } = resources.sprite[name];
         return {
           name,
           sprite:
             type === "Base"
-              ? new BaseSprite(frames)
+              ? new BaseSprite(frames, { zIndex })
               : type === "Fade"
-              ? new FadeSprite(frames)
-              : new ZoomSprite(frames),
+              ? new FadeSprite(frames, { zIndex })
+              : new ZoomSprite(frames, { zIndex }),
         };
       });
       sceneEngine.addScenes(sprites);

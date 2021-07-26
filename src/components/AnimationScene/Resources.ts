@@ -2,13 +2,15 @@ type SpriteType = "Base" | "Fade" | "Zoom";
 
 interface ICreateSpriteResource {
   type: SpriteType;
+  zIndex: number;
   frames: string[];
 }
 
 // prettier-ignore
-function createSpriteResource(name: string, frames: number, type: SpriteType = "Fade") {
+function createSpriteResource(name: string, frames: number, type: SpriteType = "Fade", zIndex: number = 0) {
   return {
     type,
+    zIndex,
     frames: Array 
     .from({ length: frames })
     .map((_, idx) => `images/screen/${name}-${idx + 1}.png`)
@@ -17,9 +19,9 @@ function createSpriteResource(name: string, frames: number, type: SpriteType = "
 
 export const resources = <const>{
   sprite: {
-    "star-dark": createSpriteResource("star-dark", 1),
-    "star-light": createSpriteResource("star-light", 1),
-    "star-light-full": createSpriteResource("star-light-full", 1),
+    "star-dark": createSpriteResource("star-dark", 1, "Fade", -1),
+    "star-light": createSpriteResource("star-light", 1, "Fade", -1),
+    "star-light-full": createSpriteResource("star-light-full", 1, "Fade", -1),
     "leaf-og": createSpriteResource("leaf-og", 5),
     leaf: createSpriteResource("leaf", 4),
     book: createSpriteResource("book", 3),
