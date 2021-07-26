@@ -1,6 +1,8 @@
-import { Link } from "solid-app-router";
+import { useTranslation } from "../../config/i18n";
 
 function index() {
+  const [t] = useTranslation("landing");
+
   return (
     <>
       <img
@@ -33,13 +35,11 @@ function index() {
           <h6 class="text-[14px] font-semibold">สู่ชีวิตในแบบของเรา</h6>
         </div>
         <div class="text-[#F4AE23] font-semibold text-[48px]">
-          <p class="absolute left-[-33px] top-[-5px]">“</p>
-          <p class="absolute right-[-28px] bottom-[-20px]">”</p>
+          <p class="absolute left-[-33px] top-[-5px] xs:left-[-17px]">“</p>
+          <p class="absolute right-[-28px] bottom-[-20px] xs:right-[-22px]">”</p>
         </div>
       </div>
-      <Link href="/trigger-warning" class="mt-12 mb-10 text-white">
-        <button>{"<< แตะเพื่อไปต่อ >>"}</button>
-      </Link>
+      <h6 class="mt-12 mb-10 text-white text-sm font-medium">{t("tapToContinue")}</h6>
     </>
   );
 }

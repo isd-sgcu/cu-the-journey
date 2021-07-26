@@ -1,6 +1,5 @@
 export default {
-  p1: "ก่อนเริ่มต้นการเดินทางครั้งใหม่เพื่อสีสัน\nของการเดินทางครั้งนี้en",
-  p2: "เธอลองเลือกมาสักหมายเลขสิen",
-  p3: "เพื่อความตื่นเต้นขอไม่เลือกดีกว่าen",
-  footer: "*อย่าลืม Capture หน้าถัดไป\nเพื่อร่วมสนุกกับกิจกรรมต่อไปen"
+  p1: "Before we take the first step,\n\n try picking a number - for fun!",
+  p2: "The excitement is killing me,\n I’d rather not choose",
+  footer: "*Don't forget to capture the next page\nfor a chance to win a reward",
 };

@@ -22,3 +22,8 @@ export function useTranslation(prefix?: string): ITranslation {
 
   return [newT, action];
 }
+
+export const sceneTranslator = (scene: string) => (JSONkey: string) => {
+  const [translate] = useTranslation(scene);
+  return translate(JSONkey);
+};

@@ -1,8 +1,9 @@
 export default {
-  sound: "อย่าลืมเปิดเสียง\nเพื่อสัมผัสประสบการณ์เต็มรูปแบบ",
+  tapToContinue: "<< Tap to continue >>",
+  sound: "Enable audio\nfor the best experience.",
   tw: {
-    title: "คำเตือน",
-    p1: "การเดินทางในครั้งนี้มีเนื้อหาที่เกี่ยวข้องกับ\nความรู้สึกและความทรงจำในช่วงก่อนเข้า\nมหาวิทยาลัยของคุณ\n•\nหากคุณไม่สามารถรับมือกับสภาวะอารมณ์\nด้านลบได้ดีพอหรือไม่อยากนึกถึงเรื่องราว\nในอดีตของช่วงเวลาที่ผ่านมา โปรดพิจารณา\nความพร้อมก่อนเข้าร่วมการเดินทาง\nหากรู้สึกไม่สบายใจระหว่างทางสามารถหยุด\nพักหรือหยุดเล่นได้ตลอดเวลาเลยนะ\n•\nเพราะการดูแลใจและความรู้สึกตัวเอง\nเป็นเรื่องสำคัญที่สุด",
-    p2: "* ทางผู้จัดกิจกรรมขออนุญาตในการบันทึก\nคำตอบของคุณ\nเพื่อใช้ในการเดินทางครั้งอื่น ๆ ต่อไป\nโดยทางเราขอสัญญาว่าข้อมูลทั้งหมดจะถูกเก็บ\nเป็นความลับระหว่างคุณกับกาลเวลาตลอดไป"
-  }
+    title: "Warning",
+    p1: "The following journey contains emotions and memories of the past during your university’s admission period. If you do not wish to relive those memories or are unable to handle negative emotions,\n•\nPlease prepare yourself before embarking on this journey.\n•\nIf you experience discomfort or trauma while embarking on this journey, feel free to take a break or stop the journey entirely. Taking care of your mental health is very important.",
+    p2: "* The event organizers would like to collect your answers during this journey for use in other journeys in the future. This data is stored safely and will not be revealed to any third-parties.",
+  },
 };

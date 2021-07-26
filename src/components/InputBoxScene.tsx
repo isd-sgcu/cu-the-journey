@@ -1,0 +1,126 @@
+import { createSignal, createEffect, Show, Component, For, Accessor } from "solid-js";
+import Button from "./common/Button";
+import InputBox from "./common/InputBox";
+
+import "../styles/scrollbar.css";
+import { saveMessage } from "../MessageStore";
+import { useTransitionContext } from "../context/TransitionContext";
+import { useFadeSignal } from "../context/FadeSignalContext";
+import { useScene } from "./AnimationScene";
+
+export type InputBoxScenePropsType = {
+  isMinimized?: boolean; // shrink down the height of the textarea
+  onButtonClicked?: () => void; // on clicking the save button
+  text?: Accessor<string>; // the caller wants to access the text and use it in the upper scope
+  setText?: (v: string | ((prev: string) => string)) => string; // eslint-disable-line
+  placeHolderKey: string; // placeholder of the textarea
+  nextPage: string; // ex. "/9-0"
+  orderKeys: string | string[]; // key or array of keys of text lines above the textarea, ex. "8-0-order"
+  buttonTextKey: string;
+  onTapTextKey: string;
+  storeKey: string;
+  t: (key: string, params?: Record<string, string>, defaultValue?: string) => string; // eslint-disable-line
+};
+
+const InputBoxScene: Component<InputBoxScenePropsType> = props => {
+  const {
+    isMinimized,
+    placeHolderKey,
+    orderKeys,
+    buttonTextKey,
+    onTapTextKey,
+    storeKey,
+    onButtonClicked,
+    t,
+    text,
+    setText,
+  } = props;
+  const placeHolder = t(placeHolderKey);
+  let textGetter: Accessor<string>;
+  let textSetter: (v: string | ((prev: string) => string)) => string; // eslint-disable-line
+  if (text === undefined && setText === undefined) [textGetter, textSetter] = createSignal("");
+  else {
+    textGetter = text as Accessor<string>;
+    textSetter = setText as (v: string | ((prev: string) => string)) => string;
+  }
+  const [isButtonShown, setIsButtonShown] = createSignal(false);
+  const { cancelPrevented } = useTransitionContext();
+
+  createEffect(() => {
+    setIsButtonShown(textGetter().trim() !== "");
+  });
+
+  const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
+
+  const { current } = useFadeSignal();
+  const [showOrderKey, setShowOrderKey] = createSignal(true);
+  const { sceneSwitcher, isLoading } = useScene();
+  createEffect(() => {
+    if (isGoingNextScene() && !isLoading()) {
+      if (current() === "/16-0") {
+        setShowOrderKey(false);
+        sceneSwitcher(["star-light", "post-pp"]);
+      } else if (current() === "/24-0") {
+        setShowOrderKey(false);
+        sceneSwitcher(["star-light-full", "post-yl"]);
+      }
+    }
+  });
+
+  const proceed = () => {
+    saveMessage(storeKey, textGetter());
+    if (onButtonClicked) onButtonClicked();
+    setIsButtonShown(false);
+    setIsGoingNextScene(true);
+    cancelPrevented();
+  };
+
+  const sceneWithoutLink = (
+    <div class="flex flex-col h-[667px] max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
+      <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
+        <Show when={showOrderKey()} fallback={<div class="h-[29px]"></div>}>
+          <Show
+            when={typeof orderKeys === "string"}
+            fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
+          >
+            <h5>{t(orderKeys as string)}</h5>
+          </Show>
+        </Show>
+      </div>
+      <InputBox
+        isGoingNextScene={isGoingNextScene}
+        placeHolder={placeHolder}
+        signal={[textGetter, textSetter]}
+        isMinimized={isMinimized || false}
+      />
+      <Show
+        when={isButtonShown()}
+        // 40px below is the height of the button
+        fallback={() => (
+          <h5
+            class={`block h-[40px]`}
+            style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;"
+          >
+            {isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}
+          </h5>
+        )}
+      >
+        <Button children={t(buttonTextKey)} onClick={proceed} />
+      </Show>
+    </div>
+  );
+
+  return (
+    <>
+      <Show
+        // Show without link when the button is visible (haven't clicked save yet)
+        when={!isGoingNextScene()}
+        fallback={() => <div>{sceneWithoutLink}</div>}
+      >
+        {sceneWithoutLink}
+      </Show>
+    </>
+  );
+};
+
+export default InputBoxScene;

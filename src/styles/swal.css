@@ -1,0 +1,14 @@
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.swal-button--confirm {
+  background-color: #5f229f;
+  border: 1px solid #a984d4;
+}
+
+.swal-modal {
+  width: 300px;
+}

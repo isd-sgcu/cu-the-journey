@@ -1,17 +1,20 @@
 {
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "snowpack dev",
-    "build": "snowpack build",
+    "dev": "snowpack dev --polyfill-node",
+    "build": "snowpack build --polyfill-node",
     "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
     "lint": "prettier --check \"src/**/*.{tsx,ts,js}\"",
     "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -w"
   },
   "dependencies": {
     "@amoutonbrady/solid-i18n": "^0.4.0",
+    "@pixi/sound": "^4.0.4",
     "firebase": "^8.7.1",
+    "pixi.js": "^6.0.4",
     "solid-app-router": "^0.0.51",
-    "solid-js": "^1.0.0"
+    "solid-js": "^1.0.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

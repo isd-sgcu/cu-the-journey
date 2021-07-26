@@ -6,16 +6,22 @@ import { I18nProvider } from "@amoutonbrady/solid-i18n";
 import { App } from "./app";
 import RoutingPath from "./router/RoutingPath";
 import dict from "./locales";
+import { SceneProvider } from "./components/AnimationScene";
+import { FadeSignalProvider } from "./context/FadeSignalContext";
 
 const dispose = render(
   () => (
     <I18nProvider dict={dict} locale="th">
       <Router routes={RoutingPath}>
-        <App />
+        <FadeSignalProvider>
+          <SceneProvider>
+            <App />
+          </SceneProvider>
+        </FadeSignalProvider>
       </Router>
     </I18nProvider>
   ),
-  document.getElementById("app")
+  document.getElementById("app")!,
 );
 
 /**
