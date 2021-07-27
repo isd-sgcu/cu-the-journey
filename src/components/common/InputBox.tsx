@@ -61,7 +61,7 @@ const InputBox: Component<InputBoxProps> = props => {
 
   const preventNewLine = (
     e: KeyboardEvent & {
-      currentTarget: HTMLTextAreaElement;
+      currentTarget: HTMLInputElement;
       target: Element;
     },
   ) => {
@@ -71,9 +71,17 @@ const InputBox: Component<InputBoxProps> = props => {
 
   return (
     <Show
-      when={false}
+      when={props.noWrap}
       fallback={
-        <input class="placeholder-primary-300 resize-none w-[200px] xs:w-[290px] h-[46px] px-[10px] py-[10px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"></input>
+        <input
+          onKeyDown={e => {
+            preventNewLine(e);
+          }}
+          onKeyUp={e => {
+            setText(e.currentTarget.value.replaceAll("\n", ""));
+          }}
+          class="placeholder-primary-300 resize-none w-[200px] xs:w-[290px] h-[46px] px-[10px] py-[10px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
+        ></input>
       }
     >
       <textarea
@@ -94,9 +102,7 @@ const InputBox: Component<InputBoxProps> = props => {
         }}
         onKeyUp={e => {
           const self = e.target as HTMLTextAreaElement;
-
-          if (props.noWrap) setText(self.value.replaceAll("\n", ""));
-          else setText(self.value);
+          setText(self.value);
 
           if (!props.isMinimized) return;
           if (props.noWrap) return;
