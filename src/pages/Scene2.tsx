@@ -11,7 +11,7 @@ import "../styles/swal.css";
 
 const t = sceneTranslator("scene2");
 
-enum InputType { // eslint-disable-line
+enum InfoType { // eslint-disable-line
   NICKNAME,
   ID,
   EMAIL,
@@ -30,8 +30,8 @@ class InputManager {
   static readonly ALL_ERROR_MESSAGES: {
     [InputType: number]: { [lang: string]: string };
   } = {
-    [InputType.ID]: { en: "a valid student ID", th: "รหัสนิสิต" },
-    [InputType.EMAIL]: {
+    [InfoType.ID]: { en: "a valid student ID", th: "รหัสนิสิต" },
+    [InfoType.EMAIL]: {
       en: "a valid email address",
       th: "ที่อยู่อีเมลล์",
     },
@@ -43,7 +43,7 @@ class InputManager {
     nameKey: string,
     placeHolderKey: string,
     readonly storeKey: string,
-    readonly type: InputType = InputType.NICKNAME,
+    readonly type: InfoType = InfoType.NICKNAME,
   ) {
     const [g, s] = createSignal("");
     this.text = g;
@@ -80,8 +80,8 @@ class InputManager {
   };
 
   isValid = () => {
-    if (this.type === InputType.NICKNAME) return true;
-    if (this.type === InputType.EMAIL) return this.validateEmail(this.text());
+    if (this.type === InfoType.NICKNAME) return true;
+    if (this.type === InfoType.EMAIL) return this.validateEmail(this.text());
     return this.validateId(this.text());
   };
 
@@ -104,8 +104,8 @@ class InputManager {
 const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
-    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID),
-    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL),
+    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InfoType.ID),
+    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InfoType.EMAIL),
   ];
 
   // tells if all input boxes are filled
