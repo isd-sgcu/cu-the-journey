@@ -159,7 +159,20 @@ const Scene2S0: Component = () => {
   };
 
   return (
-    <div class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple">
+    <form
+      class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple"
+      onSubmit={e => {
+        e.preventDefault();
+        const activeElement = document.activeElement as HTMLElement | null;
+        activeElement?.blur();
+        if (!areAllFilled()) return;
+        if (!validateForms()) {
+          showAlert();
+          return;
+        }
+        fadeOut(nextPage);
+      }}
+    >
       <h3>{t("2-0-order")}</h3>
       <For each={inputManagers}>
         {manager => (
@@ -174,20 +187,10 @@ const Scene2S0: Component = () => {
           </div>
         )}
       </For>
-      <Button
-        onClick={() => {
-          if (!areAllFilled()) return;
-          if (!validateForms()) {
-            showAlert();
-            return;
-          }
-          fadeOut(nextPage);
-        }}
-        style={buttonStyle()}
-      >
+      <Button style={buttonStyle()}>
         <h6 class="leading-[28px] font-Mitr px-[12px] uppercase">{t("2-0-buttonText")}</h6>
       </Button>
-    </div>
+    </form>
   );
 };
 
