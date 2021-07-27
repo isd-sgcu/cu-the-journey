@@ -35,9 +35,7 @@ export class ZoomSprite extends BaseSprite {
       return;
     }
     const { width, height } = app.screen;
-    const ratio = Math.max(width / this.width, height / this.height);
-    const newWidth = Math.round(this.width * ratio);
-    const newHeight = Math.round(this.height * ratio);
-    this.setSize(newWidth, newHeight);
+    const ratio = Math.max(width / this.realWidth, height / this.realHeight);
+    this.scale.set(ratio, ratio);
   }
 }
