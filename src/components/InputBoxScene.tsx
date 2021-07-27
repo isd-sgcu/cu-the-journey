@@ -76,7 +76,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   };
 
   const sceneWithoutLink = (
-    <div class="flex flex-col h-[667px] max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
+    <div class="flex flex-col flex-grow max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
       <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
         <Show when={showOrderKey()} fallback={<div class="h-[29px]"></div>}>
           <Show
