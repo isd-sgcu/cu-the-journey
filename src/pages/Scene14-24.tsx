@@ -8,6 +8,7 @@ import { uploadTimeCapsule } from "../firebase";
 import { replaceNameAndFaculty } from "./TextReplacer";
 import Typography from "../components/common/Typography";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
+import "../styles/scrollbar.css";
 
 const t = sceneTranslator("scene14to24");
 
@@ -70,6 +71,7 @@ const Scene18S1: Component = () => {
 
   return (
     <div>
+      <style></style>
       <TransitionFade order={0}>
         <Typography class="mb-5">{t("18-1")}</Typography>
       </TransitionFade>
@@ -77,7 +79,7 @@ const Scene18S1: Component = () => {
         <div class="relative">
           <img class="max-w-[250px]" src="images/screen/post-pp-sm-1.png" />
           <Typography
-            class="absolute top-10 px-3 w-[210px] h-[40vh] max-h-[220px]"
+            class="absolute top-10 px-3 w-[210px] h-[40vh] max-h-[220px] disable-scrollbar"
             style="overflow-wrap: break-word; left: 50%; transform: translateX(-52%);overflow-y: scroll"
             variant="p"
           >

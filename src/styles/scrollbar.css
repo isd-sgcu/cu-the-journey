@@ -7,3 +7,18 @@ textarea::-webkit-scrollbar-thumb {
   background-color: #a984d4;
   outline: none;
 }
+
+.disable-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
+
+.disable-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a984d4;
+  outline: none;
+}
+
+.disable-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
