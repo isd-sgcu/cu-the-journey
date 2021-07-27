@@ -1,10 +1,17 @@
 import { Accessor, Component, createEffect, createSignal, Show } from "solid-js";
 
+export const InputType = {
+  EMAIL: "email",
+  NUMBER: "number",
+  TEXT: "text",
+};
+
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
   noWrap?: boolean; // turns into <input>, used in Scene 2
   isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
+  inputType?: string;
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
@@ -79,6 +86,8 @@ const InputBox: Component<InputBoxProps> = props => {
           onKeyUp={e => {
             setText(e.currentTarget.value.replaceAll("\n", ""));
           }}
+          placeholder={props.placeHolder}
+          type={props.inputType || InputType.TEXT}
           class="placeholder-primary-300 resize-none w-[200px] xs:w-[290px] h-[46px] px-[10px] py-[10px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
         ></input>
       }
