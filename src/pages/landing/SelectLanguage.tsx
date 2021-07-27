@@ -45,10 +45,17 @@ function SelectLanguage() {
   const [, { locale }] = useI18n();
   const [page, setPage] = createSignal<number>(0);
   const [t] = useTranslation("landing");
-  const { scheduleFrame, cancelPrevented, nextAnimationTrigger, resetAnimationFrame } =
-    useTransitionContext(true);
+  const {
+    transitionNumber,
+    scheduleFrame,
+    cancelPrevented,
+    nextAnimationTrigger,
+    resetAnimationFrame,
+    waitingOrder,
+  } = useTransitionContext(true);
 
   const handleClick = (language: string) => {
+    if (transitionNumber() < waitingOrder()) return;
     locale(language);
     localStorage.setItem(StorableKeys.LanguageKey, language);
     setPage(1);

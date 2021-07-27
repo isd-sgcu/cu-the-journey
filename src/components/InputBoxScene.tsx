@@ -53,8 +53,14 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
     textSetter = setText as (v: string | ((prev: string) => string)) => string;
   }
   const [isButtonShown, setIsButtonShown] = createSignal(false);
-  const { cancelPrevented, scheduleFrame, nextAnimationTrigger, resetAnimationFrame } =
-    useTransitionContext();
+  const {
+    transitionNumber,
+    waitingOrder,
+    cancelPrevented,
+    scheduleFrame,
+    nextAnimationTrigger,
+    resetAnimationFrame,
+  } = useTransitionContext();
 
   createEffect(() => {
     setIsButtonShown(textGetter().trim() !== "");
@@ -82,6 +88,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   onCleanup(() => resetAnimationFrame());
 
   const proceed = () => {
+    if (transitionNumber() < waitingOrder()) return;
     saveMessage(storeKey, textGetter());
     if (onButtonClicked) onButtonClicked();
     setIsButtonShown(false);

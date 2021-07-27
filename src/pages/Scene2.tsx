@@ -1,4 +1,4 @@
-import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
+import { Component, For, createSignal, Accessor, createEffect, JSX } from "solid-js";
 import Swal from "sweetalert2";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
@@ -44,6 +44,7 @@ class InputManager {
     placeHolderKey: string,
     readonly storeKey: string,
     readonly type: InputType = InputType.NICKNAME,
+    readonly htmlProps: JSX.InputHTMLAttributes<HTMLInputElement> = {},
   ) {
     const [g, s] = createSignal("");
     this.text = g;
@@ -104,8 +105,13 @@ class InputManager {
 const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
-    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID),
-    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL),
+    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID, {
+      inputMode: "numeric",
+    }),
+    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL, {
+      autocomplete: "email",
+      type: "email",
+    }),
   ];
 
   // tells if all input boxes are filled
@@ -153,7 +159,21 @@ const Scene2S0: Component = () => {
   };
 
   return (
-    <div class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple">
+    <form
+      class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple"
+      onSubmit={e => {
+        e.preventDefault();
+        const activeElement = document.activeElement as HTMLElement | null;
+        activeElement?.blur();
+        if (!areAllFilled()) return;
+        if (!validateForms()) {
+          showAlert();
+          return;
+        }
+        fadeOut(nextPage);
+      }}
+      noValidate
+    >
       <h3>{t("2-0-order")}</h3>
       <For each={inputManagers}>
         {manager => (
@@ -162,25 +182,16 @@ const Scene2S0: Component = () => {
             <SmallInputBox
               placeHolder={manager.placeHolder}
               signal={[manager.text, manager.setText]}
+              htmlProps={manager.htmlProps}
               noWrap={true}
             />
           </div>
         )}
       </For>
-      <Button
-        onClick={() => {
-          if (!areAllFilled()) return;
-          if (!validateForms()) {
-            showAlert();
-            return;
-          }
-          fadeOut(nextPage);
-        }}
-        style={buttonStyle()}
-      >
+      <Button style={buttonStyle()}>
         <h6 class="leading-[28px] font-Mitr px-[12px] uppercase">{t("2-0-buttonText")}</h6>
       </Button>
-    </div>
+    </form>
   );
 };
 
