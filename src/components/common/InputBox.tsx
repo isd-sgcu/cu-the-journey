@@ -3,9 +3,8 @@ import { Accessor, Component, createEffect, createSignal, Show } from "solid-js"
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
-  noWrap?: boolean;
+  noWrap?: boolean; // turns into <input>, used in Scene 2
   isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
-  turnIntoInput?: boolean;
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
@@ -60,16 +59,13 @@ const InputBox: Component<InputBoxProps> = props => {
     self.style.borderRadius = "4px"; // eslint-disable-line
   };
 
-  const preventNewlineIfNoWrapOrInputTag = (
+  const preventNewLine = (
     e: KeyboardEvent & {
       currentTarget: HTMLTextAreaElement;
       target: Element;
     },
   ) => {
-    if (
-      (props.noWrap || props.turnIntoInput) &&
-      (e.key === "Enter" || (e.key === "Enter" && e.shiftKey))
-    )
+    if (props.noWrap && (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)))
       e.preventDefault();
   };
 
@@ -82,9 +78,6 @@ const InputBox: Component<InputBoxProps> = props => {
     >
       <textarea
         onKeyDown={e => {
-          // No new line on enter in noWrap InputBox
-          preventNewlineIfNoWrapOrInputTag(e);
-
           if (!props.isMinimized) return;
           if (props.noWrap) return;
 
