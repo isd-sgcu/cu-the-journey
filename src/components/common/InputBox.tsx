@@ -70,7 +70,7 @@ const InputBox: Component<InputBoxProps> = props => {
 
   return (
     <Show
-      when={props.noWrap}
+      when={!props.noWrap}
       fallback={
         <input
           onKeyDown={e => {
