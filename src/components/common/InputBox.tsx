@@ -65,8 +65,7 @@ const InputBox: Component<InputBoxProps> = props => {
       target: Element;
     },
   ) => {
-    if (props.noWrap && (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)))
-      e.preventDefault();
+    if (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)) e.preventDefault();
   };
 
   return (
@@ -87,7 +86,6 @@ const InputBox: Component<InputBoxProps> = props => {
       <textarea
         onKeyDown={e => {
           if (!props.isMinimized) return;
-          if (props.noWrap) return;
 
           const self = e.target as HTMLTextAreaElement;
           if (!hasResized && hasScrollbar(self)) {
@@ -105,7 +103,6 @@ const InputBox: Component<InputBoxProps> = props => {
           setText(self.value);
 
           if (!props.isMinimized) return;
-          if (props.noWrap) return;
           if (self.value === "") {
             hasResized = false; // reset the resizing state
             shrink(self);
