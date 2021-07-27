@@ -1,11 +1,20 @@
-import { createSignal, createEffect, Show, Component, For, Accessor } from "solid-js";
+import {
+  createSignal,
+  createEffect,
+  Show,
+  Component,
+  For,
+  Accessor,
+  onMount,
+  onCleanup,
+} from "solid-js";
+import { useRouter } from "solid-app-router";
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
 import "../styles/scrollbar.css";
 import { saveMessage } from "../MessageStore";
-import { useTransitionContext } from "../context/TransitionContext";
-import { useFadeSignal } from "../context/FadeSignalContext";
+import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 import { useScene } from "./AnimationScene";
 
 export type InputBoxScenePropsType = {
@@ -44,7 +53,8 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
     textSetter = setText as (v: string | ((prev: string) => string)) => string;
   }
   const [isButtonShown, setIsButtonShown] = createSignal(false);
-  const { cancelPrevented } = useTransitionContext();
+  const { cancelPrevented, scheduleFrame, nextAnimationTrigger, resetAnimationFrame } =
+    useTransitionContext();
 
   createEffect(() => {
     setIsButtonShown(textGetter().trim() !== "");
@@ -52,62 +62,86 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
 
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
-  const { current } = useFadeSignal();
-  const [showOrderKey, setShowOrderKey] = createSignal(true);
-  const { sceneSwitcher, isLoading } = useScene();
+  const [router] = useRouter()!;
+  const [showOrderKey, setShowOrderKey] = createSignal(true); // false on /16-0 and /24-0
+  const { isLoading } = useScene();
+  const isShowOrder = ["/16-0", "/24-0"].includes(router.current[0].path);
+
   createEffect(() => {
     if (isGoingNextScene() && !isLoading()) {
-      if (current() === "/16-0") {
+      if (isShowOrder) {
         setShowOrderKey(false);
-        sceneSwitcher(["star-light", "post-pp"]);
-      } else if (current() === "/24-0") {
-        setShowOrderKey(false);
-        sceneSwitcher(["star-light-full", "post-yl"]);
       }
     }
   });
+
+  onMount(() => {
+    if (isShowOrder) scheduleFrame(1, 1);
+  });
+
+  onCleanup(() => resetAnimationFrame());
 
   const proceed = () => {
     saveMessage(storeKey, textGetter());
     if (onButtonClicked) onButtonClicked();
     setIsButtonShown(false);
     setIsGoingNextScene(true);
+    if (isShowOrder) nextAnimationTrigger();
     cancelPrevented();
   };
 
   const sceneWithoutLink = (
-    <div class="flex flex-col h-[667px] max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
-      <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
-        <Show when={showOrderKey()} fallback={<div class="h-[29px]"></div>}>
-          <Show
-            when={typeof orderKeys === "string"}
-            fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
-          >
-            <h5>{t(orderKeys as string)}</h5>
+    <>
+      <div class="relative flex flex-col flex-grow max-w-[327px] xs:max-w-[300px] justify-center items-center z-10 space-y-[24px] purple">
+        <div class="text-purple text-[24px] text-center leading=[38px] tracking-[2%] font-BaiJam font-bold">
+          <Show when={showOrderKey()} fallback={<div class="h-[29px]"></div>}>
+            <Show
+              when={typeof orderKeys === "string"}
+              fallback={<For each={orderKeys as string[]}>{key => <h5>{t(key)}</h5>}</For>}
+            >
+              <h5>{t(orderKeys as string)}</h5>
+            </Show>
           </Show>
+        </div>
+        {/* To push down "Tap to continue" */}
+        <Show when={!showOrderKey()}>
+          <div class="h-20"> </div>
+          <div class="absolute w-screen flex justify-center -z-10">
+            <TransitionFade order={1}>
+              <img
+                class="w-[350px] max-w-full"
+                style="top: -50px;"
+                src={`images/screen/post-${router.current[0].path === "/16-0" ? "pp" : "yl"}-1.png`}
+              />
+            </TransitionFade>
+          </div>
+        </Show>
+        <InputBox
+          isGoingNextScene={isGoingNextScene}
+          placeHolder={placeHolder}
+          signal={[textGetter, textSetter]}
+          isMinimized={isMinimized || false}
+        />
+        {/* To push down "Tap to continue" */}
+        <Show when={!showOrderKey()}>
+          <div class="h-20"> </div>
+        </Show>
+        <Show
+          when={isButtonShown()}
+          // 40px below is the height of the button
+          fallback={() => (
+            <h5
+              class={`block h-[40px]`}
+              style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;"
+            >
+              {isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}
+            </h5>
+          )}
+        >
+          <Button children={t(buttonTextKey)} onClick={proceed} />
         </Show>
       </div>
-      <InputBox
-        isGoingNextScene={isGoingNextScene}
-        placeHolder={placeHolder}
-        signal={[textGetter, textSetter]}
-        isMinimized={isMinimized || false}
-      />
-      <Show
-        when={isButtonShown()}
-        // 40px below is the height of the button
-        fallback={() => (
-          <h5
-            class={`block h-[40px]`}
-            style="text-shadow: 0px 0px 2px #ffffff,0px 0px 2px #ffffff;"
-          >
-            {isGoingNextScene() ? `<< ${t(onTapTextKey)} >>` : ""}
-          </h5>
-        )}
-      >
-        <Button children={t(buttonTextKey)} onClick={proceed} />
-      </Show>
-    </div>
+    </>
   );
 
   return (

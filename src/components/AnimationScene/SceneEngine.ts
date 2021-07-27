@@ -44,6 +44,7 @@ export class SceneEngine {
     this.removeContainer = new Container();
 
     this.sceneContainer.sortableChildren = true;
+    this.removeContainer.sortableChildren = true;
     this.app.stage.addChild(this.removeContainer, this.sceneContainer);
   }
 
@@ -61,6 +62,7 @@ export class SceneEngine {
     force: boolean = false,
     onNewScene: (() => void) | undefined = undefined,
   ) => {
+    this.willAddScene = []; // clear
     this.onNewScene = onNewScene;
     const mappedScenes: SceneSwitcherOption[] = newScenes.map(scene => {
       if (typeof scene === "string") {
@@ -111,6 +113,7 @@ export class SceneEngine {
 
   setupScene(sceneSetting: SpriteSetting) {
     const { sprite } = sceneSetting;
+    sprite.resizeToApp(this.app);
     sprite.setup(this.sceneContainer);
     sprite.play();
   }

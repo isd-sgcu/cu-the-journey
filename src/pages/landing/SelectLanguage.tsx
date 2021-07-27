@@ -1,6 +1,6 @@
 import { useI18n } from "@amoutonbrady/solid-i18n";
-import { createSignal } from "solid-js";
-import swal from "sweetalert";
+import { createSignal, onCleanup, onMount } from "solid-js";
+import Swal from "sweetalert2";
 import Typography from "../../components/common/Typography";
 import { useTranslation } from "../../config/i18n";
 import Button from "../../components/common/Button";
@@ -25,17 +25,16 @@ const wasNotFinished = () => {
 const resumeIfWantTo = () => {
   const { fadeOut } = useTransitionContext()!;
 
-  swal({
-    title: "",
+  Swal.fire({
     text: isEnglish()
       ? "It looks like you did not finish last time.\nDo you want to continue where you left off?"
       : "เหมือนว่าคุณยังเล่นไม่จบครั้งที่แล้วนะ\nอยากเริ่มต่อจากครั้งที่แล้วไหม?",
-    icon: "warning",
-    buttons: true as unknown as [boolean], // this can actually be a boolean
-    dangerMode: true,
-  }).then(willResume => {
-    if (willResume) {
-      fadeOut(getMessage(StorableKeys.LastSeenPath) as string);
+    icon: "question",
+    showCancelButton: true,
+    width: 325,
+  }).then(result => {
+    if (result.isConfirmed) {
+      fadeOut(getMessage(StorableKeys.LastSeenPath) as string, true);
     } else clearSavedMessages();
   });
 };
@@ -46,15 +45,20 @@ function SelectLanguage() {
   const [, { locale }] = useI18n();
   const [page, setPage] = createSignal<number>(0);
   const [t] = useTranslation("landing");
-  const { fadeOut, nextAnimationTrigger } = useTransitionContext();
+  const { scheduleFrame, cancelPrevented, nextAnimationTrigger, resetAnimationFrame } =
+    useTransitionContext(true);
 
   const handleClick = (language: string) => {
     locale(language);
     localStorage.setItem(StorableKeys.LanguageKey, language);
     setPage(1);
     nextAnimationTrigger();
-    setTimeout(() => fadeOut("/door-open"), 2000);
+    cancelPrevented();
   };
+
+  onMount(() => scheduleFrame(1, 1));
+
+  onCleanup(() => resetAnimationFrame());
 
   return (
     <>
@@ -65,10 +69,7 @@ function SelectLanguage() {
           <Button onClick={() => handleClick(ENGLISH_SIGNATURE)}>ENGLISH</Button>
         </TransitionFade>
       ) : (
-        <div
-          class="flex-grow w-full flex justify-center items-center"
-          onClick={() => fadeOut("/door-open")}
-        >
+        <div class="flex-grow w-full flex justify-center items-center">
           <TransitionFade order={1}>
             <Typography variant="h5">{t("sound")}</Typography>
           </TransitionFade>

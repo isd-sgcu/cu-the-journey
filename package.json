@@ -14,7 +14,7 @@
     "pixi.js": "^6.0.4",
     "solid-app-router": "^0.0.51",
     "solid-js": "^1.0.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert2": "^11.0.20"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

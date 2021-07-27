@@ -10,6 +10,10 @@ export interface BaseSpriteOptions {
 export class BaseSprite extends AnimatedSprite {
   protected state: SpriteState = "LOAD";
 
+  protected realWidth: number;
+
+  protected realHeight: number;
+
   protected onDone?: () => void;
 
   constructor(resources: string[], options?: BaseSpriteOptions) {
@@ -20,6 +24,8 @@ export class BaseSprite extends AnimatedSprite {
     super(textures);
     super.animationSpeed = options?.animationSpeed ?? 0.02;
     super.zIndex = options?.zIndex || 0;
+    this.realWidth = this.width;
+    this.realHeight = this.height;
   }
 
   updateState(_delta: number): void {
@@ -38,10 +44,8 @@ export class BaseSprite extends AnimatedSprite {
 
   resizeToApp(app: Application) {
     const { width, height } = app.screen;
-    const ratio = Math.max(width / this.width, height / this.height);
-    const newWidth = Math.round(this.width * ratio);
-    const newHeight = Math.round(this.height * ratio);
-    this.setSize(newWidth, newHeight);
+    const ratio = Math.max(width / this.realWidth, height / this.realHeight);
+    this.scale.set(ratio, ratio);
   }
 
   setup(sceneContainer: Container) {

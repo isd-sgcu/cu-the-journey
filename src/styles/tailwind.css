@@ -163,4 +163,10 @@
   button {
     @apply text-sm font-medium font-Mitr tracking-[0.4px];
   }
+
+  *:fullscreen,
+  *:-webkit-full-screen,
+  *:-moz-full-screen {
+    background: transparent; /* for safari on macos */
+  }
 }

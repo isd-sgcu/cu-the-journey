@@ -41,9 +41,9 @@ export default (): IBackgroundMapping => {
     "/3-0": ["star-light", "leaf-og"],
     "/3-1": ["star-light", "leaf-og"],
     "/3-2": ["star-light", "leaf-og"],
-    "/3-3": ["star-light"],
-    "/3-3-1": ["star-light"],
-    "/3-4": ["star-light"],
+    "/3-3": ["star-light", "leaf-og"],
+    "/3-3-1": ["star-light", "leaf-og"],
+    "/3-4": ["star-light", "leaf-og"],
 
     //   // Scene 4
     "/4-0": ["star-dark"],
@@ -119,7 +119,7 @@ export default (): IBackgroundMapping => {
 
     //   // Scene 18
     "/18-0": ["star-light-full"],
-    "/18-1": ["star-light-full", "post-pp-sm"],
+    "/18-1": ["star-light-full"],
 
     //   // Scene 19
     "/19-0": ["star-light-full"],

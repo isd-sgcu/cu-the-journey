@@ -4,7 +4,7 @@ export default {
   "5-2": "...you find a journal. A journal kept safe through the depths of time.",
   "5-3": ["Shall we take the time to look back", "upon your past journey?"],
   "5-4": {
-    q: "Shall we take the time to look back upon your past journey?",
+    q: "Are you ready to return to those times?",
     c1: ["Yes, I’m ready", "/6-0"],
     c2: ["No, I’m not", "/5-5-1"],
   },
