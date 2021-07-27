@@ -1,4 +1,13 @@
-import { createSignal, createEffect, Show, Component, For, Accessor, onMount } from "solid-js";
+import {
+  createSignal,
+  createEffect,
+  Show,
+  Component,
+  For,
+  Accessor,
+  onMount,
+  onCleanup,
+} from "solid-js";
 import { useRouter } from "solid-app-router";
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
@@ -44,7 +53,8 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
     textSetter = setText as (v: string | ((prev: string) => string)) => string;
   }
   const [isButtonShown, setIsButtonShown] = createSignal(false);
-  const { cancelPrevented, scheduleFrame, nextAnimationTrigger } = useTransitionContext();
+  const { cancelPrevented, scheduleFrame, nextAnimationTrigger, resetAnimationFrame } =
+    useTransitionContext();
 
   createEffect(() => {
     setIsButtonShown(textGetter().trim() !== "");
@@ -55,22 +65,28 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
   const [router] = useRouter()!;
   const [showOrderKey, setShowOrderKey] = createSignal(true); // false on /16-0 and /24-0
   const { isLoading } = useScene();
+  const isShowOrder = ["/16-0", "/24-0"].includes(router.current[0].path);
+
   createEffect(() => {
     if (isGoingNextScene() && !isLoading()) {
-      if (["/16-0", "/24-0"].includes(router.current[0].path)) {
+      if (isShowOrder) {
         setShowOrderKey(false);
       }
     }
   });
 
-  onMount(() => scheduleFrame(1, 1));
+  onMount(() => {
+    if (isShowOrder) scheduleFrame(1, 1);
+  });
+
+  onCleanup(() => resetAnimationFrame());
 
   const proceed = () => {
     saveMessage(storeKey, textGetter());
     if (onButtonClicked) onButtonClicked();
     setIsButtonShown(false);
     setIsGoingNextScene(true);
-    nextAnimationTrigger();
+    if (isShowOrder) nextAnimationTrigger();
     cancelPrevented();
   };
 

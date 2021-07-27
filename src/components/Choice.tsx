@@ -1,4 +1,4 @@
-import { Accessor, Component, createSignal, onMount } from "solid-js";
+import { Accessor, Component, createSignal, onCleanup, onMount } from "solid-js";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
 
 interface ChoiceButtonProps {
@@ -54,9 +54,11 @@ const ChoiceComponent: Component<ChoiceComponentProps> = props => {
     return props.question;
   };
 
-  const { scheduleFrame } = useTransitionContext(true)!;
+  const { scheduleFrame, resetAnimationFrame } = useTransitionContext(true)!;
 
   onMount(() => scheduleFrame(1));
+
+  onCleanup(() => resetAnimationFrame());
 
   return (
     <>
