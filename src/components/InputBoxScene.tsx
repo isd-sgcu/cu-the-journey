@@ -1,11 +1,11 @@
 import { createSignal, createEffect, Show, Component, For, Accessor, onMount } from "solid-js";
+import { useRouter } from "solid-app-router";
 import Button from "./common/Button";
 import InputBox from "./common/InputBox";
 
 import "../styles/scrollbar.css";
 import { saveMessage } from "../MessageStore";
 import { TransitionFade, useTransitionContext } from "../context/TransitionContext";
-import { useFadeSignal } from "../context/FadeSignalContext";
 import { useScene } from "./AnimationScene";
 
 export type InputBoxScenePropsType = {
@@ -52,12 +52,12 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
 
   const [isGoingNextScene, setIsGoingNextScene] = createSignal(false);
 
-  const { current } = useFadeSignal();
+  const [router] = useRouter()!;
   const [showOrderKey, setShowOrderKey] = createSignal(true); // false on /16-0 and /24-0
   const { isLoading } = useScene();
   createEffect(() => {
     if (isGoingNextScene() && !isLoading()) {
-      if (["/16-0", "/24-0"].includes(current())) {
+      if (["/16-0", "/24-0"].includes(router.current[0].path)) {
         setShowOrderKey(false);
       }
     }
@@ -95,7 +95,7 @@ const InputBoxScene: Component<InputBoxScenePropsType> = props => {
               <img
                 class="w-[350px] max-w-full"
                 style="top: -50px;"
-                src={`images/screen/post-${current() === "/16-0" ? "pp" : "yl"}-1.png`}
+                src={`images/screen/post-${router.current[0].path === "/16-0" ? "pp" : "yl"}-1.png`}
               />
             </TransitionFade>
           </div>
