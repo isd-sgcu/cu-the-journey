@@ -77,7 +77,7 @@ const Scene18S1: Component = () => {
         <div class="relative">
           <img class="max-w-[250px]" src="images/screen/post-pp-sm-1.png" />
           <Typography
-            class="absolute top-10 px-3 max-w-[210px] w-[40vw] h-[40vh] max-h-[220px] overflow-y-hidden"
+            class="absolute top-10 px-3 w-[210px] h-[40vh] max-h-[220px]"
             style="overflow-wrap: break-word; left: 50%; transform: translateX(-52%)"
             variant="p"
           >
