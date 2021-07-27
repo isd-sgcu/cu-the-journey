@@ -10,6 +10,7 @@ import {
   splitProps,
   useContext,
 } from "solid-js";
+import { ClickEmulator } from "../ClickEmulator";
 import { preventScenesSkipping } from "../preventScene2Skipping";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useFadeSignal } from "./FadeSignalContext";
@@ -225,6 +226,7 @@ export const TransitionProvider: Component = props => {
             setFadeOut(false);
           }
         }}
+        {...new ClickEmulator().props()}
         class={`w-full flex flex-grow items-center px-6 xs:px-5 flex-col ${
           !isPrevented() ? "cursor-pointer" : "cursor-default"
         }`}
