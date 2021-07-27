@@ -87,7 +87,7 @@ class InputManager {
 
   // Should be called only if all input fields are filled
   save = () => {
-    saveMessage(this.storeKey, this.text());
+    saveMessage(this.storeKey, this.text().replaceAll("\n", ""));
   };
 
   isEmpty = () => this.text().trim() === "";
