@@ -12,20 +12,8 @@ export function InvitationPage(props: IInvitationPage) {
     <div class="w-full h-full flex items-center flex-col">
       <h2>{local.header}</h2>
       <div class="relative" style={{ "max-width": "300px" }}>
-        <img
-          class="w-full"
-          alt="invite-card"
-          src="images/invite-card.png"
-          style={{ "max-width": "300px", height: "auto" }}
-        />
-        <div
-          class="absolute left-10 px-2"
-          style={{
-            transform: "rotate(-9deg)",
-            width: "157px",
-            top: "8.5rem",
-          }}
-        >
+        <img class="w-full max-h-[300px] h-auto" alt="invite-card" src="images/invite-card.png" />
+        <div class="absolute left-10 px-2 top-32 w-[157px] rotate-[-9deg]">
           <p
             style={{
               "font-size": "0.8rem",
