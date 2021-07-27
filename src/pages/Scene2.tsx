@@ -156,6 +156,7 @@ const Scene2S0: Component = () => {
     <div class="flex flex-col h-[667px] max-w-[327px] justify-center items-center z-10 space-y-[24px] purple">
       <h3>{t("2-0-order")}</h3>
       <For each={inputManagers}>
+        {/* TODO use <input> instead */}
         {manager => (
           <div class="flex flex-col space-y-[12px]">
             <h5>{manager.name}</h5>

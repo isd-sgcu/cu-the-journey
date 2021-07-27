@@ -1,10 +1,11 @@
-import { Accessor, Component, createEffect, createSignal } from "solid-js";
+import { Accessor, Component, createEffect, createSignal, Show } from "solid-js";
 
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
   noWrap?: boolean;
   isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
+  turnIntoInput?: boolean;
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
@@ -59,46 +60,65 @@ const InputBox: Component<InputBoxProps> = props => {
     self.style.borderRadius = "4px"; // eslint-disable-line
   };
 
+  const preventNewlineIfNoWrapOrInputTag = (
+    e: KeyboardEvent & {
+      currentTarget: HTMLTextAreaElement;
+      target: Element;
+    },
+  ) => {
+    if (
+      (props.noWrap || props.turnIntoInput) &&
+      (e.key === "Enter" || (e.key === "Enter" && e.shiftKey))
+    )
+      e.preventDefault();
+  };
+
   return (
-    <textarea
-      onKeyDown={e => {
-        // No new line on enter in noWrap InputBox
-        if (props.noWrap && (e.key === "Enter" || (e.key === "Enter" && e.shiftKey)))
-          e.preventDefault();
+    <Show
+      when={false}
+      fallback={
+        <input class="placeholder-primary-300 resize-none w-[200px] xs:w-[290px] h-[46px] px-[10px] py-[10px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"></input>
+      }
+    >
+      <textarea
+        onKeyDown={e => {
+          // No new line on enter in noWrap InputBox
+          preventNewlineIfNoWrapOrInputTag(e);
 
-        if (!props.isMinimized) return;
-        if (props.noWrap) return;
+          if (!props.isMinimized) return;
+          if (props.noWrap) return;
 
-        const self = e.target as HTMLTextAreaElement;
-        if (!hasResized && hasScrollbar(self)) {
-          hasResized = true;
-          expand(self);
-          return;
-        }
-        if (self.value === "") {
-          hasResized = false; // reset the resizing state
-          shrink(self);
-        }
-      }}
-      onKeyUp={e => {
-        const self = e.target as HTMLTextAreaElement;
+          const self = e.target as HTMLTextAreaElement;
+          if (!hasResized && hasScrollbar(self)) {
+            hasResized = true;
+            expand(self);
+            return;
+          }
+          if (self.value === "") {
+            hasResized = false; // reset the resizing state
+            shrink(self);
+          }
+        }}
+        onKeyUp={e => {
+          const self = e.target as HTMLTextAreaElement;
 
-        if (props.noWrap) setText(self.value.replaceAll("\n", ""));
-        else setText(self.value);
+          if (props.noWrap) setText(self.value.replaceAll("\n", ""));
+          else setText(self.value);
 
-        if (!props.isMinimized) return;
-        if (props.noWrap) return;
-        if (self.value === "") {
-          hasResized = false; // reset the resizing state
-          shrink(self);
-        }
-      }}
-      spellcheck={false}
-      placeholder={props.placeHolder}
-      disabled={props.isGoingNextScene && props.isGoingNextScene()}
-      style={`transition: all 300ms;${inlineStyle()}`}
-      class="placeholder-primary-300 resize-none w-[311px] xs:w-[290px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
-    ></textarea>
+          if (!props.isMinimized) return;
+          if (props.noWrap) return;
+          if (self.value === "") {
+            hasResized = false; // reset the resizing state
+            shrink(self);
+          }
+        }}
+        spellcheck={false}
+        placeholder={props.placeHolder}
+        disabled={props.isGoingNextScene && props.isGoingNextScene()}
+        style={`transition: all 300ms;${inlineStyle()}`}
+        class="placeholder-primary-300 resize-none w-[311px] xs:w-[290px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
+      ></textarea>
+    </Show>
   );
 };
 
