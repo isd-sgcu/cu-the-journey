@@ -1,4 +1,4 @@
-import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
+import { Component, For, createSignal, Accessor, createEffect, JSX } from "solid-js";
 import Swal from "sweetalert2";
 import { sceneTranslator } from "../config/i18n";
 import { SmallInputBox } from "../components/common/InputBox";
@@ -44,6 +44,7 @@ class InputManager {
     placeHolderKey: string,
     readonly storeKey: string,
     readonly type: InputType = InputType.NICKNAME,
+    readonly htmlProps: JSX.InputHTMLAttributes<HTMLInputElement> = {},
   ) {
     const [g, s] = createSignal("");
     this.text = g;
@@ -104,8 +105,13 @@ class InputManager {
 const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
-    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID),
-    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL),
+    new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID, {
+      pattern: "\\d*",
+    }),
+    new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL, {
+      autocomplete: "email",
+      type: "email",
+    }),
   ];
 
   // tells if all input boxes are filled
@@ -162,6 +168,7 @@ const Scene2S0: Component = () => {
             <SmallInputBox
               placeHolder={manager.placeHolder}
               signal={[manager.text, manager.setText]}
+              htmlProps={manager.htmlProps}
               noWrap={true}
             />
           </div>
