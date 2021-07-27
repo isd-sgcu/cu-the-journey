@@ -82,7 +82,9 @@ const InputBox: Component<InputBoxProps> = props => {
       }}
       onKeyUp={e => {
         const self = e.target as HTMLTextAreaElement;
-        setText(self.value);
+
+        if (props.noWrap) setText(self.value.replaceAll("\n", ""));
+        else setText(self.value);
 
         if (!props.isMinimized) return;
         if (props.noWrap) return;
