@@ -13,20 +13,23 @@ export function InvitationPage(props: IInvitationPage) {
       <h2>{local.header}</h2>
       <div class="relative" style={{ "max-width": "300px" }}>
         <img class="w-full max-h-[300px] h-auto" alt="invite-card" src="images/invite-card.png" />
-        <div class="absolute left-10 px-2 top-32 w-[157px] rotate-[-9deg]">
+        <div class="absolute left-[2.125rem] px-2 top-32 xs:top-[7.75rem] w-[170px] rotate-[-9deg]">
           <p
             style={{
-              "font-size": "0.8rem",
-              "line-height": "2.4",
+              "font-size": "0.73rem",
+              "line-height": "2",
               overflow: "hidden",
               "white-space": "nowrap",
+              "text-align": "left",
             }}
           >
             {replaceLine("Dear (name)")}
           </p>
-          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>FREE YOUR MIND,</h6>
-          <h6 style={{ "font-size": "0.8rem", "line-height": "1.6" }}>Find YOUR WAYS</h6>
-          <p style={{ "font-size": "0.8rem", "line-height": "1.6" }}>
+          <p style={{ "font-size": "0.73rem", "line-height": "1.6" }}>You're invited to</p>
+          <h6 style={{ "font-size": "0.73rem", "line-height": "1.6" }}>
+            FREE YOUR MIND, FIND YOUR WAYS
+          </h6>
+          <p style={{ "font-size": "0.73rem", "line-height": "1.6" }}>
             {replaceLine("CU at (faculty)")}
           </p>
         </div>
