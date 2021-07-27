@@ -1,7 +1,7 @@
 import { Component, For, createSignal, Accessor, createEffect } from "solid-js";
 import Swal from "sweetalert2";
 import { sceneTranslator } from "../config/i18n";
-import { SmallInputBox } from "../components/common/InputBox";
+import { SmallInputBox, InputType } from "../components/common/InputBox";
 import { saveMessage, StorableKeys } from "../MessageStore";
 import { useTransitionContext } from "../context/TransitionContext";
 import Button from "../components/common/Button";
@@ -27,6 +27,8 @@ class InputManager {
 
   readonly placeHolder: string;
 
+  readonly inputTagType: string;
+
   static readonly ALL_ERROR_MESSAGES: {
     [InputType: number]: { [lang: string]: string };
   } = {
@@ -51,6 +53,10 @@ class InputManager {
     this.name = t(nameKey);
     this.placeHolder = t(placeHolderKey);
     this.errorMessage = "";
+
+    if (this.type === InfoType.NICKNAME) this.inputTagType = InputType.TEXT;
+    else if (this.type === InfoType.EMAIL) this.inputTagType = InputType.EMAIL;
+    else this.inputTagType = InputType.NUMBER; // student id
   }
 
   validateEmail = (email: string) => {
