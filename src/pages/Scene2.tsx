@@ -106,7 +106,7 @@ const Scene2S0: Component = () => {
   const inputManagers = [
     new InputManager("2-0-name", "2-0-namePlaceHolder", StorableKeys.Nickname),
     new InputManager("2-0-id", "2-0-idPlaceHolder", StorableKeys.ID, InputType.ID, {
-      pattern: "\\d*",
+      inputMode: "numeric",
     }),
     new InputManager("2-0-email", "2-0-emailPlaceHolder", StorableKeys.Email, InputType.EMAIL, {
       autocomplete: "email",
@@ -172,6 +172,7 @@ const Scene2S0: Component = () => {
         }
         fadeOut(nextPage);
       }}
+      noValidate
     >
       <h3>{t("2-0-order")}</h3>
       <For each={inputManagers}>
