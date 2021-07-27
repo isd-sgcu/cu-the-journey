@@ -91,8 +91,8 @@ export const SceneProvider: Component = props => {
       if (loop.isPlaying || intro.isPlaying || playSound()) return;
 
       setPlaySound(true);
-      // intro.play({ complete: () => loop.play({ loop: true }) });
-      loop.play({ loop: true });
+      intro.play({ complete: () => loop.play({ loop: true }) });
+      // loop.play({ loop: true });
     },
     muted: () => sound.toggleMuteAll(),
   };
