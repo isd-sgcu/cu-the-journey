@@ -1,10 +1,11 @@
-import { Accessor, Component, createEffect, createSignal } from "solid-js";
+import { Accessor, Component, createEffect, createSignal, JSX } from "solid-js";
 
 type SmallInputBoxProps = {
   signal: [get: Accessor<string>, set: (v: string | ((prev: string) => string)) => string]; // eslint-disable-line
   placeHolder: string;
   noWrap?: boolean;
   isGoingNextScene?: Accessor<boolean>; // if true, outline-none and bg-transparent
+  htmlProps?: JSX.InputHTMLAttributes<HTMLInputElement>;
 };
 
 type InputBoxProps = SmallInputBoxProps & { isMinimized?: boolean };
@@ -58,6 +59,22 @@ const InputBox: Component<InputBoxProps> = props => {
     self.style.padding = "10px 10px"; // eslint-disable-line
     self.style.borderRadius = "4px"; // eslint-disable-line
   };
+
+  if (props.noWrap) {
+    return (
+      <input
+        {...props.htmlProps}
+        onInput={e => {
+          const self = e.target as HTMLInputElement;
+          setText(self.value);
+        }}
+        placeholder={props.placeHolder}
+        disabled={props.isGoingNextScene && props.isGoingNextScene()}
+        style={`transition: all 300ms;${inlineStyle()}`}
+        class="placeholder-primary-300 resize-none w-[311px] xs:w-[290px] h-[233px] px-[35px] py-[30px] text-[16px] text-center border-[1px] border-purple rounded-[10px] outline-none nowrap-input-box"
+      />
+    );
+  }
 
   return (
     <textarea
