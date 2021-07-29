@@ -9,6 +9,7 @@ import Typography from "../components/common/Typography";
 const { TextMiddle } = TextComponent;
 
 const t = sceneTranslator("scene9to13");
+const tap = sceneTranslator("landing");
 
 const Scene9S0: Component = () => (
   <>
@@ -23,18 +24,21 @@ const Scene10S0: Component = () => (
 );
 
 const Scene11S0: Component = () => (
-  <div
-    class="max-w-[327px] w-full min-h-[244px] flex items-center bg-[#FFFFFFCC] rounded-[10px]"
-    style="border: 1px solid #5F229F"
-  >
-    <Typography
-      variant="h2"
-      style="overflow-wrap: break-word;max-width:100%"
-      class="px-3 py-3 w-full"
+  <>
+    <div
+      class="max-w-[327px] w-full min-h-[244px] mt-20 flex items-center bg-[#FFFFFFCC] rounded-[10px]"
+      style="border: 1px solid #5F229F"
     >
-      {replaceLine(t("11-0"))}
-    </Typography>
-  </div>
+      <Typography
+        variant="h2"
+        style="overflow-wrap: break-word;max-width:100%"
+        class="px-3 py-3 w-full"
+      >
+        {replaceLine(t("11-0"))}
+      </Typography>
+    </div>
+    <h6 class="xs:pt-16 pt-24 text-lg">{tap("tapToContinue")}</h6>
+  </>
 );
 
 const Scene12S0: Component = () => (
